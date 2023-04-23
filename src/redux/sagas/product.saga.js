@@ -3,19 +3,20 @@ import axios from "axios";
 
 function* getProductListSaga(action) {
   try {
-    const { categoryId, searchKey, subCategoryId, sort, sizeId } =
-      action.payload;
+    const {
+      page,
+      limit,
+      more,
+      categoryId,
+      searchKey,
+      subCategoryId,
+      sort,
+      sizeId,
+    } = action.payload;
     console.log(
-      "🚀 ~ file: product.saga.js:7 ~ function*getProductListSaga ~ sizeId:",
-      sizeId
-    );
-    console.log(
-      "🚀 ~ file: product.saga.js:7 ~ function*getProductListSaga ~ categoryId:",
-      categoryId
-    );
-    console.log(
-      "🚀 ~ file: product.saga.js:7 ~ function*getProductListSaga ~ subCategoryId:",
-      subCategoryId
+      "🚀 ~ file: product.saga.js:7 ~ function*getProductListSaga ~ Sort:",
+      page,
+      limit
     );
 
     //call API
@@ -23,9 +24,15 @@ function* getProductListSaga(action) {
 
     const result = yield axios.get("http://localhost:4000/products/", {
       params: {
+        _page: page,
+        _limit: limit,
         categoryId: categoryId,
         sizeId: sizeId,
         subCategoryId: subCategoryId,
+        ...(sort && {
+          _sort: sort.split(".")[0],
+          _order: sort.split(".")[1],
+        }),
       },
     });
 
@@ -33,6 +40,12 @@ function* getProductListSaga(action) {
       type: "GET_PRODUCT_LIST_SUCCESS",
       payload: {
         data: result.data,
+        meta: {
+          page: page,
+          limit: limit,
+          total: parseInt(result.headers["x-total-count"]),
+        },
+        more: more,
       },
     });
   } catch (e) {

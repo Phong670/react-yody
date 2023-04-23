@@ -1,4 +1,4 @@
-import { Checkbox } from "antd";
+import { Checkbox, Select, Col, Row, Button } from "antd";
 import { useEffect, useState } from "react";
 import { Link, generatePath } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,14 +17,17 @@ function ProductList() {
   const { productList } = useSelector((state) => state.product);
   const { categoryList } = useSelector((state) => state.category);
   const { sizeList } = useSelector((state) => state.size);
+  const [active, setActive] = useState("deactive");
   const dispatch = useDispatch();
   const [filterParams, setFilterParams] = useState({
     categoryId: [],
     sizeId: [],
     subCategoryId: subCategoryId,
+    page: 1,
+    limit: PRODUCT_LIMIT,
   });
   useEffect(() => {
-    dispatch(getProductListAction(filterParams));
+    dispatch(getProductListAction());
     dispatch(
       getCategoryListAction({
         subCategoryId: subCategoryId,
@@ -117,6 +120,8 @@ function ProductList() {
       setFilterParams({
         ...filterParams,
         categoryId: categoryIdTemp,
+        page: 1,
+        limit: PRODUCT_LIMIT,
       });
       setlistYourChoice(clone);
     }
@@ -133,6 +138,8 @@ function ProductList() {
       setFilterParams({
         ...filterParams,
         sizeId: sizeIdTemp,
+        page: 1,
+        limit: PRODUCT_LIMIT,
       });
 
       dispatch(getProductListAction(filterParams));
@@ -150,6 +157,7 @@ function ProductList() {
     }
   };
   // console.log("tets", checkAddYourChoice([1, 2, 3], 4));
+
   const renderListFilterType = (list) => {
     return (
       <div className="w-full flex flex-wrap gap-2 ">
@@ -157,10 +165,11 @@ function ProductList() {
           return (
             <div
               key={item.id}
-              className="p-2 bg-[#F2F2F2] mt-2 hover:bg-[#a8a3a3d8]"
-              onClick={() =>
-                checkAddYourChoiceType(item.name, "catalogyId", item.id)
-              }
+              className={`p-2 bg-[#F2F2F2] mt-2 hover:bg-[#a8a3a3d8] `}
+              onClick={(e) => {
+                checkAddYourChoiceType(item.name, "catalogyId", item.id);
+              }}
+              id={item.id}
             >
               {item.name}, {item.id}
             </div>
@@ -189,6 +198,32 @@ function ProductList() {
     );
   };
 
+  const handleFilter = (key, values) => {
+    let sortClone = values;
+    setFilterParams({
+      ...filterParams,
+      sort: sortClone,
+      page: 1,
+      limit: PRODUCT_LIMIT,
+    });
+  };
+  console.log(
+    "🚀 ~ file: index.jsx:204 ~ handleFilter ~ filterParams:",
+    filterParams
+  );
+  const handleShowMore = () => {
+    dispatch(
+      getProductListAction({
+        ...filterParams,
+        page: productList.meta.page + 1,
+        limit: PRODUCT_LIMIT,
+        more: true,
+      })
+    );
+  };
+  console.log("checklength", productList.data.length);
+  console.log("total", productList.meta.total);
+
   const onChange = (e) => {
     console.log(`checked = ${e.target.checked}`);
   };
@@ -205,11 +240,6 @@ function ProductList() {
       </div>
     );
   };
-
-  // const pushYourChoice = (name, key, values) => {
-  //   clone.push({ name: name, [key]: values });
-  //   setlistYourChoice(clone);
-  // };
 
   const renderYourChoice = (listYourChoice) => {
     return (
@@ -246,18 +276,46 @@ function ProductList() {
     return (
       <div className="col-span-4 grid grid-cols-4 gap-4">
         {renderCartList(listProduct)}
+        {productList.data.length !== productList.meta.total && (
+          <Row justify="center" style={{ marginTop: 16 }}>
+            <Button onClick={() => handleShowMore()}>Show more</Button>
+          </Row>
+        )}
       </div>
     );
   };
 
+  const CpnFilterSort = () => {
+    return (
+      <div>
+        <div className="flex justify-end">
+          <Col span={8}>
+            <Select
+              onChange={(value) => handleFilter("sort", value)}
+              placeholder="Sort by"
+              style={{ width: "100%" }}
+            >
+              <Select.Option value="title.desc">Tên A-Z</Select.Option>
+              <Select.Option value="title.asc">Tên Z-A</Select.Option>
+              <Select.Option value="price.asc">Giá tăng dần</Select.Option>
+              <Select.Option value="price.desc">Giá giảm dần</Select.Option>
+            </Select>
+          </Col>
+        </div>
+      </div>
+    );
+  };
   return (
-    <div className="w-[1200px] grid grid-cols-5">
-      <CpnFilter
-        typeProduct={categoryList.data}
-        sizeProduct={sizeList.data}
-        priceProduct={priceProduct}
-      />
-      <CpnCartList listProduct={productList.data}></CpnCartList>
+    <div>
+      <CpnFilterSort></CpnFilterSort>
+      <div className="w-[1200px] grid grid-cols-5">
+        <CpnFilter
+          typeProduct={categoryList.data}
+          sizeProduct={sizeList.data}
+          priceProduct={priceProduct}
+        />
+        <CpnCartList listProduct={productList.data}></CpnCartList>
+      </div>
     </div>
   );
 }

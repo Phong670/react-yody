@@ -26,7 +26,7 @@ const productReducer = createReducer(initialState, {
   },
   GET_PRODUCT_LIST_SUCCESS: (state, action) => {
     const { data, meta, more } = action.payload;
-    console.log("🚀 ~ file: product.reducer.js:29 ~ data:", data);
+    console.log("🚀 ~ file: product.reducer.js:29 ~ meta:", meta);
     return {
       ...state,
       productList: {
