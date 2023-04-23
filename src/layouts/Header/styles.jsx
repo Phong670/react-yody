@@ -25,7 +25,9 @@ export const HeaderTop = styled.div`
 
   margin-top: 18px;
 `;
-export const HeaderBottom = styled.div``;
+export const HeaderBottom = styled.div`
+  display: none;
+`;
 
 export const Nav = styled.ul`
   display: flex;
@@ -36,7 +38,7 @@ export const Nav = styled.ul`
   margin: 0;
   padding: 0;
 `;
-export const ItemBottom = styled.a`
+export const ItemBottom = styled.div`
   width: 120px;
   background-color: white;
   position: absolute;

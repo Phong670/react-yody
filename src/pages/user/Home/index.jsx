@@ -1,35 +1,32 @@
 import { useEffect, useState } from "react";
 import { Link, generatePath } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import * as S from "./styles";
 import { ROUTES } from "../../../constants/routes";
+import { PRODUCT_LIMIT } from "../../../constants/paging";
+
+import {
+  getProductListAction,
+  getCategoryListAction,
+} from "../../../redux/actions";
+
 function HomeUser(props) {
   const [DataList, setDataList] = useState([]);
+  const dispatch = useDispatch();
+  const { productList } = useSelector((state) => state.product);
 
-  useEffect(() => {
-    // API_ENDPOINT là bất kỳ đường dẫn API nào trả về dạng JSON
-    fetch("https://fakestoreapi.com/products")
-      .then((response) => {
-        // Kiểm tra trạng thái phản hồi
-        if (!response.ok) {
-          throw new Error(response);
-        }
+  const { categoryList } = useSelector((state) => state.category);
 
-        // Phản hồi không lỗi, trả về JSON cho then tiếp theo lấy dữ liệu
-        return response.json();
-      })
-      .then((data) => {
-        // Lấy dữ liệu và setState cho data
-        setDataList(data);
-      })
-      .catch((err) => alert("Có lỗi"))
-      .finally(() => {
-        console.log("End");
-      });
-  }, []);
+  const [filterParams, setFilterParams] = useState({
+    categoryId: [],
+    searchKey: "",
+  });
 
   const renderProduct = (keyWord) => {
-    const result = DataList.filter((e) => e.category === keyWord);
+    const result = productList.data.filter(
+      (item) => item.categoryId === keyWord
+    );
 
     return result.map((item, index) => {
       return (
@@ -51,6 +48,29 @@ function HomeUser(props) {
       );
     });
   };
+  const handleFilterCategory = (values) => {
+    setFilterParams({
+      ...filterParams,
+      categoryId: values,
+    });
+    dispatch(
+      getProductListAction({
+        page: 1,
+        limit: PRODUCT_LIMIT,
+        categoryId: values,
+      })
+    );
+  };
+  useEffect(() => {
+    dispatch(
+      getProductListAction({
+        page: 1,
+        limit: PRODUCT_LIMIT,
+      })
+    );
+    dispatch(getCategoryListAction());
+    handleFilterCategory(1);
+  }, []);
   return (
     <>
       <S.MainCover>
@@ -62,7 +82,7 @@ function HomeUser(props) {
               alt=""
             />
           </S.SideBar>
-          <S.MainContainer>{renderProduct("electronics")}</S.MainContainer>
+          <S.MainContainer>{renderProduct(5)}</S.MainContainer>
         </S.ChildMain>
       </S.MainCover>
 
@@ -75,7 +95,7 @@ function HomeUser(props) {
               alt=""
             />
           </S.SideBar>
-          <S.MainContainer>{renderProduct("men's clothing")}</S.MainContainer>
+          <S.MainContainer>{renderProduct(1)}</S.MainContainer>
         </S.ChildMain>
       </S.MainCover>
     </>

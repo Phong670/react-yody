@@ -13,7 +13,7 @@ function ProductDetail() {
     // API_ENDPOINT là bất kỳ đường dẫn API nào trả về dạng JSON
 
     // const a = async function test1(req, res) {
-    fetch("https://fakestoreapi.com/products")
+    fetch("http://localhost:4000/products")
       .then((response) => {
         console.log(response);
         // Kiểm tra trạng thái phản hồi

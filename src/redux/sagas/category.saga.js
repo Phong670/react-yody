@@ -3,7 +3,14 @@ import axios from "axios";
 
 function* getCategoryListSaga(action) {
   try {
-    const result = yield axios.get("http://localhost:4000/categories");
+    const { subCategoryId } = action.payload;
+
+    const result = yield axios.get("http://localhost:4000/categories", {
+      params: {
+        subCategoryId: subCategoryId,
+      },
+    });
+
     yield put({
       type: "GET_CATEGORY_LIST_SUCCESS",
       payload: {

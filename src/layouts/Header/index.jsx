@@ -8,8 +8,10 @@ import {
   BsTelephoneFill,
   BsPersonCircle,
 } from "react-icons/bs";
+import { useNavigate, generatePath } from "react-router-dom";
 
 function Header() {
+  const navigate = useNavigate();
   const listAoNu = [
     "Áo Polo",
     "Áo Thun",
@@ -90,7 +92,6 @@ function Header() {
                   className="h-80 mx-8 text-[#11006F] flex flex-wrap flex-col items-center  "
                 >
                   Nữ
-                  <S.ItemBottom className="w-[140%] h-10  rounded-t-lg  "></S.ItemBottom>
                 </S.ItemTitle>
                 {/* <S.ChildNavList>
                   <S.ChildNav>
@@ -113,7 +114,6 @@ function Header() {
                   className="h-80 mx-8 text-[#11006F] flex flex-wrap flex-col items-center  "
                 >
                   Nam
-                  <S.ItemBottom className="w-[140%] h-10  rounded-t-lg  "></S.ItemBottom>
                 </S.ItemTitle>
                 {/* <S.ChildNavList>
                   <S.ChildNav>
@@ -139,7 +139,15 @@ function Header() {
                   <S.ItemBottom className="w-[140%] h-10  rounded-t-lg  "></S.ItemBottom>
                 </S.ItemTitle>
                 {/* <S.ChildNavList>
-                  <S.ChildNav>
+                  <S.ChildNav
+                    onClick={() =>
+                      navigate({
+                        pathname: generatePath(ROUTES.ADMIN.TODO_DETAIL, {
+                          subcategoryid: 5,
+                        }),
+                      })
+                    }
+                  >
                     <a href="">Áo</a>
                   </S.ChildNav>
                   <S.ChildNav>

@@ -1,12 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import createSagaMiddleware from "redux-saga";
+import createSagaMiddleware from "redux-saga"; //add Library saga
 
 import productReducer from "./redux/reducers/product.reducer";
 import categoryReducer from "./redux/reducers/category.reducer";
+import sizeReducer from "./redux/reducers/size.reducer";
+
 import todoReducer from "./redux/reducers/todolist.reducer";
 import commonReducer from "./redux/reducers/common.reducer";
 
-import rootSaga from "./redux/sagas";
+import rootSaga from "./redux/sagas"; //import yield fork for choice saga file
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -14,18 +16,21 @@ const store = configureStore({
   reducer: {
     product: productReducer,
     category: categoryReducer,
+    size: sizeReducer,
+
     todo: todoReducer,
     common: commonReducer,
   },
+  //saga
   middleware: (getDefaultMiddleware) => [
     ...getDefaultMiddleware({
-      thunk: false,
-      serializableCheck: false,
+      thunk: false, //offthunk
+      serializableCheck: false, //off check warning parameter function
     }),
-    sagaMiddleware,
+    sagaMiddleware, //add saga
   ],
 });
 
-sagaMiddleware.run(rootSaga);
+sagaMiddleware.run(rootSaga); // run file index saga
 
 export { store };
