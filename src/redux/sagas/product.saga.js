@@ -13,12 +13,6 @@ function* getProductListSaga(action) {
       sort,
       sizeId,
     } = action.payload;
-    console.log(
-      "🚀 ~ file: product.saga.js:7 ~ function*getProductListSaga ~ Sort:",
-      page,
-      limit
-    );
-
     //call API
     // xu ly BDB
 

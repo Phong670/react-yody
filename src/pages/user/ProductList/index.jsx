@@ -3,21 +3,23 @@ import { useEffect, useState } from "react";
 import { Link, generatePath } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { PRODUCT_LIMIT } from "../../../constants/paging";
-
-import { useParams, useLocation } from "react-router-dom";
+import LazyLoad from "react-lazy-load";
+import { useParams } from "react-router-dom";
 import {
   getProductListAction,
   getCategoryListAction,
   getSizeListAction,
 } from "../../../redux/actions";
-
+import ReactPlaceholder from "react-placeholder";
+import "react-placeholder/lib/reactPlaceholder.css";
 function ProductList() {
   const { subCategoryId } = useParams();
   const [listYourChoice, setlistYourChoice] = useState([]);
   const { productList } = useSelector((state) => state.product);
+
   const { categoryList } = useSelector((state) => state.category);
   const { sizeList } = useSelector((state) => state.size);
-  const [active, setActive] = useState("deactive");
+
   const dispatch = useDispatch();
   const [filterParams, setFilterParams] = useState({
     categoryId: [],
@@ -63,23 +65,7 @@ function ProductList() {
       name: "Lớn hơn 700.000đ",
     },
   ];
-  const renderCartList = (array) => {
-    return array?.map((item) => {
-      return (
-        <div key={item.id} className="w-full ">
-          <div className="overflow-hidden">
-            <img
-              src={item.image}
-              alt="anh"
-              className="  hover:scale-110 hover:duration-500 transition duration-500 "
-            />
-          </div>
-          <p>{item.title}</p>
-          <p>{item.price}đ</p>
-        </div>
-      );
-    });
-  };
+
   let categoryIdTemp = [...filterParams.categoryId];
   let sizeIdTemp = [...filterParams.sizeId];
 
@@ -88,21 +74,24 @@ function ProductList() {
     dispatch(getProductListAction(filterParams));
   }, [filterParams]);
 
-  const removeYourChoiceSize = (array, values, name) => {
+  const removeYourChoice = (array, values, name) => {
     let indexGetAPI = array.indexOf(values);
-    console.log(
-      "🚀 ~ file: index.jsx:90 ~ removeYourChoiceSize ~ indexGetAPI:",
-      indexGetAPI
-    );
+
     array.splice(indexGetAPI, 1);
-    let nameOfIndex = clone.indexOf(name);
+    console.log("clone", clone);
+    let nameOfIndex = clone.findIndex((item) => item.name === name);
+    // let nameOfIndex = clone.indexOf(name);
+    console.log(
+      "🚀 ~ file: index.jsx:83 ~ removeYourChoice ~ nameOfIndex:",
+      nameOfIndex
+    );
     clone.splice(nameOfIndex, 1);
   };
 
   const checkAddYourChoiceType = (name, name2, valuesId) => {
-    let type = categoryIdTemp.find((type) => type === valuesId);
+    let typeId = categoryIdTemp.find((type) => type === valuesId);
     const addYourChoice = (name) => {
-      clone.push(name);
+      clone.push({ name: name, value: valuesId });
       setlistYourChoice(clone);
     };
     const handleFilterType = (values) => {
@@ -112,11 +101,11 @@ function ProductList() {
         categoryId: categoryIdTemp,
       });
     };
-    if (!type) {
+    if (!typeId) {
       addYourChoice(name);
       handleFilterType(valuesId);
     } else {
-      removeYourChoiceSize(categoryIdTemp, type, name);
+      removeYourChoice(categoryIdTemp, typeId, name);
       setFilterParams({
         ...filterParams,
         categoryId: categoryIdTemp,
@@ -127,12 +116,11 @@ function ProductList() {
     }
   };
   const checkAddYourChoiceSize = (name, name2, valuesId) => {
-    let size = sizeIdTemp.find((size) => size === valuesId);
+    let sizeId = sizeIdTemp.find((size) => size === valuesId);
     const addYourChoice = (name) => {
-      clone.push(name);
+      clone.push({ name: name, value: valuesId });
       setlistYourChoice(clone);
     };
-    console.log("🚀 ~ file: index.jsx:111 ~ addYourChoice ~ clone:", clone);
     const handleFilterSize = (values) => {
       sizeIdTemp = [...filterParams.sizeId, values];
       setFilterParams({
@@ -144,11 +132,11 @@ function ProductList() {
 
       dispatch(getProductListAction(filterParams));
     };
-    if (!size) {
+    if (!sizeId) {
       addYourChoice(name);
       handleFilterSize(valuesId);
     } else {
-      removeYourChoiceSize(sizeIdTemp, size, name);
+      removeYourChoice(sizeIdTemp, sizeId, name);
       setFilterParams({
         ...filterParams,
         sizeId: sizeIdTemp,
@@ -156,8 +144,62 @@ function ProductList() {
       setlistYourChoice(clone);
     }
   };
-  // console.log("tets", checkAddYourChoice([1, 2, 3], 4));
+  useEffect(() => {
+    setlistYourChoice(clone);
+  }, []);
+  const removeYourChoiceTop = (objectname) => {
+    console.log("click top", objectname);
+    let valueType = categoryIdTemp.map((item) => {
+      if (item === objectname.value) {
+        console.log("aaaaaaa", categoryIdTemp, item, objectname.name);
+        removeYourChoice(categoryIdTemp, item, objectname.name);
+        setlistYourChoice(clone);
+        setFilterParams({
+          ...filterParams,
+          categoryId: categoryIdTemp,
+          page: 1,
+          limit: PRODUCT_LIMIT,
+        });
+      }
+    });
+    let valueSize = sizeIdTemp.map((item) => {
+      if (item === objectname.value) {
+        console.log("bbbb", sizeIdTemp, item, objectname.name);
+        removeYourChoice(sizeIdTemp, item, objectname.name);
+        setlistYourChoice(clone);
+        setFilterParams({
+          ...filterParams,
+          sizeId: sizeIdTemp,
+          page: 1,
+          limit: PRODUCT_LIMIT,
+        });
+      }
+    });
+    console.log(
+      "🚀 ~ file: index.jsx:147 ~ valueType ~ categoryIdTemp:",
+      categoryIdTemp
+    );
+    console.log("🚀 ~ file: index.jsx:147 ~ valueType ~ valueType:", valueType);
+  };
+  const removeAll = () => {
+    console.log("categoryIdTemp", categoryIdTemp);
+    console.log("sizeIdTemp", sizeIdTemp);
 
+    console.log("clone", clone);
+    clone = [];
+    setlistYourChoice(clone);
+
+    categoryIdTemp = [];
+    sizeIdTemp = [];
+    setFilterParams({
+      ...filterParams,
+      sizeId: sizeIdTemp,
+      categoryId: categoryIdTemp,
+      sizeId: sizeIdTemp,
+      page: 1,
+      limit: PRODUCT_LIMIT,
+    });
+  };
   const renderListFilterType = (list) => {
     return (
       <div className="w-full flex flex-wrap gap-2 ">
@@ -221,18 +263,30 @@ function ProductList() {
       })
     );
   };
-  console.log("checklength", productList.data.length);
-  console.log("total", productList.meta.total);
 
-  const onChange = (e) => {
-    console.log(`checked = ${e.target.checked}`);
+  const renderCartList = (array) => {
+    return array?.map((item) => {
+      return (
+        <div key={item.id} className="w-full ">
+          <div className="overflow-hidden">
+            <img
+              src={item.image}
+              alt="anh"
+              className="  hover:scale-110 hover:duration-500 transition duration-500 "
+            />
+          </div>
+          <p>{item.title}</p>
+          <p>{item.price}đ</p>
+        </div>
+      );
+    });
   };
   const renderListFilterChecker = (list) => {
     return (
       <div className="w-full flex justify-start flex-wrap gap-2 ">
         {list?.map((item, index) => {
           return (
-            <Checkbox key={index} className="m-2" onChange={onChange}>
+            <Checkbox key={index} className="m-2">
               {item.name}
             </Checkbox>
           );
@@ -249,8 +303,11 @@ function ProductList() {
             <div
               key={index}
               className="p-2 bg-[#ccbd18] mt-2 hover:bg-[#a8a3a3d8]"
+              onClick={() => {
+                removeYourChoiceTop(item);
+              }}
             >
-              {item}
+              {item.name}
             </div>
           );
         })}
@@ -261,7 +318,12 @@ function ProductList() {
   const CpnFilter = ({ typeProduct, sizeProduct, priceProduct }) => {
     return (
       <div className="col-span-1">
-        <div>Bạn chọn:</div>
+        <div className="flex justify-between">
+          Bạn chọn:
+          <div className="mr-5" onClick={() => removeAll()}>
+            Bỏ hết
+          </div>
+        </div>
         {renderYourChoice(listYourChoice)}
         <div className="my-4">Loại sản phẩm</div>
         {renderListFilterType(typeProduct)}
