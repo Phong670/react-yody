@@ -1,4 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
+import { REQUEST, SUCCESS, FAIL, SIZE_ACTION } from "../constants";
 
 const initialState = {
   sizeList: {
@@ -9,7 +10,7 @@ const initialState = {
 };
 
 const sizeReducer = createReducer(initialState, {
-  GET_SIZE_LIST_REQUEST: (state, action) => {
+  [REQUEST(SIZE_ACTION.GET_SIZE_LIST)]: (state, action) => {
     return {
       ...state,
       sizeList: {
@@ -19,7 +20,7 @@ const sizeReducer = createReducer(initialState, {
     };
   },
 
-  GET_SIZE_LIST_SUCCESS: (state, action) => {
+  [SUCCESS(SIZE_ACTION.GET_SIZE_LIST)]: (state, action) => {
     const { data } = action.payload;
     return {
       ...state,
@@ -30,7 +31,7 @@ const sizeReducer = createReducer(initialState, {
       },
     };
   },
-  GET_SIZE_LIST_FAIL: (state, action) => {
+  [FAIL(SIZE_ACTION.GET_SIZE_LIST)]: (state, action) => {
     const { error } = action.payload;
     return {
       ...state,

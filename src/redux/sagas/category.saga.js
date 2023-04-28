@@ -1,6 +1,6 @@
 import { put, takeEvery } from "redux-saga/effects";
 import axios from "axios";
-
+import { CATEGORY_ACTION, REQUEST, SUCCESS, FAIL } from "../constants";
 function* getCategoryListSaga(action) {
   try {
     const { subCategoryId } = action.payload;
@@ -12,14 +12,14 @@ function* getCategoryListSaga(action) {
     });
 
     yield put({
-      type: "GET_CATEGORY_LIST_SUCCESS",
+      type: SUCCESS(CATEGORY_ACTION.GET_CATEGORY_LIST),
       payload: {
         data: result.data,
       },
     });
   } catch (e) {
     yield put({
-      type: "GET_CATEGORY_LIST_FAIL",
+      type: SUCCESS(CATEGORY_ACTION.GET_CATEGORY_LIST),
       payload: {
         error: "Lỗi rồi!",
       },
@@ -28,5 +28,8 @@ function* getCategoryListSaga(action) {
 }
 
 export default function* categorySaga() {
-  yield takeEvery("GET_CATEGORY_LIST_REQUEST", getCategoryListSaga);
+  yield takeEvery(
+    REQUEST(CATEGORY_ACTION.GET_CATEGORY_LIST),
+    getCategoryListSaga
+  );
 }

@@ -77,7 +77,12 @@ function CarouselMenuSection() {
   };
   return (
     <S.SideBarMenu className="">
-      <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
+      <Swiper
+        navigation={true}
+        modules={[Navigation]}
+        speed={2700}
+        className="mySwiper"
+      >
         {MenuList.length > 6 ? (
           <>
             <SwiperSlide>

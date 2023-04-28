@@ -1,7 +1,8 @@
 * {
   /* font-family: "SVN-Gilroy"; */
   font-weight: 600;
-  font-size: 14px !important;
+  /* font-size: 14px !important; */
+  box-sizing: border-box;
 }
 .App {
   text-align: center;
@@ -47,7 +48,7 @@
 }
 a {
   text-decoration: none;
-  font-size: 20px;
+  /* font-size: 20px; */
 }
 li {
   list-style: none;
@@ -57,8 +58,31 @@ li {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: #f3f3f359;
 }
 .carousel {
   width: 1200px;
   /* z-index: 1; */
+}
+.swiper-button-next {
+  --swiper-navigation-size: 16px !important;
+  padding: 14px;
+  border-radius: 100%;
+  background-color: #adb3bb;
+  color: #ffff !important;
+}
+.swiper-button-next:hover {
+  transform: scale(1.2);
+  traslation: all 0.3s;
+}
+.swiper-button-prev {
+  --swiper-navigation-size: 16px !important;
+  padding: 14px;
+  border-radius: 100%;
+  background-color: #adb3bb;
+  color: #ffff !important;
+}
+.swiper-button-prev:hover {
+  transform: scale(1.2);
+  traslation: all 0.3s;
 }

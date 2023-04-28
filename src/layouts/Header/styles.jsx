@@ -13,7 +13,7 @@ export const Header = styled.div`
   align-items: center;
 `;
 export const HeaderContainer = styled.div`
-  max-width: 1200px;
+  width: 1200px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -25,9 +25,7 @@ export const HeaderTop = styled.div`
 
   margin-top: 18px;
 `;
-export const HeaderBottom = styled.div`
-  display: none;
-`;
+export const HeaderBottom = styled.div``;
 
 export const Nav = styled.ul`
   display: flex;

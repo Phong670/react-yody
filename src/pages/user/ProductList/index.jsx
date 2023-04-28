@@ -1,9 +1,11 @@
-import { Checkbox, Select, Col, Row, Button } from "antd";
-import { useEffect, useState } from "react";
+import { Checkbox, Select, Col, Row, Button, Slider, Form } from "antd";
+import { useEffect, useState, useMemo } from "react";
 import { Link, generatePath } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { PRODUCT_LIMIT } from "../../../constants/paging";
 import LazyLoad from "react-lazy-load";
+import axios from "axios";
+
 import { useParams } from "react-router-dom";
 import {
   getProductListAction,
@@ -12,67 +14,59 @@ import {
 } from "../../../redux/actions";
 import ReactPlaceholder from "react-placeholder";
 import "react-placeholder/lib/reactPlaceholder.css";
+import { useCallback } from "react";
+import { debounce } from "lodash";
+import { ROUTES } from "../../../constants/routes";
 function ProductList() {
   const { subCategoryId } = useParams();
+  console.log(
+    "🚀 ~ file: index.jsx:20 ~ ProductList ~ subCategoryId:",
+    typeof subCategoryId
+  );
+  let subCategoryIdArray = subCategoryId.split(",");
+  console.log(
+    "🚀 ~ file: index.jsx:36 ~ ProductList ~ subCategoryIdArray:",
+    subCategoryIdArray
+  );
+  const [gender, setGender] = useState([subCategoryIdArray[0]]);
+  const [subCategory, setSubCategory] = useState([]);
+
   const [listYourChoice, setlistYourChoice] = useState([]);
+  const [defaultValuePrice, setDefaultValuePrice] = useState([0, 700]);
+  const [active, setActive] = useState(false);
+  const [activeButton, setActiveButton] = useState(1);
+
   const { productList } = useSelector((state) => state.product);
 
   const { categoryList } = useSelector((state) => state.category);
   const { sizeList } = useSelector((state) => state.size);
 
   const dispatch = useDispatch();
+
   const [filterParams, setFilterParams] = useState({
     categoryId: [],
     sizeId: [],
-    subCategoryId: subCategoryId,
+    subCategoryId: gender,
     page: 1,
     limit: PRODUCT_LIMIT,
   });
+
   useEffect(() => {
-    dispatch(getProductListAction());
     dispatch(
       getCategoryListAction({
-        subCategoryId: subCategoryId,
+        subCategoryId: gender,
       })
     );
     dispatch(getSizeListAction());
-  }, []);
-
-  const priceProduct = [
-    {
-      id: 100,
-      name: "Nhỏ hơn 100.000đ",
-    },
-    {
-      id: 200,
-      name: "Từ 100.000đ - 200.000đ",
-    },
-    {
-      id: 350,
-      name: "Từ 200.000đ - 350.000đ",
-    },
-
-    {
-      id: 500,
-      name: "Từ 350.000đ - 500.000đ",
-    },
-    {
-      id: 700,
-      name: "Từ 500.000đ - 700.000đ",
-    },
-    {
-      id: 701,
-      name: "Lớn hơn 700.000đ",
-    },
-  ];
-
+    console.log("load lan dau");
+  }, [gender]);
+  useEffect(() => {
+    dispatch(getProductListAction(filterParams));
+  }, [filterParams]);
   let categoryIdTemp = [...filterParams.categoryId];
   let sizeIdTemp = [...filterParams.sizeId];
 
   let clone = [...listYourChoice];
-  useEffect(() => {
-    dispatch(getProductListAction(filterParams));
-  }, [filterParams]);
 
   const removeYourChoice = (array, values, name) => {
     let indexGetAPI = array.indexOf(values);
@@ -104,7 +98,9 @@ function ProductList() {
     if (!typeId) {
       addYourChoice(name);
       handleFilterType(valuesId);
+      setActive(true);
     } else {
+      setActive(false);
       removeYourChoice(categoryIdTemp, typeId, name);
       setFilterParams({
         ...filterParams,
@@ -129,8 +125,6 @@ function ProductList() {
         page: 1,
         limit: PRODUCT_LIMIT,
       });
-
-      dispatch(getProductListAction(filterParams));
     };
     if (!sizeId) {
       addYourChoice(name);
@@ -181,6 +175,7 @@ function ProductList() {
     );
     console.log("🚀 ~ file: index.jsx:147 ~ valueType ~ valueType:", valueType);
   };
+  let genderClone = [];
   const removeAll = () => {
     console.log("categoryIdTemp", categoryIdTemp);
     console.log("sizeIdTemp", sizeIdTemp);
@@ -189,15 +184,20 @@ function ProductList() {
     clone = [];
     setlistYourChoice(clone);
 
+    console.log(
+      "🚀 ~ file: index.jsx:182 ~ removeAll ~ filterParams:",
+      filterParams
+    );
+
     categoryIdTemp = [];
     sizeIdTemp = [];
     setFilterParams({
       ...filterParams,
-      sizeId: sizeIdTemp,
       categoryId: categoryIdTemp,
       sizeId: sizeIdTemp,
       page: 1,
       limit: PRODUCT_LIMIT,
+      subCategoryId: genderClone,
     });
   };
   const renderListFilterType = (list) => {
@@ -207,7 +207,11 @@ function ProductList() {
           return (
             <div
               key={item.id}
-              className={`p-2 bg-[#F2F2F2] mt-2 hover:bg-[#a8a3a3d8] `}
+              className={`p-2 mt-2 hover:bg-[#a8a3a3d8] ${
+                categoryIdTemp.findIndex((a) => item.id === a) === -1
+                  ? "bg-[#fcfcfc]"
+                  : "bg-[#dce627]"
+              } `}
               onClick={(e) => {
                 checkAddYourChoiceType(item.name, "catalogyId", item.id);
               }}
@@ -220,6 +224,7 @@ function ProductList() {
       </div>
     );
   };
+
   const renderListFilterSize = (list) => {
     return (
       <div className="w-full flex flex-wrap gap-2 ">
@@ -227,7 +232,11 @@ function ProductList() {
           return (
             <div
               key={item.id}
-              className="p-2 bg-[#F2F2F2] mt-2 hover:bg-[#a8a3a3d8]"
+              className={`p-2 mt-2 hover:bg-[#a8a3a3d8] ${
+                sizeIdTemp.findIndex((a) => item.id === a) === -1
+                  ? "bg-[#fcfcfc]"
+                  : "bg-[#dce627]"
+              } `}
               onClick={() =>
                 checkAddYourChoiceSize(item.size, "sizeId", item.id)
               }
@@ -267,7 +276,11 @@ function ProductList() {
   const renderCartList = (array) => {
     return array?.map((item) => {
       return (
-        <div key={item.id} className="w-full ">
+        <Link
+          key={item.id}
+          className="w-full "
+          to={generatePath(ROUTES.USER.PRODUCT_DETAIL, { id: item.id })}
+        >
           <div className="overflow-hidden">
             <img
               src={item.image}
@@ -277,25 +290,44 @@ function ProductList() {
           </div>
           <p>{item.title}</p>
           <p>{item.price}đ</p>
-        </div>
+        </Link>
       );
     });
   };
-  const renderListFilterChecker = (list) => {
+
+  console.log(
+    "🚀 ~ file: index.jsx:288 ~ ProductList ~ defaultValuePrice:",
+    defaultValuePrice
+  );
+
+  const renderListFilterPrice = (list) => {
+    console.log("render lai price");
     return (
-      <div className="w-full flex justify-start flex-wrap gap-2 ">
-        {list?.map((item, index) => {
-          return (
-            <Checkbox key={index} className="m-2">
-              {item.name}
-            </Checkbox>
-          );
-        })}
+      <div className="w-[90%] ">
+        <Slider
+          onAfterChange={(value) => {
+            console.log("999999", value);
+            setDefaultValuePrice(value);
+            setFilterParams({
+              ...filterParams,
+              price_gte: value[0],
+              price_lte: value[1],
+              page: 1,
+              limit: PRODUCT_LIMIT,
+            });
+          }}
+          min={0}
+          max={700}
+          range={{
+            draggableTrack: false,
+          }}
+          defaultValue={defaultValuePrice}
+        />
       </div>
     );
   };
 
-  const renderYourChoice = (listYourChoice) => {
+  const RenderYourChoice = useMemo(() => {
     return (
       <div className="w-full flex flex-wrap gap-2 ">
         {listYourChoice?.map((item, index) => {
@@ -313,9 +345,10 @@ function ProductList() {
         })}
       </div>
     );
-  };
+  }, [listYourChoice]);
 
-  const CpnFilter = ({ typeProduct, sizeProduct, priceProduct }) => {
+  const CpnFilter = ({ listYourChoice, typeProduct, sizeProduct }) => {
+    console.log("render filter CPN");
     return (
       <div className="col-span-1">
         <div className="flex justify-between">
@@ -324,13 +357,13 @@ function ProductList() {
             Bỏ hết
           </div>
         </div>
-        {renderYourChoice(listYourChoice)}
+        {RenderYourChoice}
         <div className="my-4">Loại sản phẩm</div>
         {renderListFilterType(typeProduct)}
         <div className="my-4">Size</div>
         {renderListFilterSize(sizeProduct)}
         <div className="my-4">Giá</div>
-        {renderListFilterChecker(priceProduct)}
+        {renderListFilterPrice()}
       </div>
     );
   };
@@ -367,14 +400,105 @@ function ProductList() {
       </div>
     );
   };
+  let activeButtonClone = 0;
+  useEffect(() => {
+    setActiveButton(activeButton);
+  }, [activeButton]);
+  console.log(parseInt(subCategoryIdArray[0]) === 1);
+
+  useEffect(() => {
+    axios
+      .get(
+        `http://localhost:4000/subCategories/${parseInt(subCategoryIdArray[0])}`
+      )
+      .then((res) => {
+        console.log("lay data");
+        setSubCategory(res.data);
+        console.log("🚀 ~ file: index.jsx:31 ~ .then ~ res.data:", res.data);
+      })
+
+      .catch((err) => {
+        console.log("loi roi");
+      });
+  }, []);
   return (
-    <div>
+    <div className="w-full flex flex-nowrap flex-col justify-between">
+      <div className="w-full flex justify-center">
+        {subCategoryIdArray.length > 1 ? (
+          <> Trang chủ/{activeButton ? "Nữ" : "Nam"}</>
+        ) : (
+          <>Trang chủ/{subCategory.name}</>
+        )}
+      </div>
+
+      {subCategoryIdArray.length > 1 ? (
+        <>
+          <div className="w-full flex justify-center mb-[10px] text-[#fcaf17] text-[20px]">
+            {parseInt(subCategoryIdArray[0]) === 5 && <p>ÁO</p>}
+            {parseInt(subCategoryIdArray[0]) === 6 && <p>QUẦN</p>}
+            {parseInt(subCategoryIdArray[0]) === 8 && <p>ĐỒ THỂ THAO</p>}
+            {parseInt(subCategoryIdArray[0]) === 4 && <p>PHỤ KIỆN</p>}
+            {parseInt(subCategoryIdArray[0]) === 7 && <p>VÁY</p>}
+          </div>
+          <div className="w-full flex justify-center h-[80px] mb-[10px] p-[20px] bg-[#F8F8F8] gap-3">
+            <button
+              onClick={() => {
+                setGender(parseInt(subCategoryIdArray[0]));
+                genderClone = parseInt(subCategoryIdArray[0]);
+                setFilterParams({
+                  ...filterParams,
+                  subCategoryId: genderClone,
+                });
+                removeAll();
+                activeButtonClone = 1;
+                setActiveButton(activeButtonClone);
+                console.log(
+                  "🚀 ~ file: index.jsx:419 ~ ProductList ~ activeButton:",
+                  activeButton
+                );
+              }}
+              className={`p-2 w-[80px] rounded-md hover:bg-[#fcaf17] ${
+                activeButton ? "bg-[#fcaf17]" : "bg-[#ffff]"
+              } `}
+            >
+              Nữ
+            </button>
+            <button
+              onClick={() => {
+                setGender(parseInt(subCategoryIdArray[1]));
+                genderClone = parseInt(subCategoryIdArray[1]);
+
+                setFilterParams({
+                  ...filterParams,
+                  subCategoryId: genderClone,
+                });
+
+                removeAll();
+                activeButtonClone = 0;
+                setActiveButton(activeButtonClone);
+                console.log(
+                  "🚀 ~ file: index.jsx:429 ~ ProductList ~ activeButton:",
+                  activeButton
+                );
+              }}
+              className={`p-2 w-[80px] rounded-md hover:bg-[#fcaf17] ${
+                activeButton ? "bg-[#ffff]" : "bg-[#fcaf17]"
+              } `}
+            >
+              Nam
+            </button>
+          </div>
+        </>
+      ) : (
+        <></>
+      )}
+
       <CpnFilterSort></CpnFilterSort>
       <div className="w-[1200px] grid grid-cols-5">
         <CpnFilter
+          listYourChoice={listYourChoice}
           typeProduct={categoryList.data}
           sizeProduct={sizeList.data}
-          priceProduct={priceProduct}
         />
         <CpnCartList listProduct={productList.data}></CpnCartList>
       </div>

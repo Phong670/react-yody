@@ -1,6 +1,6 @@
-import { put, takeEvery } from "redux-saga/effects";
+import { put, takeEvery, debounce } from "redux-saga/effects";
 import axios from "axios";
-
+import { PRODUCT_ACTION, REQUEST, SUCCESS, FAIL } from "../constants/";
 function* getProductListSaga(action) {
   try {
     const {
@@ -12,6 +12,8 @@ function* getProductListSaga(action) {
       subCategoryId,
       sort,
       sizeId,
+      price_gte,
+      price_lte,
     } = action.payload;
     //call API
     // xu ly BDB
@@ -21,8 +23,10 @@ function* getProductListSaga(action) {
         _page: page,
         _limit: limit,
         categoryId: categoryId,
-        sizeId: sizeId,
+        sizeId_like: sizeId,
         subCategoryId: subCategoryId,
+        price_gte: price_gte,
+        price_lte: price_lte,
         ...(sort && {
           _sort: sort.split(".")[0],
           _order: sort.split(".")[1],
@@ -31,7 +35,7 @@ function* getProductListSaga(action) {
     });
 
     yield put({
-      type: "GET_PRODUCT_LIST_SUCCESS",
+      type: SUCCESS(PRODUCT_ACTION.GET_PRODUCT_LIST),
       payload: {
         data: result.data,
         meta: {
@@ -44,9 +48,30 @@ function* getProductListSaga(action) {
     });
   } catch (e) {
     yield put({
-      type: "GET_PRODUCT_LIST_FAIL",
+      type: FAIL(PRODUCT_ACTION.GET_PRODUCT_LIST),
       payload: {
         error: "Lỗi rồi!",
+      },
+    });
+  }
+}
+function* getProductDetailSaga(action) {
+  try {
+    const { id } = action.payload;
+    console.log(
+      "🚀 ~ file: product.saga.js:61 ~ function*getProductDetailSaga ~ id:",
+      id
+    );
+    const result = yield axios.get(`http://localhost:4000/products/${id}`);
+    yield put({
+      type: SUCCESS(PRODUCT_ACTION.GET_PRODUCT_DETAIL),
+      payload: { data: result.data },
+    });
+  } catch (e) {
+    yield put({
+      type: FAIL(PRODUCT_ACTION.GET_PRODUCT_DETAIL),
+      payload: {
+        error: " lỗi rồi",
       },
     });
   }
@@ -54,7 +79,15 @@ function* getProductListSaga(action) {
 
 //function main: chay function tuong ung
 export default function* productSaga() {
-  yield takeEvery("GET_PRODUCT_LIST_REQUEST", getProductListSaga);
+  yield debounce(
+    300,
+    REQUEST(PRODUCT_ACTION.GET_PRODUCT_LIST),
+    getProductListSaga
+  );
+  yield takeEvery(
+    REQUEST(PRODUCT_ACTION.GET_PRODUCT_DETAIL),
+    getProductDetailSaga
+  );
 }
 // ACTION >>  GET_PRODUCT_LIST_REQUEST >> RUN FUNCTION getProductListSaga
 // >> call API >> success/ fail

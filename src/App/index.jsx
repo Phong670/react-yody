@@ -1,21 +1,35 @@
 import "../App.css";
+import { useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+
+import jwtDecode from "jwt-decode";
+
 import HeaderPage from "../layouts/Header";
-import CarouselPage from "../layouts/Carousel";
 import HomePage from "../pages/user/Home";
 import ProducDetail from "../pages/user/ProductDetail";
 import ProductList from "../pages/user/ProductList";
+import LoginPage from "../pages/Login";
+import RegisterPage from "../pages/Register";
 
 import FooterPage from "../layouts/Footer";
 import UserLayout from "../layouts/UserLayout/";
 import DetailProducLayout from "../layouts/DetailProducLayout/";
 import ProductListLayout from "../layouts/ProductListLayout/";
 
-import { useState } from "react";
-import { Routes, Route } from "react-router-dom";
-
 import { ROUTES } from "../constants/routes";
 
+import { getUserInfoAction } from "../redux/actions";
+
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+      const tokenData = jwtDecode(accessToken);
+      dispatch(getUserInfoAction({ id: tokenData.sub }));
+    }
+  }, []);
   return (
     <>
       <HeaderPage />
@@ -29,6 +43,8 @@ function App() {
         <Route element={<ProductListLayout />}>
           <Route path={ROUTES.USER.PRODUCT_LIST} element={<ProductList />} />
         </Route>
+        <Route path={ROUTES.USER.LOGIN} element={<LoginPage />} />
+        <Route path={ROUTES.USER.REGISTER} element={<RegisterPage />} />
       </Routes>
 
       <FooterPage />

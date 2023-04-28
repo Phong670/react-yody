@@ -1,6 +1,11 @@
 import * as S from "./styles";
-import { Link } from "react-router-dom";
+
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { Link, generatePath } from "react-router-dom";
 import { ROUTES } from "../../constants/routes";
+import { DownOutlined, UserOutlined } from "@ant-design/icons";
+import { Button, Dropdown, Space } from "antd";
 import {
   BsSearch,
   BsGeoAltFill,
@@ -8,34 +13,174 @@ import {
   BsTelephoneFill,
   BsPersonCircle,
 } from "react-icons/bs";
-import { useNavigate, generatePath } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { logoutAction } from "../../redux/actions";
 
 function Header() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const listAoNu = [
-    "Áo Polo",
-    "Áo Thun",
-    "Áo Khoác",
-    "Áo Sơ Mi",
-    "Áo chống nắng",
+  const { userInfo } = useSelector((state) => state.auth);
+  const male = [
+    {
+      key: "1",
+      label: (
+        <div className="w-[100px]">
+          <Link
+            target="_blank"
+            rel="noopener noreferrer"
+            to={generatePath(ROUTES.USER.PRODUCT_LIST, { subCategoryId: 1 })}
+          >
+            Áo
+          </Link>
+        </div>
+      ),
+    },
+    {
+      key: "ư",
+      label: (
+        <div className="w-[120px]">
+          <Link
+            target="_blank"
+            rel="noopener noreferrer"
+            to={generatePath(ROUTES.USER.PRODUCT_LIST, { subCategoryId: 2 })}
+          >
+            Quần
+          </Link>
+        </div>
+      ),
+    },
+    {
+      key: "3",
+      label: (
+        <div className="w-[120px]">
+          <Link
+            target="_blank"
+            rel="noopener noreferrer"
+            to={generatePath(ROUTES.USER.PRODUCT_LIST, { subCategoryId: 3 })}
+          >
+            Đồ Thể Thao Nam
+          </Link>
+        </div>
+      ),
+    },
+    {
+      key: "4",
+      label: (
+        <div className="w-[100px]">
+          <Link
+            target="_blank"
+            rel="noopener noreferrer"
+            to={generatePath(ROUTES.USER.PRODUCT_LIST, { subCategoryId: 4 })}
+          >
+            Phụ Kiện Nam
+          </Link>
+        </div>
+      ),
+    },
   ];
-  const listQuanNu = ["Quần Jeans", "Quần Âu", "Quần Kaki", "Quần Short"];
-  const listPhuKienNu = ["Giày", "Túi Xách", "Phụ Kiện Khác"];
-  const listDoTheThaoNu = [
-    "Áo Thun Thể Thao",
-    "Áo Polo Thể Thao",
-    "Bộ Thể Thao",
+  const female = [
+    {
+      key: "1",
+      label: (
+        <div className="w-[100px]">
+          <Link
+            target="_blank"
+            rel="noopener noreferrer"
+            to={generatePath(ROUTES.USER.PRODUCT_LIST, { subCategoryId: 5 })}
+          >
+            Áo
+          </Link>
+        </div>
+      ),
+    },
+    {
+      key: "ư",
+      label: (
+        <div className="w-[100px]">
+          <Link
+            target="_blank"
+            rel="noopener noreferrer"
+            to={generatePath(ROUTES.USER.PRODUCT_LIST, { subCategoryId: 6 })}
+          >
+            Quần
+          </Link>
+        </div>
+      ),
+    },
+    {
+      key: "3",
+      label: (
+        <div className="w-[100px]">
+          <Link
+            target="_blank"
+            rel="noopener noreferrer"
+            to={generatePath(ROUTES.USER.PRODUCT_LIST, { subCategoryId: 7 })}
+          >
+            Váy
+          </Link>
+        </div>
+      ),
+    },
+    {
+      key: "4",
+      label: (
+        <div className="w-[100px]">
+          <Link
+            target="_blank"
+            rel="noopener noreferrer"
+            to={generatePath(ROUTES.USER.PRODUCT_LIST, { subCategoryId: 8 })}
+          >
+            Đồ Thể Thao
+          </Link>
+        </div>
+      ),
+    },
   ];
-  const listAoNam = ["Áo Polo", "Áo Thun", "Áo Khoác", "Áo Sơ Mi", "Áo Len"];
-  const listQuanNam = ["Quần Jeans", "Quần Âu", "Quần Kaki", "Quần Short"];
-  const listPhuKienNam = ["Thắt Lưng", "Giày", "Phụ Kiện Khác"];
-  const listDoTheThaoNam = [
-    "Áo Thun Thể Thao",
-    "Áo Polo Thể Thao",
-    "Bộ Thể Thao",
-    "Quần Thể Thao",
+  const account = [
+    {
+      label: (
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.antgroup.com"
+        >
+          Tài khoản của tôi
+        </a>
+      ),
+      key: "0",
+    },
+    {
+      label: (
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.aliyun.com"
+        >
+          Thay đổi mật khẩu
+        </a>
+      ),
+      key: "1",
+    },
+    {
+      type: "divider",
+    },
+    {
+      key: "3",
+      onClick: () => {
+        console.log("dang xuat ");
+        dispatch(logoutAction());
+      },
+      label: (
+        <Link
+          target="_blank"
+          rel="noopener noreferrer"
+          // to={generatePath(ROUTES.USER.PRODUCT_LIST, { subCategoryId: 5 })}
+        >
+          Đăng xuất
+        </Link>
+      ),
+    },
   ];
-
   return (
     <S.Header>
       <S.HeaderContainer>
@@ -86,81 +231,35 @@ function Header() {
         <S.HeaderBottom className="flex justify-center items-center w-full">
           <div className="flex justify-start items-center w-3/5">
             <S.Nav className="h-full mb-8">
-              <S.ItemNav className="h-full mb-2">
-                <S.ItemTitle
-                  href=""
-                  className="h-80 mx-8 text-[#11006F] flex flex-wrap flex-col items-center  "
-                >
-                  Nữ
-                </S.ItemTitle>
-                {/* <S.ChildNavList>
-                  <S.ChildNav>
-                    <a href="">Áo Nữ</a>
-                  </S.ChildNav>
-                  <S.ChildNav>
-                    <a href="">Quần Nữ</a>
-                  </S.ChildNav>
-                  <S.ChildNav>
-                    <a href="">Váy Nữ</a>
-                  </S.ChildNav>
-                  <S.ChildNav>
-                    <a href="">Đầm Nữ</a>
-                  </S.ChildNav>
-                </S.ChildNavList> */}
-              </S.ItemNav>
-              <S.ItemNav className="h-full mb-2">
-                <S.ItemTitle
-                  href=""
-                  className="h-80 mx-8 text-[#11006F] flex flex-wrap flex-col items-center  "
-                >
-                  Nam
-                </S.ItemTitle>
-                {/* <S.ChildNavList>
-                  <S.ChildNav>
-                    <a href="">Áo Nam</a>
-                  </S.ChildNav>
-                  <S.ChildNav>
-                    <a href="">Quần Nam</a>
-                  </S.ChildNav>
-                  <S.ChildNav>
-                    <a href="">Áo Khoác Nam</a>
-                  </S.ChildNav>
-                  <S.ChildNav>
-                    <a href="">Giày Nam</a>
-                  </S.ChildNav>
-                </S.ChildNavList> */}
-              </S.ItemNav>
-              <S.ItemNav className="h-full mb-2">
-                <S.ItemTitle
-                  href=""
-                  className="h-80 mx-8 text-[#11006F] flex flex-wrap flex-col items-center  "
-                >
-                  Trẻ Em
-                  <S.ItemBottom className="w-[140%] h-10  rounded-t-lg  "></S.ItemBottom>
-                </S.ItemTitle>
-                {/* <S.ChildNavList>
-                  <S.ChildNav
-                    onClick={() =>
-                      navigate({
-                        pathname: generatePath(ROUTES.ADMIN.TODO_DETAIL, {
-                          subcategoryid: 5,
-                        }),
-                      })
-                    }
-                  >
-                    <a href="">Áo</a>
-                  </S.ChildNav>
-                  <S.ChildNav>
-                    <a href="">Quần</a>
-                  </S.ChildNav>
-                  <S.ChildNav>
-                    <a href="">Áo ấm</a>
-                  </S.ChildNav>
-                  <S.ChildNav>
-                    <a href="">Giày</a>
-                  </S.ChildNav>
-                </S.ChildNavList> */}
-              </S.ItemNav>
+              <Dropdown
+                menu={{
+                  items: female,
+                }}
+                placement="bottomLeft"
+                arrow
+              >
+                <div className="w-[80px]">
+                  <Space>
+                    Nữ
+                    <DownOutlined />
+                  </Space>
+                </div>
+              </Dropdown>
+
+              <Dropdown
+                menu={{
+                  items: male,
+                }}
+                placement="bottomLeft"
+                arrow
+              >
+                <div className="w-[80px]">
+                  <Space className="flex justify-center align-content-center">
+                    Nam
+                    <DownOutlined />
+                  </Space>
+                </div>
+              </Dropdown>
             </S.Nav>
           </div>
           <div className="text-[10px] flex justify-end items-center w-2/4">
@@ -171,11 +270,28 @@ function Header() {
             <S.Person className="mr-2">
               <BsPersonCircle className="text-[24px]" />
             </S.Person>
-            <a href="" className="">
-              Đăng nhập
-            </a>
-            <span className="m-2">/</span>
-            <a href="">Đăng Ký</a>
+            <div>
+              {userInfo.data.id ? (
+                <Link>
+                  <Dropdown
+                    menu={{
+                      items: account,
+                    }}
+                    placement="bottomRight"
+                  >
+                    <a onClick={(e) => e.preventDefault()}>
+                      <Space>{userInfo.data.fullName}</Space>
+                    </a>
+                  </Dropdown>
+                </Link>
+              ) : (
+                <div>
+                  <Link to={generatePath(ROUTES.USER.REGISTER)}>Đăng Ký</Link>
+                  <span className="m-2">/</span>
+                  <Link to={generatePath(ROUTES.USER.LOGIN)}>Đăng Nhập</Link>
+                </div>
+              )}
+            </div>
           </div>
         </S.HeaderBottom>
       </S.HeaderContainer>

@@ -1,4 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
+import { CATEGORY_ACTION, REQUEST, SUCCESS, FAIL } from "../constants";
 
 const initialState = {
   categoryList: {
@@ -9,7 +10,7 @@ const initialState = {
 };
 
 const categoryReducer = createReducer(initialState, {
-  GET_CATEGORY_LIST_REQUEST: (state, action) => {
+  [REQUEST(CATEGORY_ACTION.GET_CATEGORY_LIST)]: (state, action) => {
     return {
       ...state,
       categoryList: {
@@ -18,7 +19,7 @@ const categoryReducer = createReducer(initialState, {
       },
     };
   },
-  GET_CATEGORY_LIST_SUCCESS: (state, action) => {
+  [SUCCESS(CATEGORY_ACTION.GET_CATEGORY_LIST)]: (state, action) => {
     const { data } = action.payload;
     return {
       ...state,
@@ -29,7 +30,7 @@ const categoryReducer = createReducer(initialState, {
       },
     };
   },
-  GET_CATEGORY_LIST_FAIL: (state, action) => {
+  [FAIL(CATEGORY_ACTION.GET_CATEGORY_LIST)]: (state, action) => {
     const { error } = action.payload;
     return {
       ...state,

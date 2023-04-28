@@ -1,0 +1,3 @@
+export const SIZE_ACTION = {
+  GET_SIZE_LIST: "SIZE/GET_SIZE_LIST",
+};
