@@ -22,11 +22,8 @@ function ProductHome() {
     axios
       .get("http://localhost:4000/products/?_page=1&_limit=8")
       .then((res) => {
-        console.log("lay data");
         setProductDress(res.data);
-        console.log("🚀 ~ file: index.jsx:31 ~ .then ~ res.data:", res.data);
       })
-
       .catch((err) => {
         console.log("loi roi");
       });

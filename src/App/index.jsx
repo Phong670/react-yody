@@ -11,6 +11,7 @@ import ProducDetail from "../pages/user/ProductDetail";
 import ProductList from "../pages/user/ProductList";
 import LoginPage from "../pages/Login";
 import RegisterPage from "../pages/Register";
+import CartPage from "../pages/user/Cart";
 
 import FooterPage from "../layouts/Footer";
 import UserLayout from "../layouts/UserLayout/";
@@ -20,7 +21,7 @@ import ProductListLayout from "../layouts/ProductListLayout/";
 import { ROUTES } from "../constants/routes";
 
 import { getUserInfoAction } from "../redux/actions";
-
+import { History } from "history";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -45,6 +46,7 @@ function App() {
         </Route>
         <Route path={ROUTES.USER.LOGIN} element={<LoginPage />} />
         <Route path={ROUTES.USER.REGISTER} element={<RegisterPage />} />
+        <Route path={ROUTES.USER.CART} element={<CartPage />} />
       </Routes>
 
       <FooterPage />

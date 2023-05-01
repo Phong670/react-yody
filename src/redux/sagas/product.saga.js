@@ -58,14 +58,19 @@ function* getProductListSaga(action) {
 function* getProductDetailSaga(action) {
   try {
     const { id } = action.payload;
+    console.log("id bang", id);
+    const result = yield axios.get(`http://localhost:4000/products?id=${id}`, {
+      params: {
+        _expand: ["subCategory", "category"],
+      },
+    });
     console.log(
-      "🚀 ~ file: product.saga.js:61 ~ function*getProductDetailSaga ~ id:",
-      id
+      "🚀 ~ file: product.saga.js:64 ~ function*getProductDetailSaga ~ result:",
+      result
     );
-    const result = yield axios.get(`http://localhost:4000/products/${id}`);
     yield put({
       type: SUCCESS(PRODUCT_ACTION.GET_PRODUCT_DETAIL),
-      payload: { data: result.data },
+      payload: { data: result.data[0] },
     });
   } catch (e) {
     yield put({

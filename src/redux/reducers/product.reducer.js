@@ -59,6 +59,7 @@ const productReducer = createReducer(initialState, {
   },
   [SUCCESS(PRODUCT_ACTION.GET_PRODUCT_DETAIL)]: (state, action) => {
     const { data } = action.payload;
+    console.log("🚀 ~ file: product.reducer.js:62 ~ [SUCCESS ~ data:", data);
     return {
       ...state,
       productDetail: {

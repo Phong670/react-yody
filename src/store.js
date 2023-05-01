@@ -8,6 +8,7 @@ import authReducer from "./redux/reducers/auth.reducer";
 import reviewReducer from "./redux/reducers/review.reducer";
 
 import commonReducer from "./redux/reducers/common.reducer";
+import cartReducer from "./redux/reducers/cart.reducer";
 
 import rootSaga from "./redux/sagas"; //import yield fork for choice saga file
 
@@ -21,6 +22,7 @@ const store = configureStore({
     auth: authReducer,
     review: reviewReducer,
     common: commonReducer,
+    cart: cartReducer,
   },
   //saga
   middleware: (getDefaultMiddleware) => [

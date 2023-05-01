@@ -5,6 +5,7 @@ export const ROUTES = {
     PRODUCT_LIST: "/product/:subCategoryId",
     LOGIN: "/login",
     REGISTER: "/register",
+    CART: "/cart",
   },
   id: {},
 };

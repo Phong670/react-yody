@@ -6,14 +6,6 @@ import { PRODUCT_LIMIT } from "../../constants/paging";
 function* getReviewListSaga(action) {
   try {
     const { productId, page, sendReview } = action.payload;
-    console.log(
-      "🚀 ~ file: review.saga.js:9 ~ function*getReviewListSaga ~ productId:",
-      productId
-    );
-    console.log(
-      "🚀 ~ file: review.saga.js:9 ~ function*getReviewListSaga ~ page:",
-      page
-    );
 
     const result = yield axios.get("http://localhost:4000/reviews/", {
       params: {
@@ -25,7 +17,7 @@ function* getReviewListSaga(action) {
         //getProductId
         productId: productId,
         _page: page,
-        _limit: PRODUCT_LIMIT,
+        // _limit: PRODUCT_LIMIT,
       },
     });
 
