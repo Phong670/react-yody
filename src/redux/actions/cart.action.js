@@ -7,6 +7,6 @@ export const addCartListAction = createAction(
 export const updateCartItemAction = createAction(
   REQUEST(CART_ACTION.UPDATE_CART_ITEM)
 );
-export const deleteCartListAction = createAction(
-  REQUEST(CART_ACTION.DELETE_CART_LIST)
+export const deleteCartItemAction = createAction(
+  REQUEST(CART_ACTION.DELETE_CART_ITEM)
 );

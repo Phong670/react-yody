@@ -13,6 +13,7 @@ import * as S from "./styles";
 import { useEffect } from "react";
 
 import { addCartListAction } from "../../../redux/actions/index";
+import axios from "axios";
 
 function AddToCard({ productDetail }) {
   const [isSizeToCart, setIsSizeToCart] = useState("");
@@ -20,19 +21,33 @@ function AddToCard({ productDetail }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
-  const { sizeList } = useSelector((state) => state.size);
-  const [quality, setQuality] = useState(1);
+
+  const [sizeList, setSizeList] = useState([]);
+
+  console.log("🚀 ~ file: addToCard.jsx:24 ~ AddToCard ~ sizeList:", sizeList);
+  const [quantity, setQuantity] = useState(1);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:4000/sizes")
+      .then((res) => {
+        setSizeList(res.data);
+      })
+      .catch((err) => {
+        console.log("loi roi");
+      });
+  }, []);
 
   const renderSizeList = useMemo(() => {
     let listSizeProduct = productDetail.data.sizeId;
 
     let listSizeName = [];
-    sizeList?.data?.map((item) =>
+    sizeList?.map((item) =>
       listSizeProduct.map(
         (item2) => item2 === item.id && listSizeName.push(item.size)
       )
     );
-    return listSizeName.map((item, index) => {
+    return listSizeName?.map((item, index) => {
       return (
         <button
           key={index}
@@ -53,32 +68,32 @@ function AddToCard({ productDetail }) {
         </button>
       );
     });
-  }, [sizeList.data, isSizeToCart]);
+  }, [sizeList, isSizeToCart]);
   console.log("isSizeToCart", isSizeToCart);
-  console.log("🚀 ~ file: addToCard.jsx:64 ~ useEffect ~ quality:", quality);
-  const renderQuality = () => {
+  console.log("🚀 ~ file: addToCard.jsx:64 ~ useEffect ~ quantity:", quantity);
+  const renderQuantity = () => {
     return (
       <div className="flex justify-center gap-0">
         <button
           className={`w-[56px] h-[48px] ${
-            quality === 1 ? "bg-[#d2d0d0] " : "bg-[#ffffff]"
+            quantity === 1 ? "bg-[#d2d0d0] " : "bg-[#ffffff]"
           }  
             order-solid border-[1px] border-[#e9ecef] rounded-l-xl text-[24px]`}
           onClick={() => {
-            quality !== 1 && setQuality(quality - 1);
-            console.log("quality", quality);
+            quantity !== 1 && setQuantity(quantity - 1);
+            console.log("quantity", quantity);
           }}
         >
           -
         </button>
         <div className="w-[56px] h-[48px] bg-[#ffffff] order-solid border-[1px] border-[#e9ecef] flex justify-center items-center">
-          {quality}
+          {quantity}
         </div>
         <button
           className="w-[56px] h-[48px] bg-[#ffffff] order-solid border-[1px] border-[#e9ecef] rounded-r-xl text-[24px]"
           onClick={() => {
-            setQuality(quality + 1);
-            console.log("quality", quality);
+            setQuantity(quantity + 1);
+            console.log("quantity", quantity);
           }}
         >
           +
@@ -108,22 +123,20 @@ function AddToCard({ productDetail }) {
 
       <div className="my-3">Số lượng:</div>
       <div className="w-full flex justify-between">
-        <>{renderQuality()}</>
+        <>{renderQuantity()}</>
         <button
           className="w-[220px] h-[48px] bg-[#ffc107] text-[#fff] hover:bg-[#FEECC7] hover:text-[#fcaf17] rounded-md"
           onClick={() => {
             isSizeToCart === ""
               ? setBoxSizeWarning(true)
               : dispatch(
-                  addCartListAction([
-                    {
-                      id: parseInt(id),
-                      image: productDetail.data.image,
-                      title: productDetail.data.title,
-                      size: isSizeToCart,
-                      quality: quality,
-                    },
-                  ])
+                  addCartListAction({
+                    id: parseInt(id),
+                    image: productDetail.data.image,
+                    title: productDetail.data.title,
+                    size: isSizeToCart,
+                    quantity: quantity,
+                  })
                 );
           }}
         >

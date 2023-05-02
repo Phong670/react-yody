@@ -21,7 +21,6 @@ import {
 import AddToCard from "./addToCard";
 import ReviewProduct from "./review";
 import * as S from "./styles";
-import axios from "axios";
 
 function ProductDetail() {
   const [isSizeToCart, setIsSizeToCart] = useState("");

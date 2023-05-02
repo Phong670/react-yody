@@ -20,7 +20,7 @@ import {
 } from "../../../redux/actions";
 import { REQUEST } from "../../../redux/constants";
 import {
-  deleteCartListAction,
+  deleteCartItemAction,
   updateCartItemAction,
 } from "../../../redux/actions/index";
 
@@ -41,40 +41,52 @@ function Cart() {
           <div className="flex justify-center">200.000đ</div>
           <div className="flex ">
             <div className="flex w-full h-[38px] justify-center gap-0">
-              <Space.Compact>
-                <Button
+              <div className="flex justify-center gap-0">
+                <button
+                  className={`w-[56px] h-[48px] ${
+                    item.quantity === 1 ? "bg-[#d2d0d0] " : "bg-[#ffffff]"
+                  }  
+            order-solid border-[1px] border-[#e9ecef] rounded-l-xl text-[24px]`}
+                  onClick={() => {
+                    item.quantity !== 1 &&
+                      dispatch(
+                        updateCartItemAction({
+                          id: item.id,
+                          size: item.size,
+                          quantity: item.quantity - 1,
+                        })
+                      );
+                  }}
+                >
+                  -
+                </button>
+                <div className="w-[56px] h-[48px] bg-[#ffffff] order-solid border-[1px] border-[#e9ecef] flex justify-center items-center">
+                  {item.quantity}
+                </div>
+                <button
+                  className="w-[56px] h-[48px] bg-[#ffffff] order-solid border-[1px] border-[#e9ecef] rounded-r-xl text-[24px]"
                   onClick={() => {
                     dispatch(
                       updateCartItemAction({
                         id: item.id,
-                        quality: item.quality > 1 ? item.quality - 1 : 1,
+                        size: item.size,
+                        quantity: item.quantity + 1,
                       })
                     );
-                    console.log(item.quality);
                   }}
-                  icon={<MinusOutlined />}
-                />
-                <Input value={item.quality} readOnly style={{ width: 50 }} />
-                <Button
-                  onClick={() => {
-                    dispatch(
-                      updateCartItemAction({
-                        id: item.id,
-                        quality: item.quality + 1,
-                      })
-                    );
-                    console.log(item.quality);
-                  }}
-                  // icon={<PlusOutlined />}
-                />
-              </Space.Compact>
+                >
+                  +
+                </button>
+              </div>
             </div>
           </div>
           <div className="flex flex-wrap col justify-center ">
             <div className="w-full text-center">213.123đ</div>
             <div
               className="w-full flex justify-end items-end pb-2"
-              onClick={() => dispatch(deleteCartListAction([item.id]))}
+              onClick={() =>
+                dispatch(deleteCartItemAction({ id: item.id, size: item.size }))
+              }
             >
               <RiDeleteBinLine className="text-[26px]" />
             </div>
