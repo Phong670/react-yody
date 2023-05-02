@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { PRODUCT_LIMIT } from "../../../constants/paging";
 import LazyLoad from "react-lazy-load";
 import axios from "axios";
-import { AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineUp, AiOutlineDown } from "react-icons/ai";
+import { FiFilter } from "react-icons/fi";
 import { useParams } from "react-router-dom";
 import {
   getProductListAction,
@@ -18,12 +19,19 @@ import { useCallback } from "react";
 import { debounce } from "lodash";
 import { ROUTES } from "../../../constants/routes";
 import CartProductList from "./cartProductList";
+import { useNavigate } from "react-router-dom";
 function ProductList() {
+  const navigate = useNavigate();
   const { subCategoryId } = useParams();
   let subCategoryIdArray = subCategoryId.split(",");
   const [gender, setGender] = useState([subCategoryIdArray[0]]);
   const [subCategory, setSubCategory] = useState([]);
   const [listYourChoice, setlistYourChoice] = useState([]);
+  const [placeHolderSort, setPlaceHolderSort] = useState("Mặc định");
+  const [showTypeFilter, setShowTypeFilter] = useState(false);
+  const [showSizeFilter, setShowSizeFilter] = useState(false);
+  const [sortBox, setSortBox] = useState(false);
+
   const [defaultValuePrice, setDefaultValuePrice] = useState([0, 700]);
   const [active, setActive] = useState(false);
   const [activeButton, setActiveButton] = useState(1);
@@ -39,7 +47,6 @@ function ProductList() {
     page: 1,
     limit: PRODUCT_LIMIT,
   });
-  const [sortBox, setSortBox] = useState(false);
   useEffect(() => {
     axios
       .get("http://localhost:4000/sizes")
@@ -175,7 +182,7 @@ function ProductList() {
   };
   const renderListFilterType = (list) => {
     return (
-      <div className="w-full flex flex-wrap gap-2 ">
+      <div className="w-full flex flex-wrap gap-2 duration-700 transition-[height] ">
         {list?.map((item, index) => {
           return (
             <div
@@ -280,39 +287,90 @@ function ProductList() {
   const CpnFilter = ({ listYourChoice, typeProduct, sizeProduct }) => {
     return (
       <div
-        className={`col-span-1 lg:block  ${
+        className={`col-span-1 lg:block p-2  ${
           sortBox
-            ? "xs:block fixed right-0 w-[220px] p-2 bg-[white] z-50"
-            : "xs:hidden"
+            ? "xxs:block fixed right-0 top-0 w-[220px]  bg-[white] z-50 h-full"
+            : "xxs:hidden"
         } `}
       >
+        <div
+          className={`w-full flex justify-start items-center mb-2 ${
+            sortBox ? "block" : "hidden"
+          } `}
+        >
+          <AiOutlineClose
+            className="w-[20%] flex justify-start text-[20px] hover:cursor-pointer"
+            onClick={() => setSortBox(!sortBox)}
+          />
+          <p className="w-[80%] flex justify-center text-[20px] text-[orange]">
+            Bộ Lọc
+          </p>
+        </div>
         <div className="flex justify-between">
           Bạn chọn:
-          <div className="mr-5" onClick={() => removeAll()}>
+          <div
+            className="hover:text-[orange] cursor-pointer"
+            onClick={() => removeAll()}
+          >
             Bỏ hết
           </div>
         </div>
         {RenderYourChoice}
-        <div className="my-4">Loại sản phẩm</div>
-        {renderListFilterType(typeProduct)}
-        <div className="my-4">Size</div>
-        {renderListFilterSize(sizeProduct)}
         <div className="my-4">Giá</div>
         {renderListFilterPrice()}
+        <div
+          className="my-4 flex justify-between items-center"
+          onClick={() => {
+            setShowTypeFilter(!showTypeFilter);
+          }}
+        >
+          Loại sản phẩm {sortBox && showTypeFilter && <AiOutlineUp />}{" "}
+          {sortBox && !showTypeFilter && <AiOutlineDown />}
+        </div>
+        <div className="transition-[height]">
+          {sortBox
+            ? showTypeFilter && renderListFilterType(typeProduct)
+            : renderListFilterType(typeProduct)}
+        </div>
+        <div
+          className="my-4 flex justify-between items-center"
+          onClick={() => {
+            setShowSizeFilter(!showSizeFilter);
+          }}
+        >
+          Size {sortBox && showSizeFilter && <AiOutlineUp />}
+          {sortBox && !showSizeFilter && <AiOutlineDown />}
+        </div>
+        <div>
+          {sortBox
+            ? showSizeFilter && renderListFilterSize(sizeProduct)
+            : renderListFilterSize(sizeProduct)}
+        </div>
       </div>
     );
   };
-
+  const renderPlaceHolderSort = (value) => {
+    if (value === "") setPlaceHolderSort("Mặc định");
+    else if (value === "title.desc") setPlaceHolderSort("Tên A-Z");
+    else if (value === "title.asc") setPlaceHolderSort("Tên Z-A");
+    else if (value === "price.asc") setPlaceHolderSort("Giá tăng dần");
+    else if (value === "price.desc") setPlaceHolderSort("Giá giảm dần");
+  };
   const CpnFilterSort = () => {
     return (
-      <div className="mb-4 lg:w-full flex justify-end">
-        <div className="w-[150px]">
+      <div className="mb-4 lg:w-full flex justify-end gap-2">
+        <div className="flex items-center">Sắp xếp:</div>
+        <div className="w-[120px]">
           <Col>
             <Select
-              onChange={(value) => handleFilter("sort", value)}
-              placeholder="Sort by"
+              onChange={(value) => {
+                handleFilter("sort", value);
+                renderPlaceHolderSort(value);
+              }}
+              placeholder={placeHolderSort}
               style={{ width: "100%" }}
             >
+              <Select.Option value="">Mặc định</Select.Option>
               <Select.Option value="title.desc">Tên A-Z</Select.Option>
               <Select.Option value="title.asc">Tên Z-A</Select.Option>
               <Select.Option value="price.asc">Giá tăng dần</Select.Option>
@@ -342,9 +400,35 @@ function ProductList() {
     <div className="w-full p-[8px] flex flex-nowrap flex-col justify-between">
       <div className="w-full flex justify-center">
         {subCategoryIdArray.length > 1 ? (
-          <> Trang chủ/{activeButton ? "Nữ" : "Nam"}</>
+          <>
+            {" "}
+            <p
+              className="cursor-pointer hover:text-[orange]"
+              onClick={() => {
+                navigate({
+                  pathname: generatePath(ROUTES.USER.HOME),
+                });
+              }}
+            >
+              Trang chủ /
+            </p>
+            {activeButton ? "Nữ" : "Nam"}
+          </>
         ) : (
-          <>Trang chủ/{subCategory.name}</>
+          <>
+            {" "}
+            <p
+              className="cursor-pointer hover:text-[orange]"
+              onClick={() => {
+                navigate({
+                  pathname: generatePath(ROUTES.USER.HOME),
+                });
+              }}
+            >
+              Trang chủ /
+            </p>
+            {subCategory.name}
+          </>
         )}
       </div>
 
@@ -401,14 +485,22 @@ function ProductList() {
       ) : (
         <></>
       )}
-      <div className="flex justify-between">
+      <div className="flex justify-between min-w-[250px]">
         <CpnFilterSort></CpnFilterSort>
-        <div className="xs:block lg:hidden" onClick={() => setSortBox(true)}>
-          Bộ lọc
+        <div
+          className="xs:block lg:hidden cursor-pointer"
+          onClick={() => {
+            setSortBox(!sortBox);
+            console.log("dmdmdmmd");
+          }}
+        >
+          <p className="flex items-centers sm:gap-2 xs:gap-0">
+            Bộ lọc <FiFilter className="text-[20px]" />
+          </p>
         </div>
       </div>
 
-      <div className="xl:w-[1150px] lg:w-[900px] grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-4 ">
+      <div className="xl:w-[1150px] lg:w-[900px] grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-4 justify-center ">
         <CpnFilter
           listYourChoice={listYourChoice}
           typeProduct={categoryList.data}

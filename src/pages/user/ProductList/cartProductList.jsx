@@ -45,14 +45,20 @@ const CartProductList = ({ listProduct, filterParams }) => {
   };
 
   return (
-    <div className=" grid col-span-4 gap-1 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 ">
-      {renderCartList(listProduct)}
+    <>
+      <div className=" grid col-span-4 gap-1 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-3 xs:grid-cols-2 ">
+        {renderCartList(listProduct)}
+      </div>
       {productList.data.length !== productList.meta.total && (
-        <Row justify="center" style={{ marginTop: 16 }}>
+        <Row
+          justify="center"
+          style={{ marginTop: 16 }}
+          className="col-span-5 h-10"
+        >
           <Button onClick={() => handleShowMore()}>Show more</Button>
         </Row>
       )}
-    </div>
+    </>
   );
 };
 export default CartProductList;

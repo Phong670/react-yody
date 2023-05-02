@@ -30,8 +30,9 @@ module.exports = {
     // --breakpoint-xl: 1200px;
 
     screens: {
-      xs: "0",
-      sm: "576px",
+      xxs: "0",
+      xs: "300px",
+      sm: "676px",
       md: "768px",
       lg: "992px",
       xl: "1200px",
