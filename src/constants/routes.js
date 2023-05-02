@@ -6,6 +6,7 @@ export const ROUTES = {
     LOGIN: "/login",
     REGISTER: "/register",
     CART: "/cart",
+    SEARCH: "/search/:searchKey",
   },
   id: {},
 };

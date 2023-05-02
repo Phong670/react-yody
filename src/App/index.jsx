@@ -12,10 +12,11 @@ import ProductList from "../pages/user/ProductList";
 import LoginPage from "../pages/Login";
 import RegisterPage from "../pages/Register";
 import CartPage from "../pages/user/Cart";
+import SearchPage from "../pages/user/Search";
 
 import FooterPage from "../layouts/Footer";
 import UserLayout from "../layouts/UserLayout/";
-import DetailProducLayout from "../layouts/DetailProducLayout/";
+import DetailProductLayout from "../layouts/DetailProductLayout/";
 import ProductListLayout from "../layouts/ProductListLayout/";
 
 import { ROUTES } from "../constants/routes";
@@ -38,7 +39,7 @@ function App() {
         <Route element={<UserLayout />}>
           <Route path={ROUTES.USER.HOME} element={<HomePage />} />
         </Route>
-        <Route element={<DetailProducLayout />}>
+        <Route element={<DetailProductLayout />}>
           <Route path={ROUTES.USER.PRODUCT_DETAIL} element={<ProducDetail />} />
         </Route>
         <Route element={<ProductListLayout />}>
@@ -47,6 +48,7 @@ function App() {
         <Route path={ROUTES.USER.LOGIN} element={<LoginPage />} />
         <Route path={ROUTES.USER.REGISTER} element={<RegisterPage />} />
         <Route path={ROUTES.USER.CART} element={<CartPage />} />
+        <Route path={ROUTES.USER.SEARCH} element={<SearchPage />} />
       </Routes>
 
       <FooterPage />

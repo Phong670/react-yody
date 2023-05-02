@@ -15,10 +15,16 @@ import {
 } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { logoutAction } from "../../redux/actions";
+import SearchBox from "./searchBox";
+import { useState } from "react";
 
 function Header() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const [searchKey, setSearchKey] = useState("");
+
+  console.log("🚀 ~ file: index.jsx:25 ~ Header ~ searchKey:", searchKey);
   const { userInfo } = useSelector((state) => state.auth);
   const male = [
     {
@@ -181,6 +187,7 @@ function Header() {
       ),
     },
   ];
+
   return (
     <S.Header>
       <S.HeaderContainer>
@@ -192,12 +199,24 @@ function Header() {
           >
             <img src="//bizweb.dktcdn.net/100/438/408/themes/899432/assets/logo.svg?1678786925300"></img>
           </Link>
-          <S.InputCover className="w-1/3 ml-4">
-            <S.Input type="text" className="w-4/5" />
-            <S.SearchBtn className=" w-1/5 hover:bg-[#f8b021]">
-              <BsSearch className="text-[24px]" />
-            </S.SearchBtn>
+          <S.InputCover className=" ml-4 relative">
+            <div className="flex">
+              <S.Input
+                type="text"
+                className="w-[305px]"
+                onChange={(e) => {
+                  setSearchKey(e.target.value.trim());
+                }}
+              />
+              <S.SearchBtn className=" w-[85px] hover:bg-[#f8b021]">
+                <BsSearch className="text-[24px]" />
+              </S.SearchBtn>
+            </div>
+            <div className="w-full flex flex-col z-50  bg-[#f9f6f6] absolute top-[40px] left-0 ">
+              <SearchBox searchKey={searchKey} />
+            </div>
           </S.InputCover>
+
           <div className="flex justify-around items-center gap-2 ">
             <a
               href=""

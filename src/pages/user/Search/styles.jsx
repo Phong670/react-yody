@@ -39,7 +39,7 @@ export const Info = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  z-index: 1;
+  z-index: 99;
 `;
 export const CustomLink = styled(Link)`
   width: 100%;

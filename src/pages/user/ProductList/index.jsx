@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { PRODUCT_LIMIT } from "../../../constants/paging";
 import LazyLoad from "react-lazy-load";
 import axios from "axios";
-
+import { AiOutlineClose } from "react-icons/ai";
 import { useParams } from "react-router-dom";
 import {
   getProductListAction,
@@ -17,32 +17,21 @@ import "react-placeholder/lib/reactPlaceholder.css";
 import { useCallback } from "react";
 import { debounce } from "lodash";
 import { ROUTES } from "../../../constants/routes";
+import CartProductList from "./cartProductList";
 function ProductList() {
   const { subCategoryId } = useParams();
-  console.log(
-    "🚀 ~ file: index.jsx:20 ~ ProductList ~ subCategoryId:",
-    typeof subCategoryId
-  );
   let subCategoryIdArray = subCategoryId.split(",");
-  console.log(
-    "🚀 ~ file: index.jsx:36 ~ ProductList ~ subCategoryIdArray:",
-    subCategoryIdArray
-  );
   const [gender, setGender] = useState([subCategoryIdArray[0]]);
   const [subCategory, setSubCategory] = useState([]);
-
   const [listYourChoice, setlistYourChoice] = useState([]);
   const [defaultValuePrice, setDefaultValuePrice] = useState([0, 700]);
   const [active, setActive] = useState(false);
   const [activeButton, setActiveButton] = useState(1);
-
   const { productList } = useSelector((state) => state.product);
-
   const { categoryList } = useSelector((state) => state.category);
-  const { sizeList } = useSelector((state) => state.size);
 
   const dispatch = useDispatch();
-
+  const [sizeList, setSizeList] = useState([]);
   const [filterParams, setFilterParams] = useState({
     categoryId: [],
     sizeId: [],
@@ -50,7 +39,19 @@ function ProductList() {
     page: 1,
     limit: PRODUCT_LIMIT,
   });
+  const [sortBox, setSortBox] = useState(false);
+  useEffect(() => {
+    axios
+      .get("http://localhost:4000/sizes")
+      .then((res) => {
+        setSizeList(res.data);
+      })
+      .catch((err) => {
+        console.log("loi roi");
+      });
+  }, []);
 
+  console.log("🚀 ~ file: index.jsx:35 ~ ProductList ~ sizeList:", sizeList);
   useEffect(() => {
     dispatch(
       getCategoryListAction({
@@ -58,27 +59,17 @@ function ProductList() {
       })
     );
     dispatch(getSizeListAction());
-    console.log("load lan dau");
   }, [gender]);
   useEffect(() => {
     dispatch(getProductListAction(filterParams));
   }, [filterParams]);
   let categoryIdTemp = [...filterParams.categoryId];
   let sizeIdTemp = [...filterParams.sizeId];
-
   let clone = [...listYourChoice];
-
   const removeYourChoice = (array, values, name) => {
     let indexGetAPI = array.indexOf(values);
-
     array.splice(indexGetAPI, 1);
-    console.log("clone", clone);
     let nameOfIndex = clone.findIndex((item) => item.name === name);
-    // let nameOfIndex = clone.indexOf(name);
-    console.log(
-      "🚀 ~ file: index.jsx:83 ~ removeYourChoice ~ nameOfIndex:",
-      nameOfIndex
-    );
     clone.splice(nameOfIndex, 1);
   };
 
@@ -142,10 +133,8 @@ function ProductList() {
     setlistYourChoice(clone);
   }, []);
   const removeYourChoiceTop = (objectname) => {
-    console.log("click top", objectname);
     let valueType = categoryIdTemp.map((item) => {
       if (item === objectname.value) {
-        console.log("aaaaaaa", categoryIdTemp, item, objectname.name);
         removeYourChoice(categoryIdTemp, item, objectname.name);
         setlistYourChoice(clone);
         setFilterParams({
@@ -158,7 +147,6 @@ function ProductList() {
     });
     let valueSize = sizeIdTemp.map((item) => {
       if (item === objectname.value) {
-        console.log("bbbb", sizeIdTemp, item, objectname.name);
         removeYourChoice(sizeIdTemp, item, objectname.name);
         setlistYourChoice(clone);
         setFilterParams({
@@ -169,26 +157,11 @@ function ProductList() {
         });
       }
     });
-    console.log(
-      "🚀 ~ file: index.jsx:147 ~ valueType ~ categoryIdTemp:",
-      categoryIdTemp
-    );
-    console.log("🚀 ~ file: index.jsx:147 ~ valueType ~ valueType:", valueType);
   };
   let genderClone = [];
   const removeAll = () => {
-    console.log("categoryIdTemp", categoryIdTemp);
-    console.log("sizeIdTemp", sizeIdTemp);
-
-    console.log("clone", clone);
     clone = [];
     setlistYourChoice(clone);
-
-    console.log(
-      "🚀 ~ file: index.jsx:182 ~ removeAll ~ filterParams:",
-      filterParams
-    );
-
     categoryIdTemp = [];
     sizeIdTemp = [];
     setFilterParams({
@@ -207,10 +180,10 @@ function ProductList() {
           return (
             <div
               key={item.id}
-              className={`p-2 mt-2 hover:bg-[#a8a3a3d8] ${
+              className={`px-[16px] py-2 mt-2 relative bg-[#f7f4f4] hover:cursor-pointer rounded-md ${
                 categoryIdTemp.findIndex((a) => item.id === a) === -1
                   ? "bg-[#fcfcfc]"
-                  : "bg-[#dce627]"
+                  : "border-solid border-2 border-[#fcaf17] after:h-[22px] after:rounded-tr-md after:w-[22px] after:content-[''] after:top-[-1px] after:right-[-1px] after:absolute after:bg-[url('https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/chose.svg')]"
               } `}
               onClick={(e) => {
                 checkAddYourChoiceType(item.name, "catalogyId", item.id);
@@ -232,10 +205,10 @@ function ProductList() {
           return (
             <div
               key={item.id}
-              className={`p-2 mt-2 hover:bg-[#a8a3a3d8] ${
+              className={`px-[16px] py-2 mt-2 relative bg-[#f7f4f4] hover:cursor-pointer rounded-md  ${
                 sizeIdTemp.findIndex((a) => item.id === a) === -1
                   ? "bg-[#fcfcfc]"
-                  : "bg-[#dce627]"
+                  : "border-solid border-2 border-[#fcaf17] after:h-[22px] after:rounded-tr-md after:w-[22px] after:content-[''] after:top-[-1px] after:right-[-1px] after:absolute after:bg-[url('https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/chose.svg')]"
               } `}
               onClick={() =>
                 checkAddYourChoiceSize(item.size, "sizeId", item.id)
@@ -248,7 +221,6 @@ function ProductList() {
       </div>
     );
   };
-
   const handleFilter = (key, values) => {
     let sortClone = values;
     setFilterParams({
@@ -258,55 +230,12 @@ function ProductList() {
       limit: PRODUCT_LIMIT,
     });
   };
-  console.log(
-    "🚀 ~ file: index.jsx:204 ~ handleFilter ~ filterParams:",
-    filterParams
-  );
-  const handleShowMore = () => {
-    dispatch(
-      getProductListAction({
-        ...filterParams,
-        page: productList.meta.page + 1,
-        limit: PRODUCT_LIMIT,
-        more: true,
-      })
-    );
-  };
-
-  const renderCartList = (array) => {
-    return array?.map((item) => {
-      return (
-        <Link
-          key={item.id}
-          className="w-full "
-          to={generatePath(ROUTES.USER.PRODUCT_DETAIL, { id: item.id })}
-        >
-          <div className="overflow-hidden">
-            <img
-              src={item.image}
-              alt="anh"
-              className="  hover:scale-110 hover:duration-500 transition duration-500 "
-            />
-          </div>
-          <p>{item.title}</p>
-          <p>{item.price}đ</p>
-        </Link>
-      );
-    });
-  };
-
-  console.log(
-    "🚀 ~ file: index.jsx:288 ~ ProductList ~ defaultValuePrice:",
-    defaultValuePrice
-  );
 
   const renderListFilterPrice = (list) => {
-    console.log("render lai price");
     return (
       <div className="w-[90%] ">
         <Slider
           onAfterChange={(value) => {
-            console.log("999999", value);
             setDefaultValuePrice(value);
             setFilterParams({
               ...filterParams,
@@ -334,11 +263,12 @@ function ProductList() {
           return (
             <div
               key={index}
-              className="p-2 bg-[#ccbd18] mt-2 hover:bg-[#a8a3a3d8]"
+              className=" flex items-center gap-2 px-2 py-[2px] rounded-md text-[white] bg-[orange] mt-2 hover:cursor-pointer"
               onClick={() => {
                 removeYourChoiceTop(item);
               }}
             >
+              <AiOutlineClose className="text-[20px] ml-[-4px]" />
               {item.name}
             </div>
           );
@@ -348,9 +278,14 @@ function ProductList() {
   }, [listYourChoice]);
 
   const CpnFilter = ({ listYourChoice, typeProduct, sizeProduct }) => {
-    console.log("render filter CPN");
     return (
-      <div className="col-span-1">
+      <div
+        className={`col-span-1 lg:block  ${
+          sortBox
+            ? "xs:block fixed right-0 w-[220px] p-2 bg-[white] z-50"
+            : "xs:hidden"
+        } `}
+      >
         <div className="flex justify-between">
           Bạn chọn:
           <div className="mr-5" onClick={() => removeAll()}>
@@ -367,24 +302,12 @@ function ProductList() {
       </div>
     );
   };
-  const CpnCartList = ({ listProduct }) => {
-    return (
-      <div className="col-span-4 grid grid-cols-4 gap-4">
-        {renderCartList(listProduct)}
-        {productList.data.length !== productList.meta.total && (
-          <Row justify="center" style={{ marginTop: 16 }}>
-            <Button onClick={() => handleShowMore()}>Show more</Button>
-          </Row>
-        )}
-      </div>
-    );
-  };
 
   const CpnFilterSort = () => {
     return (
-      <div>
-        <div className="flex justify-end">
-          <Col span={8}>
+      <div className="mb-4 lg:w-full flex justify-end">
+        <div className="w-[150px]">
+          <Col>
             <Select
               onChange={(value) => handleFilter("sort", value)}
               placeholder="Sort by"
@@ -404,25 +327,19 @@ function ProductList() {
   useEffect(() => {
     setActiveButton(activeButton);
   }, [activeButton]);
-  console.log(parseInt(subCategoryIdArray[0]) === 1);
-
   useEffect(() => {
     axios
       .get(
         `http://localhost:4000/subCategories/${parseInt(subCategoryIdArray[0])}`
       )
       .then((res) => {
-        console.log("lay data");
         setSubCategory(res.data);
-        console.log("🚀 ~ file: index.jsx:31 ~ .then ~ res.data:", res.data);
       })
 
-      .catch((err) => {
-        console.log("loi roi");
-      });
+      .catch((err) => {});
   }, []);
   return (
-    <div className="w-full flex flex-nowrap flex-col justify-between">
+    <div className="w-full p-[8px] flex flex-nowrap flex-col justify-between">
       <div className="w-full flex justify-center">
         {subCategoryIdArray.length > 1 ? (
           <> Trang chủ/{activeButton ? "Nữ" : "Nam"}</>
@@ -452,10 +369,6 @@ function ProductList() {
                 removeAll();
                 activeButtonClone = 1;
                 setActiveButton(activeButtonClone);
-                console.log(
-                  "🚀 ~ file: index.jsx:419 ~ ProductList ~ activeButton:",
-                  activeButton
-                );
               }}
               className={`p-2 w-[80px] rounded-md hover:bg-[#fcaf17] ${
                 activeButton ? "bg-[#fcaf17]" : "bg-[#ffff]"
@@ -476,10 +389,6 @@ function ProductList() {
                 removeAll();
                 activeButtonClone = 0;
                 setActiveButton(activeButtonClone);
-                console.log(
-                  "🚀 ~ file: index.jsx:429 ~ ProductList ~ activeButton:",
-                  activeButton
-                );
               }}
               className={`p-2 w-[80px] rounded-md hover:bg-[#fcaf17] ${
                 activeButton ? "bg-[#ffff]" : "bg-[#fcaf17]"
@@ -492,15 +401,23 @@ function ProductList() {
       ) : (
         <></>
       )}
+      <div className="flex justify-between">
+        <CpnFilterSort></CpnFilterSort>
+        <div className="xs:block lg:hidden" onClick={() => setSortBox(true)}>
+          Bộ lọc
+        </div>
+      </div>
 
-      <CpnFilterSort></CpnFilterSort>
-      <div className="w-[1200px] grid grid-cols-5">
+      <div className="xl:w-[1150px] lg:w-[900px] grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-4 ">
         <CpnFilter
           listYourChoice={listYourChoice}
           typeProduct={categoryList.data}
-          sizeProduct={sizeList.data}
+          sizeProduct={sizeList}
         />
-        <CpnCartList listProduct={productList.data}></CpnCartList>
+        <CartProductList
+          listProduct={productList.data}
+          filterParams={filterParams}
+        ></CartProductList>
       </div>
     </div>
   );

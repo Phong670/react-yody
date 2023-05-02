@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 
 import * as S from "./styles";
 
-function DetailProducLayout() {
+function DetailProductLayout() {
   return (
     <div className="wrapper">
       <S.MainWrapper>
@@ -12,4 +12,4 @@ function DetailProducLayout() {
   );
 }
 
-export default DetailProducLayout;
+export default DetailProductLayout;
