@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Spin, Row, Col, Card, Button, Space, notification } from "antd";
 import { Rate, Form, Input, Modal } from "antd";
 import { ROUTES } from "../../../constants/routes";
+import CursorZoom from "react-cursor-zoom";
 
 import { PRODUCT_LIMIT } from "../../../constants/paging";
 import {
@@ -75,7 +76,20 @@ function ProductDetail() {
         <div className="w-[400px]">
           <Spin spinning={productDetail.load}>
             <div>
-              <img src={productDetail.data.image} alt="" />
+              {/* <img src={productDetail.data.image} alt="" /> */}
+              <CursorZoom
+                image={{
+                  src: productDetail?.data.image,
+                  width: 400,
+                  height: 300,
+                }}
+                zoomImage={{
+                  src: productDetail.data.image,
+                  width: 1600,
+                  height: 1200,
+                }}
+                cursorOffset={{ x: 80, y: -80 }}
+              />
             </div>
           </Spin>
         </div>

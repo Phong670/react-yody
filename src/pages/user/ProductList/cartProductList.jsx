@@ -34,9 +34,9 @@ const CartProductList = ({ listProduct, filterParams }) => {
             to={generatePath(ROUTES.USER.PRODUCT_DETAIL, { id: item.id })}
           >
             <S.Image src={item.image} alt="" />
-            <S.Info>
-              <h3 className="w-full h-[38px]">{item.title}</h3>
-              <span className="">{item.price.toLocaleString()}đ</span>
+            <S.Info className="flex items-end">
+              <S.Title>{item.title}</S.Title>
+              <S.Price>{item.price.toLocaleString()}đ</S.Price>
             </S.Info>
           </S.CustomLink>
         </S.ItemList>

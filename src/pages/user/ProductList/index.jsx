@@ -358,9 +358,9 @@ function ProductList() {
   };
   const CpnFilterSort = () => {
     return (
-      <div className="mb-4 lg:w-full flex justify-end gap-2">
+      <div className="mb-2 lg:w-full flex justify-end gap-2">
         <div className="flex items-center">Sắp xếp:</div>
-        <div className="w-[120px]">
+        <div className="min-w-[120px]">
           <Col>
             <Select
               onChange={(value) => {
@@ -485,7 +485,7 @@ function ProductList() {
       ) : (
         <></>
       )}
-      <div className="flex justify-between min-w-[250px]">
+      <div className="flex justify-between min-w-[250px] h-[auto] border-solid border-b-2 border-[#dde1ef]">
         <CpnFilterSort></CpnFilterSort>
         <div
           className="xs:block lg:hidden cursor-pointer"
