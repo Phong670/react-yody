@@ -14,13 +14,15 @@ import { Pagination } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
 
-function ProductHome() {
+function ProductHome({ subCategoryId }) {
   const [productData, setProductDress] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/products/?_page=1&_limit=8")
+      .get("http://localhost:4000/products/?_page=1&_limit=8", {
+        params: { subCategoryId: subCategoryId },
+      })
       .then((res) => {
         setProductDress(res.data);
       })
@@ -34,24 +36,26 @@ function ProductHome() {
   const renderListCart = (productChild) => {
     return productChild.map((item, index) => {
       return (
-        <S.ItemList key={item.id}>
-          <S.CustomLink
-            to={generatePath(ROUTES.USER.PRODUCT_DETAIL, { id: item.id })}
-          >
-            <S.Image src={item.image} alt="" />
-            <S.Infor>
-              <h3 className="w-full h-[38px]">{item.title}</h3>
-              <span className="">{item.price.toLocaleString()}đ</span>
-            </S.Infor>
-          </S.CustomLink>
-        </S.ItemList>
+        <SwiperSlide>
+          <S.ItemList key={item.id}>
+            <S.CustomLink
+              to={generatePath(ROUTES.USER.PRODUCT_DETAIL, { id: item.id })}
+            >
+              <S.Image src={item.image} alt="" />
+              <S.Info>
+                <h3 className="w-full h-[38px]">{item.title}</h3>
+                <span className="">{item.price.toLocaleString()}đ</span>
+              </S.Info>
+            </S.CustomLink>
+          </S.ItemList>
+        </SwiperSlide>
       );
     });
   };
 
   return (
     <>
-      <S.MainCover className="w-[1020px]">
+      <S.MainCover className=" xxs: w-[100vw] lg:w-[1020px]">
         <S.ChildMain className="w-full">
           <S.SideBarMenu className="w-full">
             <Swiper
@@ -59,17 +63,28 @@ function ProductHome() {
               modules={[Navigation]}
               className="mySwiper"
               speed={1500}
+              breakpoints={{
+                // when window width is >= 640px
+                640: {
+                  width: 640,
+                  slidesPerView: 4,
+                  spaceBetween: 1,
+                  navigation: false,
+                },
+                // when window width is >= 768px
+                768: {
+                  width: 768,
+                  slidesPerView: 4,
+                },
+              }}
             >
-              <SwiperSlide>
-                <S.MenuListContainer className="flex  justify-start align-items-center">
-                  {renderListCart(productChildOne)}
-                </S.MenuListContainer>
-              </SwiperSlide>
-              <SwiperSlide>
+              {renderListCart(productData)}
+
+              {/* <SwiperSlide>
                 <S.MenuListContainer className="flex  justify-start align-items-center ">
                   {renderListCart(productChildTwo)}
                 </S.MenuListContainer>
-              </SwiperSlide>
+              </SwiperSlide> */}
             </Swiper>
           </S.SideBarMenu>
         </S.ChildMain>

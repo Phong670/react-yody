@@ -9,10 +9,7 @@ export const MainCover = styled.div`
   justify-content: center;
   align-items: flex-start;
 `;
-export const Title = styled.h6`
-  margin-bottom: 10px;
-  font-size: 20px;
-`;
+
 export const ChildMain = styled.div`
   /* width: 800px; */
   height: 380px;
@@ -21,34 +18,14 @@ export const ChildMain = styled.div`
   align-items: flex-start;
   overflow: hidden;
 `;
-export const SideBar = styled.div`
-  width: 200px;
-  height: 100%;
-  background-color: #d18686;
-  border-radius: 8px;
-  overflow: hidden;
-`;
-export const ImgSideBar = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: fill;
-  object-position: center;
-  cursor: pointer;
-`;
-export const MainContainer = styled.div`
-  height: 100%;
-  display: flex;
-
-  align-items: flex-start;
-  flex-wrap: nowrap;
-  overflow: hidden;
-  margin-left: 80px;
-`;
+//aaa
 export const ItemList = styled.div`
-  width: 220px !important;
+  width: 90% !important;
+  max-width: 226px !important;
   height: 360px;
+  max-height: 360px;
   /* margin-bottom: 40px; */
-  margin: 0 10px;
+  margin: 10px 10px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -57,6 +34,13 @@ export const ItemList = styled.div`
   overflow: hidden;
   border-radius: 8px;
   /* box-shadow: 5px 5px 5px #798896; */
+
+  @media (max-width: 450px) {
+    max-height: 280px;
+  }
+  @media (max-width: 350px) {
+    max-height: 220px;
+  }
 `;
 export const Image = styled.img`
   width: 100%;
@@ -71,8 +55,14 @@ export const Image = styled.img`
     transition: all 0.7s;
     z-index: -99;
   }
+  @media (max-width: 500px) {
+    height: 76%;
+  }
+  @media (max-width: 350px) {
+    height: 70%;
+  }
 `;
-export const Infor = styled.div`
+export const Info = styled.div`
   width: 100%;
   height: 20%;
   position: relative;
@@ -80,13 +70,38 @@ export const Infor = styled.div`
   padding: 8px 0px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: flex-start;
-  z-index: 99;
+  z-index: 1;
+  @media (max-width: 500px) {
+    height: 20% !important;
+    font-size: 14px;
+  }
+  @media (max-width: 350px) {
+    height: 25% !important;
+  }
 `;
 export const CustomLink = styled(Link)`
   width: 100%;
   height: 100%;
+`;
+export const Title = styled.h2`
+  max-width: 100%;
+  font-weight: 500;
+  @media (max-width: 500px) {
+    /* display: flex;
+    flex-wrap: wrap; */
+    max-height: 35px;
+    font-size: 16px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+`;
+export const Price = styled.h4`
+  height: 20px;
+  font-size: 20px;
+  font-weight: 650;
 `;
 
 //dasd

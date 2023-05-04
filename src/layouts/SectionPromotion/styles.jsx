@@ -2,6 +2,9 @@ import styled from "styled-components";
 
 export const wrapperSectionPromotion = styled.div`
   width: 100%;
+  @media (max-width: 1200px) {
+    display: none;
+  }
 `;
 export const ImageContainer = styled.div`
   width: 100%;

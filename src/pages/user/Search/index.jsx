@@ -7,7 +7,7 @@ import { getProductListSearchAction } from "../../../redux/actions/";
 import { useMemo } from "react";
 import { Link, generatePath, useNavigate } from "react-router-dom";
 import { ROUTES } from "../../../constants/routes";
-
+import { TbPointFilled } from "react-icons/tb";
 import axios from "axios";
 import * as S from "./styles";
 
@@ -38,7 +38,10 @@ function Search() {
     productSearchList
   );
   return (
-    <div className="xl:w-[1200px] lg:w-[990px] md:w-[740px] sm:w-[500px] xs:w-[240px]  flex justify-center items-center flex-wrap flex-col">
+    <div
+      className="xl:w-[1200px] lg:w-[990px] mt-40
+     md:w-[740px] sm:w-[500px] xs:w-[240px]  flex justify-center items-center flex-wrap flex-col"
+    >
       <div className="flex gap-2">
         <p
           className="cursor-pointer hover:text-[orange]"
@@ -54,8 +57,31 @@ function Search() {
       </div>
       <div className="text-[orange]">KẾT QUẢ TÌM KIỂM SẢN PHẨM</div>
       <div>"{searchKey}"</div>
-
-      <RenderSearchList productSearchList={productSearchList} />
+      {productSearchList.length > 0 ? (
+        <RenderSearchList productSearchList={productSearchList} />
+      ) : (
+        <div className="max-w-[400px] m-auto my-4">
+          <div className="flex justify-center mb-2">
+            <img
+              src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/search-page.svg?1683190865643"
+              alt=""
+            />
+          </div>
+          <div className="block gap-2">
+            Tìm kiếm <b className="text-[orange]">{searchKey}</b> của bạn không
+            có sản phẩm phù hợp
+          </div>
+          <div className="">HÃY THỬ LẠI CÁCH KHÁC NHƯ</div>
+          <div className="flex items-center">
+            <TbPointFilled />
+            Sử dụng thuật ngữ chung nhiều hơn
+          </div>
+          <div className="flex items-center">
+            <TbPointFilled />
+            Kiểm tra chính tả của bạn
+          </div>
+        </div>
+      )}
     </div>
   );
 }

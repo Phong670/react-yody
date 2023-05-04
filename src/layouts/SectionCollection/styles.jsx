@@ -6,8 +6,8 @@ export const wrapperCollection = styled.div`
 `;
 export const Title = styled.div`
   width: 100%;
-  height: 24px;
-  margin-bottom: 8px;
+  /* height: 24px; */
+
   display: flex;
   align-items: center;
   font-family: "SVN-Gilroy";
@@ -18,5 +18,8 @@ export const ImageContainer = styled.div`
   width: 100%;
 `;
 export const Img = styled.img`
-  width: calc(100% / 3 - 40px);
+  width: calc(100% / 3);
+  @media (max-width: 620px) {
+    width: 100%;
+  }
 `;

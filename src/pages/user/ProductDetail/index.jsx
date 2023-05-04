@@ -70,26 +70,13 @@ function ProductDetail() {
     );
   }, [productDetail.data]);
   return (
-    <div className="flex flex-wrap flex-col justify-between w-[1200px]">
+    <div className="flex flex-wrap flex-col justify-between w-[1200px] mt-[95px]">
       <div className="flex gap-2">{renderTitle}</div>
       <div className="flex justify-between">
         <div className="w-[400px]">
           <Spin spinning={productDetail.load}>
             <div>
-              {/* <img src={productDetail.data.image} alt="" /> */}
-              <CursorZoom
-                image={{
-                  src: productDetail?.data.image,
-                  width: 400,
-                  height: 300,
-                }}
-                zoomImage={{
-                  src: productDetail.data.image,
-                  width: 1600,
-                  height: 1200,
-                }}
-                cursorOffset={{ x: 80, y: -80 }}
-              />
+              <img src={productDetail.data.image} alt="" />
             </div>
           </Spin>
         </div>

@@ -13,7 +13,6 @@ function UserLayout() {
       <Collection />
       <Promotion />
       <SectionMenu />
-
       <S.UserLayoutWrapper>
         <Outlet />
       </S.UserLayoutWrapper>

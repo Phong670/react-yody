@@ -59,6 +59,7 @@ li {
   justify-content: center;
   align-items: center;
   background-color: #f3f3f359;
+  padding: 0 8px !important;
 }
 .carousel {
   width: 1200px;

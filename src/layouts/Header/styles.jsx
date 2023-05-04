@@ -7,14 +7,17 @@ export const Header = styled.div`
   background-repeat: no-repeat;
   background-size: 100% 100%;
   box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.05);
-  padding-bottom: 15px;
+
   display: flex;
   justify-content: center;
   align-items: center;
+  @media (max-width: 992px) {
+    background-image: none;
+  }
 `;
 export const HeaderContainer = styled.div`
   width: 1200px;
-  display: flex;
+
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;

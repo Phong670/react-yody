@@ -69,7 +69,7 @@ function ProductList() {
   }, [gender]);
   useEffect(() => {
     dispatch(getProductListAction(filterParams));
-  }, [filterParams]);
+  }, [filterParams, subCategoryId]);
   let categoryIdTemp = [...filterParams.categoryId];
   let sizeIdTemp = [...filterParams.sizeId];
   let clone = [...listYourChoice];
@@ -397,7 +397,7 @@ function ProductList() {
       .catch((err) => {});
   }, []);
   return (
-    <div className="w-full p-[8px] flex flex-nowrap flex-col justify-between">
+    <div className="w-full p-[8px] flex flex-nowrap flex-col justify-between mt-[95px]">
       <div className="w-full flex justify-center">
         {subCategoryIdArray.length > 1 ? (
           <>

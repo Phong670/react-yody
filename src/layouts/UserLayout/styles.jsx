@@ -5,6 +5,7 @@ export const UserLayoutWrapper = styled.div`
   margin-top: 56px;
 `;
 export const wrapperMain = styled.div`
-  width: 1200px;
+  width: 100%;
+  max-width: 1200px;
   overflow: hidden;
 `;
