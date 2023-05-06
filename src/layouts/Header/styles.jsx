@@ -100,7 +100,7 @@ export const Input = styled.input`
   border-radius: 4px;
   padding-left: 8px;
   border-radius: 8px 0 0 8px;
-  font-size: 20px;
+  font-family: inherit;
   &:focus {
     outline: none;
   }

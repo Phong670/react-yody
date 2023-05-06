@@ -2,6 +2,7 @@ import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Navigate } from "react-router-dom";
 import { Button, Form, Input } from "antd";
+import { Link, generatePath } from "react-router-dom";
 
 import { loginAction } from "../../redux/actions";
 import { ROUTES } from "../../constants/routes";
@@ -53,49 +54,64 @@ function LoginPage() {
 
   if (accessToken) return <Navigate to={ROUTES.USER.HOME} />;
   return (
-    <S.LoginWrapper className="w-full bg-[url(https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/bg_login.jpg?1682348011396)]">
-      <S.LoginContainer>
-        <h3>Login</h3>
-        <Form
-          form={loginForm}
-          name="loginForm"
-          layout="vertical"
-          onFinish={(values) => handleLogin(values)}
-          autoComplete="off"
-        >
-          <Form.Item
-            label="Email"
-            name="email"
-            rules={[
-              {
-                required: true,
-                message: "Please input your email!",
-              },
-            ]}
+    <S.LoginWrapper className="w-full lg:mt-[95px] xxs:mt-[20px]">
+      <S.LoginContainer className="sm:p-[50px] xxs:p-[8px]">
+        <div className="w-full flex justify-center flex-wrap gap-4">
+          <h6 className="w-full flex justify-center gap-2 xxs:text-[18px]">
+            Chào mừng bạn đến với Yody!
+          </h6>
+          <h6 className="w-full flex justify-center gap-2 xxs:text-[26px]">
+            ĐĂNG <p className="text-[orange]">NHẬP</p>
+          </h6>
+          <Form
+            form={loginForm}
+            name="loginForm"
+            layout="vertical"
+            onFinish={(values) => handleLogin(values)}
+            autoComplete="off"
+            className="w-full p-2 text-[20px]"
           >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label="Password"
-            name="password"
-            rules={[
-              {
-                required: true,
-                message: "Please input your password!",
-              },
-            ]}
+            <Form.Item
+              label="Email"
+              name="email"
+              rules={[
+                {
+                  required: true,
+                  message: "Vui lòng nhập email!",
+                },
+              ]}
+            >
+              <Input className="py-3 rounded-sm" />
+            </Form.Item>
+            <Form.Item
+              label="Mật khẩu"
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message: "Vui lòng nhập mật khẩu!",
+                },
+              ]}
+            >
+              <Input.Password className="py-3 rounded-sm" />
+            </Form.Item>
+            <S.ButtonCustom
+              // type="primary"
+              htmlType="submit"
+              block
+              className="bg-[#fcaf17]  hover:text-white "
+            >
+              Đăng nhập
+            </S.ButtonCustom>
+          </Form>
+          <Link
+            className="w-full flex justify-center flex-wrap gap-2 xxs:text-[16px]"
+            to={generatePath(ROUTES.USER.REGISTER)}
           >
-            <Input.Password />
-          </Form.Item>
-          <S.ButtonCustom
-            // type="primary"
-            htmlType="submit"
-            block
-            className="bg-[#fcaf17] hover:text-white "
-          >
-            Submit
-          </S.ButtonCustom>
-        </Form>
+            Bạn chưa có tài khoản?{" "}
+            <p className="text-[orange] hover:cursor-pointer">Đăng ký ngay</p>
+          </Link>
+        </div>
       </S.LoginContainer>
     </S.LoginWrapper>
   );

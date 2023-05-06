@@ -35,7 +35,7 @@ export const Image = styled.img`
     z-index: -99;
   }
 `;
-export const Infor = styled.div`
+export const Info = styled.div`
   width: 100%;
   height: 20%;
   position: relative;
@@ -45,5 +45,8 @@ export const Infor = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  z-index: 99;
+  z-index: 1;
+`;
+export const BoxAddCart = styled.div`
+  background: linear-gradient(180deg, #feecc7 0%, #fff 28.93%);
 `;

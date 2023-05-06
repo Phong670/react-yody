@@ -107,7 +107,7 @@ function CarouselMenuSection() {
           Nam
         </div>
       </div>
-      <div className="w-full flex justify-center gap-4 mt-4">
+      <div className="w-full flex justify-center xxs:gap-3 sm:gap-5 mt-4">
         {gender === 1
           ? renderMenuList(menuListFemale)
           : renderMenuList(menuListMale)}

@@ -18,7 +18,7 @@ function HomeUser(props) {
 
   return (
     <>
-      <div className="p-2 mt-[95px]">
+      <div className="p-2">
         <div className="flex justify-between mb-2">
           <div
             className="cursor-pointer text-[#11006F] font-medium  text-[20px] hover:text-[red]"
@@ -50,6 +50,12 @@ function HomeUser(props) {
           >
             Xem thêm <AiOutlineRight className="mt-[5px] ml-2" />
           </div>
+        </div>
+        <div className="w-full lg:hidden xxs:flex">
+          <img
+            src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/home_preivew_sanpham_2_image_mobile.jpg?1683278564918"
+            alt=""
+          />
         </div>
         <div className="flex flex-row justify-start  w-[1200px]">
           <div className="w-[180px] h-[360px] xxs:hidden lg:block">
@@ -133,6 +139,7 @@ function HomeUser(props) {
             Xem thêm <AiOutlineRight className="mt-[5px] ml-2" />
           </div>
         </div>
+
         <div className="flex flex-row justify-end  w-[1200px]">
           <div className="w-[180px] h-[360px]">
             <img

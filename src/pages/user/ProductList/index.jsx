@@ -1,4 +1,14 @@
-import { Checkbox, Select, Col, Row, Button, Slider, Form } from "antd";
+import {
+  Checkbox,
+  Select,
+  Col,
+  Row,
+  Button,
+  Slider,
+  Form,
+  Drawer,
+  Space,
+} from "antd";
 import { useEffect, useState, useMemo } from "react";
 import { Link, generatePath } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,6 +23,7 @@ import {
   getCategoryListAction,
   getSizeListAction,
 } from "../../../redux/actions";
+
 import ReactPlaceholder from "react-placeholder";
 import "react-placeholder/lib/reactPlaceholder.css";
 import { useCallback } from "react";
@@ -31,7 +42,7 @@ function ProductList() {
   const [showTypeFilter, setShowTypeFilter] = useState(false);
   const [showSizeFilter, setShowSizeFilter] = useState(false);
   const [sortBox, setSortBox] = useState(false);
-
+  const [size, setSize] = useState();
   const [defaultValuePrice, setDefaultValuePrice] = useState([0, 700]);
   const [active, setActive] = useState(false);
   const [activeButton, setActiveButton] = useState(1);
@@ -47,6 +58,15 @@ function ProductList() {
     page: 1,
     limit: PRODUCT_LIMIT,
   });
+  const [open, setOpen] = useState(false);
+  const showDrawer = () => {
+    setOpen(true);
+    setSortBox(true);
+  };
+  const onClose = () => {
+    setOpen(false);
+    setSortBox(false);
+  };
   useEffect(() => {
     axios
       .get("http://localhost:4000/sizes")
@@ -284,71 +304,6 @@ function ProductList() {
     );
   }, [listYourChoice]);
 
-  const CpnFilter = ({ listYourChoice, typeProduct, sizeProduct }) => {
-    return (
-      <div
-        className={`col-span-1 lg:block p-2  ${
-          sortBox
-            ? "xxs:block fixed right-0 top-0 w-[220px]  bg-[white] z-50 h-full"
-            : "xxs:hidden"
-        } `}
-      >
-        <div
-          className={`w-full flex justify-start items-center mb-2 ${
-            sortBox ? "block" : "hidden"
-          } `}
-        >
-          <AiOutlineClose
-            className="w-[20%] flex justify-start text-[20px] hover:cursor-pointer"
-            onClick={() => setSortBox(!sortBox)}
-          />
-          <p className="w-[80%] flex justify-center text-[20px] text-[orange]">
-            Bộ Lọc
-          </p>
-        </div>
-        <div className="flex justify-between">
-          Bạn chọn:
-          <div
-            className="hover:text-[orange] cursor-pointer"
-            onClick={() => removeAll()}
-          >
-            Bỏ hết
-          </div>
-        </div>
-        {RenderYourChoice}
-        <div className="my-4">Giá</div>
-        {renderListFilterPrice()}
-        <div
-          className="my-4 flex justify-between items-center"
-          onClick={() => {
-            setShowTypeFilter(!showTypeFilter);
-          }}
-        >
-          Loại sản phẩm {sortBox && showTypeFilter && <AiOutlineUp />}{" "}
-          {sortBox && !showTypeFilter && <AiOutlineDown />}
-        </div>
-        <div className="transition-[height]">
-          {sortBox
-            ? showTypeFilter && renderListFilterType(typeProduct)
-            : renderListFilterType(typeProduct)}
-        </div>
-        <div
-          className="my-4 flex justify-between items-center"
-          onClick={() => {
-            setShowSizeFilter(!showSizeFilter);
-          }}
-        >
-          Size {sortBox && showSizeFilter && <AiOutlineUp />}
-          {sortBox && !showSizeFilter && <AiOutlineDown />}
-        </div>
-        <div>
-          {sortBox
-            ? showSizeFilter && renderListFilterSize(sizeProduct)
-            : renderListFilterSize(sizeProduct)}
-        </div>
-      </div>
-    );
-  };
   const renderPlaceHolderSort = (value) => {
     if (value === "") setPlaceHolderSort("Mặc định");
     else if (value === "title.desc") setPlaceHolderSort("Tên A-Z");
@@ -490,8 +445,8 @@ function ProductList() {
         <div
           className="xs:block lg:hidden cursor-pointer"
           onClick={() => {
-            setSortBox(!sortBox);
-            console.log("dmdmdmmd");
+            setSize(200);
+            showDrawer();
           }}
         >
           <p className="flex items-centers sm:gap-2 xs:gap-0">
@@ -501,11 +456,67 @@ function ProductList() {
       </div>
 
       <div className="xl:w-[1150px] lg:w-[900px] grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-4 justify-center ">
-        <CpnFilter
-          listYourChoice={listYourChoice}
-          typeProduct={categoryList.data}
-          sizeProduct={sizeList}
-        />
+        <Drawer
+          width={"300px"}
+          title="Bộ lọc"
+          placement="right"
+          onClose={onClose}
+          open={open}
+          extra={
+            <Space>
+              <Button
+                className="bg-[orange] hover:!bg-[#FEECC7] hover:!text-[orange]"
+                type="primary"
+                onClick={onClose}
+              >
+                OK
+              </Button>
+            </Space>
+          }
+        >
+          <div className="col-span-1 lg:block pl-7 w-[220px]  bg-[white] z-50 h-full">
+            <div className="flex justify-between">
+              Bạn chọn:
+              <div
+                className="hover:text-[orange] cursor-pointer"
+                onClick={() => removeAll()}
+              >
+                Bỏ hết
+              </div>
+            </div>
+            {RenderYourChoice}
+            <div className="my-4">Giá</div>
+            {renderListFilterPrice()}
+            <div
+              className="my-4 flex justify-between items-center"
+              onClick={() => {
+                setShowTypeFilter(!showTypeFilter);
+              }}
+            >
+              Loại sản phẩm {sortBox && showTypeFilter && <AiOutlineUp />}
+              {sortBox && !showTypeFilter && <AiOutlineDown />}
+            </div>
+            <div className="transition-[height]">
+              {sortBox
+                ? showTypeFilter && renderListFilterType(categoryList.data)
+                : renderListFilterType(categoryList.data)}
+            </div>
+            <div
+              className="my-4 flex justify-between items-center"
+              onClick={() => {
+                setShowSizeFilter(!showSizeFilter);
+              }}
+            >
+              Size {sortBox && showSizeFilter && <AiOutlineUp />}
+              {sortBox && !showSizeFilter && <AiOutlineDown />}
+            </div>
+            <div>
+              {sortBox
+                ? showSizeFilter && renderListFilterSize(sizeList)
+                : renderListFilterSize(sizeList)}
+            </div>
+          </div>
+        </Drawer>
         <CartProductList
           listProduct={productList.data}
           filterParams={filterParams}

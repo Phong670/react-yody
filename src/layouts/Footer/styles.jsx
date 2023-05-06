@@ -3,7 +3,7 @@ export const Footer = styled.div`
   display: flex;
   background-color: #1f2999;
   width: 100%;
-  margin-top: 20px;
+
   padding-bottom: 20px;
   padding-top: 20px;
   justify-content: center;

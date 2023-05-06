@@ -12,7 +12,6 @@ export const Title = styled.div`
   align-items: center;
   font-family: "SVN-Gilroy";
   font-weight: 600;
-  font-size: 16px;
 `;
 export const ImageContainer = styled.div`
   width: 100%;

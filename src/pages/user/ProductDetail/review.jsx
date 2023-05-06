@@ -78,7 +78,7 @@ function ReviewProduct({ idProduct }) {
     return listReview.data.map((item) => {
       return (
         <div key={item.id} className="w-full mt-4 flex">
-          <div className="w-[40px] h-[40px] flex item-center">
+          <div className="max-w-[40px] h-[40px] flex item-center">
             <BsPersonCircle className="text-[40px]" />
           </div>
           <div className="ml-3">
@@ -107,7 +107,7 @@ function ReviewProduct({ idProduct }) {
   };
 
   return (
-    <div className="flex flex-wrap flex-col justify-between w-[1200px]">
+    <div className="flex flex-wrap flex-col justify-between w-full">
       <div className="mt-5 pt-3 border-t-[3px]">
         ĐÁNH GIÁ SẢN PHẨM
         <div>

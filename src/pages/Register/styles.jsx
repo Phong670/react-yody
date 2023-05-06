@@ -1,16 +1,26 @@
 import styled from "styled-components";
+import { Button, Form, Input } from "antd";
 
 export const RegisterWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background-color: gray;
+  min-height: 700px;
+  background-image: url("https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/bg_login.jpg?1682348011396");
+  @media (max-width: 620px) {
+    background-image: none;
+    background-color: #ffffffff;
+  }
 `;
 
 export const RegisterContainer = styled.div`
-  padding: 16px;
-  max-width: 350px;
-  width: 100%;
+  max-width: 700px;
   background-color: white;
+`;
+export const ButtonCustom = styled(Button)`
+  height: 50px;
+  color: #ffffff !important;
+  &:hover {
+    border-color: #da991f !important;
+  }
 `;

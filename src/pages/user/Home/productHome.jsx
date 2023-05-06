@@ -2,17 +2,12 @@ import { useEffect, useState } from "react";
 import { Link, generatePath } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import * as S from "./styles";
-import { ROUTES } from "../../../constants/routes";
-
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper";
-
 import "swiper/css";
 import "swiper/css/navigation";
-import { Pagination } from "swiper";
-import "swiper/css";
 import "swiper/css/pagination";
+import { ROUTES } from "../../../constants/routes";
+import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper";
 
 function ProductHome({ subCategoryId }) {
   const [productData, setProductDress] = useState([]);
@@ -37,17 +32,11 @@ function ProductHome({ subCategoryId }) {
     return productChild.map((item, index) => {
       return (
         <SwiperSlide>
-          <S.ItemList key={item.id}>
-            <S.CustomLink
-              to={generatePath(ROUTES.USER.PRODUCT_DETAIL, { id: item.id })}
-            >
-              <S.Image src={item.image} alt="" />
-              <S.Info>
-                <h3 className="w-full h-[38px]">{item.title}</h3>
-                <span className="">{item.price.toLocaleString()}đ</span>
-              </S.Info>
-            </S.CustomLink>
-          </S.ItemList>
+          <div>
+            <img src={item.image} alt="" />
+          </div>
+          <div>{item.title}</div>
+          <div>{item.price}</div>
         </SwiperSlide>
       );
     });
@@ -55,41 +44,31 @@ function ProductHome({ subCategoryId }) {
 
   return (
     <>
-      <S.MainCover className=" xxs: w-[100vw] lg:w-[1020px]">
-        <S.ChildMain className="w-full">
-          <S.SideBarMenu className="w-full">
-            <Swiper
-              navigation={true}
-              modules={[Navigation]}
-              className="mySwiper"
-              speed={1500}
-              breakpoints={{
-                // when window width is >= 640px
-                640: {
-                  width: 640,
-                  slidesPerView: 4,
-                  spaceBetween: 1,
-                  navigation: false,
-                },
-                // when window width is >= 768px
-                768: {
-                  width: 768,
-                  slidesPerView: 4,
-                },
-              }}
-            >
-              {renderListCart(productData)}
-
-              {/* <SwiperSlide>
-                <S.MenuListContainer className="flex  justify-start align-items-center ">
-                  {renderListCart(productChildTwo)}
-                </S.MenuListContainer>
-              </SwiperSlide> */}
-            </Swiper>
-          </S.SideBarMenu>
-        </S.ChildMain>
-      </S.MainCover>
+      <Swiper
+        cssMode={true}
+        navigation={true}
+        pagination={true}
+        mousewheel={true}
+        keyboard={true}
+        allowSlidePrev={false}
+        modules={[Navigation, Mousewheel, Keyboard]}
+        className="px-[200px]"
+        breakpoints={{
+          300: {
+            slidesPerView: 4,
+            spaceBetween: 20,
+            navigation: {
+              disabledClass: "swiper-button-disabled",
+              hiddenClass: "swiper-button-hidden",
+              navigationDisabledClass: "swiper-navigation-disabled",
+            },
+          },
+        }}
+      >
+        {renderListCart(productData)}
+      </Swiper>
     </>
   );
 }
+
 export default ProductHome;

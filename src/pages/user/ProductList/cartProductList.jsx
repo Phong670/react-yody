@@ -16,6 +16,7 @@ import * as S from "./styles";
 const CartProductList = ({ listProduct, filterParams }) => {
   const dispatch = useDispatch();
   const { productList } = useSelector((state) => state.product);
+
   const handleShowMore = () => {
     dispatch(
       getProductListAction({
