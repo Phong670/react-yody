@@ -207,10 +207,10 @@ function ProductList() {
           return (
             <div
               key={item.id}
-              className={`px-[16px] py-2 mt-2 relative bg-[#f7f4f4] hover:cursor-pointer rounded-md ${
+              className={`px-[8px] text-[12px] py-2 mt-2 relative hover:cursor-pointer hover:bg-[white] hover:border-[1px] hover:border-[#fcaf17] rounded-md text-[#7A7A9D] ${
                 categoryIdTemp.findIndex((a) => item.id === a) === -1
-                  ? "bg-[#fcfcfc]"
-                  : "border-solid border-2 border-[#fcaf17] after:h-[22px] after:rounded-tr-md after:w-[22px] after:content-[''] after:top-[-1px] after:right-[-1px] after:absolute after:bg-[url('https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/chose.svg')]"
+                  ? " bg-[#F2F2F2]"
+                  : " bg-[white] border-solid border-[1px] border-[#fcaf17]  after:h-[22px] after:rounded-tr-md after:w-[22px] after:content-[''] after:top-[-1px] after:right-[-1px] after:absolute after:bg-[url('https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/chose.svg')]"
               } `}
               onClick={(e) => {
                 checkAddYourChoiceType(item.name, "catalogyId", item.id);
@@ -232,10 +232,10 @@ function ProductList() {
           return (
             <div
               key={item.id}
-              className={`px-[16px] py-2 mt-2 relative bg-[#f7f4f4] hover:cursor-pointer rounded-md  ${
+              className={`px-[8px]   text-[12px] py-2 mt-2 relative hover:cursor-pointer hover:bg-[white] hover:border-[1px] hover:border-[#fcaf17] rounded-md text-[#7A7A9D] ${
                 sizeIdTemp.findIndex((a) => item.id === a) === -1
-                  ? "bg-[#fcfcfc]"
-                  : "border-solid border-2 border-[#fcaf17] after:h-[22px] after:rounded-tr-md after:w-[22px] after:content-[''] after:top-[-1px] after:right-[-1px] after:absolute after:bg-[url('https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/chose.svg')]"
+                  ? " bg-[#F2F2F2]"
+                  : " bg-[white] border-solid border-[1px] border-[#fcaf17]  after:h-[22px] after:rounded-tr-md after:w-[22px] after:content-[''] after:top-[-1px] after:right-[-1px] after:absolute after:bg-[url('https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/chose.svg')]"
               } `}
               onClick={() =>
                 checkAddYourChoiceSize(item.size, "sizeId", item.id)
@@ -290,12 +290,12 @@ function ProductList() {
           return (
             <div
               key={index}
-              className=" flex items-center gap-2 px-2 py-[2px] rounded-md text-[white] bg-[orange] mt-2 hover:cursor-pointer"
+              className=" flex   text-[12px] items-center gap-1 px-2 py-[2px] rounded-md text-[white] bg-[orange] mt-2 hover:cursor-pointer"
               onClick={() => {
                 removeYourChoiceTop(item);
               }}
             >
-              <AiOutlineClose className="text-[20px] ml-[-4px]" />
+              <AiOutlineClose className="text-[16px] ml-[-4px]" />
               {item.name}
             </div>
           );
@@ -351,6 +351,32 @@ function ProductList() {
 
       .catch((err) => {});
   }, []);
+  const CpnFilter = ({ listYourChoice, typeProduct, sizeProduct }) => {
+    return (
+      <div className="col-span-1 lg:block p-2 xxs:hidden">
+        <div className="flex justify-between">
+          Bạn chọn:
+          <div
+            className="hover:text-[orange] cursor-pointer"
+            onClick={() => removeAll()}
+          >
+            Bỏ hết
+          </div>
+        </div>
+        {RenderYourChoice}
+        <div className="my-4">Giá</div>
+        {renderListFilterPrice()}
+        <div className="my-4 flex justify-between items-center">
+          Loại sản phẩm
+        </div>
+        <div className="transition-[height]">
+          {renderListFilterType(typeProduct)}
+        </div>
+        <div className="my-4 flex justify-between items-center">Kích thước</div>
+        <div>{renderListFilterSize(sizeProduct)}</div>
+      </div>
+    );
+  };
   return (
     <div className="w-full p-[8px] flex flex-nowrap flex-col justify-between mt-[95px]">
       <div className="w-full flex justify-center">
@@ -456,6 +482,11 @@ function ProductList() {
       </div>
 
       <div className="xl:w-[1150px] lg:w-[900px] grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-4 justify-center ">
+        <CpnFilter
+          listYourChoice={listYourChoice}
+          typeProduct={categoryList.data}
+          sizeProduct={sizeList}
+        />
         <Drawer
           width={"300px"}
           title="Bộ lọc"

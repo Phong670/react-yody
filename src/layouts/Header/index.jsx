@@ -36,9 +36,7 @@ import {
 import { logoutAction } from "../../redux/actions";
 import SearchBox from "./searchBox";
 
-import { MailOutlined, SettingOutlined } from "@ant-design/icons";
 import { Menu } from "antd";
-import { AudioOutlined } from "@ant-design/icons";
 function getItem(label, key, icon, children, type) {
   return {
     key,
@@ -286,6 +284,8 @@ function Header() {
   };
   const [messageApi, contextHolder] = message.useMessage();
   const warning = () => {
+    console.log("ửaining");
+
     messageApi.open({
       type: "warning",
       content: "Vui lòng nhập nội dung tìm kiếm",
@@ -415,7 +415,7 @@ function Header() {
               <S.SearchBtn
                 className=" w-[85px] hover:bg-[#f8b021]"
                 onClick={() => {
-                  if (searchKey !== "") {
+                  if (searchKey !== false && searchKey !== "") {
                     navigate({
                       pathname: generatePath(ROUTES.USER.SEARCH, {
                         searchKey: searchKey,
@@ -424,6 +424,13 @@ function Header() {
                     setSearchKey(false);
                     setOpenSearchBox(false);
                   }
+                  if (searchKey === "") {
+                    console.log("adasdasd");
+                    {
+                      warning();
+                    }
+                  }
+                  if (searchKey === false) warning();
                 }}
               >
                 <BsSearch className="text-[24px]" />
@@ -507,7 +514,11 @@ function Header() {
                 <BsCart3 className="text-[24px]" />
               </Badge>
               <p className="mr-10 text-[16px]">Giỏ Hàng</p>
-              <div className="group-hover:flex hidden w-[477px]   justify-center flex-col items-center bg-white absolute top-[50px] right-[-150px]">
+              <div
+                className={` ${
+                  cartList?.data.length > 0 ? "group-hover:flex" : "hidden"
+                }   w-[477px] hidden  justify-center flex-col items-center bg-white absolute top-[40px] right-[-150px]`}
+              >
                 <img
                   className="absolute top-[-10px] right-[240px]"
                   src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/arrow-cart.png?1683303178082"
@@ -534,17 +545,28 @@ function Header() {
                   </div>
                 </div>
               </div>
-              <div className="group-hover:flex hidden  justify-center flex-col items-center bg-white absolute top-[50px] right-[-150px]">
+              <div
+                className={`${
+                  cartList?.data.length < 1 ? "group-hover:flex" : "hidden"
+                }  w-[400px] h-[200px] hidden justify-center flex-col items-center bg-white absolute top-[40px] right-[-125px]`}
+              >
                 <img
-                  className="absolute top-[-10px] right-[240px]"
+                  className="absolute top-[-10px] right-[200px]"
                   src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/arrow-cart.png?1683303178082"
                   alt=""
                 />
                 <img
+                  className="w-[90px] h-[100px]"
                   src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/blank_cart.svg?1683303155312"
                   alt=""
                 />
-                <p>Giỏ hàng của bạn trống</p>
+                <h6 className="text-[20px] my-2">Giỏ hàng của bạn trống</h6>
+                <Link
+                  className="text-[20px] hover:text-[orange]"
+                  to={generatePath(ROUTES.USER.HOME)}
+                >
+                  Mua ngay
+                </Link>
               </div>
             </Link>
 
