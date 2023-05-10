@@ -50,8 +50,8 @@ function RegisterPage() {
   if (accessToken) return <Navigate to={ROUTES.USER.HOME} />;
   return (
     <S.RegisterWrapper className="w-full lg:mt-[95px] mt-[55px]">
-      <S.RegisterContainer className="sm:p-[50px] xxs:p-[8px] lg:my-[40px]">
-        <div className="w-full flex justify-center flex-wrap gap-4">
+      <S.RegisterContainer className="sm:p-[40px] xxs:px-[8px] py-[40px] lg:my-[40px] flex justify-center flex-wrap">
+        <div className="max-w-[500px] flex justify-center flex-wrap gap-4">
           <h6 className="w-full flex justify-center gap-2 xxs:text-[18px]">
             Chào mừng bạn đến với Yody!
           </h6>

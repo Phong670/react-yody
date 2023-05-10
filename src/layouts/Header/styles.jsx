@@ -105,7 +105,7 @@ export const Input = styled.input`
     outline: none;
   }
 `;
-export const SearchBtn = styled.i`
+export const SearchBtn = styled.button`
   height: 35px;
   font-size: 24px;
   display: flex;
@@ -120,3 +120,7 @@ export const Cart = styled.div`
   font-size: 20px;
 `;
 export const Person = styled.div``;
+export const BoxAddCart = styled.div`
+  background: linear-gradient(180deg, #feecc7 0%, #fff 28.93%);
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.16);
+`;

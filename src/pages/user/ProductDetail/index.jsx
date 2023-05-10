@@ -78,7 +78,7 @@ function ProductDetail() {
         </Link>
         <span>/</span>
         <p
-          className="hover:text-[orange] hover:cursor-pointe font-normal"
+          className="hover:text-[orange] hover:cursor-pointer font-normal"
           onClick={() =>
             navigate(
               generatePath(ROUTES.USER.PRODUCT_LIST, {
@@ -98,8 +98,8 @@ function ProductDetail() {
     return (
       <S.BoxAddCart
         className={`w-[300px] fixed  ${
-          isOpen ? "visible opacity-100" : "invisible opacity-0"
-        }  rounded-md p-3 fixed top-[60px] right-[10px]  z-10  flex flex-col items-center justify-center flex-nowrap`}
+          !isOpen ? "visible opacity-100" : "invisible opacity-0"
+        }  rounded-md p-3 fixed top-[100px] right-[400px]  z-10  flex flex-col items-center justify-center flex-nowrap`}
       >
         <div className="w-full p-2 mt-[-10px] text-[18px]  flex justify-center border-b-[0.8px] border-[#d9d9d9] mb-2">
           Đã thêm vào giỏ hàng
@@ -137,9 +137,8 @@ function ProductDetail() {
   }, [isOpen]);
 
   return (
-    <div className="flex flex-wrap flex-col justify-center xl:w-[1200px] lg:mt-[50px] xxs:mt-[8px] relative">
-      {renderOneProductAddCart}
-
+    <div className="flex flex-wrap flex-col justify-center xl:w-[1200px] lg:mt-[50px] xxs:mt-[8px] ">
+      {/* {renderOneProductAddCart} */}
       <div>{renderTitle}</div>
       <div className="flex my-4  xxs:w-full xxs:justify-center lg:justify-between xxs:flex-wrap lg:flex-nowrap">
         <div className="xl:w-[400px] xxs:w-full mb-3 ">
@@ -155,9 +154,9 @@ function ProductDetail() {
       <div className="mb-[200px] w-full">{productDetail.data.description} </div>
       <ReviewProduct idProduct={id} />
       <p className="mt-4">GỢI Ý CHO BẠN</p>
-      <Row gutter={[16, 16]} className="w-40">
+      {/* <Row gutter={[16, 16]} className="w-40">
         {renderListCart}
-      </Row>
+      </Row> */}
     </div>
   );
 }

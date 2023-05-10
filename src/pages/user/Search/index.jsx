@@ -38,10 +38,7 @@ function Search() {
     productSearchList
   );
   return (
-    <div
-      className="xl:w-[1200px] lg:w-[990px] mt-40
-     md:w-[740px] sm:w-[500px] xs:w-[240px]  flex justify-center items-center flex-wrap flex-col"
-    >
+    <div className="flex justify-center items-center flex-wrap flex-col lg:mt-[105px] xxs:mt-[60px]">
       <div className="flex gap-2">
         <p
           className="cursor-pointer hover:text-[orange]"

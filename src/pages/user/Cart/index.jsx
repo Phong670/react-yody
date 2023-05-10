@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, generatePath } from "react-router-dom";
+import { Link, generatePath, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RiDeleteBinLine } from "react-icons/ri";
 import * as S from "./styles";
@@ -10,8 +10,10 @@ import {
   deleteCartItemAction,
   updateCartItemAction,
 } from "../../../redux/actions/index";
+import { Button } from "antd";
 
 function Cart() {
+  const navigate = useNavigate();
   const { cartList } = useSelector((state) => state.cart);
   console.log("🚀 ~ file: index.jsx:14 ~ Cart ~ cartList:", cartList);
   const [total, setTotal] = useState(0);
@@ -125,7 +127,7 @@ function Cart() {
           className="w-full grid grid-cols-5 gap-2 mb-4 text-[14px] "
         >
           <img
-            className="w-[80px] col-span-1 rounded-[4px] mt-[8px]"
+            className="w-[80px] col-span-1 rounded-[4px] lg:mt-[8px]"
             src={item.image}
             alt="anh "
           />
@@ -188,7 +190,9 @@ function Cart() {
             >
               <RiDeleteBinLine className="text-[20px] cursor-pointer" />
             </div>
-            <div className="flex justify-center">{item.price}</div>
+            <div className="flex justify-center">
+              {item.price.toLocaleString()}đ
+            </div>
           </div>
         </div>
       );
@@ -197,8 +201,8 @@ function Cart() {
 
   const windowWidth = useRef(window.innerWidth);
   console.log("width: ", windowWidth.current);
-  return (
-    <div className="max-w-[1200px] md:w-[680px] lg:w-[900px] xl:w-full mt-[105px] lg:grid-cols-1 grid xl:grid-cols-3 gap-4 p-4">
+  return cartList.data.length > 0 ? (
+    <div className="max-w-[1200px] md:w-[680px] lg:w-[900px] xl:w-full lg:mt-[105px] xxs:mt-[50px] lg:grid-cols-1 grid xl:grid-cols-3 gap-4 lg:p-4">
       <div className="xl:col-span-2 bg-[white] p-4">
         <div className="w-full  mb-4 text-[18px] flex flex-nowrap gap-2">
           Giỏ hàng{" "}
@@ -234,6 +238,27 @@ function Cart() {
           </button>
         </div>
       </div>
+    </div>
+  ) : (
+    <div className="w-full lg:mt-[100px] xxs:mt-[60px] flex flex-col items-center justify-center flex-1  min-h-[260px] mb-[20px]">
+      <img
+        className="w-[120px] h-[110px]"
+        src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/blank_cart.svg?1683303155312"
+        alt=""
+      />
+      <h6 className="text-[16px] my-2 text-[#7A7A9D]">
+        Giỏ hàng của bạn trống
+      </h6>
+      <button
+        className="text-[20px] text-[orange] flex justify-center items-center px-2 py-1  border-[orange] border-solid border-2 rounded-md hover:bg-[orange] hover:text-[white] "
+        onClick={() => {
+          navigate({
+            pathname: generatePath(ROUTES.USER.HOME),
+          });
+        }}
+      >
+        Mua ngay
+      </button>
     </div>
   );
 }

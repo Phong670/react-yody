@@ -47,7 +47,7 @@ const CartProductList = ({ listProduct, filterParams }) => {
 
   return (
     <>
-      <div className=" grid col-span-4 gap-1 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-3 xs:grid-cols-2 ">
+      <div className=" grid col-span-4 gap-1 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-3 xs:grid-cols-2 xxs:mt-[8px] lg:mt-0">
         {renderCartList(listProduct)}
       </div>
       {productList.data.length !== productList.meta.total && (

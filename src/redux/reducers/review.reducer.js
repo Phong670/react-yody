@@ -36,6 +36,8 @@ const reviewReducer = createReducer(initialState, {
         data: sendReview ? data : [...state.listReview.data, ...data],
         load: false,
         total: total,
+        // more khac lan dau
+        // unMount khi load lai trang
       },
     };
   },

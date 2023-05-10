@@ -10,14 +10,14 @@ export const Title = styled.div`
 
   display: flex;
   align-items: center;
-  font-family: "SVN-Gilroy";
+  /* font-family: "SVN-Gilroy"; */
   font-weight: 600;
 `;
 export const ImageContainer = styled.div`
   width: 100%;
 `;
 export const Img = styled.img`
-  width: calc(100% / 3);
+  width: calc(100% / 3 - 16px);
   @media (max-width: 620px) {
     width: 100%;
   }

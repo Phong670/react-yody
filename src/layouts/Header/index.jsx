@@ -1,4 +1,5 @@
 import * as S from "./styles";
+import { getProductListSearchAction } from "../../redux/actions";
 
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -19,7 +20,7 @@ import {
   BsTruck,
 } from "react-icons/bs";
 import { RiDeleteBinLine } from "react-icons/ri";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useMemo } from "react";
 
 import { BiMap, BiSupport } from "react-icons/bi";
 import {
@@ -37,6 +38,7 @@ import { logoutAction } from "../../redux/actions";
 import SearchBox from "./searchBox";
 
 import { Menu } from "antd";
+import { submit } from "redux-form";
 function getItem(label, key, icon, children, type) {
   return {
     key,
@@ -75,10 +77,20 @@ const items = [
 const rootSubmenuKeys = ["sub1", "sub2"];
 
 function Header() {
+  const [goSearchPage, setGoSearchPage] = useState(false);
+  const [empty, setEmpty] = useState(true);
+
   const { cartList } = useSelector((state) => state.cart);
+  const { oneAddCard } = useSelector((state) => state.cart);
+
+  console.log("🚀 ~ file: index.jsx:80 ~ Header ~ oneAddCard:", oneAddCard);
+
   const [total, setTotal] = useState(0);
+  const [isOneAddCart, setIsOneAddCart] = useState(false);
+
   const dispatch = useDispatch();
   let totalClone = 0;
+  const [isOpen, setIsOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -86,8 +98,19 @@ function Header() {
   const [openMenu, setOpenMenu] = useState(false);
   const [openSearchBox, setOpenSearchBox] = useState(false);
 
-  console.log("🚀 ~ file: index.jsx:25 ~ Header ~ searchKey:", searchKey);
   const { userInfo } = useSelector((state) => state.auth);
+
+  const getResultSearch = (value) => {
+    dispatch(
+      getProductListSearchAction({
+        page: 1,
+        limit: 5,
+        searchKey: value,
+      })
+    );
+
+    setGoSearchPage(false);
+  };
   const male = [
     {
       key: "1",
@@ -271,26 +294,21 @@ function Header() {
 
   const { Search } = Input;
   const onSearch = (value) => {
-    console.log("🚀 ~ file: index.jsx:275 ~ onSearch ~ value:", value);
-    if (value) {
+    console.log("🚀 ~ file: index.jsx:296 ~ onSearch ~ value:", value);
+    if (value.trim()) {
+      setSearchKey(value?.trim());
+      getResultSearch(value);
       setOpenSearchBox(false);
+      setEmpty(true);
       navigate({
         pathname: generatePath(ROUTES.USER.SEARCH, {
           searchKey: searchKey,
         }),
       });
       setSearchKey(false);
-    } else warning();
+    }
   };
-  const [messageApi, contextHolder] = message.useMessage();
-  const warning = () => {
-    console.log("ửaining");
 
-    messageApi.open({
-      type: "warning",
-      content: "Vui lòng nhập nội dung tìm kiếm",
-    });
-  };
   useEffect(() => {
     cartList.data?.map((item) => {
       totalClone = totalClone + item.price * item.quantity;
@@ -383,16 +401,72 @@ function Header() {
     });
   };
   const [open, setOpen] = useState(false);
-  const [placement, setPlacement] = useState("left");
+
   const showDrawer = () => {
     setOpen(true);
   };
   const onClose = () => {
     setOpen(false);
   };
+  let isOneAddCartClone = false;
+  useEffect(() => {
+    if (oneAddCard.length > 0) isOneAddCartClone = true;
+    if (isOneAddCartClone) {
+      setIsOpen(true);
+      setTimeout(() => setIsOpen(false), 3000);
+    }
+    return () => setIsOpen(false);
+  }, [oneAddCard]);
+
+  const renderOneProductAddCart = () => {
+    return (
+      <S.BoxAddCart
+        className={`w-[300px] fixed  ${
+          isOpen ? "visible opacity-100" : "invisible opacity-0"
+        }  rounded-md p-3   z-10  flex flex-col items-center justify-center flex-nowrap`}
+      >
+        <div className="w-full p-2 mt-[-10px] text-[18px]  flex justify-center border-b-[0.8px] border-[#d9d9d9] mb-2">
+          Đã thêm vào giỏ hàng
+        </div>
+
+        <div>
+          <div className="w-full grid grid-cols-3 gap-2 mb-4 text-[14px] ">
+            <img
+              className="w-[100px] col-span-1 rounded-[4px] mt-[4px]"
+              src={oneAddCard[0]?.image}
+              alt="anh "
+            />
+            <div className="w-[100%] col-span-2 flex flex-wrap col justify-between  align-content-between ml-[5px]">
+              <div className="hover:text-[orange] w-full ">
+                {oneAddCard[0]?.title}
+              </div>
+              <div className="flex justify-center text-[orange]">
+                {oneAddCard[0]?.price?.toLocaleString()}đ
+              </div>
+              <div className="w-full">Size: {oneAddCard[0]?.size}</div>
+              <div className="flex w-full ">
+                <div className="flex w-full  gap-0"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <Link
+          to={generatePath(ROUTES.USER.CART)}
+          className="w-full flex justify-center rounded-md p-2 bg-[orange] text-[16px]"
+        >
+          Xem giỏ hàng
+        </Link>
+      </S.BoxAddCart>
+    );
+  };
+  // const handleClick = () => {
+  //   setEmpty(true);
+  // };
+  // document.removeEventListener("click", this.handleClick);
+
   return (
-    <S.Header className="fixed top-[0px] z-10">
-      <S.HeaderContainer className="xxs:hidden lg:flex mb-[15px]">
+    <S.Header className="fixed top-[0px] z-10 ">
+      <S.HeaderContainer className="xxs:hidden lg:flex mb-[15px] lg:px-4 xl:px-0">
         <S.HeaderTop className="w-full flex justify-between items-center">
           <Link
             to={ROUTES.USER.HOME}
@@ -403,41 +477,51 @@ function Header() {
           </Link>
           <S.InputCover className=" ml-4 relative">
             <div className="flex">
-              <S.Input
-                type="text"
-                className="w-[305px] text-[12px]"
-                value={searchKey === false ? "" : searchKey}
-                placeholder="Nhập nội dung tìm kiếm"
-                onChange={(e) => {
-                  setSearchKey(e.target.value.trim());
-                }}
-              />
-              <S.SearchBtn
-                className=" w-[85px] hover:bg-[#f8b021]"
-                onClick={() => {
-                  if (searchKey !== false && searchKey !== "") {
-                    navigate({
-                      pathname: generatePath(ROUTES.USER.SEARCH, {
-                        searchKey: searchKey,
-                      }),
-                    });
-                    setSearchKey(false);
-                    setOpenSearchBox(false);
-                  }
-                  if (searchKey === "") {
-                    console.log("adasdasd");
-                    {
-                      warning();
-                    }
-                  }
-                  if (searchKey === false) warning();
-                }}
+              <form
+                onSubmit={(e) => onSearch(searchKey)}
+                className="z-[999] flex flex-nowrap"
               >
-                <BsSearch className="text-[24px]" />
-              </S.SearchBtn>
+                <S.Input
+                  type="text"
+                  className="w-[305px] text-[12px]"
+                  defaultValue={searchKey}
+                  required
+                  placeholder="Nhập nội dung tìm kiếm"
+                  onKeyPress={(e) => {
+                    if (e.key === "Enter") {
+                      onSearch(searchKey);
+                      // e.preventDefault();
+                    }
+                  }}
+                  onChange={(e) => {
+                    console.log("1", e.target.value.trim());
+                    if (e.target.value) {
+                      setEmpty(false);
+                      setSearchKey(e.target.value.trim());
+                      getResultSearch(e.target.value.trim());
+                    } else setEmpty(true);
+                  }}
+                />
+                <S.SearchBtn
+                  type="submit"
+                  className=" w-[85px] hover:bg-[#f8b021]"
+                  // onClick={(e) => {
+                  //   e.preventDefault();
+                  //   onSearch(searchKey);
+                  // }}
+                >
+                  <BsSearch className="text-[24px]" />
+                </S.SearchBtn>
+              </form>
             </div>
             <div className="w-full flex flex-col z-50  bg-[#ffffff] absolute top-[40px] left-0 ">
-              <SearchBox searchKey={searchKey} setSearchKey={setSearchKey} />
+              <SearchBox
+                searchKey={searchKey}
+                setSearchKey={setSearchKey}
+                setOpenSearchBox={setOpenSearchBox}
+                empty={empty}
+                setEmpty={setEmpty}
+              />
             </div>
           </S.InputCover>
 
@@ -505,7 +589,7 @@ function Header() {
               </Dropdown>
             </S.Nav>
           </div>
-          <div className="text-[10px] flex justify-end items-center w-2/4">
+          <div className="text-[10px] flex justify-end items-center w-2/4 relative">
             <Link
               to={ROUTES.USER.CART}
               className="mr-2 flex justify-center items-center gap-2 relative group h-[40px]"
@@ -514,6 +598,9 @@ function Header() {
                 <BsCart3 className="text-[24px]" />
               </Badge>
               <p className="mr-10 text-[16px]">Giỏ Hàng</p>
+              <div className="absolute top-[40px] right-[250px]  z-[99]">
+                {renderOneProductAddCart()}
+              </div>
               <div
                 className={` ${
                   cartList?.data.length > 0 ? "group-hover:flex" : "hidden"
@@ -690,7 +777,8 @@ function Header() {
               <div className="flex justify-between mb-2">
                 <div
                   onClick={() => {
-                    setSearchKey(false);
+                    setEmpty(true);
+                    // setSearchKey(false);
                     setOpenSearchBox(false);
                   }}
                 >
@@ -698,25 +786,35 @@ function Header() {
                 </div>
                 <div>Tìm kiếm sản phẩm</div>
               </div>
-              {contextHolder}
+
               <Space direction="vertical" className="w-full mb-2">
                 <Search
                   placeholder="Nhập từ khoá tìm kiếm"
+                  required
                   onSearch={onSearch}
                   onChange={(e) => {
-                    setSearchKey(e.target.value.trim());
+                    console.log("1");
+                    if (e.target.value.trim() !== "") {
+                      console.log("2");
+                      setEmpty(false);
+                      setSearchKey(e.target.value.trim());
+                      getResultSearch(e.target.value.trim());
+                    } else setEmpty(true);
                   }}
                   style={{
                     width: "100%",
                   }}
                 />
               </Space>
-
-              <SearchBox
-                searchKey={searchKey}
-                setSearchKey={setSearchKey}
-                setOpenSearchBox={setOpenSearchBox}
-              />
+              <div className="flex justify-center">
+                <SearchBox
+                  searchKey={searchKey}
+                  setSearchKey={setSearchKey}
+                  setOpenSearchBox={setOpenSearchBox}
+                  empty={empty}
+                  setEmpty={setEmpty}
+                />
+              </div>
             </div>
           )}
 

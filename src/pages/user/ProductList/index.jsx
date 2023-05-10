@@ -1,3 +1,5 @@
+import * as S from "./styles";
+
 import {
   Checkbox,
   Select,
@@ -10,27 +12,22 @@ import {
   Space,
 } from "antd";
 import { useEffect, useState, useMemo } from "react";
-import { Link, generatePath } from "react-router-dom";
+import { Link, generatePath, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { PRODUCT_LIMIT } from "../../../constants/paging";
-import LazyLoad from "react-lazy-load";
+import { ROUTES } from "../../../constants/routes";
+import CartProductList from "./cartProductList";
+
 import axios from "axios";
 import { AiOutlineClose, AiOutlineUp, AiOutlineDown } from "react-icons/ai";
 import { FiFilter } from "react-icons/fi";
-import { useParams } from "react-router-dom";
 import {
   getProductListAction,
   getCategoryListAction,
   getSizeListAction,
 } from "../../../redux/actions";
 
-import ReactPlaceholder from "react-placeholder";
-import "react-placeholder/lib/reactPlaceholder.css";
-import { useCallback } from "react";
-import { debounce } from "lodash";
-import { ROUTES } from "../../../constants/routes";
-import CartProductList from "./cartProductList";
-import { useNavigate } from "react-router-dom";
 function ProductList() {
   const navigate = useNavigate();
   const { subCategoryId } = useParams();
@@ -39,8 +36,8 @@ function ProductList() {
   const [subCategory, setSubCategory] = useState([]);
   const [listYourChoice, setlistYourChoice] = useState([]);
   const [placeHolderSort, setPlaceHolderSort] = useState("Mặc định");
-  const [showTypeFilter, setShowTypeFilter] = useState(false);
-  const [showSizeFilter, setShowSizeFilter] = useState(false);
+  const [showTypeFilter, setShowTypeFilter] = useState(true);
+  const [showSizeFilter, setShowSizeFilter] = useState(true);
   const [sortBox, setSortBox] = useState(false);
   const [size, setSize] = useState();
   const [defaultValuePrice, setDefaultValuePrice] = useState([0, 700]);
@@ -200,14 +197,19 @@ function ProductList() {
       subCategoryId: genderClone,
     });
   };
-  const renderListFilterType = (list) => {
+  const renderListFilterType = useMemo(() => {
+    console.log("aa1");
     return (
-      <div className="w-full flex flex-wrap gap-2 duration-700 transition-[height] ">
-        {list?.map((item, index) => {
+      <div
+        showTypeFilter={showTypeFilter}
+        className={`w-full   flex flex-wrap gap-2  overflow-hidden `}
+      >
+        {categoryList.data?.map((item, index) => {
           return (
             <div
               key={item.id}
-              className={`px-[8px] text-[12px] py-2 mt-2 relative hover:cursor-pointer hover:bg-[white] hover:border-[1px] hover:border-[#fcaf17] rounded-md text-[#7A7A9D] ${
+              className={`px-[8px] text-[12px] py-2 mt-2 relative hover:cursor-pointer hover:bg-[white] hover:border-[1px] hover:border-[#fcaf17] rounded-md text-[#7A7A9D] 
+              ${
                 categoryIdTemp.findIndex((a) => item.id === a) === -1
                   ? " bg-[#F2F2F2]"
                   : " bg-[white] border-solid border-[1px] border-[#fcaf17]  after:h-[22px] after:rounded-tr-md after:w-[22px] after:content-[''] after:top-[-1px] after:right-[-1px] after:absolute after:bg-[url('https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/chose.svg')]"
@@ -223,7 +225,7 @@ function ProductList() {
         })}
       </div>
     );
-  };
+  }, [categoryList.data, showTypeFilter]);
 
   const renderListFilterSize = (list) => {
     return (
@@ -232,10 +234,10 @@ function ProductList() {
           return (
             <div
               key={item.id}
-              className={`px-[8px]   text-[12px] py-2 mt-2 relative hover:cursor-pointer hover:bg-[white] hover:border-[1px] hover:border-[#fcaf17] rounded-md text-[#7A7A9D] ${
+              className={`px-[10px] text-[12px] py-[8px] mt-2 relative hover:cursor-pointer hover:px-[6px] hover:bg-[white] hover:border-[1px] hover:border-[#fcaf17] rounded-md text-[#7A7A9D] ${
                 sizeIdTemp.findIndex((a) => item.id === a) === -1
                   ? " bg-[#F2F2F2]"
-                  : " bg-[white] border-solid border-[1px] border-[#fcaf17]  after:h-[22px] after:rounded-tr-md after:w-[22px] after:content-[''] after:top-[-1px] after:right-[-1px] after:absolute after:bg-[url('https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/chose.svg')]"
+                  : " bg-[white] border-solid border-[1px] px-[6px] border-[#fcaf17]  after:h-[22px] after:rounded-tr-md after:w-[22px] after:content-[''] after:top-[-1px] after:right-[-1px] after:absolute after:bg-[url('https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/chose.svg')]"
               } `}
               onClick={() =>
                 checkAddYourChoiceSize(item.size, "sizeId", item.id)
@@ -366,20 +368,43 @@ function ProductList() {
         {RenderYourChoice}
         <div className="my-4">Giá</div>
         {renderListFilterPrice()}
-        <div className="my-4 flex justify-between items-center">
+        {/* <div className="my-4 flex justify-between items-center">
           Loại sản phẩm
         </div>
         <div className="transition-[height]">
           {renderListFilterType(typeProduct)}
         </div>
         <div className="my-4 flex justify-between items-center">Kích thước</div>
-        <div>{renderListFilterSize(sizeProduct)}</div>
+        <div>{renderListFilterSize(sizeProduct)}</div> */}
+        {/* // */}
+        <div
+          className="my-4 flex justify-between items-center"
+          onClick={() => {
+            setShowTypeFilter(!showTypeFilter);
+          }}
+        >
+          Loại sản phẩm {showTypeFilter && <AiOutlineUp />}
+          {!showTypeFilter && <AiOutlineDown />}
+        </div>
+        <S.Transition showTypeFilter={showTypeFilter}>
+          {renderListFilterType}
+        </S.Transition>
+        <div
+          className="my-4 flex justify-between items-center"
+          onClick={() => {
+            setShowSizeFilter(!showSizeFilter);
+          }}
+        >
+          Size {showSizeFilter && <AiOutlineUp />}
+          {!showSizeFilter && <AiOutlineDown />}
+        </div>
+        <div>{showSizeFilter && renderListFilterSize(sizeList)}</div>
       </div>
     );
   };
   return (
-    <div className="w-full p-[8px] flex flex-nowrap flex-col justify-between mt-[95px]">
-      <div className="w-full flex justify-center">
+    <div className="w-full p-[8px] flex flex-nowrap flex-col justify-between lg:mt-[125px] xxs:mt-[70px]">
+      <div className="w-full flex justify-center mb-4">
         {subCategoryIdArray.length > 1 ? (
           <>
             {" "}
@@ -530,7 +555,7 @@ function ProductList() {
             <div className="transition-[height]">
               {sortBox
                 ? showTypeFilter && renderListFilterType(categoryList.data)
-                : renderListFilterType(categoryList.data)}
+                : renderListFilterType}
             </div>
             <div
               className="my-4 flex justify-between items-center"

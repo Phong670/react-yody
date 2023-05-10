@@ -16,6 +16,8 @@ const productSearchReducer = createReducer(initialState, {
       ...state,
       productSearchList: {
         ...state.productSearchList,
+        data: [],
+        load: true,
       },
     };
   },

@@ -19,8 +19,8 @@ const RenderSearchList = ({ productSearchList }) => {
           >
             <S.Image src={item.image} alt="" />
             <S.Info>
-              <h3 className="w-full h-[38px]">{item.title}</h3>
-              <span className="">{item.price.toLocaleString()}đ</span>
+              <S.Title className="w-full h-[38px]">{item.title}</S.Title>
+              <S.Price className="">{item.price.toLocaleString()}đ</S.Price>
             </S.Info>
           </S.CustomLink>
         </S.ItemList>
@@ -29,7 +29,7 @@ const RenderSearchList = ({ productSearchList }) => {
   };
 
   return (
-    <div className="max-w-full flex flex-wrap justify-center px-[8px] -z-0 ">
+    <div className="max-w-full flex-wrap justify-center px-[8px] -z-0 grid col-span-4 gap-1 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-3 xs:grid-cols-2">
       {renderListCart()}
     </div>
   );

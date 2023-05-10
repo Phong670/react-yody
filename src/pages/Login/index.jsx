@@ -54,8 +54,8 @@ function LoginPage() {
 
   if (accessToken) return <Navigate to={ROUTES.USER.HOME} />;
   return (
-    <S.LoginWrapper className="w-full lg:mt-[95px] xxs:mt-[20px]">
-      <S.LoginContainer className="sm:p-[50px] xxs:p-[8px]">
+    <S.LoginWrapper className="w-full lg:mt-[95px] xxs:mt-[55px]">
+      <S.LoginContainer className="max-w-[500px] lg:my-[40px] sm:p-[40px] xxs:px-[8px] py-[40px]">
         <div className="w-full flex justify-center flex-wrap gap-4">
           <h6 className="w-full flex justify-center gap-2 xxs:text-[18px]">
             Chào mừng bạn đến với Yody!

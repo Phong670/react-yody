@@ -59,7 +59,6 @@ li {
   justify-content: center;
   align-items: center;
   background-color: #f3f3f359;
-  padding: 0 8px !important;
 }
 .carousel {
   width: 1200px;
@@ -113,3 +112,30 @@ html {
 }
 .ant-message-notice-content {
 }
+.swiper-pagination-progressbar-fill {
+  background-color: #fcaf17 !important;
+  height: 2px !important;
+}
+.swiper-pagination-horizontal {
+  height: 2px !important;
+}
+.swiper-pagination-bullets-dynamic {
+  height: 8px !important;
+}
+.swiper-pagination-bullet-active-next-next {
+  background-color: #fcaf17 !important;
+}
+.swiper-pagination-bullet-active {
+  background-color: #fcaf17 !important;
+}
+.swiper-pagination-bullet-active-main {
+  background-color: #fcaf17 !important;
+}
+/* .showFilterItem {
+  height: auto;
+  transition: height 0.2s;
+}
+.hiddenFilterItem {
+  height: 20px;
+  transition: height 0.2s;
+} */

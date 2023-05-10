@@ -5,14 +5,14 @@ const initialState = {
   cartList: {
     data: JSON.parse(localStorage.getItem("cartList")) || [],
   },
-  oneAddCard: {},
+  oneAddCard: { data: [] },
 };
 
 const cartReducer = createReducer(initialState, {
   [REQUEST(CART_ACTION.ADD_CART_LIST)]: (state, action) => {
     const { id, image, title, size, quantity, price } = action.payload;
     let newCartList = [...state.cartList.data];
-    let newOneAddCard = {};
+    let newOneAddCard = [];
     const indexFilter = state.cartList.data?.findIndex(
       (item) => item.id === id && item.size === size
     );
@@ -21,13 +21,13 @@ const cartReducer = createReducer(initialState, {
         ...newCartList[indexFilter],
         quantity: newCartList[indexFilter].quantity + quantity,
       });
-      newOneAddCard = { id, image, title, size, quantity, price };
+      newOneAddCard = [{ id, image, title, size, quantity, price }];
     } else {
       newCartList = [
         { id, image, title, size, quantity, price },
         ...newCartList,
       ];
-      newOneAddCard = { id, image, title, size, quantity, price };
+      newOneAddCard = [{ id, image, title, size, quantity, price }];
     }
     localStorage.setItem("cartList", JSON.stringify(newCartList));
     return {

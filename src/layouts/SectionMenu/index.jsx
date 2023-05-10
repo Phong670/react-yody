@@ -82,12 +82,12 @@ function CarouselMenuSection() {
     });
   };
   return (
-    <div className="w-full flex flex-col">
+    <div className="w-full flex flex-col mt-2">
       <div className="w-full flex justify-center gap-4">
         <div
-          className={`w-[220px] h-[40px] sm:h-[64px] border-b-2 flex justify-center items-center sm:text-[20px] text-[14px]
-        hover:text-[orange] hover:cursor-pointer
-          ${gender === 1 && "text-[orange]"}
+          className={`lg:w-[220px] xxs:w-[100px] h-[30px] sm:h-[64px] border-b-2 flex justify-center items-center sm:text-[20px] text-[16px] 
+        hover:text-[orange]  hover:cursor-pointer
+          ${gender === 1 ? "text-[orange]" : "text-[#97A0AD]"}
         `}
           onClick={() => {
             setGender(1);
@@ -96,9 +96,9 @@ function CarouselMenuSection() {
           Nữ
         </div>
         <div
-          className={`w-[220px] h-[40px] sm:h-[64px] border-b-2 flex justify-center items-center sm:text-[20px] text-[14px]
+          className={`lg:w-[220px]  xxs:w-[100px] h-[30px] sm:h-[64px] border-b-2 flex justify-center items-center sm:text-[20px] text-[16px] 
        hover:text-[orange] hover:cursor-pointer
-          ${gender === 0 && "text-[orange]"}
+          ${gender === 0 ? "text-[orange]" : "text-[#97A0AD]"}
         `}
           onClick={() => {
             setGender(0);
