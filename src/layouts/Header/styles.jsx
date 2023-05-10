@@ -101,8 +101,11 @@ export const Input = styled.input`
   padding-left: 8px;
   border-radius: 8px 0 0 8px;
   font-family: inherit;
+  font-size: 14px;
   &:focus {
     outline: none;
+    border: 1px solid #ffa500 !important;
+    /* border-color: #ffa500; */
   }
 `;
 export const SearchBtn = styled.button`

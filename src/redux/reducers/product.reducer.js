@@ -21,6 +21,7 @@ const productReducer = createReducer(initialState, {
       ...state,
       productList: {
         ...state.productList,
+        load: true,
       },
     };
   },

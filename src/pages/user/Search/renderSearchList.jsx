@@ -9,9 +9,9 @@ import { ROUTES } from "../../../constants/routes";
 import { useState } from "react";
 import axios from "axios";
 import * as S from "./styles";
-const RenderSearchList = ({ productSearchList }) => {
+const RenderSearchList = ({ productList }) => {
   const renderListCart = () => {
-    return productSearchList?.map((item, index) => {
+    return productList?.map((item, index) => {
       return (
         <S.ItemList key={item.id}>
           <S.CustomLink

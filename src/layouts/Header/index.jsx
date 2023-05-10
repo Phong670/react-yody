@@ -1,12 +1,11 @@
 import * as S from "./styles";
 import { getProductListSearchAction } from "../../redux/actions";
-
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Link, generatePath, useNavigate } from "react-router-dom";
-import { ROUTES } from "../../constants/routes";
-import { DownOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Dropdown, Space, Input, Badge, message, Drawer } from "antd";
+import { useEffect, useState } from "react";
+import { DownOutlined } from "@ant-design/icons";
+import { Dropdown, Space, Input, Badge, Drawer, Menu } from "antd";
 import {
   BsSearch,
   BsGeoAltFill,
@@ -20,25 +19,17 @@ import {
   BsTruck,
 } from "react-icons/bs";
 import { RiDeleteBinLine } from "react-icons/ri";
-import { useEffect, useState, useRef, useMemo } from "react";
-
 import { BiMap, BiSupport } from "react-icons/bi";
-import {
-  AiOutlineMenu,
-  AiOutlineArrowLeft,
-  AiOutlineClose,
-  AiOutlineSearch,
-} from "react-icons/ai";
+import { AiOutlineMenu, AiOutlineArrowLeft } from "react-icons/ai";
 import {
   deleteCartItemAction,
   updateCartItemAction,
 } from "../../redux/actions";
-
 import { logoutAction } from "../../redux/actions";
 import SearchBox from "./searchBox";
+import { ROUTES } from "../../constants/routes";
 
-import { Menu } from "antd";
-import { submit } from "redux-form";
+//function ant menu
 function getItem(label, key, icon, children, type) {
   return {
     key,
@@ -48,7 +39,7 @@ function getItem(label, key, icon, children, type) {
     type,
   };
 }
-
+//ant menu
 const items = [
   getItem("NỮ", "sub1", <BsGenderFemale />, [
     getItem("Áo", "5"),
@@ -77,29 +68,46 @@ const items = [
 const rootSubmenuKeys = ["sub1", "sub2"];
 
 function Header() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [goSearchPage, setGoSearchPage] = useState(false);
   const [empty, setEmpty] = useState(true);
-
+  console.log("🚀 ~ file: index.jsx:77 ~ Header ~ empty:", empty);
+  const [total, setTotal] = useState(0);
+  const [isOneAddCart, setIsOneAddCart] = useState(false);
+  const [searchKey, setSearchKey] = useState("");
+  console.log("🚀 ~ file: index.jsx:81 ~ Header ~ searchKey:", searchKey);
+  const [openSearchBox, setOpenSearchBox] = useState(false);
+  const [openKeys, setOpenKeys] = useState(["sub1"]);
+  const { userInfo } = useSelector((state) => state.auth);
   const { cartList } = useSelector((state) => state.cart);
   const { oneAddCard } = useSelector((state) => state.cart);
 
-  console.log("🚀 ~ file: index.jsx:80 ~ Header ~ oneAddCard:", oneAddCard);
-
-  const [total, setTotal] = useState(0);
-  const [isOneAddCart, setIsOneAddCart] = useState(false);
-
-  const dispatch = useDispatch();
+  //cloneValue
+  let isOneAddCartClone = false;
   let totalClone = 0;
-  const [isOpen, setIsOpen] = useState(false);
 
-  const navigate = useNavigate();
-
-  const [searchKey, setSearchKey] = useState("");
-  const [openMenu, setOpenMenu] = useState(false);
-  const [openSearchBox, setOpenSearchBox] = useState(false);
-
-  const { userInfo } = useSelector((state) => state.auth);
-
+  //Effect
+  // useEffect(() => {
+  //   console.log("render lai trong effect");
+  //   setEmpty(true);
+  // }, []);
+  useEffect(() => {
+    cartList.data?.map((item) => {
+      totalClone = totalClone + item.price * item.quantity;
+      setTotal(totalClone);
+    });
+  }, [cartList.data]);
+  useEffect(() => {
+    if (oneAddCard.length > 0) isOneAddCartClone = true;
+    if (isOneAddCartClone) {
+      setIsOpen(true);
+      setTimeout(() => setIsOpen(false), 3000);
+    }
+    return () => setIsOpen(false);
+  }, [oneAddCard]);
   const getResultSearch = (value) => {
     dispatch(
       getProductListSearchAction({
@@ -111,6 +119,7 @@ function Header() {
 
     setGoSearchPage(false);
   };
+  //dropdown
   const male = [
     {
       key: "1",
@@ -258,7 +267,6 @@ function Header() {
     {
       key: "3",
       onClick: () => {
-        console.log("dang xuat ");
         dispatch(logoutAction());
       },
       label: (
@@ -272,7 +280,7 @@ function Header() {
       ),
     },
   ];
-  const [openKeys, setOpenKeys] = useState(["sub1"]);
+  //function open menu item
   const onOpenChange = (keys) => {
     const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
     if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
@@ -282,7 +290,6 @@ function Header() {
     }
   };
   const onClick = (e) => {
-    console.log("🚀 ~ file: index.jsx:231 ~ onClick ~ e:", e);
     e.key < 10 &&
       navigate({
         pathname: generatePath(ROUTES.USER.PRODUCT_LIST, {
@@ -292,9 +299,10 @@ function Header() {
     onClose();
   };
 
+  //search in mobile
   const { Search } = Input;
-  const onSearch = (value) => {
-    console.log("🚀 ~ file: index.jsx:296 ~ onSearch ~ value:", value);
+  const onSearch = (value, e) => {
+    e.preventDefault();
     if (value.trim()) {
       setSearchKey(value?.trim());
       getResultSearch(value);
@@ -305,16 +313,10 @@ function Header() {
           searchKey: searchKey,
         }),
       });
-      setSearchKey(false);
+      // setSearchKey(false);
     }
   };
 
-  useEffect(() => {
-    cartList.data?.map((item) => {
-      totalClone = totalClone + item.price * item.quantity;
-      setTotal(totalClone);
-    });
-  }, [cartList.data]);
   const renderListProductCartMobile = () => {
     return cartList.data?.map((item, index) => {
       return (
@@ -345,7 +347,7 @@ function Header() {
                     className={`w-[27px] h-[26px] text-[#62676D] leading-[24px] font-[inherit] flex justify-center items-center ${
                       item.quantity === 1 ? "bg-[#d2d0d0] " : "bg-[#ffffff]"
                     }  
-            order-solid border-[0.8px] border-[#e9ecef] rounded-l-[4px] text-[24px]`}
+            border-solid border-[0.8px] border-[#e9ecef] rounded-l-[4px] text-[24px]`}
                     onClick={() => {
                       item.quantity !== 1 &&
                         dispatch(
@@ -400,23 +402,13 @@ function Header() {
       );
     });
   };
-  const [open, setOpen] = useState(false);
-
+  //ant Drawer
   const showDrawer = () => {
     setOpen(true);
   };
   const onClose = () => {
     setOpen(false);
   };
-  let isOneAddCartClone = false;
-  useEffect(() => {
-    if (oneAddCard.length > 0) isOneAddCartClone = true;
-    if (isOneAddCartClone) {
-      setIsOpen(true);
-      setTimeout(() => setIsOpen(false), 3000);
-    }
-    return () => setIsOpen(false);
-  }, [oneAddCard]);
 
   const renderOneProductAddCart = () => {
     return (
@@ -459,11 +451,8 @@ function Header() {
       </S.BoxAddCart>
     );
   };
-  // const handleClick = () => {
-  //   setEmpty(true);
-  // };
-  // document.removeEventListener("click", this.handleClick);
 
+  console.log("render lai");
   return (
     <S.Header className="fixed top-[0px] z-10 ">
       <S.HeaderContainer className="xxs:hidden lg:flex mb-[15px] lg:px-4 xl:px-0">
@@ -478,37 +467,35 @@ function Header() {
           <S.InputCover className=" ml-4 relative">
             <div className="flex">
               <form
-                onSubmit={(e) => onSearch(searchKey)}
+                onSubmit={(e) => onSearch(searchKey, e)}
                 className="z-[999] flex flex-nowrap"
               >
                 <S.Input
                   type="text"
                   className="w-[305px] text-[12px]"
-                  defaultValue={searchKey}
+                  defaultValue={""}
                   required
                   placeholder="Nhập nội dung tìm kiếm"
-                  onKeyPress={(e) => {
-                    if (e.key === "Enter") {
-                      onSearch(searchKey);
-                      // e.preventDefault();
-                    }
-                  }}
                   onChange={(e) => {
-                    console.log("1", e.target.value.trim());
-                    if (e.target.value) {
+                    if (e.target.value.trim() !== "") {
+                      setOpenSearchBox(false);
                       setEmpty(false);
                       setSearchKey(e.target.value.trim());
                       getResultSearch(e.target.value.trim());
-                    } else setEmpty(true);
+                      console.log("trong1");
+                    } else {
+                      setEmpty(true);
+                      setSearchKey(null);
+                    }
+                    console.log(
+                      "🚀 ~ file: index.jsx:491 ~ Header ~ searchKey:",
+                      searchKey
+                    );
                   }}
                 />
                 <S.SearchBtn
                   type="submit"
                   className=" w-[85px] hover:bg-[#f8b021]"
-                  // onClick={(e) => {
-                  //   e.preventDefault();
-                  //   onSearch(searchKey);
-                  // }}
                 >
                   <BsSearch className="text-[24px]" />
                 </S.SearchBtn>
@@ -518,6 +505,7 @@ function Header() {
               <SearchBox
                 searchKey={searchKey}
                 setSearchKey={setSearchKey}
+                openSearchBox={openSearchBox}
                 setOpenSearchBox={setOpenSearchBox}
                 empty={empty}
                 setEmpty={setEmpty}
@@ -774,7 +762,7 @@ function Header() {
           </div>
           {openSearchBox && (
             <div className="fixed right-0 top-0 transition-all  duration-700  ease-linear translate-x-0 bg-white w-full h-[100vh] p-4 z-10 ">
-              <div className="flex justify-between mb-2">
+              <div className="flex justify-between mb-4">
                 <div
                   onClick={() => {
                     setEmpty(true);
@@ -784,32 +772,50 @@ function Header() {
                 >
                   <AiOutlineArrowLeft />
                 </div>
-                <div>Tìm kiếm sản phẩm</div>
+                <div className="flex flex-1 justify-center">
+                  Tìm kiếm sản phẩm
+                </div>
               </div>
 
-              <Space direction="vertical" className="w-full mb-2">
-                <Search
-                  placeholder="Nhập từ khoá tìm kiếm"
-                  required
-                  onSearch={onSearch}
-                  onChange={(e) => {
-                    console.log("1");
-                    if (e.target.value.trim() !== "") {
-                      console.log("2");
-                      setEmpty(false);
-                      setSearchKey(e.target.value.trim());
-                      getResultSearch(e.target.value.trim());
-                    } else setEmpty(true);
-                  }}
-                  style={{
-                    width: "100%",
-                  }}
-                />
-              </Space>
-              <div className="flex justify-center">
+              <div className="flex mb-2">
+                <form
+                  onSubmit={(e) => onSearch(searchKey, e)}
+                  className="z-[999] w-full flex flex-nowrap"
+                >
+                  <input
+                    type="text"
+                    className="flex flex-1  border-solid border-[0.8px] border-[#e9ecef] rounded-l-[4px] rounded-r-[0px] text-[16px] 
+                    py-1 px-2"
+                    defaultValue={""}
+                    required
+                    placeholder="Nhập nội dung tìm kiếm"
+                    onChange={(e) => {
+                      if (e.target.value.trim() !== "") {
+                        setEmpty(false);
+                        setSearchKey(e.target.value.trim());
+                        console.log("trong");
+                        getResultSearch(e.target.value.trim());
+                      } else {
+                        setEmpty(true);
+                        setSearchKey(null);
+                      }
+                    }}
+                  />
+                  <button
+                    type="submit"
+                    className={`${
+                      searchKey?.length > 0 ? "bg-[#FFA500]" : "bg-[#5d5c5b]"
+                    } w-[85px] hover:bg-[#f8b021] p-2 bg-[#1111] flex justify-center rounded-l-[0px] rounded-r-[4px] ml-[-2px]`}
+                  >
+                    <BsSearch className="text-[24px]" />
+                  </button>
+                </form>
+              </div>
+              <div className="flex justify-center w-full">
                 <SearchBox
                   searchKey={searchKey}
                   setSearchKey={setSearchKey}
+                  openSearchBox={openSearchBox}
                   setOpenSearchBox={setOpenSearchBox}
                   empty={empty}
                   setEmpty={setEmpty}

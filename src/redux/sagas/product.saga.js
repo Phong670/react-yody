@@ -27,6 +27,7 @@ function* getProductListSaga(action) {
         subCategoryId: subCategoryId,
         price_gte: price_gte,
         price_lte: price_lte,
+        q: searchKey,
         ...(sort && {
           _sort: sort.split(".")[0],
           _order: sort.split(".")[1],
