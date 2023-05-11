@@ -40,7 +40,7 @@ function Search() {
     );
   }, [searchKey]);
   return (
-    <div className="flex justify-center items-center flex-wrap flex-col lg:mt-[105px] xxs:mt-[60px]">
+    <div className="lg:min-h-[400px] flex justify-start items-center flex-wrap flex-col lg:mt-[125px] xxs:mt-[80px]">
       <div className="flex gap-2">
         <p
           className="cursor-pointer hover:text-[orange]"
@@ -63,7 +63,7 @@ function Search() {
           {productList.data.length > 0 ? (
             <RenderSearchList productList={productList.data} />
           ) : (
-            <div className="max-w-[400px] m-auto my-4">
+            <div className="max-w-[400px] m-auto my-4 px-4">
               <div className="flex justify-center mb-2">
                 <img
                   src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/search-page.svg?1683190865643"

@@ -5,7 +5,11 @@ import { PRODUCT_LIMIT } from "../../constants/paging";
 
 function* getReviewListSaga(action) {
   try {
-    const { productId, page, sendReview } = action.payload;
+    const { productId, page, sendReview, more } = action.payload;
+    console.log(
+      "🚀 ~ file: review.saga.js:9 ~ function*getReviewListSaga ~ unMount:",
+      more
+    );
 
     const result = yield axios.get("http://localhost:4000/reviews/", {
       params: {
@@ -17,9 +21,13 @@ function* getReviewListSaga(action) {
         //getProductId
         productId: productId,
         _page: page,
-        // _limit: PRODUCT_LIMIT,
+        _limit: PRODUCT_LIMIT,
       },
     });
+    console.log(
+      "🚀 ~ file: review.saga.js:27 ~ function*getReviewListSaga ~ result:",
+      result.data
+    );
 
     yield put({
       type: SUCCESS(REVIEW_ACTION.GET_REVIEW_LIST),
@@ -28,6 +36,7 @@ function* getReviewListSaga(action) {
         page: page,
         sendReview: sendReview,
         total: parseInt(result.headers["x-total-count"]),
+        more: more,
       },
     });
   } catch (e) {
@@ -49,21 +58,25 @@ function* sendReviewSaga(action) {
     );
 
     const result = yield axios.post("http://localhost:4000/reviews/", data);
+    console.log(
+      "🚀 ~ file: review.saga.js:52 ~ function*sendReviewSaga ~ result:",
+      result
+    );
     yield callback();
     yield callback2();
 
     yield put({
       type: SUCCESS(REVIEW_ACTION.SEND_REVIEW),
-      payload: {
-        data: result.data,
-      },
+      // payload: {
+      //   data: result.data,
+      // },
     });
-    yield put({
-      type: REQUEST(REVIEW_ACTION.GET_REVIEW),
-      payload: {
-        productId: data.productId,
-      },
-    });
+    // yield put({
+    //   type: REQUEST(REVIEW_ACTION.GET_REVIEW_LIST),
+    //   payload: {
+    //     productId: data.productId,
+    //   },
+    // });
   } catch (e) {
     yield put({
       type: FAIL(REVIEW_ACTION.SEND_REVIEW),

@@ -313,7 +313,7 @@ function Header() {
           searchKey: searchKey,
         }),
       });
-      // setSearchKey(false);
+      setSearchKey("");
     }
   };
 
@@ -474,6 +474,7 @@ function Header() {
                   type="text"
                   className="w-[305px] text-[12px]"
                   defaultValue={""}
+                  value={searchKey}
                   required
                   placeholder="Nhập nội dung tìm kiếm"
                   onChange={(e) => {
@@ -522,25 +523,24 @@ function Header() {
               <span className="text-[16px] h-30  flex justify-around items-center">
                 Tìm
               </span>
-              <span className="text-[#11006F] text-[19px] h-30px flex justify-around items-center">
+              <span className="mb-[1px] text-[#11006F] text-[19px] h-30px flex justify-around items-center">
                 230+
               </span>
               <span>Cửa hàng </span>
             </a>
-            <a href="" className="flex justify-around items-center">
-              <BsTelephoneFill className="mr-1 text-[#11006F]" /> 18002086
-            </a>
+            <span className="flex justify-around items-center mb-[0px]  text-[#11006F]">
+              <BsTelephoneFill className="mr-1 mb-[2px]  text-[#11006F]" />
+              18002086
+            </span>
             <span className="rounded-full bg-[#FCAF17] px-2 ">Free</span>
 
             <span className="text-[#11006F]  flex justify-around items-center xl:flex xxs:hidden">
-              - Đặt hàng gọi
+              Đặt hàng gọi
             </span>
-            <a
-              href=""
-              className="xl:flex xxs:hidden justify-around items-center gap-1 text-[#11006F]   "
-            >
-              <BsTelephoneFill /> 02499986999
-            </a>
+            <span className="xl:flex xxs:hidden mb-[0px]   justify-around items-center gap-1 text-[#11006F]   ">
+              <BsTelephoneFill className="mb-[2px]  " />
+              02499986999
+            </span>
           </div>
         </S.HeaderTop>
         <S.HeaderBottom className="flex justify-center items-center w-full">
@@ -578,8 +578,8 @@ function Header() {
             </S.Nav>
           </div>
           <div className="text-[10px] flex justify-end items-center w-2/4 relative">
-            <Link
-              to={ROUTES.USER.CART}
+            <div
+              // to={ROUTES.USER.CART}
               className="mr-2 flex justify-center items-center gap-2 relative group h-[40px]"
             >
               <Badge count={cartList.data.length} size="small">
@@ -643,7 +643,7 @@ function Header() {
                   Mua ngay
                 </Link>
               </div>
-            </Link>
+            </div>
 
             <S.Person className="mr-2">
               <BsPersonCircle className="text-[24px]" />
@@ -787,6 +787,7 @@ function Header() {
                     className="flex flex-1  border-solid border-[0.8px] border-[#e9ecef] rounded-l-[4px] rounded-r-[0px] text-[16px] 
                     py-1 px-2"
                     defaultValue={""}
+                    value={searchKey}
                     required
                     placeholder="Nhập nội dung tìm kiếm"
                     onChange={(e) => {

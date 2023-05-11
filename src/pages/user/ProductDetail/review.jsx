@@ -1,17 +1,12 @@
 import { useEffect, useMemo } from "react";
 import { useState } from "react";
-import {
-  Link,
-  useParams,
-  generatePath,
-  Navigate,
-  useNavigate,
-} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Card, Button } from "antd";
 import { Rate, Form, Input, Modal } from "antd";
 import { ROUTES } from "../../../constants/routes";
 import moment from "moment";
+import "moment/locale/vi";
 import { BsPersonCircle } from "react-icons/bs";
 import { PRODUCT_LIMIT } from "../../../constants/paging";
 import { getReviewAction, sendReviewAction } from "../../../redux/actions";
@@ -30,15 +25,19 @@ function ReviewProduct({ idProduct }) {
   const { listReview } = useSelector((state) => state.review);
 
   const [page, setPage] = useState(1);
+  const [more, setMore] = useState(false);
+
   const callSageReview = getReviewAction({
     productId: parseInt(idProduct),
     page: page,
     sendReview: false,
+    more: more,
   });
   useEffect(() => {
     console.log("lay data lan thu ");
     dispatch(callSageReview);
   }, [idProduct]);
+
   let isReview = "";
   const checkReview = () => {
     isReview = listReview.data.findIndex(
@@ -76,18 +75,31 @@ function ReviewProduct({ idProduct }) {
   };
   const renderListReview = useMemo(() => {
     return listReview.data.map((item) => {
+      console.log("aaaaaaaaaaaaaaaaa", item.createdAt);
       return (
         <div key={item.id} className="w-full mt-4 flex">
           <div className="max-w-[40px] h-[40px] flex item-center">
             <BsPersonCircle className="text-[40px]" />
           </div>
           <div className="ml-3">
-            <h5 className="text-[20px]">{item.user.fullName}</h5>
+            <div className="flex gap-2 items-center">
+              <h5 className="text-[20px]">{item.user.fullName}</h5>
+              <p className="text-[rgba(0,0,0,.54)] mb-[-2px]">
+                {`${
+                  moment() - moment(item.createdAt) > 604800000
+                    ? moment(item.createdAt).format("L")
+                    : moment(item.createdAt).fromNow()
+                }
+               ${
+                 moment() - moment(item.createdAt) > 604800000
+                   ? moment(item.createdAt).format("LT")
+                   : ""
+               }
+              `}
+              </p>
+            </div>
 
             <Rate value={item.rate} disabled style={{ fontSize: 12 }} />
-            <p className="text-[rgba(0,0,0,.54)] ">
-              {moment(item.createdAt).fromNow()}
-            </p>
             <p>{item.comment}</p>
           </div>
         </div>
@@ -109,11 +121,18 @@ function ReviewProduct({ idProduct }) {
   return (
     <div className="flex flex-wrap flex-col justify-between w-full">
       <div className="mt-5 pt-3 border-t-[3px]">
-        ĐÁNH GIÁ SẢN PHẨM
+        <h6 className="my-4"> ĐÁNH GIÁ SẢN PHẨM</h6>
         <div>
           {isReview !== -1 ? (
             <>
-              <Card title="Review" size="small">
+              <Card size="small">
+                {/* <button
+                  onClick={() => {
+                    showModal();
+                  }}
+                >
+                  â{" "}
+                </button> */}
                 <Form
                   form={reviewForm}
                   name="reviewForm"
@@ -133,7 +152,7 @@ function ReviewProduct({ idProduct }) {
                   </Modal>
 
                   <Form.Item
-                    label="Rate"
+                    label="Chất lượng sản phẩm"
                     name="rate"
                     rules={[
                       {
@@ -145,7 +164,7 @@ function ReviewProduct({ idProduct }) {
                     <Rate />
                   </Form.Item>
                   <Form.Item
-                    label="Comment"
+                    label="Bình luận"
                     name="comment"
                     rules={[
                       {
@@ -181,12 +200,14 @@ function ReviewProduct({ idProduct }) {
           {listReview.data.length < listReview.total ? (
             <Button
               onClick={() => {
+                setMore(true);
                 setPage(page + 1);
                 dispatch(
                   getReviewAction({
                     productId: parseInt(idProduct),
                     page: page + 1,
                     sendReview: false,
+                    more: true,
                   })
                 );
                 console.log("pageaaaaaaaaa", page);
@@ -195,7 +216,25 @@ function ReviewProduct({ idProduct }) {
               Hiển thị thêm bình luận
             </Button>
           ) : (
-            <></>
+            <>
+              <Button
+                onClick={() => {
+                  setMore(false);
+                  setPage(1);
+                  dispatch(
+                    getReviewAction({
+                      productId: parseInt(idProduct),
+                      page: 1,
+                      sendReview: false,
+                      more: false,
+                    })
+                  );
+                  console.log("pageaaaaaaaaa", page);
+                }}
+              >
+                Thu gọn bình luận
+              </Button>
+            </>
           )}
         </div>
       </div>

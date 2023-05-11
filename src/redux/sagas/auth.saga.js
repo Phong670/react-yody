@@ -30,7 +30,7 @@ function* registerSaga(action) {
   try {
     const { data, callback } = action.payload;
     const result = yield axios.post("http://localhost:4000/register", data);
-    yield callback();
+
     yield put({
       type: SUCCESS(AUTH_ACTION.REGISTER),
       payload: {
@@ -40,6 +40,7 @@ function* registerSaga(action) {
     yield notification.success({
       message: "Đăng kí tài khoản thành công",
     });
+    yield callback();
   } catch (e) {
     yield put({
       type: FAIL(AUTH_ACTION.REGISTER),

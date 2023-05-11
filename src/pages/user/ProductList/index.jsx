@@ -202,13 +202,14 @@ function ProductList() {
       subCategoryId: genderClone,
     });
   };
+  console.log("render lai");
   const renderListFilterType = useMemo(() => {
-    console.log("aa1");
+    console.log("renderListFilterType");
     return (
       <div
-        className={`w-full ${
-          showTypeFilter ? "h-0" : "h-auto"
-        }   flex flex-wrap gap-2  overflow-hidden `}
+        className={`w-full
+  
+          flex flex-wrap gap-2  overflow-hidden `}
       >
         {categoryList.data?.map((item, index) => {
           return (
@@ -370,7 +371,9 @@ function ProductList() {
           Loại sản phẩm {showTypeFilter && <AiOutlineUp />}
           {!showTypeFilter && <AiOutlineDown />}
         </div>
-        <div showTypeFilter={showTypeFilter}>{renderListFilterType}</div>
+        <S.Transition showTypeFilter={showTypeFilter}>
+          {renderListFilterType}
+        </S.Transition>
         <div
           className="my-4 flex justify-between items-center"
           onClick={() => {

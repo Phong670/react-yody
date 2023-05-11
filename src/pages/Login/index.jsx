@@ -81,7 +81,7 @@ function LoginPage() {
                 },
               ]}
             >
-              <Input className="py-3 rounded-sm" />
+              <Input className="py-[10px] rounded-sm" />
             </Form.Item>
             <Form.Item
               label="Mật khẩu"
@@ -93,7 +93,7 @@ function LoginPage() {
                 },
               ]}
             >
-              <Input.Password className="py-3 rounded-sm" />
+              <Input.Password className="py-[10px] rounded-sm" />
             </Form.Item>
             <S.ButtonCustom
               // type="primary"

@@ -27,13 +27,22 @@ const reviewReducer = createReducer(initialState, {
     };
   },
   [SUCCESS(REVIEW_ACTION.GET_REVIEW_LIST)]: (state, action) => {
-    const { data, page, sendReview, total } = action.payload;
+    console.log(
+      "🚀 ~ file: review.reducer.js:17 ~ initialState.listReview.data:",
+      state.listReview.data
+    );
+    const { data, page, sendReview, total, more } = action.payload;
+    console.log("🚀 ~ file: review.reducer.js:35 ~ [SUCCESS ~ data:", data);
     return {
       ...state,
       listReview: {
         ...state.listReview,
         page: page,
-        data: sendReview ? data : [...state.listReview.data, ...data],
+        data: sendReview
+          ? data
+          : more
+          ? [...state.listReview.data, ...data]
+          : data,
         load: false,
         total: total,
         // more khac lan dau

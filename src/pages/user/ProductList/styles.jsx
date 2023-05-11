@@ -88,9 +88,9 @@ export const Price = styled.h4`
 export const Transition = styled.div`
   display: block;
   height: 50px;
-  transition: height 2s ease;
-  transition-property: all;
+  transition: all 2s;
+  /* transition-property: all; */
   overflow: hidden;
-  /* height: ${(props) => props.showTypeFilter && "400px"}; */
+  height: ${(props) => props.showTypeFilter && "400px"};
   /* transition: ${(props) => (props.showTypeFilter ? "height" : "all")} 2s; */
 `;

@@ -42,7 +42,7 @@ function RegisterPage() {
           password: values.password,
           role: "user",
         },
-        callback: () => navigate(ROUTES.LOGIN),
+        callback: () => navigate(ROUTES.USER.LOGIN),
       })
     );
   };

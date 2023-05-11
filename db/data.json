@@ -62,6 +62,123 @@
       "createdAt": 1682946328969,
       "updatedAt": 1682946328969,
       "id": 7
+    },
+    {
+      "rate": 1,
+      "comment": "7",
+      "userId": 4,
+      "productId": 1,
+      "createdAt": 1683818020486,
+      "updatedAt": 1683818020486,
+      "id": 8
+    },
+    {
+      "rate": 2,
+      "comment": "8",
+      "userId": 4,
+      "productId": 1,
+      "createdAt": 1683818023430,
+      "updatedAt": 1683818023430,
+      "id": 9
+    },
+    {
+      "rate": 3,
+      "comment": "9",
+      "userId": 4,
+      "productId": 1,
+      "createdAt": 1683818025839,
+      "updatedAt": 1683818025839,
+      "id": 10
+    },
+    {
+      "rate": 2,
+      "comment": "10",
+      "userId": 4,
+      "productId": 1,
+      "createdAt": 1683818150243,
+      "updatedAt": 1683818150243,
+      "id": 11
+    },
+    {
+      "rate": 3,
+      "comment": "11",
+      "userId": 4,
+      "productId": 1,
+      "createdAt": 1683818761306,
+      "updatedAt": 1683818761307,
+      "id": 12
+    },
+    {
+      "rate": 1,
+      "comment": "12",
+      "userId": 4,
+      "productId": 1,
+      "createdAt": 1683818843476,
+      "updatedAt": 1683818843476,
+      "id": 13
+    },
+    {
+      "rate": 1,
+      "comment": "13",
+      "userId": 4,
+      "productId": 1,
+      "createdAt": 1683819000923,
+      "updatedAt": 1683819000923,
+      "id": 14
+    },
+    {
+      "rate": 2,
+      "comment": "14",
+      "userId": 4,
+      "productId": 1,
+      "createdAt": 1683819220259,
+      "updatedAt": 1683819220259,
+      "id": 15
+    },
+    {
+      "rate": 2,
+      "comment": "15",
+      "userId": 4,
+      "productId": 1,
+      "createdAt": 1683819313826,
+      "updatedAt": 1683819313826,
+      "id": 16
+    },
+    {
+      "rate": 1,
+      "comment": "16",
+      "userId": 4,
+      "productId": 1,
+      "createdAt": 1683819361601,
+      "updatedAt": 1683819361601,
+      "id": 17
+    },
+    {
+      "rate": 1,
+      "comment": "17",
+      "userId": 4,
+      "productId": 1,
+      "createdAt": 1683821244939,
+      "updatedAt": 1683821244939,
+      "id": 18
+    },
+    {
+      "rate": 1,
+      "comment": "18",
+      "userId": 4,
+      "productId": 1,
+      "createdAt": 1683821257190,
+      "updatedAt": 1683821257190,
+      "id": 19
+    },
+    {
+      "rate": 2,
+      "comment": "19",
+      "userId": 4,
+      "productId": 1,
+      "createdAt": 1683821301983,
+      "updatedAt": 1683821301983,
+      "id": 20
     }
   ],
   "users": [
@@ -100,6 +217,42 @@
       "createdAt": 1682406635756,
       "updatedAt": 1682406635756,
       "id": 4
+    },
+    {
+      "email": "qphong123412@gmail.com",
+      "password": "$2a$10$8/thLByDtnb283UdMwPgkOTvXET5LDEDqb8V/eAZJ8t7s4HCBlpAS",
+      "fullName": "phong123",
+      "role": "user",
+      "createdAt": 1683707916258,
+      "updatedAt": 1683707916258,
+      "id": 5
+    },
+    {
+      "email": "qphong12323412@gmail.com",
+      "password": "$2a$10$Koye2O.ZNOLYWU8wZV0n7.pOSXL7pftyTEBS19KLJu3al7nFepNbG",
+      "fullName": "phong123",
+      "role": "user",
+      "createdAt": 1683707973425,
+      "updatedAt": 1683707973425,
+      "id": 6
+    },
+    {
+      "email": "qphong12134@gmail.com",
+      "password": "$2a$10$wnv7UVFIZMC.FFYdr7J.C.cqqBgWx1sRQhweztzN80Gs3DaCR/Uj2",
+      "fullName": "sad",
+      "role": "user",
+      "createdAt": 1683708249543,
+      "updatedAt": 1683708249543,
+      "id": 7
+    },
+    {
+      "email": "qphong1Q2134@gmail.com",
+      "password": "$2a$10$0OgAPXDQHa02fv7Krzlkc.27EtDV4kqm/LaHsalu8Adh4PmW7WgBW",
+      "fullName": "sad",
+      "role": "user",
+      "createdAt": 1683708314759,
+      "updatedAt": 1683708314760,
+      "id": 8
     }
   ],
   "products": [
