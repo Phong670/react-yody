@@ -5,7 +5,7 @@ import { PRODUCT_LIMIT } from "../../constants/paging";
 
 function* getReviewListSaga(action) {
   try {
-    const { productId, page, sendReview, more } = action.payload;
+    const { productId, page, sendReview, more, rate } = action.payload;
     console.log(
       "🚀 ~ file: review.saga.js:9 ~ function*getReviewListSaga ~ unMount:",
       more
@@ -22,6 +22,7 @@ function* getReviewListSaga(action) {
         productId: productId,
         _page: page,
         _limit: PRODUCT_LIMIT,
+        rate: rate,
       },
     });
     console.log(

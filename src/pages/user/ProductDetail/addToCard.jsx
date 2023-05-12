@@ -15,7 +15,7 @@ import { useEffect } from "react";
 import { addCartListAction } from "../../../redux/actions/index";
 import axios from "axios";
 
-function AddToCard({ productDetail }) {
+function AddToCard({ productDetail, dataTotalReview }) {
   const [isSizeToCart, setIsSizeToCart] = useState("");
   const [boxSizeWarning, setBoxSizeWarning] = useState(false);
   const dispatch = useDispatch();
@@ -23,15 +23,19 @@ function AddToCard({ productDetail }) {
   const { id } = useParams();
 
   const [sizeList, setSizeList] = useState([]);
-  const { listReview } = useSelector((state) => state.review);
+  console.log(
+    "🚀 ~ file: addToCard.jsx:27 ~ AddToCard ~ dataTotalReview:",
+    dataTotalReview
+  );
+
   const totalRate = useMemo(
     () =>
-      listReview.data.length
-        ? listReview.data
+      dataTotalReview.length
+        ? dataTotalReview
             .map((item) => item.rate)
             .reduce((total, item) => total + item)
         : 0,
-    [listReview.data]
+    [dataTotalReview]
   );
 
   const [quantity, setQuantity] = useState(1);
@@ -118,11 +122,11 @@ function AddToCard({ productDetail }) {
     <div className="xxs:w-full lg:w-[400px]  ">
       <div className=" text-[20px] font-bold">{productDetail.data.title}</div>
       <Space>
-        <Rate value={totalRate / listReview.data.length} disabled />
+        <Rate value={totalRate / dataTotalReview.length} disabled />
         <span>
-          {listReview.data.length > 1
-            ? `${(totalRate / listReview.data.length).toFixed(1)}/5 (${
-                listReview.data.length
+          {dataTotalReview.length > 1
+            ? `${(totalRate / dataTotalReview.length).toFixed(1)}/5 (${
+                dataTotalReview.length
               } đánh giá)`
             : "chưa có đánh giá"}
         </span>

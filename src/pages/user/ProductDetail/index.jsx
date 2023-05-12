@@ -9,9 +9,9 @@ import {
 } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Spin, Row, Col, Card, Button, Space, notification } from "antd";
-import { Rate, Form, Input, Modal } from "antd";
+import { Rate, Form, Input, Modal, Collapse } from "antd";
 import { ROUTES } from "../../../constants/routes";
-import CursorZoom from "react-cursor-zoom";
+import axios from "axios";
 
 import { PRODUCT_LIMIT } from "../../../constants/paging";
 import {
@@ -29,10 +29,52 @@ function ProductDetail() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { productList, productDetail } = useSelector((state) => state.product);
+  const { sendReview } = useSelector((state) => state.review);
+  const { listReview } = useSelector((state) => state.review);
+
   const { oneAddCard } = useSelector((state) => state.cart);
   const [notiAddCartData, setNotiAddCartData] = useState({});
   const [isOpen, setIsOpen] = useState(null);
-
+  const [dataTotalReview, setDataTotalReview] = useState([]);
+  console.log(
+    "🚀 ~ file: index.jsx:36 ~ ProductDetail ~ dataTotalReview:",
+    dataTotalReview
+  );
+  const { Panel } = Collapse;
+  useEffect(() => {
+    console.log("khoi tao lan 2");
+    console.log("222222222222222222222222222222222222222222222222222", id);
+    axios
+      .get("http://localhost:4000/reviews/", {
+        params: { productId: productDetail.data.id },
+      })
+      .then((res) => {
+        setDataTotalReview(res.data);
+      })
+      .catch((err) => {
+        console.log("loi roi");
+      });
+    console.log(
+      "looooooooooooooooooooooooooooooooooooooooooooooooooooo",
+      dataTotalReview
+    );
+  }, [id, listReview]);
+  // useEffect(
+  //   () => () => {
+  //     console.log("unmount 1111111111111111111111111111111111");
+  //     axios
+  //       .get("http://localhost:4000/reviews/", {
+  //         params: { id: productDetail.data.id },
+  //       })
+  //       .then((res) => {
+  //         setDataTotalReview(res.data);
+  //       })
+  //       .catch((err) => {
+  //         console.log("loi roi");
+  //       });
+  //   },
+  //   []
+  // );
   useEffect(() => {
     setNotiAddCartData(oneAddCard);
     setIsOpen(oneAddCard.id);
@@ -71,14 +113,14 @@ function ProductDetail() {
     return (
       <div className="lg:flex gap-2  xxs:hidden text-[14px]  ">
         <Link
-          className="hover:text-[orange] hover:cursor-pointer font-normal"
+          className="hover:text-[orange] hover:cursor-pointer font-medium"
           to={ROUTES.USER.HOME}
         >
           Trang chủ
         </Link>
         <span>/</span>
         <p
-          className="hover:text-[orange] hover:cursor-pointer font-normal"
+          className="hover:text-[orange] hover:cursor-pointer font-medium"
           onClick={() =>
             navigate(
               generatePath(ROUTES.USER.PRODUCT_LIST, {
@@ -90,7 +132,7 @@ function ProductDetail() {
           {productDetail.data.subCategory?.name}
         </p>
         <span>/</span>
-        <p>{productDetail.data.category?.name}</p>
+        <p className="font-[700]">{productDetail.data.category?.name}</p>
       </div>
     );
   }, [productDetail.data]);
@@ -137,26 +179,55 @@ function ProductDetail() {
   }, [isOpen]);
 
   return (
-    <div className="flex flex-wrap flex-col justify-center xl:w-[1200px] lg:mt-[50px] xxs:mt-[8px] ">
+    <div className="flex flex-wrap flex-col justify-center xl:w-[1200px] lg:mt-[50px] xxs:mt-[8px] relative">
       {/* {renderOneProductAddCart} */}
       <div>{renderTitle}</div>
-      <div className="flex my-4  xxs:w-full xxs:justify-center lg:justify-between xxs:flex-wrap lg:flex-nowrap">
-        <div className="xl:w-[400px] xxs:w-full mb-3 ">
-          <Spin spinning={productDetail.load} className="flex justify-center">
-            <div className="flex justify-center">
+      <div className="flex my-4 h-auto xl:   xxs:justify-center lg:justify-between xxs:flex-wrap  ">
+        <div className="  xl:w-[750px]  xxs:w-full mb-3 overflow-auto ">
+          <div
+            spinning={productDetail.load}
+            className="flex justify-center w-full h-auto border-b-[1px] border-solid border-[#F2F2F2] pb-3"
+          >
+            <div className="flex justify-center w-full">
               <img src={productDetail.data.image} alt="" />
             </div>
-          </Spin>
+          </div>
+          <div className="mt-[20px]">
+            <Collapse
+              expandIconPosition="end"
+              className="border-none rounded-none boxDescribeDetail"
+            >
+              <Panel
+                header="ĐẶC TÍNH NỔI BẬT"
+                key="1"
+                className="bg-[white] border-none rounded-none "
+              >
+                <div className="">{productDetail.data.description}</div>
+              </Panel>
+            </Collapse>
+          </div>
+
+          <div className="w-full">
+            <ReviewProduct
+              idProduct={id}
+              title={productDetail.data.title}
+              dataTotalReview={dataTotalReview}
+            />
+          </div>
         </div>
-        <AddToCard productDetail={productDetail} />
+
+        <div className="sticky h-[90vh] top-[150px] right-0 ">
+          <AddToCard
+            productDetail={productDetail}
+            dataTotalReview={dataTotalReview}
+          />
+        </div>
       </div>
-      <div className="mt-[20px]">ĐẶC TÍNH NỔI BẬT</div>
-      <div className="mb-[200px] w-full">{productDetail.data.description} </div>
-      <ReviewProduct idProduct={id} />
-      <p className="mt-4">GỢI Ý CHO BẠN</p>
-      {/* <Row gutter={[16, 16]} className="w-40">
+
+      <p className="mt-4 w-full">GỢI Ý CHO BẠN</p>
+      <Row gutter={[16, 16]} className="w-full">
         {renderListCart}
-      </Row> */}
+      </Row>
     </div>
   );
 }

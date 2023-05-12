@@ -58,7 +58,6 @@ li {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #f3f3f359;
 }
 .carousel {
   width: 1200px;
@@ -139,3 +138,12 @@ html {
   height: 20px;
   transition: height 0.2s;
 } */
+.boxDescribeDetail > .ant-collapse-item {
+  border-radius: 0 !important;
+}
+.boxDescribeDetail > .ant-collapse-content {
+  border-top: 0 !important;
+}
+.boxDescribeDetail > .ant-collapse-content-box {
+  padding: 0 !important;
+}
