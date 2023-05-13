@@ -7,7 +7,7 @@ export const ROUTES = {
     REGISTER: "/register",
     CART: "/cart",
     SEARCH: "/search/:searchKey",
-    ACCOUNT: "/account",
+    ACCOUNT: "/account/orders",
     CHECKOUT: "/checkout",
   },
   id: {},

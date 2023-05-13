@@ -1,5 +1,5 @@
 import * as S from "./styles";
-import { getProductListSearchAction } from "../../redux/actions";
+import { getProductListSearchAction } from "../../../../src/redux/actions";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Link, generatePath, useNavigate } from "react-router-dom";
@@ -24,10 +24,10 @@ import { AiOutlineMenu, AiOutlineArrowLeft } from "react-icons/ai";
 import {
   deleteCartItemAction,
   updateCartItemAction,
-} from "../../redux/actions";
-import { logoutAction } from "../../redux/actions";
+} from "../../../../src/redux/actions";
+import { logoutAction } from "../../../../src/redux/actions";
 import SearchBox from "./searchBox";
-import { ROUTES } from "../../constants/routes";
+import { ROUTES } from "../../../../src/constants/routes";
 
 //function ant menu
 function getItem(label, key, icon, children, type) {

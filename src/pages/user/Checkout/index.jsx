@@ -17,9 +17,11 @@ import {
   orderProductAction,
 } from "../../../redux/actions";
 import { IoIosArrowBack } from "react-icons/io";
-import { Button, Form, Input, Badge } from "antd";
+import { Button, Form, Input, Badge, Radio, Space } from "antd";
 import Select from "react-select";
-import { values } from "json-server-auth";
+
+// import { values } from "json-server-auth";
+
 function Checkout() {
   const [checkoutForm] = Form.useForm();
   const dispatch = useDispatch();
@@ -63,6 +65,18 @@ function Checkout() {
   const handleSubmitCheckoutForm = (values) => {
     console.log("00000000000000000000000000000000000000000000");
     console.log(values);
+    dispatch(
+      orderProductAction({
+        data: {
+          ...values,
+          userId: userInfo.data.id,
+          totalPrice: total,
+          status: "pending",
+        },
+        products: cartList,
+        callback: () => {},
+      })
+    );
   };
   const renderCartList = () => {
     return cartList.data.map((item, index) => {
@@ -72,7 +86,7 @@ function Checkout() {
           className="grid grid-cols-5 py-3 border-b-[1px] border-solid border-[white] gap-2"
         >
           <Badge count={item.quantity} size="default">
-            <div className="col-span-1 bg-[white] flex justify-center rounded-sm overflow-hidden">
+            <div className="col-span-1 bg-[white] flex justify-center rounded-[4px] overflow-hidden">
               <img
                 src={item.image}
                 alt="anh"
@@ -93,35 +107,6 @@ function Checkout() {
     });
   };
 
-  // const renderCityOptions = useMemo(() => {
-  //   return cityList.data.map((item) => {
-  //     return (
-  //       <Select.Option key={item.id} value={item.code}>
-  //         {item.name}
-  //       </Select.Option>
-  //     );
-  //   });
-  // }, [cityList.data]);
-
-  // const renderDistrictOptions = useMemo(() => {
-  //   return districtList.data.map((item) => {
-  //     return (
-  //       <Select.Option key={item.id} value={item.code}>
-  //         {item.name}
-  //       </Select.Option>
-  //     );
-  //   });
-  // }, [districtList.data]);
-
-  // const renderWardListOptions = useMemo(() => {
-  //   return wardList.data.map((item) => {
-  //     return (
-  //       <Select.Option key={item.id} value={item.code}>
-  //         {item.name}
-  //       </Select.Option>
-  //     );
-  //   });
-  // }, [wardList.data]);
   const colourOptions = [
     { value: "ocean", label: "Ocean", color: "#00B8D9", isFixed: true },
     { value: "blue", label: "Blue", color: "#0052CC", isDisabled: true },
@@ -136,7 +121,7 @@ function Checkout() {
   ];
 
   return (
-    <div className="mt-[100px] w-[1200px] grid grid-cols-3">
+    <div className="mt-[100px] w-[1200px] grid grid-cols-3 gap-4">
       <div className="col-span-2 flex flex-wrap justify-center">
         <div className="w-full flex justify-center pb-2">
           <img
@@ -144,7 +129,7 @@ function Checkout() {
             alt=""
           />
         </div>
-        <div className="w-full grid grid-cols-2 gap-2">
+        <div className="w-full grid grid-cols-2 gap-4">
           <div className="col-span-1">
             <div className="mb-2">
               <h4 className="text-[20px] font-bold">Thông tin giao hàng</h4>
@@ -159,7 +144,7 @@ function Checkout() {
                 className="w-full p-2 text-[20px]"
               >
                 <Form.Item
-                  label="Họ và tên"
+                  label=""
                   name="name"
                   rules={[
                     {
@@ -168,10 +153,13 @@ function Checkout() {
                     },
                   ]}
                 >
-                  <Input className="py-[10px] rounded-sm" />
+                  <Input
+                    placeholder="Họ và tên"
+                    className="py-[10px] rounded-[4px]"
+                  />
                 </Form.Item>
                 <Form.Item
-                  label="Số điện thoại"
+                  label=""
                   name="numberPhone"
                   rules={[
                     {
@@ -180,10 +168,13 @@ function Checkout() {
                     },
                   ]}
                 >
-                  <Input className="py-[10px] rounded-sm" />
+                  <Input
+                    placeholder="Số điện thoại"
+                    className="py-[10px] rounded-[4px]"
+                  />
                 </Form.Item>
                 <Form.Item
-                  label="Email"
+                  label=""
                   name="email"
                   rules={[
                     {
@@ -192,11 +183,14 @@ function Checkout() {
                     },
                   ]}
                 >
-                  <Input className="py-[10px] rounded-sm" />
+                  <Input
+                    placeholder="Email"
+                    className="py-[10px] rounded-[4px]"
+                  />
                 </Form.Item>
 
                 <Form.Item
-                  label="Email"
+                  label=""
                   name="city"
                   rules={[
                     {
@@ -210,7 +204,7 @@ function Checkout() {
                     classNamePrefix="select"
                     defaultValue={""}
                     // isDisabled={isDisabled}
-
+                    placeholder="Tỉnh thành"
                     isSearchable={isSearchable}
                     name="city"
                     options={cityList.data}
@@ -218,16 +212,16 @@ function Checkout() {
                       dispatch(
                         getDistrictListAction({ cityCode: value.value })
                       );
-                      setIsDisabledDistrict(false);
                       setSelectedOptionDistrict(null);
                       setSelectedOptionWard(null);
                       setIsDisabledWard(true);
                       setSelectedOptionCity(value);
+                      setIsDisabledDistrict(false);
                     }}
                   />
                 </Form.Item>
                 <Form.Item
-                  label="Quận huyện"
+                  label=""
                   name="district"
                   rules={[
                     {
@@ -239,6 +233,7 @@ function Checkout() {
                   <Select
                     className="basic-single"
                     classNamePrefix="select"
+                    placeholder="Quận huyện"
                     defaultValue={selectedOptionDistrict}
                     value={selectedOptionDistrict}
                     isDisabled={isDisabledDistrict}
@@ -257,7 +252,7 @@ function Checkout() {
                 </Form.Item>
 
                 <Form.Item
-                  label="Phường xã"
+                  label=""
                   name="ward"
                   rules={[
                     {
@@ -269,6 +264,7 @@ function Checkout() {
                   <Select
                     className="basic-single"
                     classNamePrefix="select"
+                    placeholder="Phường xã"
                     defaultValue={selectedOptionWard}
                     value={selectedOptionWard}
                     isDisabled={isDisabledWard}
@@ -280,49 +276,9 @@ function Checkout() {
                     }}
                   />
                 </Form.Item>
-                {/* <Select
-                    className="selectCheckoutBox"
-                    onChange={(value) => {
-                      dispatch(getDistrictListAction({ cityCode: value }));
-                      checkoutForm.setFieldsValue({
-                        districtCode: undefined,
-                        wardCode: undefined,
-                      });
-                    }}
-                  >
-                    {renderCityOptions}
-                  </Select> */}
 
-                {/* <Form.Item
-                  label="Quận/Huyện"
-                  name="districtCode"
-                  rules={[{ required: true, message: "Required!" }]}
-                >
-                  <Select
-                    onChange={(value) => {
-                      dispatch(getWardListAction({ districtCode: value }));
-                      checkoutForm.setFieldsValue({
-                        wardCode: undefined,
-                      });
-                    }}
-                    disabled={!checkoutForm.getFieldValue("cityCode")}
-                  >
-                    {renderDistrictOptions}
-                  </Select>
-                </Form.Item>
                 <Form.Item
-                  label="Phường/Xã"
-                  name="wardCode"
-                  rules={[{ required: true, message: "Required!" }]}
-                >
-                  <Select
-                    disabled={!checkoutForm.getFieldValue("districtCode")}
-                  >
-                    {renderWardListOptions}
-                  </Select>
-                </Form.Item> */}
-                <Form.Item
-                  label="Địa chỉ"
+                  label=""
                   name="address"
                   rules={[
                     {
@@ -331,16 +287,57 @@ function Checkout() {
                     },
                   ]}
                 >
-                  <Input className="py-[10px] rounded-sm" />
+                  <Input
+                    placeholder="Địa chỉ"
+                    className="py-[10px] rounded-[4px]"
+                  />
                 </Form.Item>
               </Form>
             </div>
           </div>
           <div className="col-span-1">
-            <div className="mb-2">
-              <h4 className="text-[20px] font-bold">Vận chuyển</h4>
+            <div>
+              <div className="mb-2">
+                <h4 className="text-[20px] font-bold">Vận chuyển</h4>
+              </div>
+              <div className="flex justify-between mt-3 p-3 border-[1px]  border-[#cecdcd] rounded-[4px]">
+                <div>Phí vận chuyển:</div>
+                <div>20.0000đ</div>
+              </div>
             </div>
-            <div>20.0000đ</div>
+            <div className="mt-4">
+              <div className="mb-2">
+                <h4 className="text-[20px] font-bold">Tanh toán</h4>
+              </div>
+              <div className="mt-3 p-3 border-[1px]  border-[#cecdcd] rounded-[4px]">
+                <Form
+                  form={checkoutForm}
+                  name="checkoutForm"
+                  layout="vertical"
+                  onFinish={(values) => handleSubmitCheckoutForm(values)}
+                  autoComplete="off"
+                  className="w-full p-2 text-[20px]"
+                >
+                  <Form.Item
+                    label=""
+                    name="paymentMethod"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Bạn chưa chọn phương thức thành toán",
+                      },
+                    ]}
+                  >
+                    <Radio.Group>
+                      <Space direction="vertical">
+                        <Radio value="cod">COD</Radio>
+                        <Radio value="atm">ATM</Radio>
+                      </Space>
+                    </Radio.Group>
+                  </Form.Item>
+                </Form>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -383,8 +380,11 @@ function Checkout() {
             <button
               form="checkoutForm"
               // key="submit"
-              className="bg-[orange] w-[40%] h-[48px] text-[white] rounded-sm"
-              onClick={() => checkoutForm.handleSubmitCheckoutForm()}
+              className="bg-[orange] w-[40%] h-[48px] text-[white] rounded-[4px]"
+              onClick={() => {
+                checkoutForm.onFinish();
+                console.log(123);
+              }}
             >
               Đặt hàng
             </button>

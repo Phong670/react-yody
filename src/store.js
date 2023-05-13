@@ -11,6 +11,7 @@ import commonReducer from "./redux/reducers/common.reducer";
 import cartReducer from "./redux/reducers/cart.reducer";
 import productSearchReducer from "./redux/reducers/productSearch.reducer";
 import locationReducer from "../src/redux/reducers/location.reducer";
+import orderReducer from "../src/redux/reducers/order.reducer";
 
 import rootSaga from "./redux/sagas"; //import yield fork for choice saga file
 const sagaMiddleware = createSagaMiddleware();
@@ -26,6 +27,7 @@ const store = configureStore({
     cart: cartReducer,
     productSearch: productSearchReducer,
     location: locationReducer,
+    order: orderReducer,
   },
   //saga
   middleware: (getDefaultMiddleware) => [

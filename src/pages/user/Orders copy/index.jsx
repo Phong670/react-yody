@@ -9,7 +9,7 @@ import { REQUEST } from "../../../redux/constants";
 
 import { Button } from "antd";
 
-function Account() {
+function Orders() {
   const navigate = useNavigate();
   return (
     <div className="w-full">
@@ -54,4 +54,4 @@ function Account() {
     </div>
   );
 }
-export default Account;
+export default Orders;
