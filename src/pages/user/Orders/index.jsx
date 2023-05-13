@@ -7,14 +7,16 @@ import { ROUTES } from "../../../constants/routes";
 import { useRef } from "react";
 import { REQUEST } from "../../../redux/constants";
 
-import { Button, Table, Panel, Collapse } from "antd";
+import { Button, Table, Collapse } from "antd";
 
 import moment from "moment";
 
 import { getOrderList } from "../../../redux/actions";
 import { logoutAction } from "../../../../src/redux/actions";
+import { Fragment } from "react";
 
 function Orders() {
+  const { Panel } = Collapse;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.auth);
@@ -27,20 +29,60 @@ function Orders() {
       dispatch(getOrderList({ userId: userInfo.data.id }));
     }
   }, [userInfo.data.id]);
+
+  const renderOrderList = () => {
+    return orderList.data.map((item, index) => {
+      return (
+        <Fragment key={index}>
+          <div className="w-full flex flex-wrap justify-between ">
+            <div className="w-full flex justify-start flex-nowrap p-2 px-4 bg-[#e1e1e1]">
+              <div className="w-[165px] ">Đơn hàng</div>
+              <div className="flex flex-1 text-[orange] hover:cursor-pointer">
+                #23{item.id}
+              </div>
+            </div>
+            <div className="w-full flex justify-start p-2 px-4">
+              <div className="w-[165px]">Ngày đặt hàng</div>
+              <div className="flex flex-1">
+                {moment(item.createdAt).format("DD/MM/YYYY HH:mm")}
+              </div>
+            </div>
+            <div className="w-full flex justify-start p-2 px-4">
+              <div className="w-[165px]">Số lượng sản phẩm</div>
+              <div className="flex flex-1">{item.orderDetails.length}</div>
+            </div>
+            <div className="w-full flex justify-start p-2 px-4">
+              <div className="w-[165px]">Giá trị đơn hàng</div>
+              <div className="flex flex-1">
+                {item.totalPrice.toLocaleString()}đ
+              </div>
+            </div>
+            <div className="w-full flex justify-start p-2 px-4">
+              <div className="w-[165px]">Tình trạng</div>
+              <div className="flex flex-1">{item.status}</div>
+            </div>
+            <div>Xem chi tiết đơn hàng</div>
+          </div>
+        </Fragment>
+      );
+    });
+  };
+
   const tableColumns = [
     {
       title: "Mã đơn hàng",
       dataIndex: "id",
       key: "id",
+      render: (id) => <button>#23{id}</button>,
     },
     {
       title: "Số lượng sản phẩm",
       dataIndex: "orderDetails",
       key: "orderDetails",
-      render: (orderDetails) => `${orderList.data.length} products`,
+      render: (orderDetails) => `${orderList.data.length} sản phẩm`,
     },
     {
-      title: "Tổng tiền",
+      title: "Giá trị đơn hàng",
       dataIndex: "totalPrice",
       key: "totalPrice",
       render: (totalPrice) => `${totalPrice.toLocaleString()} VND`,
@@ -52,10 +94,10 @@ function Orders() {
       render: (createdAt) => moment(createdAt).format("DD/MM/YYYY HH:mm"),
     },
     {
-      title: "Trạng thái vận chuyển",
+      title: "Trạng thái đơn hàng",
       dataIndex: "status",
       key: "status",
-      render: (status) => (status = "pending" ? "Đang xác nhận" : ""),
+      render: (status) => status,
     },
   ];
   const childColumns = [
@@ -100,14 +142,11 @@ function Orders() {
           <div className="text-[orange]">TÀI KHOẢN</div>
         </div>
         <div className="w-full grid lg:grid-cols-4 gap-4">
-          <div className="xxs:block lg:hidden">
-            <Collapse defaultActiveKey={["1"]} onChange={onChange}>
-              <Panel header="This is panel header 1" key="1">
-                <p></p>
-              </Panel>
-          git a
-             
-            </Collapse>
+          <div className="w-[100vw] p-4 xxs:block lg:hidden bg-[white]">
+            <div className="w-[100vw] px-4 pb-2 xxs:block lg:hidden bg-[white] text-[orange]">
+              ĐƠN HÀNG CỦA TÔI
+            </div>
+            {renderOrderList()}
           </div>
           <div className="lg:col-span-1 flex flex-wrap w-full bg-[white] justify-start">
             <div className="w-full p-4 ">
@@ -165,6 +204,17 @@ function Orders() {
               <p className="">{orderList.data.length} đơn hàng</p>
             </div>
             <Table
+              onRow={(record, rowIndex) => {
+                return {
+                  onClick: (event) => {
+                    console.log(record);
+                  }, // click row
+                  onDoubleClick: (event) => {}, // double click row
+                  onContextMenu: (event) => {}, // right button click row
+                  onMouseEnter: (event) => {}, // mouse enter row
+                  onMouseLeave: (event) => {}, // mouse leave row
+                };
+              }}
               className="w-[100%] "
               columns={tableColumns}
               dataSource={orderList.data}

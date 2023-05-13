@@ -17,10 +17,10 @@ import Checkout from "../pages/user/Checkout";
 
 import SearchPage from "../pages/user/Search";
 
-import FooterPage from "../layouts/Footer";
+import FooterPage from "../../src/layouts/UserLayout/Header";
 import UserLayout from "../layouts/UserLayout/";
-import DetailProductLayout from "../layouts/DetailProductLayout/";
-import ProductListLayout from "../layouts/ProductListLayout/";
+import DetailProductLayout from "../layouts/UserLayout/DetailProductLayout/";
+import ProductListLayout from "../layouts/UserLayout/ProductListLayout/";
 
 import { ROUTES } from "../constants/routes";
 

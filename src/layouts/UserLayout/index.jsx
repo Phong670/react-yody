@@ -1,8 +1,8 @@
 import { Outlet } from "react-router-dom";
-import Carousel from "../Carousel/index";
-import Collection from "../SectionCollection";
+import Carousel from "./Carousel";
+import Collection from "./SectionCollection";
 import Promotion from "./SectionPromotion";
-import SectionMenu from "../SectionMenu";
+import SectionMenu from "./SectionMenu";
 
 import * as S from "./styles";
 
