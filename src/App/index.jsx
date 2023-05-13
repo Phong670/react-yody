@@ -12,6 +12,9 @@ import ProductList from "../pages/user/ProductList";
 import LoginPage from "../pages/Login";
 import RegisterPage from "../pages/Register";
 import CartPage from "../pages/user/Cart";
+import Account from "../pages/user/Account";
+import Checkout from "../pages/user/Checkout";
+
 import SearchPage from "../pages/user/Search";
 
 import FooterPage from "../layouts/Footer";
@@ -48,6 +51,9 @@ function App() {
         <Route path={ROUTES.USER.LOGIN} element={<LoginPage />} />
         <Route path={ROUTES.USER.REGISTER} element={<RegisterPage />} />
         <Route path={ROUTES.USER.CART} element={<CartPage />} />
+        <Route path={ROUTES.USER.ACCOUNT} element={<Account />} />
+        <Route path={ROUTES.USER.CHECKOUT} element={<Checkout />} />
+
         <Route path={ROUTES.USER.SEARCH} element={<SearchPage />} />
       </Routes>
 

@@ -90,7 +90,7 @@ function AddToCard({ productDetail, dataTotalReview }) {
   console.log("🚀 ~ file: addToCard.jsx:64 ~ useEffect ~ quantity:", quantity);
   const renderQuantity = () => {
     return (
-      <div className="flex justify-center gap-0">
+      <div className="xxs:w-[40%] flex justify-center gap-0">
         <button
           className={`w-[56px] h-[48px] bg-[#ffffff] ${
             quantity === 1 ? "text-[#DEDDDD] " : "text-[#62676D]"
@@ -151,10 +151,10 @@ function AddToCard({ productDetail, dataTotalReview }) {
 
       <div className="my-3">Số lượng:</div>
       <div className="w-full flex flex-wrap justify-center">
-        <div className="w-full flex lg:justify-between xxs:flex-wrap xxs:justify-center  sm:justify-between sm:w-[500px] gap-2">
+        <div className=" xxs:w-[100%] flex lg:justify-between xxs:flex-nowrap xxs:justify-center  sm:justify-between sm:w-[500px] gap-2">
           <>{renderQuantity()}</>
           <button
-            className="max-w-[250px] lg:w-[200px] sm:w-[250px] px-4 h-[48px] bg-[#ffc107] text-[#fff] hover:bg-[#FEECC7] hover:text-[#fcaf17] rounded-md"
+            className="max-w-[250px]   lg:w-[200px] sm:w-[50%] px-4 h-[48px] bg-[#ffc107] text-[#fff] hover:bg-[#FEECC7] hover:text-[#fcaf17] rounded-md"
             onClick={() => {
               isSizeToCart === ""
                 ? setBoxSizeWarning(true)

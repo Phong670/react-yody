@@ -6,3 +6,4 @@ export * from "./auth.constant";
 export * from "./review.constant";
 export * from "./cart.constant";
 export * from "./productSearch.constant";
+export * from "./location.constant";

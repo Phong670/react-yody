@@ -186,19 +186,12 @@ function ProductDetail() {
         <div className="  xl:w-[750px]  xxs:w-full mb-3 overflow-auto ">
           <div
             spinning={productDetail.load}
-            className="flex justify-center flex-wrap w-full h-auto border-b-[1px] border-solid border-[#F2F2F2] pb-[24px]"
+            className="flex justify-center w-full h-auto border-b-[1px] border-solid border-[#F2F2F2] pb-3"
           >
             <div className="flex justify-center w-full">
               <img src={productDetail.data.image} alt="" />
             </div>
-            <div className="xl:hidden xxs:block w-full mt-4 ">
-              <AddToCard
-                productDetail={productDetail}
-                dataTotalReview={dataTotalReview}
-              />
-            </div>
           </div>
-
           <div className="mt-[20px]">
             <Collapse
               expandIconPosition="end"
@@ -207,21 +200,6 @@ function ProductDetail() {
               <Panel
                 header="ĐẶC TÍNH NỔI BẬT"
                 key="1"
-                className="bg-[white] border-none rounded-none "
-              >
-                <div className="">{productDetail.data.description}</div>
-              </Panel>
-            </Collapse>
-          </div>
-
-          <div className="mt-[20px]">
-            <Collapse
-              expandIconPosition="end"
-              className="border-none rounded-none boxDescribeDetail"
-            >
-              <Panel
-                header="CHI TIẾT SẢN PHẨM"
-                key="2"
                 className="bg-[white] border-none rounded-none "
               >
                 <div className="">{productDetail.data.description}</div>
@@ -238,7 +216,7 @@ function ProductDetail() {
           </div>
         </div>
 
-        <div className="sticky h-[90vh] top-[150px] right-0 xxs:hidden xl:block ">
+        <div className="sticky h-[90vh] top-[150px] right-0 ">
           <AddToCard
             productDetail={productDetail}
             dataTotalReview={dataTotalReview}

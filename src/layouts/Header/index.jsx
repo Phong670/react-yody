@@ -124,10 +124,11 @@ function Header() {
     {
       key: "1",
       label: (
-        <div className="w-[100px]">
+        <div className="">
           <Link
             target="_blank"
             rel="noopener noreferrer"
+            className="hover:text-[orange]"
             to={generatePath(ROUTES.USER.PRODUCT_LIST, { subCategoryId: 1 })}
           >
             Áo
@@ -142,6 +143,7 @@ function Header() {
           <Link
             target="_blank"
             rel="noopener noreferrer"
+            className="hover:text-[orange]"
             to={generatePath(ROUTES.USER.PRODUCT_LIST, { subCategoryId: 2 })}
           >
             Quần
@@ -156,6 +158,7 @@ function Header() {
           <Link
             target="_blank"
             rel="noopener noreferrer"
+            className="hover:text-[orange]"
             to={generatePath(ROUTES.USER.PRODUCT_LIST, { subCategoryId: 3 })}
           >
             Đồ Thể Thao Nam
@@ -166,10 +169,11 @@ function Header() {
     {
       key: "4",
       label: (
-        <div className="w-[100px]">
+        <div className="">
           <Link
             target="_blank"
             rel="noopener noreferrer"
+            className="hover:text-[orange]"
             to={generatePath(ROUTES.USER.PRODUCT_LIST, { subCategoryId: 4 })}
           >
             Phụ Kiện Nam
@@ -182,10 +186,11 @@ function Header() {
     {
       key: "1",
       label: (
-        <div className="w-[100px]">
+        <div className="">
           <Link
             target="_blank"
             rel="noopener noreferrer"
+            className="hover:text-[orange]"
             to={generatePath(ROUTES.USER.PRODUCT_LIST, { subCategoryId: 5 })}
           >
             Áo
@@ -196,10 +201,11 @@ function Header() {
     {
       key: "ư",
       label: (
-        <div className="w-[100px]">
+        <div className="">
           <Link
             target="_blank"
             rel="noopener noreferrer"
+            className="hover:text-[orange]"
             to={generatePath(ROUTES.USER.PRODUCT_LIST, { subCategoryId: 6 })}
           >
             Quần
@@ -210,10 +216,11 @@ function Header() {
     {
       key: "3",
       label: (
-        <div className="w-[100px]">
+        <div className="">
           <Link
             target="_blank"
             rel="noopener noreferrer"
+            className="hover:text-[orange]"
             to={generatePath(ROUTES.USER.PRODUCT_LIST, { subCategoryId: 7 })}
           >
             Váy
@@ -224,13 +231,102 @@ function Header() {
     {
       key: "4",
       label: (
-        <div className="w-[100px]">
+        <div className="">
           <Link
             target="_blank"
             rel="noopener noreferrer"
+            className="hover:text-[orange]"
             to={generatePath(ROUTES.USER.PRODUCT_LIST, { subCategoryId: 8 })}
           >
             Đồ Thể Thao
+          </Link>
+        </div>
+      ),
+    },
+  ];
+  const collection = [
+    {
+      key: "1",
+      label: (
+        <div className="">
+          <Link
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-[orange]"
+          >
+            Đồ thể thao đa nắng
+          </Link>
+        </div>
+      ),
+    },
+    {
+      key: "ư",
+      label: (
+        <div className="">
+          <Link
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-[orange]"
+          >
+            Xuân/hè 2023
+          </Link>
+        </div>
+      ),
+    },
+    {
+      key: "3",
+      label: (
+        <div className="">
+          <Link
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-[orange]"
+          >
+            Polo Yody - Everyday Wear
+          </Link>
+        </div>
+      ),
+    },
+    {
+      key: "4",
+      label: (
+        <div className="">
+          <Link
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-[orange]"
+          >
+            Thời Trang Công Sở
+          </Link>
+        </div>
+      ),
+    },
+  ];
+  const aboutYody = [
+    {
+      key: "1",
+      label: (
+        <div>
+          <Link
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-[orange]"
+          >
+            Ưu đãi & Chính sách
+          </Link>
+        </div>
+      ),
+    },
+    {
+      key: "ư",
+      label: (
+        <div>
+          <Link
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-[orange]"
+          >
+            Câu chuyện & Nhân vật
           </Link>
         </div>
       ),
@@ -553,11 +649,8 @@ function Header() {
                 placement="bottomLeft"
                 arrow
               >
-                <div className="w-[80px]">
-                  <Space>
-                    Nữ
-                    <DownOutlined />
-                  </Space>
+                <div className="mr-4  hover:text-[orange] hover:cursor-pointer">
+                  <Space>Nữ</Space>
                 </div>
               </Dropdown>
 
@@ -568,18 +661,47 @@ function Header() {
                 placement="bottomLeft"
                 arrow
               >
-                <div className="w-[80px]">
+                <div className="mx-4 hover:text-[orange] hover:cursor-pointer">
                   <Space className="flex justify-center align-content-center">
                     Nam
-                    <DownOutlined />
+                  </Space>
+                </div>
+              </Dropdown>
+              <Dropdown
+                menu={{
+                  items: collection,
+                }}
+                placement="bottomLeft"
+                arrow
+              >
+                <div className="mx-4 hover:text-[orange] hover:cursor-pointer">
+                  <Space className="flex justify-center align-content-center">
+                    Bộ sưu tập
+                  </Space>
+                </div>
+              </Dropdown>
+              <Dropdown
+                menu={{
+                  items: aboutYody,
+                  style: {
+                    width: "200px",
+                    flexWWrap: "nowrap",
+                  },
+                }}
+                placement="bottomLeft"
+                arrow
+              >
+                <div className="mx-4 hover:text-[orange] hover:cursor-pointer">
+                  <Space className="flex justify-center align-content-center">
+                    Về Yody
                   </Space>
                 </div>
               </Dropdown>
             </S.Nav>
           </div>
           <div className="text-[10px] flex justify-end items-center w-2/4 relative">
-            <div
-              // to={ROUTES.USER.CART}
+            <Link
+              to={ROUTES.USER.CART}
               className="mr-2 flex justify-center items-center gap-2 relative group h-[40px]"
             >
               <Badge count={cartList.data.length} size="small">
@@ -643,7 +765,7 @@ function Header() {
                   Mua ngay
                 </Link>
               </div>
-            </div>
+            </Link>
 
             <S.Person className="mr-2">
               <BsPersonCircle className="text-[24px]" />
@@ -711,7 +833,9 @@ function Header() {
               <div className="flex w-full justify-start items-center ml-[28px] gap-2">
                 <BsPersonCircle />
                 {userInfo.data.id ? (
-                  <Link>Tài khoảng của tôi</Link>
+                  <Link to={ROUTES.USER.ACCOUNT} onClick={() => onClose()}>
+                    Tài khoảng của tôi
+                  </Link>
                 ) : (
                   <Link
                     to={generatePath(ROUTES.USER.LOGIN)}

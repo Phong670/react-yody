@@ -11,6 +11,7 @@ import {
   updateCartItemAction,
 } from "../../../redux/actions/index";
 import { Button } from "antd";
+import { parsePath } from "history";
 
 function Cart() {
   const navigate = useNavigate();
@@ -233,7 +234,12 @@ function Cart() {
             Tổng đơn (tạm tính):
             <p className="text-[20px]">{total.toLocaleString()}đ </p>
           </p>
-          <button className="bg-[orange] w-full h-[48px] text-[white] rounded-sm">
+          <button
+            className="bg-[orange] w-full h-[48px] text-[white] rounded-sm"
+            onClick={() => {
+              navigate(ROUTES.USER.CHECKOUT);
+            }}
+          >
             Đặt hàng ({cartList.data.length})
           </button>
         </div>

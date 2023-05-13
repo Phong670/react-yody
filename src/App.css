@@ -141,9 +141,54 @@ html {
 .boxDescribeDetail > .ant-collapse-item {
   border-radius: 0 !important;
 }
-.boxDescribeDetail > .ant-collapse-content {
+.boxDescribeDetail .ant-collapse-content {
   border-top: 0 !important;
 }
-.boxDescribeDetail > .ant-collapse-content-box {
-  padding: 0 !important;
+.boxDescribeDetail .ant-collapse-content-box {
+  padding: 8px 0 !important;
+}
+.boxDescribeDetail .ant-collapse-header {
+  padding: 16px 0 !important;
+}
+.filterCommentXxs .ant-select-selection-item {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center;
+  height: 100%;
+  min-height: 35px;
+  font-size: 20px;
+}
+
+.filterCommentXxs .ant-select-selector {
+  height: 100% !important;
+  background: #030d78 !important;
+  border-radius: 0 !important;
+  color: #ffff;
+}
+.filterCommentXxs {
+  height: 100% !important;
+  background: #030d78 !important;
+}
+@media max-width(620px) {
+  .filterCommentXxs {
+    height: auto !important;
+    background: #030d78 !important;
+  }
+}
+.filterCommentXxs .ant-select-arrow {
+  color: white;
+  font-size: 20px;
+}
+.selectCheckoutBox .ant-select-selector {
+  display: flex !important;
+  justify-content: start !important;
+  items-content: center !important;
+  height: 44px !important;
+  font-size: 16px !important;
+}
+.selectCheckoutBox .ant-select-selection-item {
+  padding: 10px 0px !important;
+  display: flex !important;
+  justify-content: start !important;
+  items-content: center !important;
 }

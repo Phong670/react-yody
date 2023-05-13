@@ -6,6 +6,7 @@ import sizeSaga from "./size.saga";
 import authSaga from "./auth.saga";
 import reviewSaga from "./review.saga";
 import productSearchSaga from "./productSearch.saga";
+import location from "./location.saga";
 
 export default function* rootSaga() {
   yield fork(productSaga);
@@ -14,4 +15,5 @@ export default function* rootSaga() {
   yield fork(authSaga);
   yield fork(reviewSaga);
   yield fork(productSearchSaga);
+  yield fork(location);
 }
