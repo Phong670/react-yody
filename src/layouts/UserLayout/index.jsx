@@ -3,20 +3,26 @@ import Carousel from "./Carousel";
 import Collection from "./SectionCollection";
 import Promotion from "./SectionPromotion";
 import SectionMenu from "./SectionMenu";
+import HeaderPage from "../UserLayout/Header";
+import FooterPage from "../UserLayout/Footer";
 
 import * as S from "./styles";
 
 function UserLayout() {
   return (
-    <S.wrapperMain>
-      <Carousel />
-      <Collection />
-      <Promotion />
-      <SectionMenu />
-      <S.UserLayoutWrapper>
-        <Outlet />
-      </S.UserLayoutWrapper>
-    </S.wrapperMain>
+    <div>
+      <S.wrapperMain>
+        <HeaderPage />
+        <Carousel />
+        <Collection />
+        <Promotion />
+        <SectionMenu />
+        <S.UserLayoutWrapper>
+          <Outlet />
+        </S.UserLayoutWrapper>
+        <FooterPage />
+      </S.wrapperMain>
+    </div>
   );
 }
 

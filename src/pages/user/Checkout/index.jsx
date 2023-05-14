@@ -19,6 +19,7 @@ import {
 import { IoIosArrowBack } from "react-icons/io";
 import { Button, Form, Input, Badge, Radio, Space } from "antd";
 import Select from "react-select";
+import { clearFields } from "redux-form";
 
 // import { values } from "json-server-auth";
 
@@ -71,7 +72,8 @@ function Checkout() {
           ...values,
           userId: userInfo.data.id,
           totalPrice: total,
-          status: "pending",
+          status: "Đang xử lý",
+          costShip: total > 500000 ? 0 : 20000,
         },
         products: cartList,
         callback: () => {},
@@ -83,10 +85,10 @@ function Checkout() {
       return (
         <div
           key={index}
-          className="grid grid-cols-5 py-3 border-b-[1px] border-solid border-[white] gap-2"
+          className="flex flex-nowrap py-3 border-b-[1px] border-solid border-[white] gap-2"
         >
           <Badge count={item.quantity} size="default">
-            <div className="col-span-1 bg-[white] flex justify-center rounded-[4px] overflow-hidden">
+            <div className="bg-[white] flex justify-center rounded-[4px] overflow-hidden">
               <img
                 src={item.image}
                 alt="anh"
@@ -95,11 +97,11 @@ function Checkout() {
             </div>
           </Badge>
 
-          <div className="col-span-3 ml-2 flex flex-col justify-between">
+          <div className=" ml-3 flex flex-col justify-between">
             <h3>{item.title}</h3>
             <p>Size: {item.size}</p>
           </div>
-          <div className="col-span-1">
+          <div className="flex flex-1 justify-end">
             <p>{item.price.toLocaleString()}đ</p>
           </div>
         </div>
@@ -107,29 +109,47 @@ function Checkout() {
     });
   };
 
-  const colourOptions = [
-    { value: "ocean", label: "Ocean", color: "#00B8D9", isFixed: true },
-    { value: "blue", label: "Blue", color: "#0052CC", isDisabled: true },
-    { value: "purple", label: "Purple", color: "#5243AA" },
-    { value: "red", label: "Red", color: "#FF5630", isFixed: true },
-    { value: "orange", label: "Orange", color: "#FF8B00" },
-    { value: "yellow", label: "Yellow", color: "#FFC400" },
-    { value: "green", label: "Green", color: "#36B37E" },
-    { value: "forest", label: "Forest", color: "#00875A" },
-    { value: "slate", label: "Slate", color: "#253858" },
-    { value: "silver", label: "Silver", color: "#666666" },
-  ];
-
   return (
-    <div className="mt-[100px] w-[1200px] grid grid-cols-3 gap-4">
-      <div className="col-span-2 flex flex-wrap justify-center">
+    <div className="mt-[100px] xl:max-w-[1200px] xxs:w-full  grid lg:grid-cols-3 xxs:grid-cols-1 gap-4 xxs:px-4 lg:px-0">
+      <div className="lg:col-span-2  flex flex-wrap justify-center">
         <div className="w-full flex justify-center pb-2">
           <img
             src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/checkout_logo.png?1683881952485"
             alt=""
           />
         </div>
-        <div className="w-full grid grid-cols-2 gap-4">
+        <div className="w-full bg-[#e7e8fc] p-4 my-4">
+          <div className="pb-3 border-b-[1px] border-solid border-[white] ">
+            <h4 className="text-[20px] font-bold">
+              Đơn hàng ({cartList.data.length} sản phẩm){" "}
+            </h4>
+          </div>
+          <>{renderCartList()}</>
+          <div className="w-full py-3 border-b-[1px] border-solid border-[white] flex flex-wrap gap-4">
+            <div className="flex justify-between w-full">
+              <div>Tạm tính</div>
+              <div>{total.toLocaleString()}đ</div>
+            </div>
+
+            <div className="flex justify-between w-full  ">
+              <div>Phí vận chuển</div>
+              <div> {total > 500000 ? "Miễn phí ship" : "20.000đ"}</div>
+            </div>
+          </div>
+
+          <div className="w-full flex flex-wrap gap-4 py-3">
+            <div className="w-full flex justify-between">
+              <div className="text-[20px]">Tổng cộng</div>
+              <div className="text-[20px] text-[orange]">
+                {total > 500000
+                  ? total.toLocaleString()
+                  : (total + 20000).toLocaleString()}
+                đ
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="w-full grid lg:grid-cols-2 xxs:grid-cols-1 gap-4">
           <div className="col-span-1">
             <div className="mb-2">
               <h4 className="text-[20px] font-bold">Thông tin giao hàng</h4>
@@ -209,14 +229,23 @@ function Checkout() {
                     name="city"
                     options={cityList.data}
                     onChange={(value) => {
+                      setSelectedOptionDistrict(null);
+                      setSelectedOptionWard(null);
                       dispatch(
                         getDistrictListAction({ cityCode: value.value })
                       );
-                      setSelectedOptionDistrict(null);
-                      setSelectedOptionWard(null);
+                      console.log(
+                        "ahiiiiiiiiiiiiiiiiiiii",
+                        selectedOptionDistrict
+                      );
                       setIsDisabledWard(true);
                       setSelectedOptionCity(value);
                       setIsDisabledDistrict(false);
+
+                      checkoutForm.setFieldsValue({
+                        district: undefined,
+                        ward: undefined,
+                      });
                     }}
                   />
                 </Form.Item>
@@ -233,12 +262,12 @@ function Checkout() {
                   <Select
                     className="basic-single"
                     classNamePrefix="select"
+                    name="district"
                     placeholder="Quận huyện"
                     defaultValue={selectedOptionDistrict}
                     value={selectedOptionDistrict}
                     isDisabled={isDisabledDistrict}
                     isSearchable={isSearchable}
-                    name="district"
                     options={districtList.data}
                     onChange={(value) => {
                       dispatch(
@@ -269,7 +298,7 @@ function Checkout() {
                     value={selectedOptionWard}
                     isDisabled={isDisabledWard}
                     isSearchable={isSearchable}
-                    name="Ward"
+                    name="ward"
                     options={wardList.data}
                     onChange={(value) => {
                       setSelectedOptionWard(value);
@@ -302,12 +331,12 @@ function Checkout() {
               </div>
               <div className="flex justify-between mt-3 p-3 border-[1px]  border-[#cecdcd] rounded-[4px]">
                 <div>Phí vận chuyển:</div>
-                <div>20.0000đ</div>
+                <div> {total > 500000 ? "Miễn phí ship" : "20.000đ"}</div>
               </div>
             </div>
             <div className="mt-4">
               <div className="mb-2">
-                <h4 className="text-[20px] font-bold">Tanh toán</h4>
+                <h4 className="text-[20px] font-bold">Thanh toán</h4>
               </div>
               <div className="mt-3 p-3 border-[1px]  border-[#cecdcd] rounded-[4px]">
                 <Form
@@ -338,10 +367,29 @@ function Checkout() {
                 </Form>
               </div>
             </div>
+            <div className="w-full xxs:flex lg:hidden justify-between items-center my-4">
+              <Link
+                className="text-[orange] flex items-center gap-2 hover:cursor-pointer"
+                to={ROUTES.USER.CART}
+              >
+                <IoIosArrowBack className="text-[20px]" /> Quay về giỏ hàng
+              </Link>
+              <button
+                form="checkoutForm"
+                // key="submit"
+                className="bg-[orange] w-[40%] h-[48px] text-[white] rounded-[4px]"
+                onClick={() => {
+                  checkoutForm.onFinish();
+                  console.log(123);
+                }}
+              >
+                Đặt hàng
+              </button>
+            </div>
           </div>
         </div>
       </div>
-      <div className="col-span-1 bg-[#e7e8fc] p-4">
+      <div className="lg:block xxs:hidden lg:col-span-1 bg-[#e7e8fc] p-4">
         <div className="pb-3 border-b-[1px] border-solid border-[white] ">
           <h4 className="text-[20px] font-bold">
             Đơn hàng ({cartList.data.length} sản phẩm){" "}
@@ -356,7 +404,7 @@ function Checkout() {
 
           <div className="flex justify-between w-full  ">
             <div>Phí vận chuển</div>
-            <div> {total > 500000 ? "-" : "20.000đ"}</div>
+            <div> {total > 500000 ? "Miễn phí ship" : "20.000đ"}</div>
           </div>
         </div>
 

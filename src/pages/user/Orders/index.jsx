@@ -22,16 +22,34 @@ function Orders() {
   const { userInfo } = useSelector((state) => state.auth);
   console.log("🚀 ~ file: index.jsx:20 ~ Orders ~ userInfo:", userInfo);
   const { orderList } = useSelector((state) => state.order);
-  console.log("🚀 ~ file: index.jsx:21 ~ Orders ~ orderList:", orderList);
+  console.log("🚀 ~ file: index.jsx:21 ~ Orders ~ orderList:", orderList.data);
   useEffect(() => {
     if (userInfo.data.id) {
       console.log("ddang nhap");
       dispatch(getOrderList({ userId: userInfo.data.id }));
     }
   }, [userInfo.data.id]);
+  let orderListFinalClone = [];
+  orderList.data.map((item, index) => {
+    orderListFinalClone.push({
+      ...item,
+      addressFinal:
+        item.address +
+        ", " +
+        item.ward.label +
+        ", " +
+        item.district.label +
+        ", " +
+        item.city.label,
+    });
+  });
+  console.log(
+    "🚀 ~ file: index.jsx:33 ~ Orders ~ orderListFinalClone:",
+    orderListFinalClone
+  );
 
   const renderOrderList = () => {
-    return orderList.data.map((item, index) => {
+    return orderListFinalClone.map((item, index) => {
       return (
         <Fragment key={index}>
           <div className="w-full flex flex-wrap justify-between ">
@@ -48,8 +66,8 @@ function Orders() {
               </div>
             </div>
             <div className="w-full flex justify-start p-2 px-4">
-              <div className="w-[165px]">Số lượng sản phẩm</div>
-              <div className="flex flex-1">{item.orderDetails.length}</div>
+              <div className="w-[165px]">Địa chỉ</div>
+              <div className="flex flex-1">{item.addressFinal}</div>
             </div>
             <div className="w-full flex justify-start p-2 px-4">
               <div className="w-[165px]">Giá trị đơn hàng</div>
@@ -61,7 +79,12 @@ function Orders() {
               <div className="w-[165px]">Tình trạng</div>
               <div className="flex flex-1">{item.status}</div>
             </div>
-            <div>Xem chi tiết đơn hàng</div>
+            <div
+              className="w-full flex justify-center text-[blue] my-2 cursor-pointer"
+              onClick={() => console.log(item)}
+            >
+              Xem chi tiết đơn hàng
+            </div>
           </div>
         </Fragment>
       );
@@ -73,20 +96,21 @@ function Orders() {
       title: "Mã đơn hàng",
       dataIndex: "id",
       key: "id",
-      render: (id) => <button>#23{id}</button>,
-    },
-    {
-      title: "Số lượng sản phẩm",
-      dataIndex: "orderDetails",
-      key: "orderDetails",
-      render: (orderDetails) => `${orderList.data.length} sản phẩm`,
+      render: (id) => <button className="text-[orange] ">#23{id}</button>,
     },
     {
       title: "Giá trị đơn hàng",
       dataIndex: "totalPrice",
       key: "totalPrice",
-      render: (totalPrice) => `${totalPrice.toLocaleString()} VND`,
+      render: (text) => `${text.toLocaleString()}đ`,
     },
+    {
+      title: "Địa chỉ",
+      dataIndex: "addressFinal",
+      key: "addressFinal",
+      render: (text) => text,
+    },
+
     {
       title: "Ngày đặt hàng",
       dataIndex: "createdAt",
@@ -98,27 +122,6 @@ function Orders() {
       dataIndex: "status",
       key: "status",
       render: (status) => status,
-    },
-  ];
-  const childColumns = [
-    {
-      title: "Tên sản phẩm",
-      dataIndex: "name",
-      key: "name",
-      render: (name) => <a>{name}</a>,
-    },
-    {
-      title: "Giá",
-      dataIndex: "price",
-      key: "price",
-      render: (price) => <a>{price}</a>,
-    },
-    {
-      title: "Số lượng",
-      dataIndex: "quantity",
-      key: "quantity",
-
-      render: (quantity) => <a>{quantity}</a>,
     },
   ];
 
@@ -137,14 +140,25 @@ function Orders() {
             >
               Trang chủ
             </p>
-            / Tài khoản
+            <p>/</p>
+            <p
+              className="cursor-pointer hover:text-[orange]"
+              onClick={() => {
+                navigate({
+                  pathname: generatePath(ROUTES.USER.ACCOUNT),
+                });
+              }}
+            >
+              Tài khoản
+            </p>
           </div>
-          <div className="text-[orange]">TÀI KHOẢN</div>
+          <div className="text-[orange]">ĐƠN HÀNG CỦA TÔI</div>
         </div>
         <div className="w-full grid lg:grid-cols-4 gap-4">
-          <div className="w-[100vw] p-4 xxs:block lg:hidden bg-[white]">
-            <div className="w-[100vw] px-4 pb-2 xxs:block lg:hidden bg-[white] text-[orange]">
-              ĐƠN HÀNG CỦA TÔI
+          <div className="w-full p-4 xxs:block lg:hidden bg-[white]">
+            <div className="w-full  pb-2 xxs:flex lg:hidden bg-[white] text-[orange] justify-between flex-nowrap">
+              <p className="w-[60%]"> ĐƠN HÀNG CỦA TÔI</p>
+              <p className="w-[30%] flex ">{orderList.data.length} đơn hàng</p>
             </div>
             {renderOrderList()}
           </div>
@@ -199,9 +213,9 @@ function Orders() {
           </div>
 
           <div className="col-span-3 xxs:hidden lg:block">
-            <div className="w-full justify-between flex py-4 px-2 bg-[white]">
-              <h4 className="">Đơn hàng của tôi</h4>
-              <p className="">{orderList.data.length} đơn hàng</p>
+            <div className="w-full justify-between flex py-4 px-3 bg-[white]">
+              <h4 className="text-[orange] ">ĐƠN HÀNG CỦA TÔI</h4>
+              <p className="text-[orange] ">{orderList.data.length} đơn hàng</p>
             </div>
             <Table
               onRow={(record, rowIndex) => {
@@ -215,24 +229,11 @@ function Orders() {
                   onMouseLeave: (event) => {}, // mouse leave row
                 };
               }}
-              className="w-[100%] "
+              className="w-[100%] cursor-pointer"
               columns={tableColumns}
-              dataSource={orderList.data}
+              dataSource={orderListFinalClone}
               rowKey="id"
               pagination={false}
-              expandable={{
-                expandedRowRender: (record) => (
-                  <div className="w-[100%]">
-                    <Table
-                      className="w-[100%]"
-                      dataSource={record.orderDetails}
-                      columns={childColumns}
-                      rowKey="id"
-                      pagination={false}
-                    />
-                  </div>
-                ),
-              }}
             />
           </div>
         </div>

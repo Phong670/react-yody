@@ -666,184 +666,184 @@
     {
       "id": 1,
       "genderId": 1,
-      "label": "Áo Nam"
+      "name": "Áo Nam"
     },
     {
       "id": 2,
       "genderId": 1,
-      "label": "Quần Nam"
+      "name": "Quần Nam"
     },
     {
       "id": 3,
       "genderId": 1,
-      "label": "Đồ Thể Thao Nam"
+      "name": "Đồ Thể Thao Nam"
     },
     {
       "id": 4,
       "genderId": 1,
-      "label": "Phụ Kiện Nam"
+      "name": "Phụ Kiện Nam"
     },
     {
       "id": 5,
       "genderId": 2,
-      "label": "Áo Nữ"
+      "name": "Áo Nữ"
     },
     {
       "id": 6,
       "genderId": 2,
-      "label": "Quần Nữ"
+      "name": "Quần Nữ"
     },
     {
       "id": 7,
       "genderId": 2,
-      "label": "Váy"
+      "name": "Váy"
     },
     {
       "id": 8,
       "genderId": 2,
-      "label": "Đồ Thể Thao"
+      "name": "Đồ Thể Thao"
     }
   ],
   "categories": [
     {
       "id": 1,
       "subCategoryId": 1,
-      "label": "Áo Polo Nam"
+      "name": "Áo Polo Nam"
     },
     {
       "id": 2,
       "subCategoryId": 1,
-      "label": "Áo Thun Nam"
+      "name": "Áo Thun Nam"
     },
     {
       "id": 3,
       "subCategoryId": 1,
-      "label": "Áo Khoác Nam"
+      "name": "Áo Khoác Nam"
     },
     {
       "id": 4,
       "subCategoryId": 1,
-      "label": "Áo Sơ Mi Nam"
+      "name": "Áo Sơ Mi Nam"
     },
     {
       "id": 5,
       "subCategoryId": 1,
-      "label": "Áo Chống Nắng Nam"
+      "name": "Áo Chống Nắng Nam"
     },
     {
       "id": 6,
       "subCategoryId": 1,
-      "label": "Áo Len Nam"
+      "name": "Áo Len Nam"
     },
     {
       "id": 7,
       "subCategoryId": 2,
-      "label": "Quần Jeans Nam"
+      "name": "Quần Jeans Nam"
     },
     {
       "id": 8,
       "subCategoryId": 2,
-      "label": "Quần Âu Nam"
+      "name": "Quần Âu Nam"
     },
     {
       "id": 9,
       "subCategoryId": 2,
-      "label": "Quần Kaki Nam"
+      "name": "Quần Kaki Nam"
     },
     {
       "id": 10,
       "subCategoryId": 2,
-      "label": "Quần Short Nam"
+      "name": "Quần Short Nam"
     },
     {
       "id": 11,
       "subCategoryId": 3,
-      "label": "Áo Thun Thể Thao Nam"
+      "name": "Áo Thun Thể Thao Nam"
     },
     {
       "id": 12,
       "subCategoryId": 3,
-      "label": "Áo Polo Thể Thao Nam"
+      "name": "Áo Polo Thể Thao Nam"
     },
     {
       "id": 13,
       "subCategoryId": 3,
-      "label": "Quần Thể Thao Nam"
+      "name": "Quần Thể Thao Nam"
     },
     {
       "id": 14,
       "subCategoryId": 8,
-      "label": "Chân Váy"
+      "name": "Chân Váy"
     },
     {
       "id": 15,
       "subCategoryId": 8,
-      "label": "Đầm"
+      "name": "Đầm"
     },
     {
       "id": 16,
       "subCategoryId": 5,
-      "label": "Áo Polo Nữ"
+      "name": "Áo Polo Nữ"
     },
     {
       "id": 17,
       "subCategoryId": 5,
-      "label": "Áo Thun Nữ"
+      "name": "Áo Thun Nữ"
     },
     {
       "id": 18,
       "subCategoryId": 5,
-      "label": "Áo Khoác Nữ"
+      "name": "Áo Khoác Nữ"
     },
     {
       "id": 19,
       "subCategoryId": 5,
-      "label": "Áo Sơ Mi Nữ"
+      "name": "Áo Sơ Mi Nữ"
     },
     {
       "id": 20,
       "subCategoryId": 5,
-      "label": "Áo Chống Nắng Nữ"
+      "name": "Áo Chống Nắng Nữ"
     },
     {
       "id": 21,
       "subCategoryId": 5,
-      "label": "Áo Len Nữ"
+      "name": "Áo Len Nữ"
     },
     {
       "id": 22,
       "subCategoryId": 6,
-      "label": "Quần Jeans Nữ"
+      "name": "Quần Jeans Nữ"
     },
     {
       "id": 23,
       "subCategoryId": 6,
-      "label": "Quần Âu Nữ"
+      "name": "Quần Âu Nữ"
     },
     {
       "id": 24,
       "subCategoryId": 6,
-      "label": "Quần Kaki Nữ"
+      "name": "Quần Kaki Nữ"
     },
     {
       "id": 25,
       "subCategoryId": 6,
-      "label": "Quần Short Nữ"
+      "name": "Quần Short Nữ"
     },
     {
       "id": 26,
       "subCategoryId": 7,
-      "label": "Áo Thun Thể Thao Nữ"
+      "name": "Áo Thun Thể Thao Nữ"
     },
     {
       "id": 27,
       "subCategoryId": 7,
-      "label": "Áo Polo Thể Thao Nữ"
+      "name": "Áo Polo Thể Thao Nữ"
     },
     {
       "id": 28,
       "subCategoryId": 7,
-      "label": "Quần Thể Thao Nữ"
+      "name": "Quần Thể Thao Nữ"
     }
   ],
   "sizes": [
@@ -882,115 +882,9 @@
   ],
   "orders": [
     {
-      "fullName": "Lê Bá Thanh Tuấn",
-      "email": "lebathanhtuan@gmail.com",
-      "phoneNumber": "+10849954060",
-      "cityCode": "79",
-      "districtCode": "771",
-      "wardCode": "27190",
-      "address": "123 ABC",
-      "paymentMethod": "cod",
-      "userId": 2,
-      "totalPrice": 175000000,
-      "status": "pending",
-      "createdAt": 1683721258751,
-      "updatedAt": 1683721258751,
-      "id": 1
-    },
-    {
-      "fullName": "Lê Bá Thanh Tuấn",
-      "email": "lebathanhtuan@gmail.com",
-      "phoneNumber": "0849954060",
-      "cityCode": "79",
-      "districtCode": "771",
-      "wardCode": "27205",
-      "address": "123 ABC",
-      "paymentMethod": "cod",
-      "userId": 4,
-      "totalPrice": 56000000,
-      "status": "pending",
-      "createdAt": 1683721889636,
-      "updatedAt": 1683721889637,
-      "id": 2
-    },
-    {
-      "name": "fsdf",
-      "numberPhone": "sad",
-      "email": "sad",
-      "city": {
-        "id": 7224,
-        "value": "48",
-        "parentcode": "0003",
-        "label": "Thành phố Đà Nẵng",
-        "status": 1,
-        "region": 2
-      },
-      "district": {
-        "id": 7256,
-        "value": "493",
-        "parentcode": "48",
-        "label": "Quận Sơn Trà",
-        "status": 1,
-        "region": null
-      },
-      "ward": {
-        "id": 7259,
-        "value": "20269",
-        "parentcode": "493",
-        "label": "Phường Mân Thái",
-        "status": 1,
-        "region": null
-      },
-      "address": "asd",
-      "paymentMethod": "cod",
-      "userId": 4,
-      "totalPrice": 0,
-      "status": "pending",
-      "createdAt": 1683976125649,
-      "updatedAt": 1683976125649,
-      "id": 3
-    },
-    {
-      "name": "deasc",
+      "name": "sad",
       "numberPhone": "asd",
-      "email": " vx324",
-      "city": {
-        "id": 8113,
-        "value": "92",
-        "parentcode": "0003",
-        "label": "Thành phố Cần Thơ",
-        "status": 1,
-        "region": 2
-      },
-      "district": {
-        "id": 8114,
-        "value": "916",
-        "parentcode": "92",
-        "label": "Quận Ninh Kiều",
-        "status": 1,
-        "region": null
-      },
-      "ward": {
-        "id": 8116,
-        "value": "31120",
-        "parentcode": "916",
-        "label": "Phường An Hòa",
-        "status": 1,
-        "region": null
-      },
-      "address": "2qdwe",
-      "paymentMethod": "cod",
-      "userId": 4,
-      "totalPrice": 0,
-      "status": "pending",
-      "createdAt": 1683976483449,
-      "updatedAt": 1683976483449,
-      "id": 4
-    },
-    {
-      "name": "asdgfas",
-      "numberPhone": "asdgf",
-      "email": "asDF",
+      "email": "saf",
       "city": {
         "id": 7224,
         "value": "48",
@@ -1000,299 +894,52 @@
         "region": 2
       },
       "district": {
-        "id": 7256,
-        "value": "493",
+        "id": 7225,
+        "value": "490",
         "parentcode": "48",
-        "label": "Quận Sơn Trà",
+        "label": "Quận Liên Chiểu",
         "status": 1,
         "region": null
       },
       "ward": {
-        "id": 7259,
-        "value": "20269",
-        "parentcode": "493",
-        "label": "Phường Mân Thái",
+        "id": 7228,
+        "value": "20197",
+        "parentcode": "490",
+        "label": "Phường Hòa Khánh Bắc",
         "status": 1,
         "region": null
       },
-      "address": "asfd",
+      "address": "fsad",
       "paymentMethod": "cod",
       "userId": 4,
-      "totalPrice": 0,
-      "status": "pending",
-      "createdAt": 1683976597927,
-      "updatedAt": 1683976597927,
-      "id": 5
-    },
-    {
-      "name": "asfdsa",
-      "numberPhone": "asdd",
-      "email": "asdfasf",
-      "city": {
-        "id": 3429,
-        "value": "31",
-        "parentcode": "0003",
-        "label": "Thành phố Hải Phòng",
-        "status": 1,
-        "region": 1
-      },
-      "district": {
-        "id": 3481,
-        "value": "307",
-        "parentcode": "31",
-        "label": "Quận Kiến An",
-        "status": 1,
-        "region": null
-      },
-      "ward": {
-        "id": 3490,
-        "value": "11449",
-        "parentcode": "307",
-        "label": "Phường Phù Liễn",
-        "status": 1,
-        "region": null
-      },
-      "address": "asdsa",
-      "paymentMethod": "cod",
-      "userId": 4,
-      "totalPrice": 0,
-      "status": "pending",
-      "createdAt": 1683976646268,
-      "updatedAt": 1683976646269,
-      "id": 6
-    },
-    {
-      "name": "asfdsa",
-      "numberPhone": "asdd",
-      "email": "asdfasf",
-      "city": {
-        "id": 3429,
-        "value": "31",
-        "parentcode": "0003",
-        "label": "Thành phố Hải Phòng",
-        "status": 1,
-        "region": 1
-      },
-      "district": {
-        "id": 3481,
-        "value": "307",
-        "parentcode": "31",
-        "label": "Quận Kiến An",
-        "status": 1,
-        "region": null
-      },
-      "ward": {
-        "id": 3490,
-        "value": "11449",
-        "parentcode": "307",
-        "label": "Phường Phù Liễn",
-        "status": 1,
-        "region": null
-      },
-      "address": "asdsa",
-      "paymentMethod": "cod",
-      "userId": 4,
-      "totalPrice": 897000,
-      "status": "pending",
-      "createdAt": 1683976764926,
-      "updatedAt": 1683976764926,
-      "id": 7
-    },
-    {
-      "name": "sdgsd",
-      "numberPhone": "asfd",
-      "email": "234",
-      "city": {
-        "id": 3429,
-        "value": "31",
-        "parentcode": "0003",
-        "label": "Thành phố Hải Phòng",
-        "status": 1,
-        "region": 1
-      },
-      "district": {
-        "id": 3481,
-        "value": "307",
-        "parentcode": "31",
-        "label": "Quận Kiến An",
-        "status": 1,
-        "region": null
-      },
-      "ward": {
-        "id": 3486,
-        "value": "11437",
-        "parentcode": "307",
-        "label": "Phường Nam Sơn",
-        "status": 1,
-        "region": null
-      },
-      "address": "asdfds",
-      "paymentMethod": "cod",
-      "userId": 4,
-      "totalPrice": 897000,
-      "status": "pending",
-      "createdAt": 1683976784646,
-      "updatedAt": 1683976784646,
-      "id": 8
-    },
-    {
-      "name": "ad",
-      "numberPhone": "ÁD",
-      "email": "ád",
-      "city": {
-        "id": 8113,
-        "value": "92",
-        "parentcode": "0003",
-        "label": "Thành phố Cần Thơ",
-        "status": 1,
-        "region": 2
-      },
-      "district": {
-        "id": 8153,
-        "value": "923",
-        "parentcode": "92",
-        "label": "Quận Thốt Nốt",
-        "status": 1,
-        "region": null
-      },
-      "ward": {
-        "id": 8159,
-        "value": "31217",
-        "parentcode": "923",
-        "label": "Phường Thạnh Hoà",
-        "status": 1,
-        "region": null
-      },
-      "address": "sdf",
-      "paymentMethod": "cod",
-      "userId": 4,
-      "totalPrice": 897000,
-      "status": "pending",
-      "createdAt": 1683980774169,
-      "updatedAt": 1683980774169,
-      "id": 9
+      "totalPrice": 299002,
+      "status": "Đang xử lý",
+      "costShip": 20000,
+      "createdAt": 1684081926576,
+      "updatedAt": 1684081926577,
+      "id": 1
     }
   ],
   "orderDetails": [
     {
       "orderId": 1,
       "productId": 1,
-      "name": "iPhone 14 Pro",
-      "price": 25000000,
-      "quantity": 3,
-      "createdAt": 1683721258863,
-      "updatedAt": 1683721258863,
+      "name": "Áo Polo Nữ Coolmax Phối Bo Siêu Mát",
+      "price": 299000,
+      "quantity": 1,
+      "createdAt": 1684081926627,
+      "updatedAt": 1684081926627,
       "id": 1
     },
     {
       "orderId": 1,
-      "productId": 3,
-      "name": "Samsung Galaxy S23",
-      "price": 20000000,
-      "quantity": 5,
-      "createdAt": 1683721258960,
-      "updatedAt": 1683721258960,
+      "productId": 2,
+      "name": "Bo Polo nam size 1,3 cate 16, sub 5 gia 2",
+      "price": 2,
+      "quantity": 1,
+      "createdAt": 1684081926670,
+      "updatedAt": 1684081926670,
       "id": 2
-    },
-    {
-      "orderId": 2,
-      "productId": 6,
-      "name": "Xiaomi Mi 13",
-      "price": 10000000,
-      "quantity": 1,
-      "createdAt": 1683721889730,
-      "updatedAt": 1683721889730,
-      "id": 3
-    },
-    {
-      "orderId": 2,
-      "productId": 4,
-      "name": "Samsung Galaxy S23 Plus",
-      "price": 23000000,
-      "quantity": 2,
-      "createdAt": 1683721889812,
-      "updatedAt": 1683721889812,
-      "id": 4
-    },
-    {
-      "orderId": 6,
-      "productId": 1,
-      "name": "Áo Polo Nữ Coolmax Phối Bo Siêu Mát",
-      "price": 299000,
-      "quantity": 2,
-      "createdAt": 1683976646325,
-      "updatedAt": 1683976646325,
-      "id": 5
-    },
-    {
-      "orderId": 6,
-      "productId": 1,
-      "name": "Áo Polo Nữ Coolmax Phối Bo Siêu Mát",
-      "price": 299000,
-      "quantity": 1,
-      "createdAt": 1683976646378,
-      "updatedAt": 1683976646379,
-      "id": 6
-    },
-    {
-      "orderId": 7,
-      "productId": 1,
-      "name": "Áo Polo Nữ Coolmax Phối Bo Siêu Mát",
-      "price": 299000,
-      "quantity": 2,
-      "createdAt": 1683976764978,
-      "updatedAt": 1683976764978,
-      "id": 7
-    },
-    {
-      "orderId": 7,
-      "productId": 1,
-      "name": "Áo Polo Nữ Coolmax Phối Bo Siêu Mát",
-      "price": 299000,
-      "quantity": 1,
-      "createdAt": 1683976765024,
-      "updatedAt": 1683976765024,
-      "id": 8
-    },
-    {
-      "orderId": 8,
-      "productId": 1,
-      "name": "Áo Polo Nữ Coolmax Phối Bo Siêu Mát",
-      "price": 299000,
-      "quantity": 2,
-      "createdAt": 1683976784697,
-      "updatedAt": 1683976784697,
-      "id": 9
-    },
-    {
-      "orderId": 8,
-      "productId": 1,
-      "name": "Áo Polo Nữ Coolmax Phối Bo Siêu Mát",
-      "price": 299000,
-      "quantity": 1,
-      "createdAt": 1683976784742,
-      "updatedAt": 1683976784742,
-      "id": 10
-    },
-    {
-      "orderId": 9,
-      "productId": 1,
-      "name": "Áo Polo Nữ Coolmax Phối Bo Siêu Mát",
-      "price": 299000,
-      "quantity": 2,
-      "createdAt": 1683980774225,
-      "updatedAt": 1683980774225,
-      "id": 11
-    },
-    {
-      "orderId": 9,
-      "productId": 1,
-      "name": "Áo Polo Nữ Coolmax Phối Bo Siêu Mát",
-      "price": 299000,
-      "quantity": 1,
-      "createdAt": 1683980774288,
-      "updatedAt": 1683980774288,
-      "id": 12
     }
   ],
   "cities": [

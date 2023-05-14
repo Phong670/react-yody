@@ -210,6 +210,10 @@ function ProductDetail() {
                 className="bg-[white] border-none rounded-none "
               >
                 <div className="">{productDetail.data.description}</div>
+                <img
+                  src="https://bizweb.dktcdn.net/thumb/large/100/438/408/products/ao-polo-nu-apn3700-vag-cvn5148-tra-8-yodyvn.jpg?v=1681279746000"
+                  alt=""
+                />
               </Panel>
             </Collapse>
           </div>

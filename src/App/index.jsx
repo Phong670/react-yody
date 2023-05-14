@@ -17,7 +17,7 @@ import Checkout from "../pages/user/Checkout";
 
 import SearchPage from "../pages/user/Search";
 
-import FooterPage from "../../src/layouts/UserLayout/Header";
+import FooterPage from "../../src/layouts/UserLayout/Footer";
 import UserLayout from "../layouts/UserLayout/";
 import DetailProductLayout from "../layouts/UserLayout/DetailProductLayout/";
 import ProductListLayout from "../layouts/UserLayout/ProductListLayout/";
@@ -41,10 +41,15 @@ function App() {
   }, [pathname]);
   return (
     <>
-      <HeaderPage />
       <Routes>
         <Route element={<UserLayout />}>
           <Route path={ROUTES.USER.HOME} element={<HomePage />} />
+          <Route path={ROUTES.USER.LOGIN} element={<LoginPage />} />
+          <Route path={ROUTES.USER.REGISTER} element={<RegisterPage />} />
+          <Route path={ROUTES.USER.CART} element={<CartPage />} />
+          <Route path={ROUTES.USER.ACCOUNT} element={<Orders />} />
+          <Route path={ROUTES.USER.CHECKOUT} element={<Checkout />} />
+          <Route path={ROUTES.USER.SEARCH} element={<SearchPage />} />
         </Route>
         <Route element={<DetailProductLayout />}>
           <Route
@@ -55,16 +60,7 @@ function App() {
         <Route element={<ProductListLayout />}>
           <Route path={ROUTES.USER.PRODUCT_LIST} element={<ProductList />} />
         </Route>
-        <Route path={ROUTES.USER.LOGIN} element={<LoginPage />} />
-        <Route path={ROUTES.USER.REGISTER} element={<RegisterPage />} />
-        <Route path={ROUTES.USER.CART} element={<CartPage />} />
-        <Route path={ROUTES.USER.ACCOUNT} element={<Orders />} />
-        <Route path={ROUTES.USER.CHECKOUT} element={<Checkout />} />
-
-        <Route path={ROUTES.USER.SEARCH} element={<SearchPage />} />
       </Routes>
-
-      <FooterPage />
     </>
   );
 }
