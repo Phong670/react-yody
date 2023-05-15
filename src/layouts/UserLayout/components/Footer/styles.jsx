@@ -12,7 +12,8 @@ export const FooterWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  width: 1200px;
+  width: 100%;
+  max-width: 1200px;
 
   @media (max-width: 900px) {
     display: flex;

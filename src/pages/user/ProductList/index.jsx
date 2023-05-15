@@ -17,7 +17,7 @@ import axios from "axios";
 import { AiOutlineClose, AiOutlineUp, AiOutlineDown } from "react-icons/ai";
 import { Select, Col, Button, Slider, Drawer, Space } from "antd";
 import { FiFilter } from "react-icons/fi";
-
+let genderClone = null;
 function ProductList() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -39,9 +39,9 @@ function ProductList() {
   const [filterParams, setFilterParams] = useState({
     categoryId: [],
     sizeId: [],
-    subCategoryId: gender,
     page: 1,
     limit: PRODUCT_LIMIT,
+    subCategoryId: gender,
   });
 
   //useEffect
@@ -87,7 +87,7 @@ function ProductList() {
   let categoryIdTemp = [...filterParams.categoryId];
   let sizeIdTemp = [...filterParams.sizeId];
   let clone = [...listYourChoice];
-  let genderClone = [];
+
   let activeButtonClone = 0;
   //ant function
   const showDrawer = () => {
@@ -188,8 +188,10 @@ function ProductList() {
     });
   };
 
-  const removeAll = () => {
+  const removeAll = (subCategoryIdRemove) => {
+    console.log("subCategoryIdRemove", subCategoryIdRemove);
     clone = [];
+    genderClone = subCategoryIdRemove;
     setListYourChoice(clone);
     categoryIdTemp = [];
     sizeIdTemp = [];
@@ -199,7 +201,7 @@ function ProductList() {
       sizeId: sizeIdTemp,
       page: 1,
       limit: PRODUCT_LIMIT,
-      subCategoryId: genderClone,
+      subCategoryId: subCategoryIdRemove,
     });
   };
   console.log("render lai");
@@ -353,7 +355,7 @@ function ProductList() {
           Bạn chọn:
           <div
             className="hover:text-[orange] cursor-pointer"
-            onClick={() => removeAll()}
+            onClick={() => removeAll(gender)}
           >
             Bỏ hết
           </div>
@@ -387,8 +389,11 @@ function ProductList() {
       </div>
     );
   };
+  console.log("render lai button actione", activeButton, activeButtonClone);
+  console.log("render lai button genderClone", subCategoryId, genderClone);
+
   return (
-    <div className="w-full p-[8px] flex flex-nowrap flex-col justify-between lg:mt-[125px] xxs:mt-[70px]">
+    <div className="max-w-[1200px] p-[8px] flex flex-nowrap flex-col justify-between lg:mt-[125px] xxs:mt-[70px]">
       <div className="w-full flex justify-center mb-4">
         {subCategoryIdArray.length > 1 ? (
           <>
@@ -437,11 +442,20 @@ function ProductList() {
                 genderClone = parseInt(subCategoryIdArray[0]);
                 setFilterParams({
                   ...filterParams,
+
                   subCategoryId: genderClone,
                 });
-                removeAll();
+                removeAll(genderClone);
                 activeButtonClone = 1;
                 setActiveButton(activeButtonClone);
+                console.log(
+                  "🚀 ~ file: index.jsx:446 ~ ProductList ~ activeButtonClone:",
+                  activeButtonClone
+                );
+                console.log(
+                  "🚀 ~ file: index.jsx:439 ~ ProductList ~ genderClone:",
+                  genderClone
+                );
               }}
               className={`p-2 w-[80px] rounded-md hover:bg-[#fcaf17] ${
                 activeButton ? "bg-[#fcaf17]" : "bg-[#ffff]"
@@ -459,9 +473,17 @@ function ProductList() {
                   subCategoryId: genderClone,
                 });
 
-                removeAll();
+                removeAll(genderClone);
                 activeButtonClone = 0;
+                console.log(
+                  "🚀 ~ file: index.jsx:470 ~ ProductList ~ activeButtonClone:",
+                  activeButtonClone
+                );
                 setActiveButton(activeButtonClone);
+                console.log(
+                  "🚀 ~ file: index.jsx:458 ~ ProductList ~ genderClone:",
+                  genderClone
+                );
               }}
               className={`p-2 w-[80px] rounded-md hover:bg-[#fcaf17] ${
                 activeButton ? "bg-[#ffff]" : "bg-[#fcaf17]"
@@ -517,7 +539,7 @@ function ProductList() {
               Bạn chọn:
               <div
                 className="hover:text-[orange] cursor-pointer"
-                onClick={() => removeAll()}
+                onClick={() => removeAll(genderClone)}
               >
                 Bỏ hết
               </div>

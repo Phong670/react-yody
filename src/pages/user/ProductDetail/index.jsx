@@ -31,7 +31,6 @@ function ProductDetail() {
   const { productList, productDetail } = useSelector((state) => state.product);
   const { sendReview } = useSelector((state) => state.review);
   const { listReview } = useSelector((state) => state.review);
-
   const { oneAddCard } = useSelector((state) => state.cart);
   const [notiAddCartData, setNotiAddCartData] = useState({});
   const [isOpen, setIsOpen] = useState(null);

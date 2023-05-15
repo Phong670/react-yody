@@ -52,7 +52,7 @@ function ProductHome({ subCategoryId }) {
         keyboard={true}
         allowSlidePrev={false}
         modules={[Navigation, Mousewheel, Keyboard]}
-        className="px-[200px]"
+        className="px-[200px] swiperHomeProduct"
         breakpoints={{
           300: {
             slidesPerView: 4,

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Button, Form, Input } from "antd";
 export const LoginWrapper = styled.div`
+  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;

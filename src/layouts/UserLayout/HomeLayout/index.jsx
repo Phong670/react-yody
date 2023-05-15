@@ -1,10 +1,10 @@
 import { Outlet } from "react-router-dom";
-import Carousel from "./Carousel";
-import Collection from "./SectionCollection";
-import Promotion from "./SectionPromotion";
-import SectionMenu from "./SectionMenu";
-import HeaderPage from "../UserLayout/Header";
-import FooterPage from "../UserLayout/Footer";
+import Carousel from "../components/Carousel";
+import Collection from "../components/SectionCollection";
+import Promotion from "../components/SectionPromotion";
+import SectionMenu from "../components/SectionMenu";
+import HeaderPage from "../components/Header";
+import FooterPage from "../components/Footer";
 
 import * as S from "./styles";
 

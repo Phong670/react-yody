@@ -8,7 +8,7 @@ import { Pagination, Navigation, Autoplay } from "swiper";
 function SectionCollection() {
   return (
     <>
-      <S.wrapperCollection className="max-w-full xxs:hidden sm:block sm:px-2 xl:px-0">
+      <S.wrapperCollection className="max-w-[1200px] xxs:hidden sm:block sm:px-2 xl:px-0">
         <S.Title className="mt-6 xxs:text-[16px]">BỘ SƯU TẬP</S.Title>
         <S.ImageContainer className=" sm:flex justify-between items-center sm:flex-row xxs:flex-col gap-4  ">
           <S.Img

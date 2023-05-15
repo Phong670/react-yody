@@ -110,15 +110,15 @@ function Checkout() {
   };
 
   return (
-    <div className="mt-[100px] xl:max-w-[1200px] xxs:w-full  grid lg:grid-cols-3 xxs:grid-cols-1 gap-4 xxs:px-4 lg:px-0">
-      <div className="lg:col-span-2  flex flex-wrap justify-center">
-        <div className="w-full flex justify-center pb-2">
+    <div className="mt-[0px] xl:max-w-[1200px] xxs:w-full  grid lg:grid-cols-3 xxs:grid-cols-1 gap-4 xxs:px-4 lg:px-0">
+      <div className="lg:col-span-2 h-auto  flex flex-wrap justify-center content-start my-4">
+        <div className="w-full h-[80px]  flex justify-center pb-2 mb-2">
           <img
             src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/checkout_logo.png?1683881952485"
             alt=""
           />
         </div>
-        <div className="w-full bg-[#e7e8fc] p-4 my-4">
+        <div className="w-full xxs:block lg:hidden bg-[#e7e8fc] p-4 my-4">
           <div className="pb-3 border-b-[1px] border-solid border-[white] ">
             <h4 className="text-[20px] font-bold">
               Đơn hàng ({cartList.data.length} sản phẩm){" "}
@@ -377,7 +377,7 @@ function Checkout() {
               <button
                 form="checkoutForm"
                 // key="submit"
-                className="bg-[orange] w-[40%] h-[48px] text-[white] rounded-[4px]"
+                className="bg-[orange] w-[40%] py-2 text-[white] rounded-[4px]"
                 onClick={() => {
                   checkoutForm.onFinish();
                   console.log(123);
@@ -389,7 +389,7 @@ function Checkout() {
           </div>
         </div>
       </div>
-      <div className="lg:block xxs:hidden lg:col-span-1 bg-[#e7e8fc] p-4">
+      <div className="lg:block xxs:hidden h-[100vh] lg:col-span-1 bg-[#e7e8fc] p-4">
         <div className="pb-3 border-b-[1px] border-solid border-[white] ">
           <h4 className="text-[20px] font-bold">
             Đơn hàng ({cartList.data.length} sản phẩm){" "}
@@ -428,7 +428,7 @@ function Checkout() {
             <button
               form="checkoutForm"
               // key="submit"
-              className="bg-[orange] w-[40%] h-[48px] text-[white] rounded-[4px]"
+              className="bg-[orange] w-[40%] py-2 text-[white] rounded-[4px]"
               onClick={() => {
                 checkoutForm.onFinish();
                 console.log(123);

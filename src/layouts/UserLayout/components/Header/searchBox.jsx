@@ -1,10 +1,10 @@
 import { Fragment, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { getProductListSearchAction } from "../../../../src/redux/actions";
+import { getProductListSearchAction } from "../../../../redux/actions";
 import { useMemo } from "react";
 import { Link, generatePath, useNavigate } from "react-router-dom";
-import { ROUTES } from "../../../constants/routes";
+import { ROUTES } from "../../../../constants/routes";
 import { useState } from "react";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";

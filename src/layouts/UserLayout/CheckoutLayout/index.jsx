@@ -4,16 +4,14 @@ import FooterPage from "../components/Footer";
 
 import * as S from "./styles";
 
-function ProductListLayout() {
+function CheckoutLayout() {
   return (
     <S.wrapperMain>
-      <HeaderPage />
       <S.MainWrapper>
         <Outlet />
       </S.MainWrapper>
-      <FooterPage />
     </S.wrapperMain>
   );
 }
 
-export default ProductListLayout;
+export default CheckoutLayout;

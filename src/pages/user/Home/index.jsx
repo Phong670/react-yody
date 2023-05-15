@@ -17,7 +17,7 @@ function HomeUser(props) {
   const navigate = useNavigate();
 
   return (
-    <>
+    <div className="w-full hidden">
       <div className="p-2">
         <div className="flex justify-between mb-2">
           <div
@@ -57,7 +57,7 @@ function HomeUser(props) {
             alt=""
           />
         </div>
-        <div className="flex flex-row justify-start  w-[1200px]">
+        <div className="flex flex-row justify-start  w-full">
           <div className="w-[180px] h-[360px] xxs:hidden lg:block">
             <img
               className="w-full, h-full "
@@ -65,7 +65,7 @@ function HomeUser(props) {
               alt=""
             />
           </div>
-          <ProductHome subCategoryId={[5, 1]} className="w-[1020px]" />
+          <ProductHome subCategoryId={[5, 1]} />
         </div>
       </div>
       <div>
@@ -98,7 +98,7 @@ function HomeUser(props) {
             Xem thêm <AiOutlineRight className="mt-[5px] ml-2" />
           </div>
         </div>
-        <div className="flex flex-row justify-end  w-[1200px]">
+        <div className="flex flex-row justify-end  w-full">
           <div className="w-[180px] h-[360px]">
             <img
               className="w-full, h-full "
@@ -106,7 +106,7 @@ function HomeUser(props) {
               alt=""
             />
           </div>
-          <ProductHome subCategoryId={[6, 2]} className="w-[1020px]" />
+          <ProductHome subCategoryId={[6, 2]} />
         </div>
       </div>
       <div>
@@ -140,7 +140,7 @@ function HomeUser(props) {
           </div>
         </div>
 
-        <div className="flex flex-row justify-end  w-[1200px]">
+        <div className="flex flex-row justify-end  w-full">
           <div className="w-[180px] h-[360px]">
             <img
               className="w-full, h-full "
@@ -148,10 +148,10 @@ function HomeUser(props) {
               alt=""
             />
           </div>
-          <ProductHome subCategoryId={[8, 3]} className="w-[1020px]" />
+          <ProductHome subCategoryId={[8, 3]} />
         </div>
       </div>
-    </>
+    </div>
   );
 }
 export default HomeUser;

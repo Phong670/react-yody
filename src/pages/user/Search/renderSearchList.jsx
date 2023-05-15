@@ -29,7 +29,7 @@ const RenderSearchList = ({ productList }) => {
   };
 
   return (
-    <div className="max-w-full flex-wrap justify-center px-[8px] -z-0 grid col-span-4 gap-1 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-3 xs:grid-cols-2">
+    <div className="max-w-full flex-wrap justify-center px-[8px] -z-0 grid  gap-1 xl:grid-cols-5 lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2">
       {renderListCart()}
     </div>
   );

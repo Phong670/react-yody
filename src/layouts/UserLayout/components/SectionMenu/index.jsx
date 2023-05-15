@@ -2,7 +2,7 @@ import * as S from "./styles";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import { Link, generatePath, useNavigate } from "react-router-dom";
-import { ROUTES } from "../../../constants/routes";
+import { ROUTES } from "../../../../constants/routes";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -82,7 +82,7 @@ function CarouselMenuSection() {
     });
   };
   return (
-    <div className="w-full flex flex-col mt-2">
+    <div className="w-full max-w-[1200px] flex flex-col mt-2">
       <div className="w-full flex justify-center gap-4">
         <div
           className={`lg:w-[220px] xxs:w-[100px] h-[30px] sm:h-[64px] border-b-2 flex justify-center items-center sm:text-[20px] text-[16px] 

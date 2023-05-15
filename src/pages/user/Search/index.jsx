@@ -40,7 +40,7 @@ function Search() {
     );
   }, [searchKey]);
   return (
-    <div className="lg:min-h-[400px] flex justify-start items-center flex-wrap flex-col lg:mt-[125px] xxs:mt-[80px]">
+    <div className="max-w-[1200px] lg:min-h-[400px] flex justify-start items-center flex-wrap flex-col lg:mt-[125px] xxs:mt-[80px]">
       <div className="flex gap-2">
         <p
           className="cursor-pointer hover:text-[orange]"

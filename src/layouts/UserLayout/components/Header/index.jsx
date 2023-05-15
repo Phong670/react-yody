@@ -1,5 +1,5 @@
 import * as S from "./styles";
-import { getProductListSearchAction } from "../../../../src/redux/actions";
+import { getProductListSearchAction } from "../../../../redux/actions";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Link, generatePath, useNavigate } from "react-router-dom";
@@ -24,10 +24,10 @@ import { AiOutlineMenu, AiOutlineArrowLeft } from "react-icons/ai";
 import {
   deleteCartItemAction,
   updateCartItemAction,
-} from "../../../../src/redux/actions";
-import { logoutAction } from "../../../../src/redux/actions";
+} from "../../../../redux/actions";
+import { logoutAction } from "../../../../redux/actions";
 import SearchBox from "./searchBox";
-import { ROUTES } from "../../../../src/constants/routes";
+import { ROUTES } from "../../../../constants/routes";
 
 //function ant menu
 function getItem(label, key, icon, children, type) {
@@ -506,10 +506,10 @@ function Header() {
     setOpen(false);
   };
 
-  const renderOneProductAddCart = () => {
+  const renderOneProductAddCartDesktop = () => {
     return (
       <S.BoxAddCart
-        className={`w-[300px] fixed  ${
+        className={`w-[300px] fixed   ${
           isOpen ? "visible opacity-100" : "invisible opacity-0"
         }  rounded-md p-3   z-10  flex flex-col items-center justify-center flex-nowrap`}
       >
@@ -547,7 +547,46 @@ function Header() {
       </S.BoxAddCart>
     );
   };
+  const renderOneProductAddCartMobile = () => {
+    return (
+      <S.BoxAddCart
+        className={`xxs:w-[220px] fixed   ${
+          !isOpen ? "visible opacity-100" : "invisible opacity-0"
+        }  rounded-md p-1   z-10  flex flex-col items-center justify-center flex-nowrap`}
+      >
+        <div className="w-full p-2 pb-1 mt-[-10px] text-[14px]  flex justify-center border-b-[0.8px] border-[#d9d9d9] ">
+          Đã thêm vào giỏ hàng
+        </div>
 
+        <div className="w-full grid grid-cols-3 gap-2 mb-2 text-[14px] ">
+          <img
+            className="w-[80px] col-span-1 rounded-[4px] mt-[4px]"
+            src={oneAddCard[0]?.image}
+            alt="anh "
+          />
+          <div className="w-[100%] col-span-2 flex flex-wrap col justify-between  align-content-between ml-[5px]">
+            <div className="hover:text-[orange] w-full text-[12px]">
+              {oneAddCard[0]?.title}
+            </div>
+            <div className="flex justify-center text-[orange]  text-[12px]">
+              {oneAddCard[0]?.price?.toLocaleString()}đ
+            </div>
+            <div className="w-full">Size: {oneAddCard[0]?.size}</div>
+            <div className="flex w-full ">
+              <div className="flex w-full  gap-0"></div>
+            </div>
+          </div>
+        </div>
+
+        <Link
+          to={generatePath(ROUTES.USER.CART)}
+          className="w-[100%] flex justify-center rounded-md p-1 bg-[orange] text-[14px]"
+        >
+          Xem giỏ hàng
+        </Link>
+      </S.BoxAddCart>
+    );
+  };
   console.log("render lai");
   return (
     <S.Header className="fixed top-[0px] z-10 ">
@@ -709,7 +748,7 @@ function Header() {
               </Badge>
               <p className="mr-10 text-[16px]">Giỏ Hàng</p>
               <div className="absolute top-[40px] right-[250px]  z-[99]">
-                {renderOneProductAddCart()}
+                {renderOneProductAddCartDesktop()}
               </div>
               <div
                 className={` ${
@@ -954,8 +993,11 @@ function Header() {
             className="mr-2 flex justify-center gap-2 z-1"
           >
             <Badge count={cartList.data.length} size="small">
-              <BsCart3 className="text-[24px]" />
+              <BsCart3 className="text-[24px] relative" />
             </Badge>
+            <div className="absolute top-[54px] right-[240px]  z-[99]">
+              {renderOneProductAddCartMobile()}
+            </div>
           </Link>
         </div>
       </div>
