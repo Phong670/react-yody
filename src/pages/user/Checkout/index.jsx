@@ -20,6 +20,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { Button, Form, Input, Badge, Radio, Space } from "antd";
 import Select from "react-select";
 import { clearFields } from "redux-form";
+import { parse } from "querystring";
 
 // import { values } from "json-server-auth";
 
@@ -66,6 +67,7 @@ function Checkout() {
   const handleSubmitCheckoutForm = (values) => {
     console.log("00000000000000000000000000000000000000000000");
     console.log(values);
+
     dispatch(
       orderProductAction({
         data: {
@@ -79,13 +81,29 @@ function Checkout() {
         callback: () => {},
       })
     );
+    navigate(
+      { pathname: generatePath(ROUTES.USER.THANKYOU) },
+
+      {
+        state: {
+          data: {
+            ...values,
+            userId: userInfo.data.id,
+            totalPrice: total,
+            status: "Đang xử lý",
+            costShip: total > 500000 ? 0 : 20000,
+          },
+          products: cartList,
+        },
+      }
+    );
   };
   const renderCartList = () => {
     return cartList.data.map((item, index) => {
       return (
         <div
           key={index}
-          className="flex flex-nowrap py-3 border-b-[1px] border-solid border-[white] gap-2"
+          className=" flex flex-nowrap py-3 border-b-[1px] border-solid border-[white] gap-2"
         >
           <Badge count={item.quantity} size="default">
             <div className="bg-[white] flex justify-center rounded-[4px] overflow-hidden">
@@ -110,10 +128,16 @@ function Checkout() {
   };
 
   return (
-    <div className="mt-[0px] xl:max-w-[1200px] xxs:w-full  grid lg:grid-cols-3 xxs:grid-cols-1 gap-4 xxs:px-4 lg:px-0">
+    <div className="mt-[0px] xl:min-w-[1200px] xxs:w-full  grid lg:grid-cols-3 xxs:grid-cols-1 gap-4 xxs:px-4 lg:px-0">
       <div className="lg:col-span-2 h-auto  flex flex-wrap justify-center content-start my-4">
         <div className="w-full h-[80px]  flex justify-center pb-2 mb-2">
           <img
+            className="cursor-pointer"
+            onClick={() => {
+              navigate({
+                pathname: generatePath(ROUTES.USER.HOME),
+              });
+            }}
             src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/checkout_logo.png?1683881952485"
             alt=""
           />
@@ -133,7 +157,7 @@ function Checkout() {
 
             <div className="flex justify-between w-full  ">
               <div>Phí vận chuển</div>
-              <div> {total > 500000 ? "Miễn phí ship" : "20.000đ"}</div>
+              <div> {total > 500000 ? "Miễn phí vận chuyển" : "20.000đ"}</div>
             </div>
           </div>
 
@@ -331,7 +355,7 @@ function Checkout() {
               </div>
               <div className="flex justify-between mt-3 p-3 border-[1px]  border-[#cecdcd] rounded-[4px]">
                 <div>Phí vận chuyển:</div>
-                <div> {total > 500000 ? "Miễn phí ship" : "20.000đ"}</div>
+                <div> {total > 500000 ? "Miễn phí vận chuyển" : "20.000đ"}</div>
               </div>
             </div>
             <div className="mt-4">
@@ -389,13 +413,13 @@ function Checkout() {
           </div>
         </div>
       </div>
-      <div className="lg:block xxs:hidden h-[100vh] lg:col-span-1 bg-[#e7e8fc] p-4">
+      <div className=" lg:block xxs:hidden h-[100vh] w-[5] bg-[#e7e8fc] p-4">
         <div className="pb-3 border-b-[1px] border-solid border-[white] ">
           <h4 className="text-[20px] font-bold">
             Đơn hàng ({cartList.data.length} sản phẩm){" "}
           </h4>
         </div>
-        <>{renderCartList()}</>
+        <div className="scroll overflow-auto h-[50%]">{renderCartList()}</div>
         <div className="w-full py-3 border-b-[1px] border-solid border-[white] flex flex-wrap gap-4">
           <div className="flex justify-between w-full">
             <div>Tạm tính</div>
@@ -403,8 +427,8 @@ function Checkout() {
           </div>
 
           <div className="flex justify-between w-full  ">
-            <div>Phí vận chuển</div>
-            <div> {total > 500000 ? "Miễn phí ship" : "20.000đ"}</div>
+            <div>Phí vận chuyển</div>
+            <div> {total > 500000 ? "Miễn phí vận chuyển" : "20.000đ"}</div>
           </div>
         </div>
 

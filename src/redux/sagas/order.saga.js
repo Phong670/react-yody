@@ -11,17 +11,15 @@ function* orderProductSaga(action) {
   );
   try {
     const result = yield axios.post("http://localhost:4000/orders", data);
-    console.log(
-      "🚀 ~ file: order.saga.js:10 ~ function*orderProductSaga ~ result:",
-      result
-    );
+
     for (let i = 0; i < products.data.length; i++) {
-      console.log("oiiiiiii", i);
       yield axios.post("http://localhost:4000/orderDetails", {
         orderId: result.data.id,
         productId: products.data[i].id,
         name: products.data[i].title,
         price: products.data[i].price,
+        image: products.data[i].image,
+        size: products.data[i].size,
         quantity: products.data[i].quantity,
       });
     }

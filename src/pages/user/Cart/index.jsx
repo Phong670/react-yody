@@ -202,69 +202,73 @@ function Cart() {
 
   const windowWidth = useRef(window.innerWidth);
   console.log("width: ", windowWidth.current);
-  return cartList.data.length > 0 ? (
-    <div className="max-w-[1200px] md:w-[680px] lg:w-[900px] xl:w-full lg:mt-[105px] xxs:mt-[50px] lg:grid-cols-1 grid xl:grid-cols-3 gap-4 lg:p-4">
-      <div className="xl:col-span-2 bg-[white] p-4">
-        <div className="w-full  mb-4 text-[18px] flex flex-nowrap gap-2">
-          Giỏ hàng{" "}
-          <p className="ml-3 text-[#7A7A9D] ">
-            ({cartList.data.length}) sản phẩm
-          </p>
+  return (
+    <div className="w-[100vw] flex justify-center content-center bg-[#f8f8f8]">
+      {cartList.data.length > 0 ? (
+        <div className="max-w-[1200px] md:w-[680px] lg:w-[900px] xl:w-full lg:mt-[85px] lg:mb-4 xxs:mt-[0px] lg:grid-cols-1 grid xl:grid-cols-3 gap-4 ">
+          <div className="xl:col-span-2 bg-[white] p-4">
+            <div className="w-full  mb-4 text-[18px] flex flex-nowrap gap-2">
+              Giỏ hàng{" "}
+              <p className="ml-3 text-[#7A7A9D] ">
+                ({cartList.data.length}) sản phẩm
+              </p>
+            </div>
+            <div className="w-full  grid-cols-6 gap-4 mb-2 xxs:hidden lg:grid">
+              <div className="col-span-3">Sản phẩm</div>
+              <div className="flex justify-center">Đơn giá</div>
+              <div className="flex justify-center">Số lượng</div>
+              <div className="flex justify-end">Tổng tiền</div>
+            </div>
+            <div className="w-full">
+              {screenSize.width > 620
+                ? renderListProductCartLaptop()
+                : renderListProductCartMobile()}
+            </div>
+          </div>
+          <div className="xl:col-span-1 mb-3 ">
+            <img
+              className="w-full"
+              src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/ui_banner_pc.jpg?1683278564918"
+              alt=""
+            />
+            <div className="p-2  bg-[white]">
+              <p className=" flex justify-between py-4">
+                Tổng đơn (tạm tính):
+                <p className="text-[20px]">{total.toLocaleString()}đ </p>
+              </p>
+              <button
+                className="bg-[orange] w-full h-[48px] text-[white] rounded-sm"
+                onClick={() => {
+                  navigate(ROUTES.USER.CHECKOUT);
+                }}
+              >
+                Đặt hàng ({cartList.data.length})
+              </button>
+            </div>
+          </div>
         </div>
-        <div className="w-full  grid-cols-6 gap-4 mb-2 xxs:hidden lg:grid">
-          <div className="col-span-3">Sản phẩm</div>
-          <div className="flex justify-center">Đơn giá</div>
-          <div className="flex justify-center">Số lượng</div>
-          <div className="flex justify-center">Tổng tiền</div>
-        </div>
-        <div className="w-full">
-          {screenSize.width > 620
-            ? renderListProductCartLaptop()
-            : renderListProductCartMobile()}
-        </div>
-      </div>
-      <div className="xl:col-span-1 ">
-        <img
-          className="w-full"
-          src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/ui_banner_pc.jpg?1683278564918"
-          alt=""
-        />
-        <div className="p-2 bg-[white]">
-          <p className=" flex justify-between">
-            Tổng đơn (tạm tính):
-            <p className="text-[20px]">{total.toLocaleString()}đ </p>
-          </p>
+      ) : (
+        <div className="w-full lg:mt-[100px] xxs:mt-[60px] flex flex-col items-center justify-center flex-1  min-h-[260px] mb-[20px]">
+          <img
+            className="w-[120px] h-[110px]"
+            src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/blank_cart.svg?1683303155312"
+            alt=""
+          />
+          <h6 className="text-[16px] my-2 text-[#7A7A9D]">
+            Giỏ hàng của bạn trống
+          </h6>
           <button
-            className="bg-[orange] w-full h-[48px] text-[white] rounded-sm"
+            className="text-[20px] text-[orange] flex justify-center items-center px-2 py-1  border-[orange] border-solid border-2 rounded-md hover:bg-[orange] hover:text-[white] "
             onClick={() => {
-              navigate(ROUTES.USER.CHECKOUT);
+              navigate({
+                pathname: generatePath(ROUTES.USER.HOME),
+              });
             }}
           >
-            Đặt hàng ({cartList.data.length})
+            Mua ngay
           </button>
         </div>
-      </div>
-    </div>
-  ) : (
-    <div className="w-full lg:mt-[100px] xxs:mt-[60px] flex flex-col items-center justify-center flex-1  min-h-[260px] mb-[20px]">
-      <img
-        className="w-[120px] h-[110px]"
-        src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/blank_cart.svg?1683303155312"
-        alt=""
-      />
-      <h6 className="text-[16px] my-2 text-[#7A7A9D]">
-        Giỏ hàng của bạn trống
-      </h6>
-      <button
-        className="text-[20px] text-[orange] flex justify-center items-center px-2 py-1  border-[orange] border-solid border-2 rounded-md hover:bg-[orange] hover:text-[white] "
-        onClick={() => {
-          navigate({
-            pathname: generatePath(ROUTES.USER.HOME),
-          });
-        }}
-      >
-        Mua ngay
-      </button>
+      )}
     </div>
   );
 }

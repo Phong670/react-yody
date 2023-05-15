@@ -81,7 +81,19 @@ function Orders() {
             </div>
             <div
               className="w-full flex justify-center text-[blue] my-2 cursor-pointer"
-              onClick={() => console.log(item)}
+              onClick={() => {
+                console.log(item);
+                navigate(
+                  {
+                    pathname: generatePath(ROUTES.USER.ORDERED_DETAIL),
+                  },
+                  {
+                    state: {
+                      data: { ...item },
+                    },
+                  }
+                );
+              }}
             >
               Xem chi tiết đơn hàng
             </div>
@@ -221,7 +233,16 @@ function Orders() {
               onRow={(record, rowIndex) => {
                 return {
                   onClick: (event) => {
-                    console.log(record);
+                    navigate(
+                      {
+                        pathname: generatePath(ROUTES.USER.ORDERED_DETAIL),
+                      },
+                      {
+                        state: {
+                          data: { ...record },
+                        },
+                      }
+                    );
                   }, // click row
                   onDoubleClick: (event) => {}, // double click row
                   onContextMenu: (event) => {}, // right button click row

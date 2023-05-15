@@ -413,15 +413,15 @@ function Header() {
     }
   };
 
-  const renderListProductCartMobile = () => {
+  const renderListProductCartMini = () => {
     return cartList.data?.map((item, index) => {
       return (
         <div
           key={index}
-          className="w-full grid grid-cols-5 gap-2 mb-4 text-[14px] "
+          className="w-full grid grid-cols-5 gap-2 mb-2 text-[14px] "
         >
           <img
-            className="w-[80px] col-span-1 rounded-[4px] mt-[4px]"
+            className="w-[80px] col-span-1  mt-[4px]"
             src={item.image}
             alt="anh "
           />
@@ -551,7 +551,7 @@ function Header() {
     return (
       <S.BoxAddCart
         className={`xxs:w-[220px] fixed   ${
-          !isOpen ? "visible opacity-100" : "invisible opacity-0"
+          isOpen ? "visible opacity-100" : "invisible opacity-0"
         }  rounded-md p-1   z-10  flex flex-col items-center justify-center flex-nowrap`}
       >
         <div className="w-full p-2 pb-1 mt-[-10px] text-[14px]  flex justify-center border-b-[0.8px] border-[#d9d9d9] ">
@@ -753,7 +753,7 @@ function Header() {
               <div
                 className={` ${
                   cartList?.data.length > 0 ? "group-hover:flex" : "hidden"
-                }   w-[477px] hidden  justify-center flex-col items-center bg-white absolute top-[40px] right-[-150px]`}
+                }   w-[477px] hidden  justify-center flex-col items-center bg-white absolute top-[40px] right-[-150px] drop-shadow-md`}
               >
                 <img
                   className="absolute top-[-10px] right-[240px]"
@@ -761,11 +761,11 @@ function Header() {
                   alt=""
                 />
                 <div>
-                  <div className="p-4 text-[24px] text-white bg-[orange] w-full flex justify-center border-b-[0.8px] border-[#D9D9D9]">
+                  <div className="p-2 text-[24px] text-white bg-[orange] w-full flex justify-center border-b-[0.8px] border-[#D9D9D9]">
                     Giỏ hàng của bạn
                   </div>
-                  <div className="scroll w-full p-4 max-h-[400px]  overflow-auto">
-                    {renderListProductCartMobile()}
+                  <div className="scroll w-full px-3 py-3 max-h-[400px]  overflow-auto">
+                    {renderListProductCartMini()}
                   </div>
                   <div className="w-full gap-2 p-4 flex justify-end text-[16px] border-y-[0.8px] border-[#D9D9D9]">
                     Tổng cộng đơn hàng:
@@ -784,7 +784,7 @@ function Header() {
               <div
                 className={`${
                   cartList?.data.length < 1 ? "group-hover:flex" : "hidden"
-                }  w-[400px] h-[200px] hidden justify-center flex-col items-center bg-white absolute top-[40px] right-[-125px]`}
+                }  w-[400px] h-[200px] hidden justify-center flex-col items-center bg-white absolute top-[40px] right-[-125px] drop-shadow-md`}
               >
                 <img
                   className="absolute top-[-10px] right-[200px]"

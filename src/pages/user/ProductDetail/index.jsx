@@ -178,11 +178,11 @@ function ProductDetail() {
   }, [isOpen]);
 
   return (
-    <div className="flex flex-wrap flex-col justify-center xl:w-[1200px] lg:mt-[50px] xxs:mt-[8px] relative">
+    <div className="flex flex-wrap flex-col justify-center xl:w-[1200px] lg:mt-[50px] xxs:mt-[-16px] relative p-3">
       {/* {renderOneProductAddCart} */}
       <div>{renderTitle}</div>
       <div className="flex my-4 h-auto xl:   xxs:justify-center lg:justify-between xxs:flex-wrap  ">
-        <div className="  xl:w-[750px]  xxs:w-full mb-3 overflow-auto ">
+        <div className="xl:w-[750px]  xxs:w-full mb-3 overflow-auto ">
           <div
             spinning={productDetail.load}
             className="flex justify-center flex-wrap w-full h-auto border-b-[1px] border-solid border-[#F2F2F2] pb-[24px]"

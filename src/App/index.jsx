@@ -12,8 +12,10 @@ import ProductList from "../pages/user/ProductList";
 import LoginPage from "../pages/Login";
 import RegisterPage from "../pages/Register";
 import CartPage from "../pages/user/Cart";
-import Orders from "../pages/user/Orders";
-import Checkout from "../pages/user/Checkout";
+import OrdersPage from "../pages/user/Orders";
+import CheckoutPage from "../pages/user/Checkout";
+import ThankyouOrderedPage from "../pages/user/ThankyouOrdered";
+import OrderedDetailPage from "../pages/user/OrderedDetail";
 
 import SearchPage from "../pages/user/Search";
 
@@ -52,7 +54,12 @@ function App() {
           <Route path={ROUTES.USER.LOGIN} element={<LoginPage />} />
           <Route path={ROUTES.USER.REGISTER} element={<RegisterPage />} />
           <Route path={ROUTES.USER.CART} element={<CartPage />} />
-          <Route path={ROUTES.USER.ACCOUNT} element={<Orders />} />
+          <Route path={ROUTES.USER.ACCOUNT} element={<OrdersPage />} />
+          <Route
+            path={ROUTES.USER.ORDERED_DETAIL}
+            element={<OrderedDetailPage />}
+          />
+
           <Route path={ROUTES.USER.SEARCH} element={<SearchPage />} />
           <Route
             path={ROUTES.USER.PRODUCT_DETAIL}
@@ -60,7 +67,11 @@ function App() {
           />
         </Route>
         <Route element={<CheckoutLayout />}>
-          <Route path={ROUTES.USER.CHECKOUT} element={<Checkout />} />
+          <Route path={ROUTES.USER.CHECKOUT} element={<CheckoutPage />} />
+          <Route
+            path={ROUTES.USER.THANKYOU}
+            element={<ThankyouOrderedPage />}
+          />
         </Route>
       </Routes>
     </>
