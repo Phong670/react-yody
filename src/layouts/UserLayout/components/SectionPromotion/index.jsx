@@ -2,7 +2,7 @@ import * as S from "./styles";
 
 function SectionPromotion() {
   return (
-    <S.wrapperSectionPromotion className="my-6">
+    <S.wrapperSectionPromotion className="my-6 xxs:order-3 lg:order-2">
       <S.ImageContainer>
         <S.TestPromotion className="flex justify-center align-items-center">
           ĐẶC BIỆT

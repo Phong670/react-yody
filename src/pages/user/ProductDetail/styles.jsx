@@ -51,3 +51,9 @@ export const BoxAddCart = styled.div`
   background: linear-gradient(180deg, #feecc7 0%, #fff 28.93%);
   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.16);
 `;
+export const AddToCardDiv = styled.div`
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  right: 0;
+`;

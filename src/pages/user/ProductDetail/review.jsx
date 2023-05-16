@@ -171,7 +171,7 @@ function ReviewProduct({ idProduct, title, dataTotalReview }) {
     <div className="flex flex-wrap flex-col justify-between w-full">
       {contextHolder}
       <h6 className="my-4"> ĐÁNH GIÁ</h6>
-      {listReview.data.length === 0 ? (
+      {listReview.total === 0 ? (
         <div className=" flex gap-4  justify-center flex-wrap bg-[#F2F2F2] p-3">
           <p className="w-full flex justify-center text-center text-[14px]">
             Hiện tại sản phẩm chưa có đánh giá nào, bạn hãy trở thành người đầu
@@ -369,7 +369,7 @@ function ReviewProduct({ idProduct, title, dataTotalReview }) {
               >
                 Xem thêm đánh giá
               </button>
-            ) : listReview.data.length === 4 ? (
+            ) : listReview.data.length < 5 ? (
               <></>
             ) : (
               <>

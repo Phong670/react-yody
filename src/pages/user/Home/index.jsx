@@ -17,14 +17,11 @@ function HomeUser(props) {
   const navigate = useNavigate();
 
   return (
-    <div className="w-full hidden">
-      <div className="p-2">
+    <div className="w-full  ">
+      <div className="p-2 w-full lg:border-none xxs:border-b-[6px] xxs:border-[#F2F3F7]">
         <div className="flex justify-between mb-2">
           <div
             className="cursor-pointer text-[#11006F] font-medium  text-[20px] hover:text-[red]"
-            to={generatePath(ROUTES.USER.PRODUCT_LIST, {
-              subCategoryId: [5, 1],
-            })}
             onClick={() => {
               navigate({
                 pathname: generatePath(ROUTES.USER.PRODUCT_LIST, {
@@ -51,30 +48,43 @@ function HomeUser(props) {
             Xem thêm <AiOutlineRight className="mt-[5px] ml-2" />
           </div>
         </div>
-        <div className="w-full lg:hidden xxs:flex">
+        <div className="w-full lg:hidden xxs:flex mb-2">
           <img
             src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/home_preivew_sanpham_2_image_mobile.jpg?1683278564918"
             alt=""
+            onClick={() => {
+              navigate({
+                pathname: generatePath(ROUTES.USER.PRODUCT_LIST, {
+                  subCategoryId: [5, 1],
+                }),
+              });
+            }}
           />
         </div>
-        <div className="flex flex-row justify-start  w-full">
-          <div className="w-[180px] h-[360px] xxs:hidden lg:block">
+        <div className=" w-full flex flex-row lg:justify-start xxs:justify-center flex-nowrap ">
+          <div className="w-[180px] h-[360px] xxs:hidden lg:block ">
             <img
               className="w-full, h-full "
               src="https://bizweb.dktcdn.net/thumb/large/100/438/408/products/cvn5270-den-6.jpg?v=1663386076000"
               alt=""
+              onClick={() => {
+                navigate({
+                  pathname: generatePath(ROUTES.USER.PRODUCT_LIST, {
+                    subCategoryId: [5, 1],
+                  }),
+                });
+              }}
             />
           </div>
-          <ProductHome subCategoryId={[5, 1]} />
+          <div className="flex  lg:w-[calc(100%-260px)] xxs:w-[100%] lg:ml-[50px]">
+            <ProductHome subCategoryId={[5, 1]} nameSwiper={"aoSwiper"} />
+          </div>
         </div>
       </div>
-      <div>
+      <div className="p-2 w-full lg:border-none xxs:border-b-[6px] xxs:border-[#F2F3F7]">
         <div className="flex justify-between mb-2">
           <div
             className="cursor-pointer text-[#11006F] font-medium  text-[20px] hover:text-[red]"
-            to={generatePath(ROUTES.USER.PRODUCT_LIST, {
-              subCategoryId: [5, 1],
-            })}
             onClick={() => {
               navigate({
                 pathname: generatePath(ROUTES.USER.PRODUCT_LIST, {
@@ -83,10 +93,12 @@ function HomeUser(props) {
               });
             }}
           >
-            QUẦN
+            Quần
           </div>
           <div
-            className="cursor-pointer flex flex-nowrap justify-center  align-content-center mr-[48px] text-[16px] hover:text-[red]"
+            className="cursor-pointer flex flex-nowrap justify-center  align-content-center 
+            lg:mr-[48px] text-[16px] hover:text-[red]
+            "
             onClick={() => {
               navigate({
                 pathname: generatePath(ROUTES.USER.PRODUCT_LIST, {
@@ -98,40 +110,61 @@ function HomeUser(props) {
             Xem thêm <AiOutlineRight className="mt-[5px] ml-2" />
           </div>
         </div>
-        <div className="flex flex-row justify-end  w-full">
-          <div className="w-[180px] h-[360px]">
-            <img
-              className="w-full, h-full "
-              src="https://bizweb.dktcdn.net/thumb/large/100/438/408/products/qam3190-nau-2131231.jpg?v=1678509267000"
-              alt=""
-            />
-          </div>
-          <ProductHome subCategoryId={[6, 2]} />
-        </div>
-      </div>
-      <div>
-        <div className="flex justify-between mb-2">
-          <div
-            className="cursor-pointer text-[#11006F] font-medium  text-[20px] hover:text-[red]"
-            to={generatePath(ROUTES.USER.PRODUCT_LIST, {
-              subCategoryId: [5, 1],
-            })}
+        <div className="w-full lg:hidden xxs:flex mb-2">
+          <img
+            src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/home_preivew_sanpham_5_image_mobile.jpg?1684217224299"
+            alt=""
             onClick={() => {
               navigate({
                 pathname: generatePath(ROUTES.USER.PRODUCT_LIST, {
-                  subCategoryId: [8, 3],
+                  subCategoryId: [6, 2],
+                }),
+              });
+            }}
+          />
+        </div>
+        <div className=" w-full flex flex-row lg:justify-start xxs:justify-center flex-nowrap ">
+          <div className="w-[180px] h-[360px] xxs:hidden lg:block ">
+            <img
+              className="w-full, h-full "
+              src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/home_preivew_sanpham_5_image_desktop.jpg?1684217224299"
+              alt=""
+              onClick={() => {
+                navigate({
+                  pathname: generatePath(ROUTES.USER.PRODUCT_LIST, {
+                    subCategoryId: [6, 2],
+                  }),
+                });
+              }}
+            />
+          </div>
+          <div className="flex  lg:w-[calc(100%-260px)] xxs:w-[100%] lg:ml-[50px]">
+            <ProductHome subCategoryId={[6, 2]} nameSwiper={"quanSwiper"} />
+          </div>
+        </div>
+      </div>
+      <div className="p-2 w-full lg:border-none xxs:border-b-[6px] xxs:border-[#F2F3F7]">
+        <div className="flex justify-between mb-2">
+          <div
+            className="cursor-pointer text-[#11006F] font-medium  text-[20px] hover:text-[red]"
+            onClick={() => {
+              navigate({
+                pathname: generatePath(ROUTES.USER.PRODUCT_LIST, {
+                  subCategoryId: [7, 3],
                 }),
               });
             }}
           >
-            ĐỒ THỂ THAO
+            Đồ thể thao
           </div>
           <div
-            className="cursor-pointer flex flex-nowrap justify-center  align-content-center mr-[48px] text-[16px] hover:text-[red]"
+            className="cursor-pointer flex flex-nowrap justify-center  align-content-center 
+            lg:mr-[48px] text-[16px] hover:text-[red]
+            "
             onClick={() => {
               navigate({
                 pathname: generatePath(ROUTES.USER.PRODUCT_LIST, {
-                  subCategoryId: [8, 3],
+                  subCategoryId: [7, 3],
                 }),
               });
             }}
@@ -139,16 +172,37 @@ function HomeUser(props) {
             Xem thêm <AiOutlineRight className="mt-[5px] ml-2" />
           </div>
         </div>
-
-        <div className="flex flex-row justify-end  w-full">
-          <div className="w-[180px] h-[360px]">
+        <div className="w-full lg:hidden xxs:flex mb-2">
+          <img
+            src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/home_preivew_sanpham_4_image_mobile.jpg?1684217224299"
+            alt=""
+            onClick={() => {
+              navigate({
+                pathname: generatePath(ROUTES.USER.PRODUCT_LIST, {
+                  subCategoryId: [7, 3],
+                }),
+              });
+            }}
+          />
+        </div>
+        <div className=" w-full flex flex-row lg:justify-start xxs:justify-center flex-nowrap ">
+          <div className="w-[180px] h-[360px] xxs:hidden lg:block ">
             <img
               className="w-full, h-full "
-              src="https://bizweb.dktcdn.net/thumb/large/100/438/408/products/san5034-den-17.jpg?v=1677139461000"
+              src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/home_preivew_sanpham_4_image_desktop.jpg?1684217224299"
               alt=""
+              onClick={() => {
+                navigate({
+                  pathname: generatePath(ROUTES.USER.PRODUCT_LIST, {
+                    subCategoryId: [7, 3],
+                  }),
+                });
+              }}
             />
           </div>
-          <ProductHome subCategoryId={[8, 3]} />
+          <div className="flex  lg:w-[calc(100%-260px)] xxs:w-[100%] lg:ml-[50px]">
+            <ProductHome subCategoryId={[7, 3]} nameSwiper={"theThaoSwiper"} />
+          </div>
         </div>
       </div>
     </div>

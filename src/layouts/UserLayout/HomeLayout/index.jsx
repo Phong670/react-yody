@@ -10,9 +10,9 @@ import * as S from "./styles";
 
 function UserLayout() {
   return (
-    <div>
+    <div className="w-full flex justify-center flex-wrap ">
+      <HeaderPage />
       <S.wrapperMain>
-        <HeaderPage />
         <Carousel />
         <Collection />
         <Promotion />
@@ -20,8 +20,8 @@ function UserLayout() {
         <S.UserLayoutWrapper>
           <Outlet />
         </S.UserLayoutWrapper>
-        <FooterPage />
       </S.wrapperMain>
+      <FooterPage />
     </div>
   );
 }

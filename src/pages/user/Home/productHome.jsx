@@ -8,8 +8,9 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { ROUTES } from "../../../constants/routes";
 import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper";
+import * as S from "./styles";
 
-function ProductHome({ subCategoryId }) {
+function ProductHome({ subCategoryId, nameSwiper }) {
   const [productData, setProductDress] = useState([]);
   const dispatch = useDispatch();
 
@@ -31,43 +32,87 @@ function ProductHome({ subCategoryId }) {
   const renderListCart = (productChild) => {
     return productChild.map((item, index) => {
       return (
-        <SwiperSlide>
-          <div>
-            <img src={item.image} alt="" />
-          </div>
-          <div>{item.title}</div>
-          <div>{item.price}</div>
+        <SwiperSlide className="productSwiperSlide">
+          <S.CustomLink
+            to={generatePath(ROUTES.USER.PRODUCT_DETAIL, { id: item.id })}
+          >
+            <S.Image src={item.image} alt="" />
+            <S.Info>
+              <S.Title className="w-full h-[38px]">{item.title}</S.Title>
+              <S.Price className="">{item.price.toLocaleString()}đ</S.Price>
+            </S.Info>
+          </S.CustomLink>
         </SwiperSlide>
       );
     });
   };
 
   return (
-    <>
+    <div className="flex  w-full  relative ">
       <Swiper
-        cssMode={true}
-        navigation={true}
-        pagination={true}
-        mousewheel={true}
-        keyboard={true}
-        allowSlidePrev={false}
-        modules={[Navigation, Mousewheel, Keyboard]}
-        className="px-[200px] swiperHomeProduct"
+        className={nameSwiper}
+        slidesPerView={4}
+        centeredSlides={false}
+        // slidesPerGroupSkip={1}
+        grabCursor={true}
+        keyboard={{
+          enabled: true,
+        }}
         breakpoints={{
-          300: {
+          1200: {
             slidesPerView: 4,
-            spaceBetween: 20,
+            slidesPerGroup: 4,
+            spaceBetween: 30,
             navigation: {
-              disabledClass: "swiper-button-disabled",
-              hiddenClass: "swiper-button-hidden",
-              navigationDisabledClass: "swiper-navigation-disabled",
+              nextEl: `.swiper-button-next-unique-${nameSwiper}`,
+              prevEl: `.swiper-button-prev-unique-${nameSwiper}`,
             },
           },
+          900: {
+            slidesPerView: 4,
+            slidesPerGroup: 4,
+            spaceBetween: 25,
+            navigation: false,
+            height: "auto",
+          },
+          300: {
+            slidesPerView: 3,
+            slidesPerGroup: 3,
+            spaceBetween: 14,
+            navigation: false,
+            height: "auto",
+          },
+          0: {
+            spaceBetween: 25,
+            navigation: false,
+          },
         }}
+        // scrollbar={true}
+
+        pagination={{
+          clickable: true,
+        }}
+        modules={[Keyboard, Navigation, Pagination]}
       >
         {renderListCart(productData)}
       </Swiper>
-    </>
+      <div
+        className={`swiper-button-prev-unique-${nameSwiper} xxs:hidden lg:block absolute left-[-30px] top-[50%]`}
+      >
+        <img
+          src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/icon-prev-danhmuc.svg"
+          alt=""
+        />
+      </div>
+      <div
+        className={`swiper-button-next-unique-${nameSwiper} xxs:hidden lg:block absolute right-[-30px] top-[50%]`}
+      >
+        <img
+          src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/icon-next-danhmuc.svg"
+          alt=""
+        />
+      </div>
+    </div>
   );
 }
 

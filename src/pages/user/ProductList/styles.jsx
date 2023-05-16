@@ -70,6 +70,9 @@ export const CustomLink = styled(Link)`
 export const Title = styled.h2`
   max-width: 100%;
   font-weight: 500;
+  &:hover {
+    color: #fcaf17;
+  }
   @media (max-width: 500px) {
     /* display: flex;
     flex-wrap: wrap; */
@@ -84,6 +87,7 @@ export const Price = styled.h4`
   height: 20px;
   font-size: 20px;
   font-weight: 650;
+  color: #cd151c !important;
 `;
 export const Transition = styled.div`
   display: block;

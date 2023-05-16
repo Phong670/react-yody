@@ -217,18 +217,18 @@ function ProductList() {
           return (
             <div
               key={item.id}
-              className={`px-[8px] text-[12px] py-2 mt-2 relative hover:cursor-pointer hover:bg-[white] hover:border-[1px] hover:border-[#fcaf17] rounded-md text-[#7A7A9D] 
-              ${
+              className={`px-[10px] text-[12px] py-[8px] mt-2 relative border-[1px] border-[#F2F2F2]
+              hover:cursor-pointer  hover:bg-[white] hover:border-[1px] hover:border-[#fcaf17] 
+              rounded-md text-[#7A7A9D] ${
                 categoryIdTemp.findIndex((a) => item.id === a) === -1
                   ? " bg-[#F2F2F2]"
-                  : " bg-[white] border-solid border-[1px] border-[#fcaf17]  after:h-[22px] after:rounded-tr-md after:w-[22px] after:content-[''] after:top-[-1px] after:right-[-1px] after:absolute after:bg-[url('https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/chose.svg')]"
+                  : " bg-[white] border-solid border-[1px]  border-[#fcaf17]  after:h-[22px] after:rounded-tr-md after:w-[22px] after:content-[''] after:top-[-1px] after:right-[-1px] after:absolute after:bg-[url('https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/chose.svg')]"
               } `}
               onClick={(e) => {
                 checkAddYourChoiceType(item.name, "catalogyId", item.id);
               }}
-              id={item.id}
             >
-              {item.name}, {item.id}
+              {item.name}
             </div>
           );
         })}
@@ -243,16 +243,18 @@ function ProductList() {
           return (
             <div
               key={item.id}
-              className={`px-[10px] text-[12px] py-[8px] mt-2 relative hover:cursor-pointer hover:px-[6px] hover:bg-[white] hover:border-[1px] hover:border-[#fcaf17] rounded-md text-[#7A7A9D] ${
+              className={`px-[10px] text-[12px] py-[8px] mt-2 relative border-[1px] border-[#F2F2F2]
+              hover:cursor-pointer  hover:bg-[white] hover:border-[1px] hover:border-[#fcaf17] 
+              rounded-md text-[#7A7A9D] ${
                 sizeIdTemp.findIndex((a) => item.id === a) === -1
                   ? " bg-[#F2F2F2]"
-                  : " bg-[white] border-solid border-[1px] px-[6px] border-[#fcaf17]  after:h-[22px] after:rounded-tr-md after:w-[22px] after:content-[''] after:top-[-1px] after:right-[-1px] after:absolute after:bg-[url('https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/chose.svg')]"
+                  : " bg-[white] border-solid border-[1px]  border-[#fcaf17]  after:h-[22px] after:rounded-tr-md after:w-[22px] after:content-[''] after:top-[-1px] after:right-[-1px] after:absolute after:bg-[url('https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/chose.svg')]"
               } `}
               onClick={() =>
                 checkAddYourChoiceSize(item.size, "sizeId", item.id)
               }
             >
-              {item.size}, {item.id}
+              {item.size}
             </div>
           );
         })}

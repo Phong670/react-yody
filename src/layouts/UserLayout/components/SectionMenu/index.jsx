@@ -82,35 +82,37 @@ function CarouselMenuSection() {
     });
   };
   return (
-    <div className="w-full max-w-[1200px] flex flex-col mt-2">
-      <div className="w-full flex justify-center gap-4">
-        <div
-          className={`lg:w-[220px] xxs:w-[100px] h-[30px] sm:h-[64px] border-b-2 flex justify-center items-center sm:text-[20px] text-[16px] 
+    <div className="sectionMenu w-full order-2">
+      <div className="w-full max-w-[1200px] flex flex-wrap items-center justify-center mt-2 mx-auto xxs:p-2 lg:p-0">
+        <div className="w-full flex justify-center gap-4">
+          <div
+            className={`lg:w-[220px] xxs:w-[100px] h-[30px] sm:h-[64px] border-b-2 flex justify-center items-center sm:text-[20px] text-[16px] 
         hover:text-[orange]  hover:cursor-pointer
           ${gender === 1 ? "text-[orange]" : "text-[#97A0AD]"}
         `}
-          onClick={() => {
-            setGender(1);
-          }}
-        >
-          Nữ
-        </div>
-        <div
-          className={`lg:w-[220px]  xxs:w-[100px] h-[30px] sm:h-[64px] border-b-2 flex justify-center items-center sm:text-[20px] text-[16px] 
+            onClick={() => {
+              setGender(1);
+            }}
+          >
+            Nữ
+          </div>
+          <div
+            className={`lg:w-[220px]  xxs:w-[100px] h-[30px] sm:h-[64px] border-b-2 flex justify-center items-center sm:text-[20px] text-[16px] 
        hover:text-[orange] hover:cursor-pointer
           ${gender === 0 ? "text-[orange]" : "text-[#97A0AD]"}
         `}
-          onClick={() => {
-            setGender(0);
-          }}
-        >
-          Nam
+            onClick={() => {
+              setGender(0);
+            }}
+          >
+            Nam
+          </div>
         </div>
-      </div>
-      <div className="w-full flex justify-center xxs:gap-3 sm:gap-5 mt-4">
-        {gender === 1
-          ? renderMenuList(menuListFemale)
-          : renderMenuList(menuListMale)}
+        <div className="w-full flex justify-center xxs:justify-between md:justify-center md:gap-[50px] mt-4">
+          {gender === 1
+            ? renderMenuList(menuListFemale)
+            : renderMenuList(menuListMale)}
+        </div>
       </div>
     </div>
   );

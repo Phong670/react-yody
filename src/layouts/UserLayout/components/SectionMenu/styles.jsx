@@ -16,7 +16,7 @@ export const Content = styled.div`
   min-width: 180px;
   margin-top: 4px;
   font-size: 16px;
-  font-family: "SVN-Gilroy";
+  font-family: "SVN-Gilroy", sans-serif;
   font-weight: 600;
   color: #11006f;
   padding: 0 10px;

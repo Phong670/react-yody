@@ -5,10 +5,11 @@ export const UserLayoutWrapper = styled.div`
   margin-top: 56px;
   width: 100%;
   max-width: 1200px;
+  order: 5;
 `;
 export const wrapperMain = styled.div`
   width: 100%;
-  /* max-width: 1200px; */
+  max-width: 1200px;
   overflow: hidden;
   display: flex;
   justify-content: center;

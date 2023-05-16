@@ -181,7 +181,7 @@ function ProductDetail() {
     <div className="flex flex-wrap flex-col justify-center xl:w-[1200px] lg:mt-[50px] xxs:mt-[-16px] relative p-3">
       {/* {renderOneProductAddCart} */}
       <div>{renderTitle}</div>
-      <div className="flex my-4 h-auto xl:   xxs:justify-center lg:justify-between xxs:flex-wrap  ">
+      <div className="flex my-4 h-auto   xxs:justify-center lg:justify-between xxs:flex-wrap  ">
         <div className="xl:w-[750px]  xxs:w-full mb-3 overflow-auto ">
           <div
             spinning={productDetail.load}
@@ -241,12 +241,12 @@ function ProductDetail() {
           </div>
         </div>
 
-        <div className="sticky h-[90vh] top-[150px] right-0 xxs:hidden xl:block ">
+        <S.AddToCardDiv className="h-[90vh]   ">
           <AddToCard
             productDetail={productDetail}
             dataTotalReview={dataTotalReview}
           />
-        </div>
+        </S.AddToCardDiv>
       </div>
 
       <p className="mt-4 w-full">GỢI Ý CHO BẠN</p>
