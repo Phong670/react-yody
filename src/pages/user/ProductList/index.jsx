@@ -18,7 +18,7 @@ import { AiOutlineClose, AiOutlineUp, AiOutlineDown } from "react-icons/ai";
 import { Select, Col, Button, Slider, Drawer, Space, Input } from "antd";
 import { FiFilter } from "react-icons/fi";
 let genderClone = null;
-let valuePriceClone = [0, 700];
+let valuePriceClone = [0, 1200000];
 function ProductList() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -31,12 +31,12 @@ function ProductList() {
   const [showTypeFilter, setShowTypeFilter] = useState(true);
   const [showSizeFilter, setShowSizeFilter] = useState(true);
   const [sortBox, setSortBox] = useState(false);
-  const [defaultValuePrice, setDefaultValuePrice] = useState([0, 700]);
+  const [defaultValuePrice, setDefaultValuePrice] = useState([0, 1200000]);
   const [activeButton, setActiveButton] = useState(1);
   const { productList } = useSelector((state) => state.product);
   const { categoryList } = useSelector((state) => state.category);
   const [sizeList, setSizeList] = useState([]);
-  const [valuePriceShow, setValuePriceShow] = useState([0, 700]);
+  const [valuePriceShow, setValuePriceShow] = useState([0, 1200000]);
 
   const [open, setOpen] = useState(false);
   const [filterParams, setFilterParams] = useState({
@@ -196,8 +196,8 @@ function ProductList() {
     clone = [];
     genderClone = subCategoryIdRemove;
     setListYourChoice(clone);
-    valuePriceClone = [0, 700];
-    setDefaultValuePrice([0, 700]);
+    valuePriceClone = [0, 1200000];
+    setDefaultValuePrice([0, 1200000]);
     categoryIdTemp = [];
     sizeIdTemp = [];
     setFilterParams({
@@ -284,18 +284,19 @@ function ProductList() {
         <div className="w-[90%] ">
           <div className="w-100% flex justify-between">
             <Input
-              className="w-[30%]"
-              value={valuePriceClone[0]}
+              className="w-[40%]"
+              value={valuePriceClone[0].toLocaleString()}
               disabled
             ></Input>
             <Input
-              className="w-[30%]"
-              value={valuePriceClone[1]}
+              className="w-[40%]"
+              value={valuePriceClone[1].toLocaleString()}
               disabled
             ></Input>
           </div>
 
           <Slider
+            step={10000}
             onAfterChange={(value) => {
               setDefaultValuePrice(value);
               setValuePriceShow(value);
@@ -310,7 +311,7 @@ function ProductList() {
               });
             }}
             min={0}
-            max={700}
+            max={1200000}
             range={{
               draggableTrack: false,
             }}
@@ -460,9 +461,9 @@ function ProductList() {
           <div className="w-full flex justify-center mb-[10px] text-[#fcaf17] text-[20px]">
             {parseInt(subCategoryIdArray[0]) === 5 && <p>ÁO</p>}
             {parseInt(subCategoryIdArray[0]) === 6 && <p>QUẦN</p>}
-            {parseInt(subCategoryIdArray[0]) === 8 && <p>ĐỒ THỂ THAO</p>}
+            {parseInt(subCategoryIdArray[0]) === 8 && <p>VÁY</p>}
             {parseInt(subCategoryIdArray[0]) === 4 && <p>PHỤ KIỆN</p>}
-            {parseInt(subCategoryIdArray[0]) === 7 && <p>VÁY</p>}
+            {parseInt(subCategoryIdArray[0]) === 7 && <p>ĐỒ THỂ THAO</p>}
           </div>
           <div className="w-full flex justify-center h-[80px] mb-[10px] p-[20px] bg-[#F8F8F8] gap-3">
             <button

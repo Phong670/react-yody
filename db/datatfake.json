@@ -1,0 +1,241 @@
+"genders": [
+    {
+      "id": 1,
+      "gender": "male"
+    },
+    {
+      "id": 2,
+      "gender": "male"
+    }
+  ],
+  "subCategories": [
+    {
+      "id": 1,
+      "genderId": 1,
+      "name": "Áo Nam"
+    },
+    {
+      "id": 2,
+      "genderId": 1,
+      "name": "Quần Nam"
+    },
+    {
+      "id": 3,
+      "genderId": 1,
+      "name": "Đồ Thể Thao Nam"
+    },
+    {
+      "id": 4,
+      "genderId": 1,
+      "name": "Phụ Kiện Nam"
+    },
+    {
+      "id": 5,
+      "genderId": 2,
+      "name": "Áo Nữ"
+    },
+    {
+      "id": 6,
+      "genderId": 2,
+      "name": "Quần Nữ"
+    },
+    {
+      "id": 7,
+      "genderId": 2,
+      "name": "Váy"
+    },
+    {
+      "id": 8,
+      "genderId": 2,
+      "name": "Đồ Thể Thao"
+    }
+    ,
+    {
+      "id": 9,
+      "genderId": 2,
+      "name": "Đầm"
+    },,
+  
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "subCategoryId": 1,
+      "name": "Áo Polo Nam"
+    },
+    {
+      "id": 2,
+      "subCategoryId": 1,
+      "name": "Áo Thun Nam"
+    },
+    {
+      "id": 3,
+      "subCategoryId": 1,
+      "name": "Áo Khoác Nam"
+    },
+    {
+      "id": 4,
+      "subCategoryId": 1,
+      "name": "Áo Sơ Mi Nam"
+    },
+    {
+      "id": 5,
+      "subCategoryId": 1,
+      "name": "Áo Vest",
+    },
+    {
+      "id": 6,
+      "subCategoryId": 1,
+      "name": "Áo Len Nam"
+    },
+    {
+      "id": 7,
+      "subCategoryId": 2,
+      "name": "Quần Jeans Nam"
+    },
+    {
+      "id": 8,
+      "subCategoryId": 2,
+      "name": "Quần Âu Nam"
+    },
+    {
+      "id": 9,
+      "subCategoryId": 2,
+      "name": "Quần Kaki Nam"
+    },
+    {
+      "id": 10,
+      "subCategoryId": 2,
+      "name": "Quần Short Nam"
+    },
+    {
+      "id": 11,
+      "subCategoryId": 3,
+      "name": "Áo Thun Thể Thao Nam"
+    },
+    {
+      "id": 12,
+      "subCategoryId": 3,
+      "name": "Áo Polo Thể Thao Nam"
+    },
+    {
+      "id": 13,
+      "subCategoryId": 3,
+      "name": "Quần Thể Thao Nam"
+    },
+    {
+      "id": 14,
+      "subCategoryId": 8,
+      "name": "Chân Váy"
+    },
+    {
+      "id": 15,
+      "subCategoryId": 9,
+      "name": "Đầm"
+    },
+    {
+      "id": 16,
+      "subCategoryId": 5,
+      "name": "Áo Polo Nữ"
+    },
+    {
+      "id": 17,
+      "subCategoryId": 5,
+      "name": "Áo Thun Nữ"
+    },
+    {
+      "id": 18,
+      "subCategoryId": 5,
+      "name": "Áo Khoác Nữ"
+    },
+    {
+      "id": 19,
+      "subCategoryId": 5,
+      "name": "Áo Sơ Mi Nữ"
+    },
+    {
+      "id": 20,
+      "subCategoryId": 5,
+      "name": "Áo Chống Nắng Nữ"
+    },
+    {
+      "id": 21,
+      "subCategoryId": 5,
+      "name": "Áo Len Nữ"
+    },
+    {
+      "id": 22,
+      "subCategoryId": 6,
+      "name": "Quần Jeans Nữ"
+    },
+    {
+      "id": 23,
+      "subCategoryId": 6,
+      "name": "Quần Âu Nữ"
+    },
+    {
+      "id": 24,
+      "subCategoryId": 6,
+      "name": "Quần Kaki Nữ"
+    },
+    {
+      "id": 25,
+      "subCategoryId": 6,
+      "name": "Quần Short Nữ"
+    },
+    {
+      "id": 26,
+      "subCategoryId": 7,
+      "name": "Áo Thun Thể Thao Nữ"
+    },
+    {
+      "id": 27,
+      "subCategoryId": 7,
+      "name": "Áo Polo Thể Thao Nữ"
+    },
+    {
+      "id": 28,
+      "subCategoryId": 7,
+      "name": "Quần Thể Thao Nữ"
+    }
+    ,
+    {
+      "id": 29,
+      "subCategoryId": 4,
+      "name": "Phụ Kiện Nam"
+    }
+  ],
+  "sizes": [
+    {
+      "id": 1,
+      "size": "XS"
+    },
+    {
+      "id": 2,
+      "size": "S"
+    },
+    {
+      "id": 3,
+      "size": "M"
+    },
+    {
+      "id": 4,
+      "size": "L"
+    },
+    {
+      "id": 5,
+      "size": "XL"
+    },
+    {
+      "id": 6,
+      "size": "2XL"
+    },
+    {
+      "id": 7,
+      "size": "3XL"
+    },
+    {
+      "id": 8,
+      "size": "4XL"
+    }
+  ],

@@ -45,8 +45,8 @@ const items = [
   getItem("NỮ", "sub1", <BsGenderFemale />, [
     getItem("Áo", "5"),
     getItem("Quần", "6"),
-    getItem("Váy", "7"),
-    getItem("Đồ thể thao", "8"),
+    getItem("Váy", "8"),
+    getItem("Đồ thể thao", "7"),
   ]),
 
   getItem("NAM", "sub2", <BsGenderMale />, [

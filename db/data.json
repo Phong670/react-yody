@@ -1,757 +1,1077 @@
 {
-  "reviews": [
-    {
-      "rate": 5,
-      "comment": "ewe",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1682593774864,
-      "updatedAt": 1682593774864,
-      "id": 1
-    },
-    {
-      "rate": 1,
-      "comment": "1",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1682945319026,
-      "updatedAt": 1682945319027,
-      "id": 2
-    },
-    {
-      "rate": 2,
-      "comment": "2",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1682945322138,
-      "updatedAt": 1682945322138,
-      "id": 3
-    },
-    {
-      "rate": 3,
-      "comment": "3",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1682945324433,
-      "updatedAt": 1682945324433,
-      "id": 4
-    },
-    {
-      "rate": 4,
-      "comment": "4",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1682945327815,
-      "updatedAt": 1682945327815,
-      "id": 5
-    },
-    {
-      "rate": 5,
-      "comment": "5",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1682946311327,
-      "updatedAt": 1682946311327,
-      "id": 6
-    },
-    {
-      "rate": 4,
-      "comment": "6",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1682946328969,
-      "updatedAt": 1682946328969,
-      "id": 7
-    },
-    {
-      "rate": 1,
-      "comment": "7",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1683818020486,
-      "updatedAt": 1683818020486,
-      "id": 8
-    },
-    {
-      "rate": 2,
-      "comment": "8",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1683818023430,
-      "updatedAt": 1683818023430,
-      "id": 9
-    },
-    {
-      "rate": 3,
-      "comment": "9",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1683818025839,
-      "updatedAt": 1683818025839,
-      "id": 10
-    },
-    {
-      "rate": 2,
-      "comment": "10",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1683818150243,
-      "updatedAt": 1683818150243,
-      "id": 11
-    },
-    {
-      "rate": 3,
-      "comment": "11",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1683818761306,
-      "updatedAt": 1683818761307,
-      "id": 12
-    },
-    {
-      "rate": 1,
-      "comment": "12",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1683818843476,
-      "updatedAt": 1683818843476,
-      "id": 13
-    },
-    {
-      "rate": 1,
-      "comment": "13",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1683819000923,
-      "updatedAt": 1683819000923,
-      "id": 14
-    },
-    {
-      "rate": 2,
-      "comment": "14",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1683819220259,
-      "updatedAt": 1683819220259,
-      "id": 15
-    },
-    {
-      "rate": 2,
-      "comment": "15",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1683819313826,
-      "updatedAt": 1683819313826,
-      "id": 16
-    },
-    {
-      "rate": 1,
-      "comment": "16",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1683819361601,
-      "updatedAt": 1683819361601,
-      "id": 17
-    },
-    {
-      "rate": 1,
-      "comment": "17",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1683821244939,
-      "updatedAt": 1683821244939,
-      "id": 18
-    },
-    {
-      "rate": 1,
-      "comment": "18",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1683821257190,
-      "updatedAt": 1683821257190,
-      "id": 19
-    },
-    {
-      "rate": 2,
-      "comment": "19",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1683821301983,
-      "updatedAt": 1683821301983,
-      "id": 20
-    },
-    {
-      "rate": 4,
-      "comment": "18",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1683824819962,
-      "updatedAt": 1683824819962,
-      "id": 21
-    },
-    {
-      "rate": 5,
-      "comment": "20",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1683824840909,
-      "updatedAt": 1683824840909,
-      "id": 22
-    },
-    {
-      "rate": 3,
-      "comment": "21",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1683830729684,
-      "updatedAt": 1683830729684,
-      "id": 23
-    },
-    {
-      "rate": 3,
-      "comment": "22",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1683830733055,
-      "updatedAt": 1683830733055,
-      "id": 24
-    },
-    {
-      "rate": 2,
-      "comment": "23",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1683830738431,
-      "updatedAt": 1683830738431,
-      "id": 25
-    },
-    {
-      "rate": 3,
-      "comment": "24",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1683830746735,
-      "updatedAt": 1683830746735,
-      "id": 26
-    },
-    {
-      "rate": 3,
-      "comment": "25",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1683830751601,
-      "updatedAt": 1683830751601,
-      "id": 27
-    },
-    {
-      "rate": 4,
-      "comment": "ok",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1683831336912,
-      "updatedAt": 1683831336912,
-      "id": 28
-    },
-    {
-      "rate": 5,
-      "comment": "ok",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1683831342883,
-      "updatedAt": 1683831342883,
-      "id": 29
-    },
-    {
-      "rate": 2,
-      "comment": "sebd",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1683831574664,
-      "updatedAt": 1683831574664,
-      "id": 30
-    },
-    {
-      "rate": 2,
-      "comment": "132",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1683831747306,
-      "updatedAt": 1683831747306,
-      "id": 31
-    },
-    {
-      "rate": 3,
-      "comment": "122",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1683831818084,
-      "updatedAt": 1683831818084,
-      "id": 32
-    },
-    {
-      "rate": 2,
-      "comment": "qw123",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1683831857118,
-      "updatedAt": 1683831857118,
-      "id": 33
-    },
-    {
-      "rate": 1,
-      "comment": "34",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1683831945783,
-      "updatedAt": 1683831945783,
-      "id": 34
-    },
-    {
-      "rate": 2,
-      "comment": "35",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1683832131369,
-      "updatedAt": 1683832131369,
-      "id": 35
-    },
-    {
-      "rate": 2,
-      "comment": "36",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1683832153788,
-      "updatedAt": 1683832153788,
-      "id": 36
-    },
-    {
-      "rate": 2,
-      "comment": "36",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1683832192660,
-      "updatedAt": 1683832192660,
-      "id": 37
-    },
-    {
-      "rate": 2,
-      "comment": "we",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1683832494202,
-      "updatedAt": 1683832494202,
-      "id": 38
-    },
-    {
-      "rate": 1,
-      "comment": "39",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1683832509637,
-      "updatedAt": 1683832509637,
-      "id": 39
-    },
-    {
-      "rate": 2,
-      "comment": "40",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1683832667245,
-      "updatedAt": 1683832667245,
-      "id": 40
-    },
-    {
-      "rate": 3,
-      "comment": "50",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1683832671972,
-      "updatedAt": 1683832671972,
-      "id": 41
-    },
-    {
-      "rate": 3,
-      "comment": "42",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1683832686842,
-      "updatedAt": 1683832686842,
-      "id": 42
-    },
-    {
-      "rate": 3,
-      "comment": "43",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1683832702706,
-      "updatedAt": 1683832702706,
-      "id": 43
-    },
-    {
-      "rate": 3,
-      "comment": "44",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1683832726554,
-      "updatedAt": 1683832726554,
-      "id": 44
-    },
-    {
-      "rate": 4,
-      "comment": "45",
-      "userId": 4,
-      "productId": 1,
-      "createdAt": 1683885809924,
-      "updatedAt": 1683885809925,
-      "id": 45
-    },
-    {
-      "rate": 1,
-      "comment": "1",
-      "userId": 4,
-      "productId": 2,
-      "createdAt": 1683887094327,
-      "updatedAt": 1683887094327,
-      "id": 46
-    }
-  ],
+  "reviews": [],
   "users": [
     {
-      "email": "tuanadmin@gmail.com",
-      "password": "$2a$10$WbCldY/Ip1nz7GPKcZnsS.f/Z/aM5pC16Uf6JmAUfGYxmSp3gUqAW",
-      "fullName": "Tuan Admin",
-      "role": "admin",
-      "createdAt": 1682080507667,
-      "updatedAt": 1682080507668,
-      "id": 1
-    },
-    {
-      "email": "tuan@gmail.com",
-      "password": "$2a$10$aP.UPeyvTJud9QwtzGc1teq4G9vtcW3iHKgeb33.jwEqSBbgBjj2m",
-      "fullName": "Tuan",
-      "role": "user",
-      "createdAt": 1682080544991,
-      "updatedAt": 1682080544992,
-      "id": 2
-    },
-    {
-      "email": "phong670@gmail.com",
-      "password": "$2a$10$U0FRCAL6nJVwS6p9yIzsl.GB4T0USZArRRyw.V0dj5x0D49RJCQ6S",
-      "fullName": "phong",
-      "role": "user",
-      "createdAt": 1682405850499,
-      "updatedAt": 1682405850500,
-      "id": 3
-    },
-    {
       "email": "qphong1234@gmail.com",
-      "password": "$2a$10$KLTdjZzHdWlXixWhnovWuOlq..LHLsrK80zYVmvy9eBKpUeHXSBLG",
-      "fullName": "phong",
+      "password": "$2a$10$Su07NndSk7Y1Vot/E519kOk5ngQY1xU65neS8..rm7c7SmM0KlSK6",
+      "fullName": "Phong",
       "role": "user",
-      "createdAt": 1682406635756,
-      "updatedAt": 1682406635756,
-      "id": 4
-    },
-    {
-      "email": "qphong123412@gmail.com",
-      "password": "$2a$10$8/thLByDtnb283UdMwPgkOTvXET5LDEDqb8V/eAZJ8t7s4HCBlpAS",
-      "fullName": "phong123",
-      "role": "user",
-      "createdAt": 1683707916258,
-      "updatedAt": 1683707916258,
-      "id": 5
-    },
-    {
-      "email": "qphong12323412@gmail.com",
-      "password": "$2a$10$Koye2O.ZNOLYWU8wZV0n7.pOSXL7pftyTEBS19KLJu3al7nFepNbG",
-      "fullName": "phong123",
-      "role": "user",
-      "createdAt": 1683707973425,
-      "updatedAt": 1683707973425,
-      "id": 6
-    },
-    {
-      "email": "qphong12134@gmail.com",
-      "password": "$2a$10$wnv7UVFIZMC.FFYdr7J.C.cqqBgWx1sRQhweztzN80Gs3DaCR/Uj2",
-      "fullName": "sad",
-      "role": "user",
-      "createdAt": 1683708249543,
-      "updatedAt": 1683708249543,
-      "id": 7
-    },
-    {
-      "email": "qphong1Q2134@gmail.com",
-      "password": "$2a$10$0OgAPXDQHa02fv7Krzlkc.27EtDV4kqm/LaHsalu8Adh4PmW7WgBW",
-      "fullName": "sad",
-      "role": "user",
-      "createdAt": 1683708314759,
-      "updatedAt": 1683708314760,
-      "id": 8
+      "createdAt": 1684318825721,
+      "updatedAt": 1684318825721,
+      "id": 1
     }
   ],
   "products": [
     {
       "id": 1,
-      "title": "Áo Polo Nữ Coolmax Phối Bo Siêu Mát",
-      "price": 299000,
-      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/ao-polo-nu-apn3700-vag-cvn5148-tra-8-yodyvn.jpg?v=1681279746000",
-      "rating": 4,
+      "title": "Áo Polo Nữ Pique Mắt Chim Phối Tay Cổ Kẻ",
+      "price": 209000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apn5036-tra3-yody-vn.jpg?v=1677118569000",
       "viewCount": 100,
       "sizeId": [
         1,
-        2
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
       ],
-      "color": 1,
-      "material": 1,
       "genderId": 2,
       "categoryId": 16,
-      "subCategoryId": 6
+      "subCategoryId": 5,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
     },
     {
       "id": 2,
-      "title": "Bo Polo nam size 1,3 cate 16, sub 5 gia 2",
-      "price": 2,
-      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/ao-polo-nam-apm5413-tpv-4.jpg?v=1678526379000",
-      "rating": 4,
+      "title": "Áo Polo Nữ Cafe Phối Tay Raglan Ngực In Gấu",
+      "price": 230000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apn5326-nav-31-0edb2973-7c98-4fe1-9279-c33f25f139f4.jpg?v=1677122912000",
       "viewCount": 100,
       "sizeId": [
         1,
-        3
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
       ],
-      "color": 1,
-      "material": 1,
-      "genderId": 1,
+      "genderId": 2,
       "categoryId": 16,
-      "subCategoryId": 6
+      "subCategoryId": 5,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
     },
     {
       "id": 3,
-      "title": "Bo Polo nam size 4,1 cate 17, sub 5 gia 3",
-      "price": 3,
-      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/ao-polo-nam-apm5413-tpv-4.jpg?v=1678526379000",
-      "rating": 4,
+      "title": "Áo Polo Nữ Coolmax Phối Bo Siêu Mát",
+      "price": 209300,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apn5320-cba-cjn3030-tra-4.jpg?v=1684202629000",
       "viewCount": 100,
       "sizeId": [
+        1,
+        2,
+        3,
         4,
-        1
+        5,
+        6,
+        7,
+        8
       ],
-      "color": 1,
-      "material": 1,
-      "genderId": 1,
-      "categoryId": 17,
-      "subCategoryId": 6
+      "genderId": 2,
+      "categoryId": 16,
+      "subCategoryId": 5,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
     },
     {
       "id": 4,
-      "title": "Áo Polo nam size 3 cate 2, sub 5 gia 4",
-      "price": 4,
-      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/ao-polo-nam-apm5413-tpv-4.jpg?v=1678526379000",
-      "rating": 4,
+      "title": "Áo Polo Thể Thao Nữ Phối Màu",
+      "price": 345300,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/polo-the-thao-nu-phoi-mau-san6046-cdt-12.jpg?v=1676606487000",
       "viewCount": 100,
-      "sizeId": 3,
-      "color": 1,
-      "material": 1,
-      "genderId": 1,
-      "categoryId": 20,
-      "subCategoryId": 6
+      "sizeId": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "genderId": 2,
+      "categoryId": 16,
+      "subCategoryId": 5,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
     },
     {
       "id": 5,
-      "title": "Áo Polo nam size 4 cate 2, sub 5 gia 5",
-      "price": 5,
-      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/ao-polo-nam-apm5413-tpv-4.jpg?v=1678526379000",
-      "rating": 4,
+      "title": "Áo Polo Nữ Airycool In YODY",
+      "price": 202300,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/ao-polo-nu-apn6076-xbi-3.jpg?v=1679473639000",
       "viewCount": 100,
-      "sizeId": 4,
-      "color": 1,
-      "material": 1,
-      "genderId": 1,
-      "categoryId": 20,
-      "subCategoryId": 6
+      "sizeId": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "genderId": 2,
+      "categoryId": 16,
+      "subCategoryId": 5,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
     },
     {
       "id": 6,
-      "title": "Áo Polo nam size 1 cate 1, sub 5 gia 6",
-      "price": 6,
-      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/ao-polo-nam-apm5413-tpv-4.jpg?v=1678526379000",
-      "rating": 4,
+      "title": "Áo Polo Nữ Cafe Bo 3 Màu",
+      "price": 322300,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/ao-polo-nu-apn6080-tra-6.jpg?v=1678528770000",
       "viewCount": 100,
-      "sizeId": 1,
-      "color": 1,
-      "material": 1,
-      "genderId": 1,
-      "categoryId": 1,
-      "subCategoryId": 6
+      "sizeId": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "genderId": 2,
+      "categoryId": 16,
+      "subCategoryId": 5,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
     },
     {
       "id": 7,
-      "title": "Áo Polo nam size 1 cate 1, sub 5 gia 6",
-      "price": 6,
-      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/ao-polo-nam-apm5413-tpv-4.jpg?v=1678526379000",
-      "rating": 4,
+      "title": "Áo Polo Nữ Mắt Chim Phối Màu In Kẻ",
+      "price": 352000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/ao-polo-nu-mat-chim-phoi-mau-in-ke-apn6026-ddo-5.jpg?v=1677813581000",
       "viewCount": 100,
-      "sizeId": 1,
-      "color": 1,
-      "material": 1,
-      "genderId": 1,
-      "categoryId": 1,
-      "subCategoryId": 6
+      "sizeId": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "genderId": 2,
+      "categoryId": 16,
+      "subCategoryId": 5,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
     },
     {
       "id": 8,
-      "title": "Áo Polo nam size 1 cate 1, sub 5 gia 6",
-      "price": 6,
-      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/ao-polo-nam-apm5413-tpv-4.jpg?v=1678526379000",
-      "rating": 4,
+      "title": "Áo Polo Nữ Airycool Giữ Form Thoáng Mát",
+      "price": 202000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/cvn5096-den-apn5046-vag-1.jpg?v=1677141360000",
       "viewCount": 100,
-      "sizeId": 1,
-      "color": 1,
-      "material": 1,
-      "genderId": 1,
-      "categoryId": 1,
-      "subCategoryId": 6
+      "sizeId": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "genderId": 2,
+      "categoryId": 16,
+      "subCategoryId": 5,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
     },
     {
       "id": 9,
-      "title": "Áo Polo nam size 1 cate 1, sub 5 gia 6",
-      "price": 6,
-      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/ao-polo-nam-apm5413-tpv-4.jpg?v=1678526379000",
-      "rating": 4,
+      "title": "Áo Polo Nữ Airycool Thoáng Mát Phối Bo",
+      "price": 292000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/ao-polo-nu-apn5380-tim-cvn5148-tra-1-yodyvn.jpg?v=1681783537000",
       "viewCount": 100,
-      "sizeId": 1,
-      "color": 1,
-      "material": 1,
-      "genderId": 1,
-      "categoryId": 1,
-      "subCategoryId": 5
+      "sizeId": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "genderId": 2,
+      "categoryId": 16,
+      "subCategoryId": 5,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
     },
     {
       "id": 10,
-      "title": "Áo Polo nam size 1 cate 1, sub 5 gia 6",
-      "price": 6,
-      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/ao-polo-nam-apm5413-tpv-4.jpg?v=1678526379000",
-      "rating": 4,
+      "title": "Áo Polo Nữ Tay Ngắn Pique Mắt Chim Phối Bo Thoáng Khí",
+      "price": 249000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apn5418-cba-3.jpg?v=1675326879000",
       "viewCount": 100,
       "sizeId": [
-        1
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
       ],
-      "color": 1,
-      "material": 1,
-      "genderId": 1,
-      "categoryId": 1,
-      "subCategoryId": 5
+      "genderId": 2,
+      "categoryId": 16,
+      "subCategoryId": 5,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
     },
     {
       "id": 11,
-      "title": "Áo Polo nam size 1 cate 1, sub 5 gia 6",
-      "price": 6,
-      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/ao-polo-nam-apm5413-tpv-4.jpg?v=1678526379000",
-      "rating": 4,
+      "title": "Áo Polo Nữ Croptop Pique Mắt Chim In Hình",
+      "price": 249000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apn5054-xan-5.jpg?v=1681356076000",
       "viewCount": 100,
       "sizeId": [
-        1
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
       ],
-      "color": 1,
-      "material": 1,
-      "genderId": 1,
-      "categoryId": 1,
-      "subCategoryId": 5
+      "genderId": 2,
+      "categoryId": 16,
+      "subCategoryId": 5,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
     },
     {
       "id": 12,
-      "title": "Áo Polo nam size 1 cate 1, sub 5 gia 6",
-      "price": 6,
-      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/ao-polo-nam-apm5413-tpv-4.jpg?v=1678526379000",
-      "rating": 4,
+      "title": "Áo Polo Nữ Mắt Chim Melange Classic",
+      "price": 202300,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apn5436-xxm-5.jpg?v=1668754985000",
       "viewCount": 100,
       "sizeId": [
-        1
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
       ],
-      "color": 1,
-      "material": 1,
-      "genderId": 1,
-      "categoryId": 1,
-      "subCategoryId": 5
+      "genderId": 2,
+      "categoryId": 16,
+      "subCategoryId": 5,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
     },
     {
       "id": 13,
-      "title": "Áo Polo nam size 1 cate 1, sub 5 gia 6",
-      "price": 6,
-      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/ao-polo-nam-apm5413-tpv-4.jpg?v=1678526379000",
-      "rating": 4,
+      "title": "Áo Polo Nam Cafe Thêu Ngực",
+      "price": 189500,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apm5329-xlo-3.jpg?v=1675313492000",
       "viewCount": 100,
       "sizeId": [
-        1
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
       ],
-      "color": 1,
-      "material": 1,
       "genderId": 1,
       "categoryId": 1,
-      "subCategoryId": 5
+      "subCategoryId": 1,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
     },
     {
       "id": 14,
-      "title": "Áo Polo nam size 1 cate 1, sub 5 gia 6",
-      "price": 6,
-      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/ao-polo-nam-apm5413-tpv-4.jpg?v=1678526379000",
-      "rating": 4,
+      "title": "Áo Polo Nam Mắt Chim Solid Bo Cotton",
+      "price": 189500,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apm5391-cba-6.jpg?v=1677119063000",
       "viewCount": 100,
       "sizeId": [
-        1
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
       ],
-      "color": 1,
-      "material": 1,
       "genderId": 1,
       "categoryId": 1,
-      "subCategoryId": 5
+      "subCategoryId": 1,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
     },
     {
       "id": 15,
-      "title": "Áo Polo nam size 1 cate 1, sub 5 gia 6",
-      "price": 6,
-      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/ao-polo-nam-apm5413-tpv-4.jpg?v=1678526379000",
-      "rating": 4,
+      "title": "Áo Polo Nam In Vạch Ngực Phối Màu",
+      "price": 189500,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apm5231-ddo5.jpg?v=1677201886000",
       "viewCount": 100,
       "sizeId": [
-        1
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
       ],
-      "color": 1,
-      "material": 1,
       "genderId": 1,
       "categoryId": 1,
-      "subCategoryId": 5
+      "subCategoryId": 1,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
     },
     {
       "id": 16,
-      "title": "Áo Polo nam size 1 cate 1, sub 5 gia 6",
-      "price": 6,
-      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/ao-polo-nam-apm5413-tpv-4.jpg?v=1678526379000",
-      "rating": 4,
+      "title": "Áo Polo Nam Pique Mắt Chim Phối Tay Thời Trang",
+      "price": 189500,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apm5139-vag-6-min.jpg?v=1665219553000",
       "viewCount": 100,
       "sizeId": [
-        1
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
       ],
-      "color": 1,
-      "material": 1,
       "genderId": 1,
       "categoryId": 1,
-      "subCategoryId": 5
+      "subCategoryId": 1,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
+    },
+    {
+      "id": 17,
+      "title": "Áo Polo Nam Mắt Chim Phối Màu In Vạch",
+      "price": 239500,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apm5071-nau-4.jpg?v=1669177473000",
+      "viewCount": 100,
+      "sizeId": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "genderId": 1,
+      "categoryId": 1,
+      "subCategoryId": 1,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
+    },
+    {
+      "id": 18,
+      "title": "Áo Polo Nam Pique Sồi",
+      "price": 249000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apm5393-xhd-3.jpg?v=1662358179000",
+      "viewCount": 100,
+      "sizeId": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "genderId": 1,
+      "categoryId": 1,
+      "subCategoryId": 1,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
+    },
+    {
+      "id": 19,
+      "title": "Áo Polo Nam Sợi Se Phối Nẹp",
+      "price": 249500,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apm5389-xbd-8.jpg?v=1660096473000",
+      "viewCount": 100,
+      "sizeId": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "genderId": 1,
+      "categoryId": 1,
+      "subCategoryId": 1,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
+    },
+    {
+      "id": 20,
+      "title": "Áo Polo Nam Pique Mắt Chim Phối Tay Cổ Kẻ",
+      "price": 329500,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/ao-polo-nam-apm5039-tr1-6-yodyvn.jpg?v=1684226579000",
+      "viewCount": 100,
+      "sizeId": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "genderId": 1,
+      "categoryId": 1,
+      "subCategoryId": 1,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
+    },
+    {
+      "id": 21,
+      "title": "Áo Thun Nữ Cổ Tim Bamboo",
+      "price": 199000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/ao-thun-nu-tsn6288-nav-4.jpg?v=1683538717000",
+      "viewCount": 100,
+      "sizeId": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "genderId": 2,
+      "categoryId": 17,
+      "subCategoryId": 5,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
+    },
+    {
+      "id": 22,
+      "title": "Áo Phao Nữ Dáng Dài Thời Trang Siêu Ấm",
+      "price": 999000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/pvn5042-bee-5.jpg?v=1665458869000",
+      "viewCount": 100,
+      "sizeId": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "genderId": 2,
+      "categoryId": 18,
+      "subCategoryId": 5,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
+    },
+    {
+      "id": 22,
+      "title": "Áo Sơ Mi Nữ Dáng Suông Sát Nách",
+      "price": 399000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/ao-so-mi-nu-scn6040-tra-sjn4020-xah-21-yody.jpg?v=1680923762000",
+      "viewCount": 100,
+      "sizeId": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "genderId": 2,
+      "categoryId": 19,
+      "subCategoryId": 5,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
+    },
+    {
+      "id": 23,
+      "title": "Áo Chống Nắng Nữ Airy UV Thoáng Mát Chống Tia UV",
+      "price": 249000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/acn5010-xat-3.jpg?v=1653096236000",
+      "viewCount": 100,
+      "sizeId": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "genderId": 2,
+      "categoryId": 20,
+      "subCategoryId": 5,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
+    },
+    {
+      "id": 24,
+      "title": "Áo Len Gân Nữ Tay Dài Cổ Tim",
+      "price": 249000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/aln5046-nau-5.jpg?v=1666836067000",
+      "viewCount": 100,
+      "sizeId": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "genderId": 2,
+      "categoryId": 21,
+      "subCategoryId": 5,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
+    },
+    {
+      "id": 25,
+      "title": "Quần Jeans Nữ Skinny Túi Vuông Co Giãn 4 Chiều",
+      "price": 499000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/quan-jean-nu-qjn5094-xdm-6-yodyvn.jpg?v=1681440208000",
+      "viewCount": 100,
+      "sizeId": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "genderId": 2,
+      "categoryId": 22,
+      "subCategoryId": 6,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
+    },
+    {
+      "id": 26,
+      "title": "Quần Jeans Nữ Baggy Gấu Xếp Ly",
+      "price": 359000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/qjn5092-xdm-1.jpg?v=1669887775000",
+      "viewCount": 100,
+      "sizeId": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "genderId": 2,
+      "categoryId": 22,
+      "subCategoryId": 6,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
+    },
+    {
+      "id": 27,
+      "title": "Quần Âu Nữ Lưng Cao Ống Đứng Thêu Cạp",
+      "price": 449000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/qan5110-nca-6.jpg?v=1664531724000",
+      "viewCount": 100,
+      "sizeId": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "genderId": 2,
+      "categoryId": 23,
+      "subCategoryId": 6,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
+    },
+    {
+      "id": 28,
+      "title": "Quần Âu Nữ Relax Pants Co Giãn 4 Chiều",
+      "price": 349000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/qan5176-bee-3.jpg?v=1669887774000",
+      "viewCount": 100,
+      "sizeId": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "genderId": 2,
+      "categoryId": 23,
+      "subCategoryId": 6,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
+    },
+    {
+      "id": 29,
+      "title": "Quần Kaki Nữ Dáng Boy Trẻ Trung",
+      "price": 349000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/qjn5052-bsa-8.jpg?v=1662911138000",
+      "viewCount": 100,
+      "sizeId": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "genderId": 2,
+      "categoryId": 24,
+      "subCategoryId": 6,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
+    },
+    {
+      "id": 30,
+      "title": "Quần Short Jeans Nữ Bó Cạp Cao",
+      "price": 249000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/sjn4010-den5.jpg?v=1666084711000",
+      "viewCount": 100,
+      "sizeId": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "genderId": 2,
+      "categoryId": 25,
+      "subCategoryId": 6,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
+    },
+    {
+      "id": 31,
+      "title": "Áo T-Shirt Nữ In Ngực Thể Thao Mềm Mịn Thông Thoáng",
+      "price": 149000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/stn5008-ddo-13.jpg?v=1682478535000",
+      "viewCount": 100,
+      "sizeId": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "genderId": 2,
+      "categoryId": 26,
+      "subCategoryId": 7,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
+    },
+    {
+      "id": 32,
+      "title": "Áo Polo Thể Thao Nữ Umorfil Trẻ Trung",
+      "price": 209000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/san5004-den-186.jpg?v=1675313261000",
+      "viewCount": 100,
+      "sizeId": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "genderId": 2,
+      "categoryId": 27,
+      "subCategoryId": 7,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
+    },
+    {
+      "id": 33,
+      "title": "Quần Thể Thao Nữ In Kẻ Ngang",
+      "price": 209000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/quan-the-thao-nu-ssn6012-xbi-5.jpg?v=1681185476000",
+      "viewCount": 100,
+      "sizeId": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "genderId": 2,
+      "categoryId": 28,
+      "subCategoryId": 7,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
+    },
+    {
+      "id": 34,
+      "title": "Chân Váy Dáng A Khaki Túi Ốp",
+      "price": 399000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/chan-vay-nu-cvn6068-reu-1.jpg?v=1680923455000",
+      "viewCount": 100,
+      "sizeId": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "genderId": 2,
+      "categoryId": 14,
+      "subCategoryId": 8,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
+    },
+    {
+      "id": 35,
+      "title": "Chân Váy Dạ Tweed Chữ A Sành Điệu",
+      "price": 399000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/cvn5258-tra-5.jpg?v=1667270759000",
+      "viewCount": 100,
+      "sizeId": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "genderId": 2,
+      "categoryId": 14,
+      "subCategoryId": 8,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
+    },
+    {
+      "id": 36,
+      "title": "Đầm Đông Nữ Kẻ Tay Phối",
+      "price": 499000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/vdn5002-kdt-6.jpg?v=1666858658000",
+      "viewCount": 100,
+      "sizeId": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "genderId": 2,
+      "categoryId": 15,
+      "subCategoryId": 9,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
+    },
+    {
+      "id": 37,
+      "title": "Áo Thun Thu Đông Nam Họa Tiết Kẻ Ngang Hiện Đại",
+      "price": 499000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/atm5009-tkc-5.jpg?v=1678352652000",
+      "viewCount": 100,
+      "sizeId": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "genderId": 1,
+      "categoryId": 2,
+      "subCategoryId": 1,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
+    },
+    {
+      "id": 38,
+      "title": "Áo Khoác Gió Thông Minh Nam Trượt Nước",
+      "price": 599000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/akm5041-nav-7.jpg?v=1682413649000",
+      "viewCount": 100,
+      "sizeId": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "genderId": 1,
+      "categoryId": 3,
+      "subCategoryId": 1,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
+    },
+    {
+      "id": 39,
+      "title": "Áo Sơ Mi Nam Phối Túi",
+      "price": 599000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/smm5219-nau-01.jpg?v=1676694524000",
+      "viewCount": 100,
+      "sizeId": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "genderId": 1,
+      "categoryId": 4,
+      "subCategoryId": 1,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
+    },
+    {
+      "id": 40,
+      "title": "Áo Vest Nam Nano Công Sở Trẻ Trung",
+      "price": 1009000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/vem4007-xnh-2.jpg?v=1666153948000",
+      "viewCount": 100,
+      "sizeId": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "genderId": 1,
+      "categoryId": 5,
+      "subCategoryId": 1,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
+    },
+    {
+      "id": 41,
+      "title": "Áo Nỉ Thu Đông Nam Dáng Rộng In Ngực",
+      "price": 349000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/atm5095-cba-4.jpg?v=1683699245000",
+      "viewCount": 100,
+      "sizeId": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "genderId": 1,
+      "categoryId": 6,
+      "subCategoryId": 1,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
+    },
+    {
+      "id": 41,
+      "title": "Quần Jeans Nam Cotton Chỉ Phối Màu",
+      "price": 549000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/qjm6029-xah-2.jpg?v=1677918489000",
+      "viewCount": 100,
+      "sizeId": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "genderId": 1,
+      "categoryId": 7,
+      "subCategoryId": 2,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
+    },
+    {
+      "id": 42,
+      "title": "Quần Jean Nam Cafe Thân Thiện Với Môi Trường",
+      "price": 449000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/qjm6033-xdm-22-quan-jean-nam-yodyvn-1.jpg?v=1680936227000",
+      "viewCount": 100,
+      "sizeId": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "genderId": 1,
+      "categoryId": 7,
+      "subCategoryId": 2,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
+    },
+    {
+      "id": 43,
+      "title": "Quần Âu Nam Nano Melange Slim Fit",
+      "price": 449000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/qam6053-bee-24.jpg?v=1679032868000",
+      "viewCount": 100,
+      "sizeId": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "genderId": 1,
+      "categoryId": 8,
+      "subCategoryId": 2,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
+    },
+    {
+      "id": 44,
+      "title": "Quần Âu Nam Slim Cạp Di Động",
+      "price": 549000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/quan-au-nam-qam6039-xdm-2-yodyvn.jpg?v=1681783412000",
+      "viewCount": 100,
+      "sizeId": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "genderId": 1,
+      "categoryId": 8,
+      "subCategoryId": 2,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
+    },
+    {
+      "id": 45,
+      "title": "Quần Kaki Nam Regular Thêu Cạnh Túi",
+      "price": 549000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/qkm6007-den-04.jpg?v=1667874295000",
+      "viewCount": 100,
+      "sizeId": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "genderId": 1,
+      "categoryId": 9,
+      "subCategoryId": 2,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
+    },
+    {
+      "id": 46,
+      "title": "Quần Short Nam Kaki Ống Đứng Lịch Lãm",
+      "price": 349000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/qsm5019-ghi0.jpg?v=1676690448000",
+      "viewCount": 100,
+      "sizeId": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "genderId": 1,
+      "categoryId": 10,
+      "subCategoryId": 2,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
+    },
+    {
+      "id": 47,
+      "title": "Áo Thun Thể Thao Nam Hoạ Tiết Tràn Thân",
+      "price": 249000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/ao-thun-nam-stm6033-tra-4-yodyvn.jpg?v=1680937506000",
+      "viewCount": 100,
+      "sizeId": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "genderId": 1,
+      "categoryId": 11,
+      "subCategoryId": 3,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
+    },
+    {
+      "id": 48,
+      "title": "Áo Polo Thể Thao Nam Airy Cool In Phản Quang - Đen",
+      "price": 249000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/ao-the-thao-sam5001-den-1-yody-vn.jpg?v=1649215246000",
+      "viewCount": 100,
+      "sizeId": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "genderId": 1,
+      "categoryId": 12,
+      "subCategoryId": 3,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
+    },
+    {
+      "id": 49,
+      "title": "Quần Short Thể Thao Nam Phối Cạp",
+      "price": 249000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/quan-short-the-thao-nam-phoi-cap-sqm6019-tit-9-1.jpg?v=1671768057000",
+      "viewCount": 100,
+      "sizeId": [
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "genderId": 1,
+      "categoryId": 13,
+      "subCategoryId": 3,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
+    },
+    {
+      "id": 50,
+      "title": "Giày Nam Da Thật Đế Thể Thao",
+      "price": 249000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/giay-nam-da-that-de-the-thao-gim5001-den-5.jpg?v=1678330406000",
+      "viewCount": 100,
+      "sizeId": [
+        17,
+        18,
+        19,
+        20
+      ],
+      "genderId": 1,
+      "categoryId": 29,
+      "subCategoryId": 4,
+      "characteristic": "Đặc điểm nổi bật",
+      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
     }
   ],
   "genders": [
@@ -761,7 +1081,7 @@
     },
     {
       "id": 2,
-      "gender": "male"
+      "gender": "female"
     }
   ],
   "subCategories": [
@@ -804,6 +1124,11 @@
       "id": 8,
       "genderId": 2,
       "name": "Đồ Thể Thao"
+    },
+    {
+      "id": 9,
+      "genderId": 2,
+      "name": "Đầm"
     }
   ],
   "categories": [
@@ -830,12 +1155,12 @@
     {
       "id": 5,
       "subCategoryId": 1,
-      "name": "Áo Chống Nắng Nam"
+      "name": "Áo Vest"
     },
     {
       "id": 6,
       "subCategoryId": 1,
-      "name": "Áo Len Nam"
+      "name": "Áo Ni Nam"
     },
     {
       "id": 7,
@@ -946,6 +1271,11 @@
       "id": 28,
       "subCategoryId": 7,
       "name": "Quần Thể Thao Nữ"
+    },
+    {
+      "id": 29,
+      "subCategoryId": 4,
+      "name": "Phụ Kiện Nam"
     }
   ],
   "sizes": [
@@ -978,175 +1308,56 @@
       "size": "3XL"
     },
     {
-      "id": 8,
-      "size": "4XL"
+      "id": 9,
+      "size": "26"
+    },
+    {
+      "id": 10,
+      "size": "26"
+    },
+    {
+      "id": 11,
+      "size": "27"
+    },
+    {
+      "id": 12,
+      "size": "28"
+    },
+    {
+      "id": 13,
+      "size": "29"
+    },
+    {
+      "id": 14,
+      "size": "30"
+    },
+    {
+      "id": 15,
+      "size": "31"
+    },
+    {
+      "id": 16,
+      "size": "32"
+    },
+    {
+      "id": 17,
+      "size": "39"
+    },
+    {
+      "id": 18,
+      "size": "40"
+    },
+    {
+      "id": 19,
+      "size": "41"
+    },
+    {
+      "id": 20,
+      "size": "42"
     }
   ],
-  "orders": [
-    {
-      "name": "phong",
-      "numberPhone": "123",
-      "email": "sadf123",
-      "city": {
-        "id": 3429,
-        "value": "31",
-        "parentcode": "0003",
-        "label": "Thành phố Hải Phòng",
-        "status": 1,
-        "region": 1
-      },
-      "district": {
-        "id": 3481,
-        "value": "307",
-        "parentcode": "31",
-        "label": "Quận Kiến An",
-        "status": 1,
-        "region": null
-      },
-      "ward": {
-        "id": 3487,
-        "value": "11440",
-        "parentcode": "307",
-        "label": "Phường Ngọc Sơn",
-        "status": 1,
-        "region": null
-      },
-      "address": "12sadf",
-      "paymentMethod": "cod",
-      "userId": 4,
-      "totalPrice": 6,
-      "status": "Đang xử lý",
-      "costShip": 20000,
-      "createdAt": 1684144080028,
-      "updatedAt": 1684144080028,
-      "id": 1
-    },
-    {
-      "name": "ưerwq",
-      "numberPhone": "213",
-      "email": "rewqrq",
-      "city": {
-        "id": 8113,
-        "value": "92",
-        "parentcode": "0003",
-        "label": "Thành phố Cần Thơ",
-        "status": 1,
-        "region": 2
-      },
-      "district": {
-        "id": 8153,
-        "value": "923",
-        "parentcode": "92",
-        "label": "Quận Thốt Nốt",
-        "status": 1,
-        "region": null
-      },
-      "ward": {
-        "id": 8154,
-        "value": "31207",
-        "parentcode": "923",
-        "label": "Phường Thốt Nốt",
-        "status": 1,
-        "region": null
-      },
-      "address": "12312",
-      "paymentMethod": "cod",
-      "userId": 4,
-      "totalPrice": 9,
-      "status": "Đang xử lý",
-      "costShip": 20000,
-      "createdAt": 1684149643800,
-      "updatedAt": 1684149643801,
-      "id": 2
-    },
-    {
-      "name": "ưd",
-      "numberPhone": "123",
-      "email": "213",
-      "city": {
-        "id": 8113,
-        "value": "92",
-        "parentcode": "0003",
-        "label": "Thành phố Cần Thơ",
-        "status": 1,
-        "region": 2
-      },
-      "district": {
-        "id": 8153,
-        "value": "923",
-        "parentcode": "92",
-        "label": "Quận Thốt Nốt",
-        "status": 1,
-        "region": null
-      },
-      "ward": {
-        "id": 8154,
-        "value": "31207",
-        "parentcode": "923",
-        "label": "Phường Thốt Nốt",
-        "status": 1,
-        "region": null
-      },
-      "address": "123",
-      "paymentMethod": "cod",
-      "totalPrice": 25,
-      "status": "Đang xử lý",
-      "costShip": 20000,
-      "createdAt": 1684240975193,
-      "updatedAt": 1684240975193,
-      "id": 3
-    }
-  ],
-  "orderDetails": [
-    {
-      "orderId": 1,
-      "productId": 3,
-      "name": "Bo Polo nam size 4,1 cate 17, sub 5 gia 3",
-      "price": 3,
-      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/ao-polo-nam-apm5413-tpv-4.jpg?v=1678526379000",
-      "size": "XS",
-      "quantity": 2,
-      "createdAt": 1684144080089,
-      "updatedAt": 1684144080089,
-      "id": 1
-    },
-    {
-      "orderId": 2,
-      "productId": 3,
-      "name": "Bo Polo nam size 4,1 cate 17, sub 5 gia 3",
-      "price": 3,
-      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/ao-polo-nam-apm5413-tpv-4.jpg?v=1678526379000",
-      "size": "XS",
-      "quantity": 3,
-      "createdAt": 1684149643878,
-      "updatedAt": 1684149643878,
-      "id": 2
-    },
-    {
-      "orderId": 3,
-      "productId": 2,
-      "name": "Bo Polo nam size 1,3 cate 16, sub 5 gia 2",
-      "price": 2,
-      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/ao-polo-nam-apm5413-tpv-4.jpg?v=1678526379000",
-      "size": "XS",
-      "quantity": 5,
-      "createdAt": 1684240975259,
-      "updatedAt": 1684240975259,
-      "id": 3
-    },
-    {
-      "orderId": 3,
-      "productId": 3,
-      "name": "Bo Polo nam size 4,1 cate 17, sub 5 gia 3",
-      "price": 3,
-      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/ao-polo-nam-apm5413-tpv-4.jpg?v=1678526379000",
-      "size": "XS",
-      "quantity": 5,
-      "createdAt": 1684240975311,
-      "updatedAt": 1684240975311,
-      "id": 4
-    }
-  ],
+  "orders": [],
+  "orderDetails": [],
   "cities": [
     {
       "id": 10993,

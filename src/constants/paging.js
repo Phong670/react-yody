@@ -1,2 +1,2 @@
-export const PRODUCT_LIMIT = 4;
-export const REVIEW_LIMIT = 8;
+export const PRODUCT_LIMIT = 12;
+export const REVIEW_LIMIT = 12;
