@@ -24,6 +24,7 @@ import { AiOutlineMenu, AiOutlineArrowLeft } from "react-icons/ai";
 import {
   deleteCartItemAction,
   updateCartItemAction,
+  deleteAddNewCard,
 } from "../../../../redux/actions";
 import { logoutAction } from "../../../../redux/actions";
 import SearchBox from "./searchBox";
@@ -71,14 +72,11 @@ function Header() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-  const [goSearchPage, setGoSearchPage] = useState(false);
+  const [isOpenOneNewCart, setIsOpenOneNewCart] = useState(false);
+  // const [goSearchPage, setGoSearchPage] = useState(false);
   const [empty, setEmpty] = useState(true);
-  console.log("🚀 ~ file: index.jsx:77 ~ Header ~ empty:", empty);
   const [total, setTotal] = useState(0);
-  const [isOneAddCart, setIsOneAddCart] = useState(false);
   const [searchKey, setSearchKey] = useState("");
-  console.log("🚀 ~ file: index.jsx:81 ~ Header ~ searchKey:", searchKey);
   const [openSearchBox, setOpenSearchBox] = useState(false);
   const [openKeys, setOpenKeys] = useState(["sub1"]);
   const { userInfo } = useSelector((state) => state.auth);
@@ -86,14 +84,8 @@ function Header() {
   const { oneAddCard } = useSelector((state) => state.cart);
 
   //cloneValue
-  let isOneAddCartClone = false;
   let totalClone = 0;
 
-  //Effect
-  // useEffect(() => {
-  //   console.log("render lai trong effect");
-  //   setEmpty(true);
-  // }, []);
   useEffect(() => {
     cartList.data?.map((item) => {
       totalClone = totalClone + item.price * item.quantity;
@@ -101,17 +93,19 @@ function Header() {
     });
   }, [cartList.data]);
   useEffect(() => {
-    if (oneAddCard.length > 0) isOneAddCartClone = true;
-    if (isOneAddCartClone) {
-      setIsOpen(true);
-      setTimeout(() => setIsOpen(false), 3000);
+    if (oneAddCard.length > 0) {
+      setIsOpenOneNewCart(true);
+      setTimeout(() => {
+        setIsOpenOneNewCart(false);
+        dispatch(deleteAddNewCard());
+      }, 3000);
     }
-    return () => setIsOpen(false);
+    return () => setIsOpenOneNewCart(false);
   }, [oneAddCard]);
   useEffect(() => {
     return () => {
-      setIsOpen(false);
-      console.log("unmountttttttttttttttttttttt", isOpen, isOneAddCartClone);
+      dispatch(deleteAddNewCard());
+      setIsOpenOneNewCart(false);
     };
   }, []);
   const getResultSearch = (value) => {
@@ -123,7 +117,7 @@ function Header() {
       })
     );
 
-    setGoSearchPage(false);
+    // setGoSearchPage(false);
   };
   //dropdown
   const male = [
@@ -341,40 +335,40 @@ function Header() {
   const account = [
     {
       key: "0",
+
       onClick: () => {
-        console.log("cmmmmmmmmmmmmmmmmmmmm");
         navigate({
-          pathname: generatePath(ROUTES.USER.PRODUCT_LIST, {
-            subCategoryId: [6, 2],
-          }),
+          pathname: generatePath(ROUTES.USER.ACCOUNT),
         });
       },
       label: (
-        <a
+        <div
           target="_blank"
           rel="noopener noreferrer"
-          href="https://www.antgroup.com"
+          className="hover:text-[orange]"
         >
           Tài khoản của tôi
-        </a>
+        </div>
       ),
     },
     {
       key: "1",
-
+      onClick: () => {
+        navigate({
+          pathname: generatePath(ROUTES.USER.CHANGE_PASSWORD),
+        });
+      },
       label: (
-        <Link
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.aliyun.com"
-          to={generatePath(ROUTES.USER.CHANGE_PASSWORD)}
-        >
-          Thay đổi mật khẩu
-        </Link>
+        <div className="">
+          <div
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-[orange]"
+          >
+            Thay đổi mật khẩu
+          </div>
+        </div>
       ),
-    },
-    {
-      type: "divider",
     },
     {
       key: "3",
@@ -522,7 +516,7 @@ function Header() {
     return (
       <S.BoxAddCart
         className={`w-[300px] fixed   ${
-          isOpen ? "visible opacity-100" : "invisible opacity-0"
+          isOpenOneNewCart ? "visible opacity-100" : "invisible opacity-0"
         }  rounded-md p-3   z-10  flex flex-col items-center justify-center flex-nowrap`}
       >
         <div className="w-full p-2 mt-[-10px] text-[18px]  flex justify-center border-b-[0.8px] border-[#d9d9d9] mb-2">
@@ -563,7 +557,7 @@ function Header() {
     return (
       <S.BoxAddCart
         className={`xxs:w-[220px] fixed   ${
-          isOpen ? "visible opacity-100" : "invisible opacity-0"
+          isOpenOneNewCart ? "visible opacity-100" : "invisible opacity-0"
         }  rounded-md p-1   z-10  flex flex-col items-center justify-center flex-nowrap`}
       >
         <div className="w-full p-2 pb-1 mt-[-10px] text-[14px]  flex justify-center border-b-[0.8px] border-[#d9d9d9] ">
@@ -599,7 +593,6 @@ function Header() {
       </S.BoxAddCart>
     );
   };
-  console.log("render lai");
   return (
     <S.Header className="fixed top-[0px] z-10 ">
       <S.HeaderContainer className="xxs:hidden lg:flex mb-[15px] lg:px-4 xl:px-0">
@@ -630,15 +623,10 @@ function Header() {
                       setEmpty(false);
                       setSearchKey(e.target.value.trim());
                       getResultSearch(e.target.value.trim());
-                      console.log("trong1");
                     } else {
                       setEmpty(true);
                       setSearchKey(null);
                     }
-                    console.log(
-                      "🚀 ~ file: index.jsx:491 ~ Header ~ searchKey:",
-                      searchKey
-                    );
                   }}
                 />
                 <S.SearchBtn
@@ -662,7 +650,7 @@ function Header() {
           </S.InputCover>
 
           <div className="flex justify-around items-center gap-2 ">
-            <a
+            <Link
               href=""
               className="flex justify-around items-center text-center gap-1 text-[#11006F] hover:text-[#FCAF17]"
             >
@@ -674,7 +662,7 @@ function Header() {
                 230+
               </span>
               <span>Cửa hàng </span>
-            </a>
+            </Link>
             <span className="flex justify-around items-center mb-[0px]  text-[#11006F]">
               <BsTelephoneFill className="mr-1 mb-[2px]  text-[#11006F]" />
               18002086
@@ -823,20 +811,20 @@ function Header() {
             </S.Person>
             <div>
               {userInfo.data.id ? (
-                <Link>
+                <div>
                   <Dropdown
                     menu={{
                       items: account,
                     }}
                     placement="bottomRight"
                   >
-                    <a onClick={(e) => e.preventDefault()}>
-                      <Space className="text-[18px] h-[40px] ">
+                    <div className="  hover:cursor-pointer">
+                      <div className="flex text-[20px] justify-center align-content-center">
                         {userInfo.data.fullName}
-                      </Space>
-                    </a>
+                      </div>
+                    </div>
                   </Dropdown>
-                </Link>
+                </div>
               ) : (
                 <div className="text-[14px]">
                   <Link to={generatePath(ROUTES.USER.REGISTER)}>Đăng Ký</Link>
@@ -969,7 +957,6 @@ function Header() {
                       if (e.target.value.trim() !== "") {
                         setEmpty(false);
                         setSearchKey(e.target.value.trim());
-                        console.log("trong");
                         getResultSearch(e.target.value.trim());
                       } else {
                         setEmpty(true);

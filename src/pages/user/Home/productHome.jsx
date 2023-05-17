@@ -32,7 +32,7 @@ function ProductHome({ subCategoryId, nameSwiper }) {
   const renderListCart = (productChild) => {
     return productChild.map((item, index) => {
       return (
-        <SwiperSlide className="productSwiperSlide">
+        <SwiperSlide key={index} className="productSwiperSlide">
           <S.CustomLink
             to={generatePath(ROUTES.USER.PRODUCT_DETAIL, { id: item.id })}
           >

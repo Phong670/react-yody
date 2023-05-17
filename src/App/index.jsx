@@ -78,6 +78,7 @@ function App() {
             element={<ThankyouOrderedPage />}
           />
         </Route>
+        <Route path="*" element={<div>404 Not Found</div>} />
       </Routes>
     </>
   );

@@ -1,5 +1,5 @@
 import { createAction } from "@reduxjs/toolkit";
-import { REQUEST, SUCCESS, FAIL, CART_ACTION } from "../constants";
+import { REQUEST, CART_ACTION } from "../constants";
 
 export const addCartListAction = createAction(
   REQUEST(CART_ACTION.ADD_CART_LIST)
@@ -9,4 +9,7 @@ export const updateCartItemAction = createAction(
 );
 export const deleteCartItemAction = createAction(
   REQUEST(CART_ACTION.DELETE_CART_ITEM)
+);
+export const deleteAddNewCard = createAction(
+  REQUEST(CART_ACTION.DELETE_ADD_NEW_CART)
 );

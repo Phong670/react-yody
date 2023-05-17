@@ -138,7 +138,7 @@ function Orders() {
   ];
 
   return (
-    <div className="w-full bg-[#f8f8f8] flex justify-center pb-4">
+    <div className="w-full xxs:mt-[-40px] bg-[#f8f8f8] flex justify-center pb-4">
       <div className="w-[1200px]">
         <div className=" flex justify-be items-center flex-wrap flex-col mb-4 lg:mt-[125px] xxs:mt-[80px]">
           <div className="flex gap-2">

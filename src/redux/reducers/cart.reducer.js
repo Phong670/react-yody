@@ -5,7 +5,7 @@ const initialState = {
   cartList: {
     data: JSON.parse(localStorage.getItem("cartList")) || [],
   },
-  oneAddCard: { data: [] },
+  oneAddCard: [],
 };
 
 const cartReducer = createReducer(initialState, {
@@ -51,6 +51,12 @@ const cartReducer = createReducer(initialState, {
       cartList: {
         data: newCartList,
       },
+    };
+  },
+  [REQUEST(CART_ACTION.DELETE_ADD_NEW_CART)]: (state, action) => {
+    return {
+      ...state,
+      oneAddCard: [],
     };
   },
 

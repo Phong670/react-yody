@@ -15,9 +15,10 @@ import {
 import axios from "axios";
 
 import { AiOutlineClose, AiOutlineUp, AiOutlineDown } from "react-icons/ai";
-import { Select, Col, Button, Slider, Drawer, Space } from "antd";
+import { Select, Col, Button, Slider, Drawer, Space, Input } from "antd";
 import { FiFilter } from "react-icons/fi";
 let genderClone = null;
+let valuePriceClone = [0, 700];
 function ProductList() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -35,6 +36,8 @@ function ProductList() {
   const { productList } = useSelector((state) => state.product);
   const { categoryList } = useSelector((state) => state.category);
   const [sizeList, setSizeList] = useState([]);
+  const [valuePriceShow, setValuePriceShow] = useState([0, 700]);
+
   const [open, setOpen] = useState(false);
   const [filterParams, setFilterParams] = useState({
     categoryId: [],
@@ -193,6 +196,8 @@ function ProductList() {
     clone = [];
     genderClone = subCategoryIdRemove;
     setListYourChoice(clone);
+    valuePriceClone = [0, 700];
+    setDefaultValuePrice([0, 700]);
     categoryIdTemp = [];
     sizeIdTemp = [];
     setFilterParams({
@@ -202,6 +207,8 @@ function ProductList() {
       page: 1,
       limit: PRODUCT_LIMIT,
       subCategoryId: subCategoryIdRemove,
+      price_gte: valuePriceClone[0],
+      price_lte: valuePriceClone[1],
     });
   };
   console.log("render lai");
@@ -271,30 +278,50 @@ function ProductList() {
     });
   };
 
-  const renderListFilterPrice = (list) => {
-    return (
-      <div className="w-[90%] ">
-        <Slider
-          onAfterChange={(value) => {
-            setDefaultValuePrice(value);
-            setFilterParams({
-              ...filterParams,
-              price_gte: value[0],
-              price_lte: value[1],
-              page: 1,
-              limit: PRODUCT_LIMIT,
-            });
-          }}
-          min={0}
-          max={700}
-          range={{
-            draggableTrack: false,
-          }}
-          defaultValue={defaultValuePrice}
-        />
-      </div>
-    );
-  };
+  const renderListFilterPrice = useMemo(
+    (list) => {
+      return (
+        <div className="w-[90%] ">
+          <div className="w-100% flex justify-between">
+            <Input
+              className="w-[30%]"
+              value={valuePriceClone[0]}
+              disabled
+            ></Input>
+            <Input
+              className="w-[30%]"
+              value={valuePriceClone[1]}
+              disabled
+            ></Input>
+          </div>
+
+          <Slider
+            onAfterChange={(value) => {
+              setDefaultValuePrice(value);
+              setValuePriceShow(value);
+              valuePriceClone = value;
+
+              setFilterParams({
+                ...filterParams,
+                price_gte: value[0],
+                price_lte: value[1],
+                page: 1,
+                limit: PRODUCT_LIMIT,
+              });
+            }}
+            min={0}
+            max={700}
+            range={{
+              draggableTrack: false,
+            }}
+            // value={valuePriceClone}
+            defaultValue={defaultValuePrice}
+          />
+        </div>
+      );
+    },
+    [valuePriceClone]
+  );
 
   const RenderYourChoice = useMemo(() => {
     return (
@@ -363,8 +390,8 @@ function ProductList() {
           </div>
         </div>
         {RenderYourChoice}
-        <div className="my-4">Giá</div>
-        {renderListFilterPrice()}
+        <div className="mt-4 mb-8">Giá</div>
+        {renderListFilterPrice}
 
         <div
           className="my-4 flex justify-between items-center"
@@ -498,7 +525,7 @@ function ProductList() {
       ) : (
         <></>
       )}
-      <div className="flex justify-between min-w-[250px] h-[auto] border-solid border-b-2 border-[#dde1ef]">
+      <div className="flex xxs:w-full justify-between min-w-[250px] h-[auto] border-solid border-b-2 border-[#dde1ef]">
         <CpnFilterSort></CpnFilterSort>
         <div
           className="xs:block lg:hidden cursor-pointer"
@@ -548,7 +575,7 @@ function ProductList() {
             </div>
             {RenderYourChoice}
             <div className="my-4">Giá</div>
-            {renderListFilterPrice()}
+            {renderListFilterPrice}
             <div
               className="my-4 flex justify-between items-center"
               onClick={() => {

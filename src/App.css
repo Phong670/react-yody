@@ -227,3 +227,6 @@ html {
 .ant-btn .ant-btn-primary {
   background-color: #fcaf17 !important;
 }
+.selectCustomCheckout > .select__control {
+  padding: 3px !important;
+}

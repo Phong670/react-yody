@@ -244,7 +244,7 @@ function Checkout() {
                   ]}
                 >
                   <Select
-                    className="Tinh"
+                    className="selectCustomCheckout"
                     classNamePrefix="select"
                     defaultValue={""}
                     // isDisabled={isDisabled}
@@ -284,7 +284,8 @@ function Checkout() {
                   ]}
                 >
                   <Select
-                    className="basic-single"
+                    styles={{ padding: "11px" }}
+                    className="selectCustomCheckout"
                     classNamePrefix="select"
                     name="district"
                     placeholder="Quận huyện"
@@ -306,7 +307,7 @@ function Checkout() {
 
                 <Form.Item
                   label=""
-                  name="ward"
+                  name="selectCustomCheckout"
                   rules={[
                     {
                       required: true,
