@@ -1,33 +1,22 @@
-import { useMemo } from "react";
-import { useState } from "react";
-import {
-  Link,
-  useParams,
-  generatePath,
-  Navigate,
-  useNavigate,
-} from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { Rate, Space } from "antd";
-import * as S from "./styles";
-import { useEffect } from "react";
+import { useMemo, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 
-import { addCartListAction } from "../../../redux/actions/index";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { addCartListAction } from "../../../redux/actions/";
+
 import axios from "axios";
+import { Rate, Space } from "antd";
 
 function AddToCard({ productDetail, dataTotalReview }) {
+  const { id } = useParams();
+  const dispatch = useDispatch();
   const [isSizeToCart, setIsSizeToCart] = useState("");
   const [boxSizeWarning, setBoxSizeWarning] = useState(false);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { id } = useParams();
-
   const [sizeList, setSizeList] = useState([]);
-  console.log(
-    "🚀 ~ file: addToCard.jsx:27 ~ AddToCard ~ dataTotalReview:",
-    dataTotalReview
-  );
+  const [quantity, setQuantity] = useState(1);
 
+  //Khoi tao
   const totalRate = useMemo(
     () =>
       dataTotalReview.length
@@ -37,8 +26,6 @@ function AddToCard({ productDetail, dataTotalReview }) {
         : 0,
     [dataTotalReview]
   );
-
-  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     axios
@@ -51,9 +38,9 @@ function AddToCard({ productDetail, dataTotalReview }) {
       });
   }, []);
 
+  //function
   const renderSizeList = useMemo(() => {
     let listSizeProduct = productDetail.data.sizeId;
-
     let listSizeName = [];
     sizeList?.map((item) =>
       listSizeProduct?.map(
@@ -67,10 +54,6 @@ function AddToCard({ productDetail, dataTotalReview }) {
           onClick={() => {
             setIsSizeToCart(item);
             setBoxSizeWarning(false);
-            console.log(
-              "🚀 ~ file: index.jsx:91 ~ returnListSizeName.map ~ isSizeToCart:",
-              isSizeToCart
-            );
           }}
           className={`w-[56px] rounded-[4px] h-[40px] bg-[#dfe4e8] gap-2 
             
@@ -86,8 +69,7 @@ function AddToCard({ productDetail, dataTotalReview }) {
       );
     });
   }, [sizeList, isSizeToCart, productDetail.data]);
-  console.log("isSizeToCart", isSizeToCart);
-  console.log("🚀 ~ file: addToCard.jsx:64 ~ useEffect ~ quantity:", quantity);
+
   const renderQuantity = () => {
     return (
       <div className="xxs:w-[40%] flex justify-center gap-0">
@@ -98,7 +80,6 @@ function AddToCard({ productDetail, dataTotalReview }) {
             order-solid border-[1px] border-[#e9ecef] rounded-l-[4px] text-[24px]`}
           onClick={() => {
             quantity !== 1 && setQuantity(quantity - 1);
-            console.log("quantity", quantity);
           }}
         >
           -
@@ -110,7 +91,6 @@ function AddToCard({ productDetail, dataTotalReview }) {
           className="w-[56px] h-[48px] bg-[#ffffff] order-solid border-[1px] border-[#e9ecef] rounded-r-[4px] text-[24px]"
           onClick={() => {
             setQuantity(quantity + 1);
-            console.log("quantity", quantity);
           }}
         >
           +
@@ -118,13 +98,14 @@ function AddToCard({ productDetail, dataTotalReview }) {
       </div>
     );
   };
+
   return (
     <div className="xxs:w-full lg:w-[400px]  ">
       <div className=" text-[20px] font-bold">{productDetail.data.title}</div>
       <Space>
         <Rate value={totalRate / dataTotalReview.length} disabled />
         <span>
-          {dataTotalReview.length > 1
+          {dataTotalReview.length > 0
             ? `${(totalRate / dataTotalReview.length).toFixed(1)}/5 (${
                 dataTotalReview.length
               } đánh giá)`

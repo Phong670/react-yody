@@ -1,7 +1,7 @@
 import { put, takeEvery, debounce } from "redux-saga/effects";
 import axios from "axios";
 import { REVIEW_ACTION, REQUEST, SUCCESS, FAIL } from "../constants";
-import { PRODUCT_LIMIT } from "../../constants/paging";
+import { REVIEW_LIMIT } from "../../constants/paging";
 
 function* getReviewListSaga(action) {
   try {
@@ -21,7 +21,7 @@ function* getReviewListSaga(action) {
         //getProductId
         productId: productId,
         _page: page,
-        _limit: PRODUCT_LIMIT,
+        _limit: REVIEW_LIMIT,
         rate: rate,
       },
     });

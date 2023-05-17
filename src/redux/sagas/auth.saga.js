@@ -20,7 +20,7 @@ function* loginSaga(action) {
     yield put({
       type: FAIL(AUTH_ACTION.LOGIN),
       payload: {
-        error: "Email hoặc password không đúng!",
+        error: "Email hoặc password không đúng",
       },
     });
   }

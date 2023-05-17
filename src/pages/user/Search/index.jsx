@@ -1,35 +1,25 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { generatePath, useNavigate, useParams } from "react-router-dom";
 
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getProductListAction } from "../../../redux/actions/";
-import { useMemo } from "react";
-import { Link, generatePath, useNavigate } from "react-router-dom";
+
 import { ROUTES } from "../../../constants/routes";
-import { TbPointFilled } from "react-icons/tb";
-import axios from "axios";
 import * as S from "./styles";
+import RenderSearchList from "./renderSearchList";
+
+import { TbPointFilled } from "react-icons/tb";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 
-import RenderSearchList from "./renderSearchList";
-
 function Search() {
-  const navigate = useNavigate();
-  const params = useParams();
   const { searchKey } = useParams();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  console.log(
-    "🚀 ~ file: renderSearchList.jsx:5 ~ RenderSearchList ~ searchKey:",
-    searchKey
-  );
-  // const { productList } = useSelector((state) => state.productSearch);
-
   const { productList } = useSelector((state) => state.product);
-  console.log("🚀 ~ file: index.jsx:27 ~ Search ~ productList:", productList);
+
   const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
-  const getResultSearch = (value) => {};
+
   useEffect(() => {
     dispatch(
       getProductListAction({
@@ -40,7 +30,7 @@ function Search() {
     );
   }, [searchKey]);
   return (
-    <div className="max-w-[1200px] lg:min-h-[400px] flex justify-start items-center flex-wrap flex-col lg:mt-[125px] xxs:mt-[80px]">
+    <div className="max-w-[1200px] lg:min-h-[400px] flex justify-start items-center flex-wrap flex-col lg:mt-[55px] xxs:mt-[30px]">
       <div className="flex gap-2">
         <p
           className="cursor-pointer hover:text-[orange]"

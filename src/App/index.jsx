@@ -1,35 +1,32 @@
 import "../App.css";
 import { useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import { getUserInfoAction } from "../redux/actions";
 
 import jwtDecode from "jwt-decode";
 
-import HeaderPage from "../layouts/UserLayout/components/Header";
 import HomePage from "../pages/user/Home";
 import ProductDetail from "../pages/user/ProductDetail";
 import ProductList from "../pages/user/ProductList";
+import SearchPage from "../pages/user/Search";
+
 import LoginPage from "../pages/Login";
 import RegisterPage from "../pages/Register";
+
 import CartPage from "../pages/user/Cart";
 import OrdersPage from "../pages/user/Orders";
+import AccountPage from "../pages/user/Account";
+import ChangePasswordPage from "../pages/user/ChangePassword";
 import CheckoutPage from "../pages/user/Checkout";
 import ThankyouOrderedPage from "../pages/user/ThankyouOrdered";
 import OrderedDetailPage from "../pages/user/OrderedDetail";
 
-import SearchPage from "../pages/user/Search";
-
 import HomeLayout from "../layouts/UserLayout/HomeLayout";
-
-import DetailProductLayout from "../layouts/UserLayout/DetailProductLayout";
-import ProductListLayout from "../layouts/UserLayout/ProductListLayout";
 import MainLayout from "..//layouts/UserLayout/MainLayout";
 import CheckoutLayout from "..//layouts/UserLayout/CheckoutLayout";
 
 import { ROUTES } from "../constants/routes";
-
-import { getUserInfoAction } from "../redux/actions";
-import { History } from "history";
 function App() {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
@@ -51,16 +48,24 @@ function App() {
         </Route>
         <Route element={<MainLayout />}>
           <Route path={ROUTES.USER.PRODUCT_LIST} element={<ProductList />} />
+          <Route path={ROUTES.USER.SEARCH} element={<SearchPage />} />
+
           <Route path={ROUTES.USER.LOGIN} element={<LoginPage />} />
           <Route path={ROUTES.USER.REGISTER} element={<RegisterPage />} />
+
           <Route path={ROUTES.USER.CART} element={<CartPage />} />
-          <Route path={ROUTES.USER.ACCOUNT} element={<OrdersPage />} />
+          <Route path={ROUTES.USER.ACCOUNT} element={<AccountPage />} />
+          <Route path={ROUTES.USER.ORDERS} element={<OrdersPage />} />
           <Route
             path={ROUTES.USER.ORDERED_DETAIL}
             element={<OrderedDetailPage />}
           />
 
-          <Route path={ROUTES.USER.SEARCH} element={<SearchPage />} />
+          <Route
+            path={ROUTES.USER.CHANGE_PASSWORD}
+            element={<ChangePasswordPage />}
+          />
+
           <Route
             path={ROUTES.USER.PRODUCT_DETAIL}
             element={<ProductDetail />}

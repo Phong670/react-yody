@@ -108,6 +108,12 @@ function Header() {
     }
     return () => setIsOpen(false);
   }, [oneAddCard]);
+  useEffect(() => {
+    return () => {
+      setIsOpen(false);
+      console.log("unmountttttttttttttttttttttt", isOpen, isOneAddCartClone);
+    };
+  }, []);
   const getResultSearch = (value) => {
     dispatch(
       getProductListSearchAction({
@@ -334,6 +340,15 @@ function Header() {
   ];
   const account = [
     {
+      key: "0",
+      onClick: () => {
+        console.log("cmmmmmmmmmmmmmmmmmmmm");
+        navigate({
+          pathname: generatePath(ROUTES.USER.PRODUCT_LIST, {
+            subCategoryId: [6, 2],
+          }),
+        });
+      },
       label: (
         <a
           target="_blank"
@@ -343,19 +358,20 @@ function Header() {
           Tài khoản của tôi
         </a>
       ),
-      key: "0",
     },
     {
+      key: "1",
+
       label: (
-        <a
+        <Link
           target="_blank"
           rel="noopener noreferrer"
           href="https://www.aliyun.com"
+          to={generatePath(ROUTES.USER.CHANGE_PASSWORD)}
         >
           Thay đổi mật khẩu
-        </a>
+        </Link>
       ),
-      key: "1",
     },
     {
       type: "divider",
@@ -366,11 +382,7 @@ function Header() {
         dispatch(logoutAction());
       },
       label: (
-        <Link
-          target="_blank"
-          rel="noopener noreferrer"
-          // to={generatePath(ROUTES.USER.PRODUCT_LIST, { subCategoryId: 5 })}
-        >
+        <Link target="_blank" rel="noopener noreferrer">
           Đăng xuất
         </Link>
       ),
@@ -886,7 +898,7 @@ function Header() {
               </div>
               <Link
                 className="flex w-full justify-start items-center ml-[28px] gap-2"
-                to={generatePath(ROUTES.USER.CART)}
+                to={generatePath(ROUTES.USER.ORDERS)}
                 onClick={() => onClose()}
               >
                 <BsTruck />

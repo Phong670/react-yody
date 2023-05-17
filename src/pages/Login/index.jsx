@@ -10,12 +10,10 @@ import { ROUTES } from "../../constants/routes";
 import * as S from "./styles";
 
 function LoginPage() {
-  const [loginForm] = Form.useForm();
-
-  const { loginData } = useSelector((state) => state.auth);
-  console.log("🚀 ~ file: index.jsx:15 ~ LoginPage ~ loginData:", loginData);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { loginData } = useSelector((state) => state.auth);
+  const [loginForm] = Form.useForm();
 
   const accessToken = useMemo(() => {
     localStorage.getItem("accessToken");
@@ -54,7 +52,7 @@ function LoginPage() {
 
   if (accessToken) return <Navigate to={ROUTES.USER.HOME} />;
   return (
-    <S.LoginWrapper className=" lg:mt-[95px] xxs:mt-[55px]">
+    <S.LoginWrapper className=" lg:mt-[35px] xxs:mt-[40px]">
       <S.LoginContainer className="max-w-[500px] lg:my-[40px] sm:p-[40px] xxs:px-[8px] py-[40px]">
         <div className="w-full flex justify-center flex-wrap gap-4">
           <h6 className="w-full flex justify-center gap-2 xxs:text-[18px]">
@@ -77,7 +75,7 @@ function LoginPage() {
               rules={[
                 {
                   required: true,
-                  message: "Vui lòng nhập email!",
+                  message: "Vui lòng nhập email",
                 },
               ]}
             >
@@ -89,7 +87,7 @@ function LoginPage() {
               rules={[
                 {
                   required: true,
-                  message: "Vui lòng nhập mật khẩu!",
+                  message: "Vui lòng nhập mật khẩu",
                 },
               ]}
             >

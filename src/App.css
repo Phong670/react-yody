@@ -223,3 +223,7 @@ html {
   justify-content: start !important;
   items-content: center !important;
 }
+//ant custom
+.ant-btn .ant-btn-primary {
+  background-color: #fcaf17 !important;
+}

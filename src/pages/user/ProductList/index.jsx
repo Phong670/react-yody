@@ -395,7 +395,7 @@ function ProductList() {
   console.log("render lai button genderClone", subCategoryId, genderClone);
 
   return (
-    <div className="max-w-[1200px] p-[8px] flex flex-nowrap flex-col justify-between lg:mt-[125px] xxs:mt-[70px]">
+    <div className="max-w-[1200px] p-[8px] flex flex-nowrap flex-col justify-between lg:mt-[55px] xxs:mt-[30px]">
       <div className="w-full flex justify-center mb-4">
         {subCategoryIdArray.length > 1 ? (
           <>

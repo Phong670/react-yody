@@ -1,41 +1,74 @@
-import { useEffect, useMemo } from "react";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { Card, Button, Space, message } from "antd";
-import { Rate, Form, Input, Modal, Select } from "antd";
-import { ROUTES } from "../../../constants/routes";
 import moment from "moment";
 import "moment/locale/vi";
-import { BsPersonCircle } from "react-icons/bs";
-import { PRODUCT_LIMIT } from "../../../constants/paging";
-import { getReviewAction, sendReviewAction } from "../../../redux/actions";
-import { FiFilter } from "react-icons/fi";
 
-import * as S from "./styles";
+import { useDispatch, useSelector } from "react-redux";
+import { getReviewAction, sendReviewAction } from "../../../redux/actions";
+
+import { REVIEW_LIMIT } from "../../../constants/paging";
+import { ROUTES } from "../../../constants/routes";
+
+import { BsPersonCircle } from "react-icons/bs";
+import { FiFilter } from "react-icons/fi";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Rate, Form, Input, Modal, Select, Button, message, Spin } from "antd";
 
 function ReviewProduct({ idProduct, title, dataTotalReview }) {
   const navigate = useNavigate();
-  const { userInfo } = useSelector((state) => state.auth);
-
-  const [reviewForm] = Form.useForm();
-  // const { id } = useParams();
-
   const dispatch = useDispatch();
 
+  const { userInfo } = useSelector((state) => state.auth);
   const { listReview } = useSelector((state) => state.review);
 
   const [page, setPage] = useState(1);
   const [more, setMore] = useState(false);
   const [filterComment, setFilterComment] = useState([1, 2, 3, 4, 5]);
-  let filterCommentClone = filterComment;
-
   //ant
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpenAlert, setIsModalOpenAlert] = useState(false);
+  const [messageApi, contextHolder] = message.useMessage();
+  const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
+  const [reviewForm] = Form.useForm();
+
+  //valueClone
+  let filterCommentClone = filterComment;
+  let isReview = "";
+
+  //KhoiTao
+  useEffect(() => {
+    dispatch(
+      getReviewAction({
+        productId: parseInt(idProduct),
+        page: page,
+        sendReview: false,
+        more: more,
+        rate: filterComment,
+      })
+    );
+  }, [idProduct]);
+  const totalRate = useMemo(
+    () =>
+      dataTotalReview.length
+        ? dataTotalReview
+            .map((item) => item.rate)
+            .reduce((total, item) => total + item)
+        : 0,
+    [dataTotalReview]
+  );
+  const checkReview = () => {
+    isReview = listReview.data.findIndex(
+      (item) => item.userId === userInfo.data.id
+    );
+  };
+
+  checkReview();
+
+  //function
   const handleChangeFilter = (value) => {
-    console.log(value); // { value: "lucy", key: "lucy", label: "Lucy (101)" }
     filterCommentClone = value === 0 ? [1, 2, 3, 4, 5] : value;
     setFilterComment(value === 0 ? [1, 2, 3, 4, 5] : value);
-    console.log("v", filterComment);
+
     setMore(false);
     setPage(1);
     dispatch(
@@ -49,41 +82,7 @@ function ReviewProduct({ idProduct, title, dataTotalReview }) {
     );
   };
 
-  const callSageReview = getReviewAction({
-    productId: parseInt(idProduct),
-    page: page,
-    sendReview: false,
-    more: more,
-    rate: filterComment,
-  });
-  useEffect(() => {
-    console.log("lay data lan thu ");
-    dispatch(callSageReview);
-  }, [idProduct]);
-  const totalRate = useMemo(
-    () =>
-      dataTotalReview.length
-        ? dataTotalReview
-            .map((item) => item.rate)
-            .reduce((total, item) => total + item)
-        : 0,
-    [dataTotalReview]
-  );
-
-  let isReview = "";
-  const checkReview = () => {
-    isReview = listReview.data.findIndex(
-      (item) => item.userId === userInfo.data.id
-    );
-  };
-  console.log(
-    "🚀 ~ file: index.jsx:30 ~ ProductDetail ~ listReview:",
-    listReview
-  );
-  checkReview();
-
   const handleReview = (values) => {
-    console.log(" handle view");
     setPage(1);
     dispatch(
       sendReviewAction({
@@ -108,7 +107,6 @@ function ReviewProduct({ idProduct, title, dataTotalReview }) {
   };
   const renderListReview = useMemo(() => {
     return listReview.data.map((item) => {
-      console.log("aaaaaaaaaaaaaaaaa", item.createdAt);
       return (
         <div key={item.id} className="w-full mt-4 flex">
           <div className="max-w-[40px] h-[40px] flex item-center">
@@ -141,26 +139,16 @@ function ReviewProduct({ idProduct, title, dataTotalReview }) {
       );
     });
   }, [listReview.data]);
-
-  const desc = ["1/5", "2/5", "3/5", "4/5", "5/5"];
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isModalOpenAlert, setIsModalOpenAlert] = useState(false);
-  const [messageApi, contextHolder] = message.useMessage();
+  //antFunction
   const showModal = () => {
     setIsModalOpen(true);
   };
-
   const handleCancel = () => {
     setIsModalOpen(false);
   };
   const showModalAlert = () => {
     setIsModalOpenAlert(true);
   };
-
-  const handleCancelAlert = () => {
-    setIsModalOpenAlert(false);
-  };
-
   const reviewedAlert = () => {
     messageApi.open({
       type: "reviewedAlert",
@@ -171,7 +159,7 @@ function ReviewProduct({ idProduct, title, dataTotalReview }) {
     <div className="flex flex-wrap flex-col justify-between w-full">
       {contextHolder}
       <h6 className="my-4"> ĐÁNH GIÁ</h6>
-      {listReview.total === 0 ? (
+      {totalRate === 0 ? (
         <div className=" flex gap-4  justify-center flex-wrap bg-[#F2F2F2] p-3">
           <p className="w-full flex justify-center text-center text-[14px]">
             Hiện tại sản phẩm chưa có đánh giá nào, bạn hãy trở thành người đầu
@@ -349,7 +337,19 @@ function ReviewProduct({ idProduct, title, dataTotalReview }) {
             </div>
           </div>
           <div className="mt-5">
-            <div className="px-4">{renderListReview}</div>
+            {!more && listReview.load ? (
+              <Spin
+                indicator={antIcon}
+                className="w-full flex justify-center"
+              />
+            ) : listReview.data.length === 0 ? (
+              <div className="w-full flex justify-center">
+                Không có đánh giá nào phù hợp!
+              </div>
+            ) : (
+              <div className="xl:px-4 xxs:px-2">{renderListReview}</div>
+            )}
+
             {listReview.data.length < listReview.total ? (
               <button
                 className="w-full p-2 border-b-[1px] border-solid border-[#c4cdd5] text-[14px] text-[#030d78] hover:text-[orange]"
@@ -369,7 +369,7 @@ function ReviewProduct({ idProduct, title, dataTotalReview }) {
               >
                 Xem thêm đánh giá
               </button>
-            ) : listReview.data.length < 5 ? (
+            ) : listReview.data.length < REVIEW_LIMIT + 1 ? (
               <></>
             ) : (
               <>
@@ -387,8 +387,6 @@ function ReviewProduct({ idProduct, title, dataTotalReview }) {
                         rate: filterCommentClone,
                       })
                     );
-
-                    console.log("pageaaaaaaaaa", page);
                   }}
                 >
                   Thu gọn đánh giá
@@ -399,12 +397,22 @@ function ReviewProduct({ idProduct, title, dataTotalReview }) {
         </div>
       )}
       <Modal
-        title=""
+        title="Bạn cần phải đăng nhập để đánh giá"
         open={isModalOpenAlert}
-        onOk={() => navigate(ROUTES.USER.LOGIN)}
-        onCancel={handleCancelAlert}
+        footer={null}
       >
-        <p>Bạn cần phải đăng nhập để đánh giá</p>
+        <div className="w-full flex justify-center mt-3">
+          <Button
+            className="border-none hover:border-none hover:bg-[#fcb01798]"
+            style={{
+              background: "#fcaf17",
+              color: "white",
+            }}
+            onClick={() => navigate(ROUTES.USER.LOGIN)}
+          >
+            Đăng nhập
+          </Button>
+        </div>
       </Modal>
       <Modal
         // className="flex justify-center items-center"

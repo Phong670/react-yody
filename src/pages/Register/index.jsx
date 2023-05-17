@@ -10,17 +10,11 @@ import { ROUTES } from "../../constants/routes";
 import * as S from "./styles";
 
 function RegisterPage() {
-  const [registerForm] = Form.useForm();
-
-  const { registerData } = useSelector((state) => state.auth);
-  console.log(
-    "🚀 ~ file: index.jsx:15 ~ RegisterPage ~ registerData:",
-    registerData
-  );
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
+  const { registerData } = useSelector((state) => state.auth);
   const accessToken = localStorage.getItem("accessToken");
+  const [registerForm] = Form.useForm();
 
   useEffect(() => {
     if (registerData.error) {
@@ -49,7 +43,7 @@ function RegisterPage() {
 
   if (accessToken) return <Navigate to={ROUTES.USER.HOME} />;
   return (
-    <S.RegisterWrapper className="w-full lg:mt-[95px] mt-[55px]">
+    <S.RegisterWrapper className="w-full lg:mt-[35px] mt-[40px]">
       <S.RegisterContainer className="sm:p-[40px] xxs:px-[8px] py-[40px] lg:my-[40px] flex justify-center flex-wrap">
         <div className="max-w-[500px] flex justify-center flex-wrap gap-4">
           <h6 className="w-full flex justify-center gap-2 xxs:text-[18px]">
@@ -73,7 +67,7 @@ function RegisterPage() {
                 {
                   required: true,
                   whitespace: true,
-                  message: "Vui lòng nhập tên!",
+                  message: "Vui lòng nhập tên",
                 },
               ]}
             >
@@ -86,7 +80,7 @@ function RegisterPage() {
                 {
                   required: true,
                   whitespace: true,
-                  message: "Vui lòng nhập email!",
+                  message: "Vui lòng nhập email",
                 },
                 {
                   type: "email",
@@ -102,7 +96,7 @@ function RegisterPage() {
               rules={[
                 {
                   required: true,
-                  message: "Vui lòng nhập mật khẩu!",
+                  message: "Vui lòng nhập mật khẩu",
                 },
               ]}
             >
@@ -116,7 +110,7 @@ function RegisterPage() {
               rules={[
                 {
                   required: true,
-                  message: "Vui lòng nhập xác nhậN mật khẩu!",
+                  message: "Vui lòng nhập xác nhậN mật khẩu",
                 },
                 ({ getFieldValue }) => ({
                   validator(_, value) {
@@ -124,7 +118,7 @@ function RegisterPage() {
                       return Promise.resolve();
                     }
                     return Promise.reject(
-                      new Error("Mật khẩu chưa trùng nhau!")
+                      new Error("Mật khẩu chưa trùng nhau")
                     );
                   },
                 }),

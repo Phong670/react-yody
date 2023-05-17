@@ -1,13 +1,6 @@
-import { useParams } from "react-router-dom";
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { getProductListSearchAction } from "../../../redux/actions/";
-import { useMemo } from "react";
-import { Link, generatePath, useNavigate } from "react-router-dom";
+import { generatePath } from "react-router-dom";
 import { ROUTES } from "../../../constants/routes";
-import { useState } from "react";
-import axios from "axios";
+
 import * as S from "./styles";
 const RenderSearchList = ({ productList }) => {
   const renderListCart = () => {
