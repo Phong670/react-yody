@@ -56,7 +56,7 @@ function Orders() {
             <div className="w-full flex justify-start flex-nowrap p-2 px-4 bg-[#e1e1e1]">
               <div className="w-[165px] ">Đơn hàng</div>
               <div className="flex flex-1 text-[orange] hover:cursor-pointer">
-                #23{item.id}
+                {item.idOrder}
               </div>
             </div>
             <div className="w-full flex justify-start p-2 px-4">
@@ -106,9 +106,11 @@ function Orders() {
   const tableColumns = [
     {
       title: "Mã đơn hàng",
-      dataIndex: "id",
-      key: "id",
-      render: (id) => <button className="text-[orange] ">#23{id}</button>,
+      dataIndex: "idOrder",
+      key: "idOrder",
+      render: (idOrder) => (
+        <button className="text-[orange] ">{idOrder}</button>
+      ),
     },
     {
       title: "Giá trị đơn hàng",
@@ -184,14 +186,20 @@ function Orders() {
                 <p>{userInfo.data.fullName}</p>
                 <button
                   className="bg-[orange] p-1 px-4 rounded-[999px] text-[white]"
-                  onClick={() => dispatch(logoutAction())}
+                  onClick={() => {
+                    dispatch(logoutAction());
+                    navigate(ROUTES.USER.HOME);
+                  }}
                 >
                   Đăng xuất
                 </button>
               </div>
             </div>
             <div className="w-full flex flex-col items-start justify-start">
-              <Link className="w-full flex gap-2 px-4 py-3">
+              <Link
+                className="w-full flex gap-2 px-4 py-3"
+                to={generatePath(ROUTES.USER.ACCOUNT)}
+              >
                 <img
                   src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/acc_user_1.svg"
                   alt=""
@@ -202,23 +210,24 @@ function Orders() {
                 <img
                   src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/acc_user_2_hover.svg"
                   alt=""
-                />{" "}
+                />
                 Đơn hàng của tôi
               </Link>
-              <Link className="w-full flex gap-2 px-4 py-3">
-                {" "}
+              <Link
+                className="w-full flex gap-2 px-4 py-3"
+                to={generatePath(ROUTES.USER.CHANGE_PASSWORD)}
+              >
                 <img
                   src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/acc_user_3_hover.svg"
                   alt=""
-                />{" "}
+                />
                 Đổi mật khẩu
               </Link>
               <Link className="w-full flex gap-2 px-4 py-3">
-                {" "}
                 <img
                   src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/acc_user_6.svg"
                   alt=""
-                />{" "}
+                />
                 Sản phẩm yêu thích
               </Link>
             </div>

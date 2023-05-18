@@ -123,61 +123,85 @@ function Header() {
   const male = [
     {
       key: "1",
+      onClick: () => {
+        navigate({
+          pathname: generatePath(ROUTES.USER.PRODUCT_LIST, {
+            subCategoryId: [1],
+          }),
+        });
+      },
       label: (
         <div className="">
-          <Link
+          <div
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-[orange]"
-            to={generatePath(ROUTES.USER.PRODUCT_LIST, { subCategoryId: 1 })}
           >
             Áo
-          </Link>
+          </div>
         </div>
       ),
     },
     {
-      key: "ư",
+      key: "2",
+      onClick: () => {
+        navigate({
+          pathname: generatePath(ROUTES.USER.PRODUCT_LIST, {
+            subCategoryId: [2],
+          }),
+        });
+      },
       label: (
         <div className="w-[120px]">
-          <Link
+          <div
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-[orange]"
-            to={generatePath(ROUTES.USER.PRODUCT_LIST, { subCategoryId: 2 })}
           >
             Quần
-          </Link>
+          </div>
         </div>
       ),
     },
     {
       key: "3",
+      onClick: () => {
+        navigate({
+          pathname: generatePath(ROUTES.USER.PRODUCT_LIST, {
+            subCategoryId: [3],
+          }),
+        });
+      },
       label: (
         <div className="w-[120px]">
-          <Link
+          <div
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-[orange]"
-            to={generatePath(ROUTES.USER.PRODUCT_LIST, { subCategoryId: 3 })}
           >
             Đồ Thể Thao Nam
-          </Link>
+          </div>
         </div>
       ),
     },
     {
       key: "4",
+      onClick: () => {
+        navigate({
+          pathname: generatePath(ROUTES.USER.PRODUCT_LIST, {
+            subCategoryId: [4],
+          }),
+        });
+      },
       label: (
         <div className="">
-          <Link
+          <div
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-[orange]"
-            to={generatePath(ROUTES.USER.PRODUCT_LIST, { subCategoryId: 4 })}
           >
             Phụ Kiện Nam
-          </Link>
+          </div>
         </div>
       ),
     },
@@ -185,61 +209,85 @@ function Header() {
   const female = [
     {
       key: "1",
+      onClick: () => {
+        navigate({
+          pathname: generatePath(ROUTES.USER.PRODUCT_LIST, {
+            subCategoryId: [5],
+          }),
+        });
+      },
       label: (
         <div className="">
-          <Link
+          <div
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-[orange]"
-            to={generatePath(ROUTES.USER.PRODUCT_LIST, { subCategoryId: 5 })}
           >
             Áo
-          </Link>
+          </div>
         </div>
       ),
     },
     {
-      key: "ư",
+      key: "2",
+      onClick: () => {
+        navigate({
+          pathname: generatePath(ROUTES.USER.PRODUCT_LIST, {
+            subCategoryId: [6],
+          }),
+        });
+      },
       label: (
         <div className="">
-          <Link
+          <div
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-[orange]"
-            to={generatePath(ROUTES.USER.PRODUCT_LIST, { subCategoryId: 6 })}
           >
             Quần
-          </Link>
+          </div>
         </div>
       ),
     },
     {
       key: "3",
+      onClick: () => {
+        navigate({
+          pathname: generatePath(ROUTES.USER.PRODUCT_LIST, {
+            subCategoryId: [7],
+          }),
+        });
+      },
       label: (
         <div className="">
-          <Link
+          <div
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-[orange]"
-            to={generatePath(ROUTES.USER.PRODUCT_LIST, { subCategoryId: 7 })}
           >
             Váy
-          </Link>
+          </div>
         </div>
       ),
     },
     {
       key: "4",
+      onClick: () => {
+        navigate({
+          pathname: generatePath(ROUTES.USER.PRODUCT_LIST, {
+            subCategoryId: [8],
+          }),
+        });
+      },
       label: (
         <div className="">
-          <Link
+          <div
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-[orange]"
-            to={generatePath(ROUTES.USER.PRODUCT_LIST, { subCategoryId: 8 })}
           >
             Đồ Thể Thao
-          </Link>
+          </div>
         </div>
       ),
     },
@@ -254,13 +302,13 @@ function Header() {
             rel="noopener noreferrer"
             className="hover:text-[orange]"
           >
-            Đồ thể thao đa nắng
+            Đồ thể thao đa năng
           </Link>
         </div>
       ),
     },
     {
-      key: "ư",
+      key: "2",
       label: (
         <div className="">
           <Link
@@ -318,7 +366,7 @@ function Header() {
       ),
     },
     {
-      key: "ư",
+      key: "2",
       label: (
         <div>
           <Link
@@ -366,6 +414,25 @@ function Header() {
             className="hover:text-[orange]"
           >
             Thay đổi mật khẩu
+          </div>
+        </div>
+      ),
+    },
+    {
+      key: "2",
+      onClick: () => {
+        navigate({
+          pathname: generatePath(ROUTES.USER.ORDERS),
+        });
+      },
+      label: (
+        <div className="">
+          <div
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-[orange]"
+          >
+            Đơn hàng của tôi
           </div>
         </div>
       ),
@@ -663,19 +730,12 @@ function Header() {
               </span>
               <span>Cửa hàng </span>
             </Link>
+
             <span className="flex justify-around items-center mb-[0px]  text-[#11006F]">
-              <BsTelephoneFill className="mr-1 mb-[2px]  text-[#11006F]" />
+              <BsTelephoneFill className="mr-1 ml-2 mb-[2px]  text-[#11006F]" />
               18002086
             </span>
             <span className="rounded-full bg-[#FCAF17] px-2 ">Free</span>
-
-            <span className="text-[#11006F]  flex justify-around items-center xl:flex xxs:hidden">
-              Đặt hàng gọi
-            </span>
-            <span className="xl:flex xxs:hidden mb-[0px]   justify-around items-center gap-1 text-[#11006F]   ">
-              <BsTelephoneFill className="mb-[2px]  " />
-              02499986999
-            </span>
           </div>
         </S.HeaderTop>
         <S.HeaderBottom className="flex justify-center items-center w-full">
@@ -967,8 +1027,8 @@ function Header() {
                   <button
                     type="submit"
                     className={`${
-                      searchKey?.length > 0 ? "bg-[#FFA500]" : "bg-[#5d5c5b]"
-                    } w-[85px] hover:bg-[#f8b021] p-2 bg-[#1111] flex justify-center rounded-l-[0px] rounded-r-[4px] ml-[-2px]`}
+                      searchKey?.length > 0 ? "bg-[#FFA500]" : "bg-[#cbc6c6]"
+                    } w-[85px] hover:bg-[#f8b021] p-2 bg-[#cbc6c6] flex justify-center rounded-l-[0px] rounded-r-[4px] ml-[-2px]`}
                   >
                     <BsSearch className="text-[24px]" />
                   </button>

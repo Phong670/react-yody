@@ -1,5 +1,33 @@
 {
-  "reviews": [],
+  "reviews": [
+    {
+      "rate": 3,
+      "comment": "1",
+      "userId": 1,
+      "productId": 1,
+      "createdAt": 1684331634904,
+      "updatedAt": 1684331634905,
+      "id": 1
+    },
+    {
+      "rate": 3,
+      "comment": "s",
+      "userId": 1,
+      "productId": 1,
+      "createdAt": 1684331668616,
+      "updatedAt": 1684331668616,
+      "id": 2
+    },
+    {
+      "rate": 3,
+      "comment": "d",
+      "userId": 1,
+      "productId": 11,
+      "createdAt": 1684428729334,
+      "updatedAt": 1684428729334,
+      "id": 3
+    }
+  ],
   "users": [
     {
       "email": "qphong1234@gmail.com",
@@ -31,8 +59,8 @@
       "genderId": 2,
       "categoryId": 16,
       "subCategoryId": 5,
-      "characteristic": "Đặc điểm nổi bật",
-      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
+      "characteristic": "<p> <img src='https://bizweb.dktcdn.net/100/438/408/files/product-highlight-mat-chim-b16c3d81-cac3-47e7-88a8-928e0173ae28.jpg?v=1681801721882' alt='Áo Polo Nữ Pique Mắt Chim Phối Tay Cổ Kẻ'></p><ul> <li>Chất liệu: Pique mắt chim với thành phần 60% Cotton USA&nbsp;+ 35% Polyester + 5% Spandex</li> <li>Sử dụng&nbsp;Cotton USA - sợi cotton&nbsp;tốt nhất trên thế giới</li> <li>Công nghệ nhuộm Solid Dyed tạo nên hiệu ứng bắt mắt</li> <li>Chất liệu vải độc đáo với hiệu ứng mắt chim độc đáo, mới lạ và trẻ trung</li> <li>Vải pique&nbsp;thông thoáng, thấm hút tốt có độ bền cao</li> <li>Áo co giãn tốt, luôn giữ được form và bền màu</li> <li>YODY - Look good. Feel good.</li></ul>",
+      "description": "<h2 class='w-full flex justify-center'> <span style='color: rgb(41, 128, 185);'>Áo Polo Nữ Mắt Chim Phối Tay Cổ Kẻ</span></h2><h3 class='w-full flex justify-center'> <span style='color: rgb(231, 76, 60);'>Tính năng chất liệu</span></h3><p> <img src='https://bizweb.dktcdn.net/100/438/408/files/tinh-nang-chat-lieu-5d848b4c-730e-4772-a810-bf9c883b775a.jpg?v=1678760425277' alt='Áo Polo Nữ Pique Mắt Chim Phối Tay Cổ Kẻ'> <img src='https://bizweb.dktcdn.net/100/438/408/files/tinh-nang-chat-lieu-2-b7d509d1-9916-4176-8501-828053a16613.jpg?v=1678760437762' alt='Áo Polo Nữ Pique Mắt Chim Phối Tay Cổ Kẻ'> <img src='https://bizweb.dktcdn.net/100/438/408/files/tinh-nang-chat-lieu-3-a382776e-ff43-489d-a28c-c6664b5fd079.jpg?v=1678760447207' alt='Áo Polo Nữ Pique Mắt Chim Phối Tay Cổ Kẻ'></p><h3 class='w-full flex justify-center'> <span style='color: rgb(231, 76, 60);'>Thiết kế sản phẩm</span></h3><p class='w-full flex justify-center'>Là kiểu áo polo nữ làm từ chất liệu mắt chim độc đáo, thiết kế&nbsp;ngắn tay basic trẻ trung và năng động. Chiếc áo có thể mặc&nbsp;thường ngày hay trong&nbsp;những dịp sang trọng, mang đến&nbsp;cảm giác&nbsp;mát mẻ dễ chịu,&nbsp;tôn dáng và vô cùng gọn gàng cho chị em.</p><p class='w-full flex justify-center'> <img src='https://bizweb.dktcdn.net/100/438/408/files/polo-nu-pique-mat-chim-phoi-tay-co-ke-4442d804-8b25-4e7c-97bb-5a9c2e6eb594.jpg?v=1659344550185' alt='Áo Polo Nữ Pique Mắt Chim Phối Tay Cổ Kẻ'></p><p class='w-full flex justify-center'>Điểm nhấn dễ nhận thấy nhất trên áo là thiết kế phối bo&nbsp;ở phần cổ áo và cánh tay, không chỉ tạo được sự cách điệu rất tinh tế cho áo mà còn giúp người mặc làm bật được sự khỏe khoắn, năng động&nbsp;của mình.&nbsp;</p><p class='w-full flex justify-center'>Ngoài ra, với thiết kế áo 2 cúc trẻ trung giúp nàng&nbsp;tôn được vóc dáng thanh lịch,&nbsp;nữ tính đầy duyên dáng.</p><p class='w-full flex justify-center'> <img src='https://bizweb.dktcdn.net/100/438/408/products/apn5036-tit4-yody-vn.jpg?v=1657869226143' alt='Áo Polo Nữ Pique Mắt Chim Phối Tay Cổ Kẻ'></p><p class='w-full flex justify-center'> <em>Áo polo pique mắt chim thiết kế dáng suông cơ bản với điểm nhấn phối bo ở cổ và tay áo</em></p><h3 class='w-full flex justify-center'> <span style='color: rgb(231, 76, 60);'>Hướng dẫn bảo quản sản phẩm</span></h3><p class='w-full flex justify-center'> <img src='https://bizweb.dktcdn.net/100/438/408/files/bao-quan-chat-lieu-1-e4c5fab1-773d-49bb-9bdd-92b707bc04a3.jpg?v=1678760503039' alt='Áo Polo Nữ Pique Mắt Chim Phối Tay Cổ Kẻ'></p><p> <br></p>"
     },
     {
       "id": 2,
@@ -497,7 +525,7 @@
       "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
     },
     {
-      "id": 22,
+      "id": 51,
       "title": "Áo Sơ Mi Nữ Dáng Suông Sát Nách",
       "price": 399000,
       "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/ao-so-mi-nu-scn6040-tra-sjn4020-xah-21-yody.jpg?v=1680923762000",
@@ -889,24 +917,6 @@
       "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
     },
     {
-      "id": 41,
-      "title": "Quần Jeans Nam Cotton Chỉ Phối Màu",
-      "price": 549000,
-      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/qjm6029-xah-2.jpg?v=1677918489000",
-      "viewCount": 100,
-      "sizeId": [
-        13,
-        14,
-        15,
-        16
-      ],
-      "genderId": 1,
-      "categoryId": 7,
-      "subCategoryId": 2,
-      "characteristic": "Đặc điểm nổi bật",
-      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
-    },
-    {
       "id": 42,
       "title": "Quần Jean Nam Cafe Thân Thiện Với Môi Trường",
       "price": 449000,
@@ -1116,12 +1126,12 @@
       "name": "Quần Nữ"
     },
     {
-      "id": 7,
+      "id": 8,
       "genderId": 2,
       "name": "Váy"
     },
     {
-      "id": 8,
+      "id": 7,
       "genderId": 2,
       "name": "Đồ Thể Thao"
     },
@@ -1204,7 +1214,7 @@
     },
     {
       "id": 15,
-      "subCategoryId": 8,
+      "subCategoryId": 9,
       "name": "Đầm"
     },
     {
@@ -1275,7 +1285,7 @@
     {
       "id": 29,
       "subCategoryId": 4,
-      "name": "Phụ Kiện Nam"
+      "name": "Giày"
     }
   ],
   "sizes": [
@@ -1309,7 +1319,7 @@
     },
     {
       "id": 9,
-      "size": "26"
+      "size": "25"
     },
     {
       "id": 10,
@@ -1356,8 +1366,124 @@
       "size": "42"
     }
   ],
-  "orders": [],
-  "orderDetails": [],
+  "orders": [
+    {
+      "name": "phong",
+      "numberPhone": "033",
+      "email": "qphong670@gmail.com",
+      "city": {
+        "id": 9737,
+        "value": "79",
+        "parentcode": "0003",
+        "label": "Thành phố Hồ Chí Minh",
+        "status": 1,
+        "region": 3
+      },
+      "district": {
+        "id": 9897,
+        "value": "771",
+        "parentcode": "79",
+        "label": "Quận 10",
+        "status": 1,
+        "region": null
+      },
+      "ward": {
+        "id": 9912,
+        "value": "27205",
+        "parentcode": "771",
+        "label": "Phường 03",
+        "status": 1,
+        "region": null
+      },
+      "address": "123",
+      "paymentMethod": "cod",
+      "userId": 1,
+      "totalPrice": 568000,
+      "status": "Đang xử lý",
+      "costShip": 0,
+      "idOrder": "1716",
+      "createdAt": 1684427574732,
+      "updatedAt": 1684427574732,
+      "id": 1
+    },
+    {
+      "name": "phong3k",
+      "numberPhone": "0339948275",
+      "email": "qphong670@gmail.com",
+      "city": {
+        "id": 9737,
+        "value": "79",
+        "parentcode": "0003",
+        "label": "Thành phố Hồ Chí Minh",
+        "status": 1,
+        "region": 3
+      },
+      "district": {
+        "id": 9897,
+        "value": "771",
+        "parentcode": "79",
+        "label": "Quận 10",
+        "status": 1,
+        "region": null
+      },
+      "ward": {
+        "id": 9907,
+        "value": "27190",
+        "parentcode": "771",
+        "label": "Phường 02",
+        "status": 1,
+        "region": null
+      },
+      "address": "123",
+      "paymentMethod": "atm",
+      "userId": 1,
+      "totalPrice": 249000,
+      "status": "Đang xử lý",
+      "costShip": 20000,
+      "idOrder": "b80f",
+      "createdAt": 1684428811247,
+      "updatedAt": 1684428811247,
+      "id": 2
+    }
+  ],
+  "orderDetails": [
+    {
+      "orderId": 1,
+      "productId": 26,
+      "name": "Quần Jeans Nữ Baggy Gấu Xếp Ly",
+      "price": 359000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/qjn5092-xdm-1.jpg?v=1669887775000",
+      "size": "25",
+      "quantity": 1,
+      "createdAt": 1684427574777,
+      "updatedAt": 1684427574777,
+      "id": 1
+    },
+    {
+      "orderId": 1,
+      "productId": 1,
+      "name": "Áo Polo Nữ Pique Mắt Chim Phối Tay Cổ Kẻ",
+      "price": 209000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apn5036-tra3-yody-vn.jpg?v=1677118569000",
+      "size": "XS",
+      "quantity": 1,
+      "createdAt": 1684427574816,
+      "updatedAt": 1684427574816,
+      "id": 2
+    },
+    {
+      "orderId": 2,
+      "productId": 11,
+      "name": "Áo Polo Nữ Croptop Pique Mắt Chim In Hình",
+      "price": 249000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apn5054-xan-5.jpg?v=1681356076000",
+      "size": "3XL",
+      "quantity": 1,
+      "createdAt": 1684428811293,
+      "updatedAt": 1684428811293,
+      "id": 3
+    }
+  ],
   "cities": [
     {
       "id": 10993,

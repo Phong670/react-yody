@@ -26,7 +26,7 @@ function CarouselMenuSection() {
       title: "QUẦN",
     },
     {
-      id: 7,
+      id: 8,
       img: "https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/home_danhmuc_1_child_6_image.png?1683124677097",
       title: "VÁY",
     },

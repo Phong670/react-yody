@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { getUserInfoAction } from "../redux/actions";
 
 import jwtDecode from "jwt-decode";
+import OnTopButton from "../layouts/UserLayout/components/OnTopButton";
 
 import HomePage from "../pages/user/Home";
 import ProductDetail from "../pages/user/ProductDetail";
@@ -80,6 +81,7 @@ function App() {
         </Route>
         <Route path="*" element={<div>404 Not Found</div>} />
       </Routes>
+      <OnTopButton />
     </>
   );
 }

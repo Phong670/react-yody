@@ -5,14 +5,16 @@ import * as S from "./styles";
 import { ROUTES } from "../../../constants/routes";
 import { getOrderList } from "../../../redux/actions";
 import { Button, Form, Input, Badge, Radio, Space } from "antd";
+import emailjs from "emailjs-com";
 
 function ThankyouOrdered() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { state } = useLocation();
-  console.log("🚀 ~ file: index.jsx:11 ~ ThankyouOrdered ~ state:", state);
+  console.log("🚀 ~ file: index.jsx:14 ~ ThankyouOrdered ~ state:", state);
   const { orderList } = useSelector((state) => state.order);
   const { userInfo } = useSelector((state) => state.auth);
+
   useEffect(() => {
     if (userInfo.data.id) {
       console.log("ddang nhap");
@@ -26,23 +28,53 @@ function ThankyouOrdered() {
       addressFinal:
         item.address +
         ", " +
-        item.ward.label +
+        item.ward?.label +
         ", " +
-        item.district.label +
+        item.district?.label +
         ", " +
-        item.city.label,
+        item.city?.label,
     });
   });
+  console.log(
+    "🚀 ~ file: index.jsx:36 ~ orderList.data.map ~ orderList:",
+    orderList
+  );
   console.log(
     "🚀 ~ file: index.jsx:33 ~ Orders ~ orderListFinalClone:",
     orderListFinalClone
   );
+
+  const templateParams = {
+    name: state.data.name,
+    idOrder: state.data.idOrder,
+    address: state.data.addressFinal,
+    paymentMethod: state.data.paymentMethod,
+    totalPrice: state.data.totalPrice,
+    costShip: state.data.costShip,
+  };
+  useEffect(() => {
+    emailjs
+      .send(
+        "orderSuccessClone",
+        "orderSuccessYody",
+        templateParams,
+        "1T4w4YthxdLw3RavW"
+      )
+      .then(
+        (response) => {
+          console.log("SUCCESS!", response.status, response.text);
+        },
+        (err) => {
+          console.log("FAILED...", err);
+        }
+      );
+  }, []);
   const renderCartList = () => {
     return state.products.data?.map((item, index) => {
       return (
         <div
           key={index}
-          className=" flex flex-nowrap py-3 border-b-[1px] border-solid border-[white] gap-2"
+          className=" flex flex-nowrap  py-3 border-b-[1px] border-solid border-[white] gap-2"
         >
           <Badge count={item.quantity} size="default">
             <div className="bg-[white] flex justify-center rounded-[4px] overflow-hidden">
@@ -88,8 +120,12 @@ function ThankyouOrdered() {
                 src="https://www.easy-gst.in/wp-content/uploads/2017/07/success-icon-10.png"
                 alt=""
               />
-              <h4 className="text-[24px] ml-2"> Cảm ơn bạn đã dặt hàng</h4>
+              <h4 className="text-[24px] ml-2"> Cảm ơn bạn đã đặt hàng</h4>
             </div>
+          </div>
+          <div className="flex text-[20px]">
+            Mã đơn hàng:
+            <p className="ml-[4px] text-[orange]">{state.data.idOrder}</p>
           </div>
           <div className="w-full flex xxs:flex-wrap my-2">
             <div className="lg:w-[50%] xxs:w-full">
@@ -104,7 +140,7 @@ function ThankyouOrdered() {
             <div className="lg:w-[50%] xxs:w-full">
               <h4 className="text-[20px]">Địa chỉ nhận hàng</h4>
               <p className="text-[14px] font-[500px]  my-2 px-2">
-                Địa chỉ: {state.data.address}, {state.data.ward.label},{" "}
+                Địa chỉ: {state.data.address}, {state.data.ward.label},
                 {state.data.district.label},{state.data.city.label}
               </p>
             </div>
@@ -123,7 +159,7 @@ function ThankyouOrdered() {
             </div>
           </div>
         </div>
-        <div className="lg:w-[400px] xxs:w-full">
+        <div className="lg:w-[650px] xxs:w-full">
           <div className=" lg:block h-auto max-h-[500px] w-[5] bg-[#e7e8fc] p-4">
             <div className="pb-3 border-b-[1px] border-solid border-[white] ">
               <h4 className="text-[20px] font-bold">
@@ -141,11 +177,9 @@ function ThankyouOrdered() {
               <div className="flex justify-between w-full  ">
                 <div>Phí vận chuyển</div>
                 <div>
-                  {
-                    (state.data.costShip = 0
-                      ? "Miễn phí vận chuyển"
-                      : `${state.data.costShip.toLocaleString()}đ`)
-                  }
+                  {state.data.costShip === 0
+                    ? "Miễn phí vận chuyển"
+                    : `${state.data.costShip.toLocaleString()}đ`}
                 </div>
               </div>
             </div>
@@ -164,11 +198,24 @@ function ThankyouOrdered() {
           </div>
         </div>
       </div>
-      <div className="w-full flex justify-center my-4">
+      <div className="w-full flex justify-center my-4 gap-4">
+        {userInfo.data.id && (
+          <button
+            form="checkoutForm"
+            // key="submit"
+            className="bg-[orange] w-[25%] py-2  text-[white] rounded-[4px]"
+            onClick={() => {
+              navigate(ROUTES.USER.ORDERS);
+            }}
+          >
+            Xem đơn hàng của bạn
+          </button>
+        )}
+
         <button
           form="checkoutForm"
           // key="submit"
-          className="bg-[orange] w-[40%] py-2  text-[white] rounded-[4px]"
+          className="bg-[orange] w-[25%] py-2  text-[white] rounded-[4px]"
           onClick={() => {
             navigate(ROUTES.USER.HOME);
           }}

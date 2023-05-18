@@ -8,7 +8,7 @@ import { addCartListAction } from "../../../redux/actions/";
 import axios from "axios";
 import { Rate, Space } from "antd";
 
-function AddToCard({ productDetail, dataTotalReview }) {
+function AddToCard({ productDetail, dataAllReview }) {
   const { id } = useParams();
   const dispatch = useDispatch();
   const [isSizeToCart, setIsSizeToCart] = useState("");
@@ -19,12 +19,12 @@ function AddToCard({ productDetail, dataTotalReview }) {
   //Khoi tao
   const totalRate = useMemo(
     () =>
-      dataTotalReview.length
-        ? dataTotalReview
+      dataAllReview.length
+        ? dataAllReview
             .map((item) => item.rate)
             .reduce((total, item) => total + item)
         : 0,
-    [dataTotalReview]
+    [dataAllReview]
   );
 
   useEffect(() => {
@@ -103,11 +103,11 @@ function AddToCard({ productDetail, dataTotalReview }) {
     <div className="xxs:w-full lg:w-[400px]  ">
       <div className=" text-[20px] font-bold">{productDetail.data.title}</div>
       <Space>
-        <Rate value={totalRate / dataTotalReview.length} disabled />
+        <Rate value={totalRate / dataAllReview.length} disabled />
         <span>
-          {dataTotalReview.length > 0
-            ? `${(totalRate / dataTotalReview.length).toFixed(1)}/5 (${
-                dataTotalReview.length
+          {dataAllReview.length > 0
+            ? `${(totalRate / dataAllReview.length).toFixed(1)}/5 (${
+                dataAllReview.length
               } đánh giá)`
             : "chưa có đánh giá"}
         </span>
@@ -154,7 +154,7 @@ function AddToCard({ productDetail, dataTotalReview }) {
             {isSizeToCart === "" ? "Chọn kích thước" : "Thêm vào giỏ hàng"}
           </button>
         </div>
-        <div className="flex sm:gap-32 sm:w-[500px] xxs:gap-4  xxs:justify-center p-[20px]">
+        <div className="flex sm:gap-32 sm:w-[500px] lg:w-full xxs:gap-4  xxs:justify-center p-[20px]">
           <div className="md:w-[180px] flex justify-center flex-wrap">
             <div className="max-w-[140px] flex flex-wrap justify-center items-center pb-[10px]">
               <img

@@ -21,7 +21,7 @@ import { Button, Form, Input, Badge, Radio, Space } from "antd";
 import Select from "react-select";
 import { clearFields } from "redux-form";
 import { parse } from "querystring";
-
+import { uid } from "uid";
 // import { values } from "json-server-auth";
 
 function Checkout() {
@@ -67,7 +67,7 @@ function Checkout() {
   const handleSubmitCheckoutForm = (values) => {
     console.log("00000000000000000000000000000000000000000000");
     console.log(values);
-
+    let idOrder = uid(4);
     dispatch(
       orderProductAction({
         data: {
@@ -76,6 +76,7 @@ function Checkout() {
           totalPrice: total,
           status: "Đang xử lý",
           costShip: total > 500000 ? 0 : 20000,
+          idOrder: idOrder,
         },
         products: cartList,
         callback: () => {},
@@ -92,6 +93,7 @@ function Checkout() {
             totalPrice: total,
             status: "Đang xử lý",
             costShip: total > 500000 ? 0 : 20000,
+            idOrder: idOrder,
           },
           products: cartList,
         },
@@ -252,6 +254,7 @@ function Checkout() {
                     isSearchable={isSearchable}
                     name="city"
                     options={cityList.data}
+                    value={checkoutForm.getFieldValue("city")}
                     onChange={(value) => {
                       setSelectedOptionDistrict(null);
                       setSelectedOptionWard(null);
@@ -267,6 +270,7 @@ function Checkout() {
                       setIsDisabledDistrict(false);
 
                       checkoutForm.setFieldsValue({
+                        city: value,
                         district: undefined,
                         ward: undefined,
                       });
@@ -290,7 +294,7 @@ function Checkout() {
                     name="district"
                     placeholder="Quận huyện"
                     defaultValue={selectedOptionDistrict}
-                    value={selectedOptionDistrict}
+                    // value={checkoutForm.getFieldValue('district')}
                     isDisabled={isDisabledDistrict}
                     isSearchable={isSearchable}
                     options={districtList.data}
@@ -307,7 +311,7 @@ function Checkout() {
 
                 <Form.Item
                   label=""
-                  name="selectCustomCheckout"
+                  name="ward"
                   rules={[
                     {
                       required: true,
@@ -316,17 +320,19 @@ function Checkout() {
                   ]}
                 >
                   <Select
-                    className="basic-single"
+                    className="selectCustomCheckout"
                     classNamePrefix="select"
                     placeholder="Phường xã"
                     defaultValue={selectedOptionWard}
-                    value={selectedOptionWard}
+                    // value={selectedOptionWard}
                     isDisabled={isDisabledWard}
                     isSearchable={isSearchable}
                     name="ward"
                     options={wardList.data}
+                    value={checkoutForm.getFieldValue("ward")}
                     onChange={(value) => {
-                      setSelectedOptionWard(value);
+                      checkoutForm.setFieldValue("ward", value);
+                      // setSelectedOptionWard(value);
                     }}
                   />
                 </Form.Item>

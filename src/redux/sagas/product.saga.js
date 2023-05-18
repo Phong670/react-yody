@@ -40,6 +40,7 @@ function* getProductListSaga(action) {
       payload: {
         data: result.data,
         meta: {
+          searchKey: searchKey,
           page: page,
           limit: limit,
           total: parseInt(result.headers["x-total-count"]),

@@ -14,7 +14,11 @@ import { FiFilter } from "react-icons/fi";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Rate, Form, Input, Modal, Select, Button, message, Spin } from "antd";
 
-function ReviewProduct({ idProduct, title, dataTotalReview }) {
+function ReviewProduct({ idProduct, title, dataAllReview }) {
+  console.log(
+    "🚀 ~ file: review.jsx:18 ~ ReviewProduct ~ dataAllReview:",
+    dataAllReview
+  );
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -49,15 +53,15 @@ function ReviewProduct({ idProduct, title, dataTotalReview }) {
   }, [idProduct]);
   const totalRate = useMemo(
     () =>
-      dataTotalReview.length
-        ? dataTotalReview
+      dataAllReview.length
+        ? dataAllReview
             .map((item) => item.rate)
             .reduce((total, item) => total + item)
         : 0,
-    [dataTotalReview]
+    [dataAllReview]
   );
   const checkReview = () => {
-    isReview = listReview.data.findIndex(
+    isReview = dataAllReview.findIndex(
       (item) => item.userId === userInfo.data.id
     );
   };
@@ -156,11 +160,11 @@ function ReviewProduct({ idProduct, title, dataTotalReview }) {
     });
   };
   return (
-    <div className="flex flex-wrap flex-col justify-between w-full">
+    <div className="flex flex-wrap flex-col justify-between w-full border-[#c4cdd5] border-b-[0.8px]">
       {contextHolder}
       <h6 className="my-4"> ĐÁNH GIÁ</h6>
-      {totalRate === 0 ? (
-        <div className=" flex gap-4  justify-center flex-wrap bg-[#F2F2F2] p-3">
+      {dataAllReview.length === 0 ? (
+        <div className=" flex gap-4  justify-center flex-wrap bg-[#F2F2F2] p-3 mb-[10px]">
           <p className="w-full flex justify-center text-center text-[14px]">
             Hiện tại sản phẩm chưa có đánh giá nào, bạn hãy trở thành người đầu
             tiên đánh giá cho sản phẩm này
@@ -185,15 +189,15 @@ function ReviewProduct({ idProduct, title, dataTotalReview }) {
               <div className=" md:w-[200px] xxs:w-full flex justify-center flex-wrap flex-col gap-2">
                 <div className=" flex justify-center flex-wrap w-full gap-2">
                   <div className="w-full flex justify-center text-[30px]">
-                    {`${(totalRate / dataTotalReview.length).toFixed(1)}/5 `}
+                    {`${(totalRate / dataAllReview.length).toFixed(1)}/5 `}
                   </div>
                   <Rate
                     className="text-[30px]"
-                    value={totalRate / dataTotalReview.length}
+                    value={totalRate / dataAllReview.length}
                     disabled
                   />
                   <div className="w-full flex justify-center">
-                    ({dataTotalReview.length} đánh giá)
+                    ({dataAllReview.length} đánh giá)
                   </div>
                 </div>
                 <div className="flex xxs:flex-wrap sm:flex-nowrap gap-2 ">
@@ -218,7 +222,6 @@ function ReviewProduct({ idProduct, title, dataTotalReview }) {
                         value: 0,
                         label: (
                           <>
-                            {" "}
                             <FiFilter className="justify-center xxs:h-[40px]  text-[30px] items-center sm:h-[100%] " />
                             Bộ lọc
                           </>

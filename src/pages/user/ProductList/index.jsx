@@ -20,12 +20,27 @@ import { FiFilter } from "react-icons/fi";
 let genderClone = null;
 let valuePriceClone = [0, 1200000];
 function ProductList() {
+  console.log("render lai");
+  console.log("render Listpage");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { subCategoryId } = useParams();
+  console.log(
+    "🚀 ~ file: index.jsx:27 ~ ProductList ~ subCategoryId:",
+    subCategoryId
+  );
   let subCategoryIdArray = subCategoryId.split(",");
-  const [gender, setGender] = useState([subCategoryIdArray[0]]);
+  console.log(
+    "🚀 ~ file: index.jsx:32 ~ ProductList ~ subCategoryIdArray:",
+    subCategoryIdArray
+  );
+  let [gender, setGender] = useState([subCategoryIdArray[0]]);
+  console.log("🚀 ~ file: index.jsx:33 ~ ProductList ~ gender:", gender);
   const [subCategory, setSubCategory] = useState([]);
+  console.log(
+    "🚀 ~ file: index.jsx:40 ~ ProductList ~ subCategory:",
+    subCategory
+  );
   const [listYourChoice, setListYourChoice] = useState([]);
   const [placeHolderSort, setPlaceHolderSort] = useState("Mặc định");
   const [showTypeFilter, setShowTypeFilter] = useState(true);
@@ -37,6 +52,10 @@ function ProductList() {
   const { categoryList } = useSelector((state) => state.category);
   const [sizeList, setSizeList] = useState([]);
   const [valuePriceShow, setValuePriceShow] = useState([0, 1200000]);
+  useEffect(() => {
+    console.log("ahihi");
+    setGender(subCategoryIdArray[0]);
+  }, [subCategoryId]);
 
   const [open, setOpen] = useState(false);
   const [filterParams, setFilterParams] = useState({
@@ -46,7 +65,13 @@ function ProductList() {
     limit: PRODUCT_LIMIT,
     subCategoryId: gender,
   });
-
+  useEffect(() => {
+    console.log("ahhahahahaha");
+    setFilterParams({
+      ...filterParams,
+      subCategoryId: gender,
+    });
+  }, [gender]);
   //useEffect
   useEffect(() => {
     axios
@@ -67,8 +92,10 @@ function ProductList() {
     dispatch(getSizeListAction());
   }, [gender]);
   useEffect(() => {
+    console.log("lay lai lis product");
     dispatch(getProductListAction(filterParams));
-  }, [filterParams, subCategoryId]);
+    console.log("productList aaaaaaaaaaaaaaaaaaaaaa", productList);
+  }, [filterParams, subCategoryId, gender]);
   useEffect(() => {
     setListYourChoice(clone);
   }, []);
@@ -85,7 +112,7 @@ function ProductList() {
       })
 
       .catch((err) => {});
-  }, []);
+  }, [gender]);
   //clone value
   let categoryIdTemp = [...filterParams.categoryId];
   let sizeIdTemp = [...filterParams.sizeId];
@@ -315,7 +342,7 @@ function ProductList() {
             range={{
               draggableTrack: false,
             }}
-            // value={valuePriceClone}
+            // value={[filterParams.price_gte, filterParams.price_lte]}
             defaultValue={defaultValuePrice}
           />
         </div>
@@ -380,7 +407,7 @@ function ProductList() {
 
   const CpnFilter = ({ listYourChoice, typeProduct, sizeProduct }) => {
     return (
-      <div className="col-span-1 lg:block p-2 xxs:hidden">
+      <div className="lg:col-span-1 xxs:col-span-0 lg:block p-2 xxs:hidden">
         <div className="flex justify-between">
           Bạn chọn:
           <div
@@ -428,7 +455,7 @@ function ProductList() {
         {subCategoryIdArray.length > 1 ? (
           <>
             <p
-              className="cursor-pointer hover:text-[orange]"
+              className="cursor-pointer hover:text-[orange] text-[20px]"
               onClick={() => {
                 navigate({
                   pathname: generatePath(ROUTES.USER.HOME),
@@ -437,12 +464,12 @@ function ProductList() {
             >
               Trang chủ /
             </p>
-            {activeButton ? "Nữ" : "Nam"}
+            <p className="text-[20px]">{activeButton ? "Nữ" : "Nam"}</p>
           </>
         ) : (
           <>
             <p
-              className="cursor-pointer hover:text-[orange]"
+              className="cursor-pointer hover:text-[orange] text-[20px]"
               onClick={() => {
                 navigate({
                   pathname: generatePath(ROUTES.USER.HOME),
@@ -451,7 +478,7 @@ function ProductList() {
             >
               Trang chủ /
             </p>
-            {subCategory.name}
+            <p className="text-[20px]">{subCategory.name}</p>
           </>
         )}
       </div>
@@ -540,7 +567,7 @@ function ProductList() {
         </div>
       </div>
 
-      <div className="xl:w-[1150px] lg:w-[900px] grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-4 justify-center ">
+      <div className="xl:w-[1150px] w-full grid lg:grid-cols-5 md:grid-cols-5 lg:gap-[20px] xxs:gap-[10px]">
         <CpnFilter
           listYourChoice={listYourChoice}
           typeProduct={categoryList.data}

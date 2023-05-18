@@ -71,6 +71,7 @@ export const CustomLink = styled(Link)`
 export const Title = styled.h2`
   max-width: 100%;
   font-weight: 500;
+  font-size: 14px;
   &:hover {
     color: #fcaf17;
   }
@@ -78,7 +79,7 @@ export const Title = styled.h2`
     /* display: flex;
     flex-wrap: wrap; */
     max-height: 35px;
-    font-size: 16px;
+    font-size: 14px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -86,7 +87,7 @@ export const Title = styled.h2`
 `;
 export const Price = styled.h4`
   height: 20px;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 650;
   color: #cd151c !important;
 `;

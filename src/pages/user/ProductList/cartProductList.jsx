@@ -14,6 +14,10 @@ import { getProductListAction } from "../../../redux/actions";
 import * as S from "./styles";
 
 const CartProductList = ({ listProduct, filterParams }) => {
+  console.log(
+    "🚀 ~ file: cartProductList.jsx:17 ~ CartProductList ~ listProduct:",
+    listProduct
+  );
   const dispatch = useDispatch();
   const { productList } = useSelector((state) => state.product);
 
@@ -47,7 +51,7 @@ const CartProductList = ({ listProduct, filterParams }) => {
 
   return (
     <>
-      <div className=" grid col-span-4 gap-1 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-3 xs:grid-cols-2 xxs:mt-[8px] lg:mt-0">
+      <div className="grid lg:col-span-4 lg:gap-[20px] xxs:gap-[10px] xl:grid-cols-4 lg:grid-cols-4 xxs:col-span-5 sm:grid-cols-3 xxs:grid-cols-2 xxs:mt-[16px] lg:mt-2">
         {renderCartList(listProduct)}
       </div>
       {productList.data.length !== productList.meta.total && (
@@ -56,7 +60,7 @@ const CartProductList = ({ listProduct, filterParams }) => {
           style={{ marginTop: 16 }}
           className="col-span-5 h-10"
         >
-          <Button onClick={() => handleShowMore()}>Show more</Button>
+          <Button onClick={() => handleShowMore()}>Xem thêm</Button>
         </Row>
       )}
     </>

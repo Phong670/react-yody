@@ -163,12 +163,12 @@ function OrderedDetail() {
               <div
                 className="flex items-center h-[30px]  mb-2 "
                 onClick={() => {
-                  navigate(ROUTES.USER.ACCOUNT);
+                  navigate(ROUTES.USER.ORDERS);
                 }}
               >
                 <AiOutlineArrowLeft className="text-[30px] text-[#7A7A9D]" />
                 <p className="text-[20px] text-[orange] ml-2">
-                  Chi tiết đơn hàng #23{state.data.id}
+                  Chi tiết đơn hàng {state.data.idOrder}
                 </p>
               </div>
               <p className="text-[14px] flex">
@@ -186,17 +186,22 @@ function OrderedDetail() {
               <div className="w-full mb-2 mt-3">Thông tin giao hàng</div>
               <div className=" p-3 border-[1px]  border-[#e0e0e0]">
                 <h4 className="flex items-center">
-                  Tên: <p className="text-[20px] ml-2 ">{state.data.name}</p>
+                  Tên:
+                  <p className="text-[18px] ml-2  text-center font-[400]  mb-[2px]">
+                    {state.data.name}
+                  </p>
                 </h4>
-                <p className="font-[500] my-1">SĐT: {state.data.numberPhone}</p>
-                <p>Địa chỉ: {state.data.addressFinal}</p>
-              </div>
-
-              <div className="w-full flex  mb-2 mt-3">
-                Hình thức thanh toán:
-                <p className="text-[orange] ml-2">
-                  {state.data.paymentMethod === "cod" &&
-                    "Thanh toán khi nhận hàng"}
+                <p className="flex items-center font-[500] my-1">
+                  SĐT:
+                  <p className="text-[14px] ml-2  text-center font-[400]  mb-[2px]">
+                    {state.data.numberPhone}
+                  </p>
+                </p>
+                <p className="flex items-center">
+                  Địa chỉ:
+                  <p className="text-[14px] ml-2  text-center font-[400]  mb-[2px]">
+                    {state.data.addressFinal}
+                  </p>
                 </p>
               </div>
 
@@ -258,14 +263,20 @@ function OrderedDetail() {
                 <button
                   className="bg-[orange] p-1 px-4 rounded-[999px] text-[white]
                   mt-2"
-                  onClick={() => dispatch(logoutAction())}
+                  onClick={() => {
+                    dispatch(logoutAction());
+                    navigate(ROUTES.USER.HOME);
+                  }}
                 >
                   Đăng xuất
                 </button>
               </div>
             </div>
             <div className="w-full flex flex-col items-start justify-start">
-              <Link className="w-full flex gap-2 px-4 py-3">
+              <Link
+                className="w-full flex gap-2 px-4 py-3"
+                to={generatePath(ROUTES.USER.ACCOUNT)}
+              >
                 <img
                   src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/acc_user_1.svg"
                   alt=""
@@ -279,7 +290,10 @@ function OrderedDetail() {
                 />
                 Đơn hàng của tôi
               </Link>
-              <Link className="w-full flex gap-2 px-4 py-3">
+              <Link
+                className="w-full flex gap-2 px-4 py-3"
+                to={generatePath(ROUTES.USER.CHANGE_PASSWORD)}
+              >
                 <img
                   src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/acc_user_3_hover.svg"
                   alt=""
@@ -300,12 +314,12 @@ function OrderedDetail() {
               <div
                 className="flex items-center h-[30px]  mb-2 "
                 onClick={() => {
-                  navigate(ROUTES.USER.ACCOUNT);
+                  navigate(ROUTES.USER.ORDERS);
                 }}
               >
                 <AiOutlineArrowLeft className="text-[30px] text-[#7A7A9D]" />
                 <p className="text-[16px] text-[orange] ml-2">
-                  Chi tiết đơn hàng #23{state.data.id}
+                  Chi tiết đơn hàng {state.data.idOrder}
                 </p>
               </div>
               <p className="text-[14px] flex">
@@ -323,10 +337,23 @@ function OrderedDetail() {
               <div className="w-full mb-2 mt-3">Thông tin giao hàng</div>
               <div className=" p-3 border-[1px]  border-[#e0e0e0]">
                 <h4 className="flex items-center">
-                  Tên: <p className="text-[20px] ml-2 ">{state.data.name}</p>
+                  Tên:
+                  <p className="text-[18px] ml-2  text-center font-[400]  mb-[2px]">
+                    {state.data.name}
+                  </p>
                 </h4>
-                <p className="font-[500] my-1">SĐT: {state.data.numberPhone}</p>
-                <p>Địa chỉ: {state.data.addressFinal}</p>
+                <p className="flex items-center font-[500] my-1">
+                  SĐT:
+                  <p className="text-[14px] ml-2  text-center font-[400]  mb-[2px]">
+                    {state.data.numberPhone}
+                  </p>
+                </p>
+                <p className="flex items-center">
+                  Địa chỉ:
+                  <p className="text-[14px] ml-2  text-center font-[400]  mb-[2px]">
+                    {state.data.addressFinal}
+                  </p>
+                </p>
               </div>
 
               <div className="w-full flex  mb-2 mt-3">

@@ -21,9 +21,15 @@ function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { productList, productDetail } = useSelector((state) => state.product);
+  const { productDetail } = useSelector((state) => state.product);
+
   const { listReview } = useSelector((state) => state.review);
-  const [dataTotalReview, setDataTotalReview] = useState([]);
+  const [dataAllReview, setDataAllReview] = useState([]);
+  const [productListRecommend, setProductListRecommend] = useState([]);
+  console.log(
+    "🚀 ~ file: index.jsx:33 ~ ProductDetail ~ productListRecommend:",
+    productListRecommend
+  );
 
   const { Panel } = Collapse;
   const { TextArea } = Input;
@@ -34,7 +40,7 @@ function ProductDetail() {
         params: { productId: id },
       })
       .then((res) => {
-        setDataTotalReview(res.data);
+        setDataAllReview(res.data);
       })
       .catch((err) => {
         console.log("loi roi");
@@ -43,18 +49,28 @@ function ProductDetail() {
 
   useEffect(() => {
     dispatch(getProductDetailAction({ id: id }));
-    dispatch(
-      getProductListAction({
-        page: 1,
-        limit: 12,
-        subCategoryId: productDetail.data.subCategoryId,
-      })
-    );
+
     dispatch(getSizeListAction());
-  }, [id]);
+  }, []);
+  useEffect(() => {
+    console.log(
+      "1111111111111111111111111111111122222222222222222222222222222222",
+      productDetail.data.subCategoryId
+    );
+    axios
+      .get("http://localhost:4000/products/?_page=1&_limit=12", {
+        params: { subCategoryId: productDetail.data.subCategoryId },
+      })
+      .then((res) => {
+        setProductListRecommend(res.data);
+      })
+      .catch((err) => {
+        console.log("loi roi");
+      });
+  }, [productDetail.data]);
 
   const renderCartList = useMemo(() => {
-    return productList.data.map((item, index) => {
+    return productListRecommend.map((item, index) => {
       return (
         <S.ItemList key={item.id}>
           <S.CustomLink
@@ -69,7 +85,7 @@ function ProductDetail() {
         </S.ItemList>
       );
     });
-  }, [productList.data]);
+  }, [productListRecommend]);
 
   const renderTitle = useMemo(() => {
     return (
@@ -114,7 +130,7 @@ function ProductDetail() {
             <div className="xl:hidden xxs:block w-full mt-4 ">
               <AddToCard
                 productDetail={productDetail}
-                dataTotalReview={dataTotalReview}
+                dataAllReview={dataAllReview}
               />
             </div>
           </div>
@@ -129,11 +145,12 @@ function ProductDetail() {
                 key="1"
                 className="bg-[white] border-none rounded-none "
               >
-                <div className="">{productDetail.data.description}</div>
-                <img
-                  src="https://bizweb.dktcdn.net/thumb/large/100/438/408/products/ao-polo-nu-apn3700-vag-cvn5148-tra-8-yodyvn.jpg?v=1681279746000"
-                  alt=""
-                />
+                <div
+                  className="characteristic px-2 font-[Sans-serif] !font-[500] flex flex-wrap gap-[8px]"
+                  dangerouslySetInnerHTML={{
+                    __html: productDetail.data.characteristic,
+                  }}
+                ></div>
               </Panel>
             </Collapse>
           </div>
@@ -148,7 +165,12 @@ function ProductDetail() {
                 key="2"
                 className="bg-[white] border-none rounded-none "
               >
-                <div className="">{productDetail.data.description}</div>
+                <div
+                  className="description px-2 font-[Sans-serif] !font-[500] flex flex-col justify-center"
+                  dangerouslySetInnerHTML={{
+                    __html: productDetail.data.description,
+                  }}
+                ></div>
               </Panel>
             </Collapse>
           </div>
@@ -157,7 +179,7 @@ function ProductDetail() {
             <ReviewProduct
               idProduct={id}
               title={productDetail.data.title}
-              dataTotalReview={dataTotalReview}
+              dataAllReview={dataAllReview}
             />
           </div>
         </div>
@@ -165,7 +187,7 @@ function ProductDetail() {
         <S.AddToCardDiv className="h-[90vh] xl:block xxs:hidden   ">
           <AddToCard
             productDetail={productDetail}
-            dataTotalReview={dataTotalReview}
+            dataAllReview={dataAllReview}
           />
         </S.AddToCardDiv>
       </div>
