@@ -71,6 +71,10 @@ export const CustomLink = styled(Link)`
 export const Title = styled.h2`
   max-width: 100%;
   font-weight: 500;
+  height: 40px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
   &:hover {
     color: #fcaf17;
   }

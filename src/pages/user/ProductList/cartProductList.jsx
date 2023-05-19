@@ -12,12 +12,13 @@ import { useEffect, useState, useMemo } from "react";
 import { PRODUCT_LIMIT } from "../../../constants/paging";
 import { getProductListAction } from "../../../redux/actions";
 import * as S from "./styles";
+import { Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 const CartProductList = ({ listProduct, filterParams }) => {
-  console.log(
-    "🚀 ~ file: cartProductList.jsx:17 ~ CartProductList ~ listProduct:",
-    listProduct
-  );
+  const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
   const dispatch = useDispatch();
   const { productList } = useSelector((state) => state.product);
 
@@ -48,12 +49,32 @@ const CartProductList = ({ listProduct, filterParams }) => {
       );
     });
   };
-
+  const arrayLoading = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  const renderCartListLoading = (array) => {
+    return array?.map((item) => {
+      return (
+        <S.ItemList key={item}>
+          <S.CustomLink>
+            <Skeleton height={280} width={214} />
+            <S.Info className="flex items-end">
+              <Skeleton height={40} width={214} />
+              <Skeleton height={20} width={70} />
+            </S.Info>
+          </S.CustomLink>
+        </S.ItemList>
+      );
+    });
+  };
   return (
     <>
       <div className="grid lg:col-span-4 lg:gap-[20px] xxs:gap-[10px] xl:grid-cols-4 lg:grid-cols-4 xxs:col-span-5 sm:grid-cols-3 xxs:grid-cols-2 xxs:mt-[16px] lg:mt-2">
-        {renderCartList(listProduct)}
+        {productList.load && productList.data.length === 0
+          ? renderCartListLoading(arrayLoading)
+          : renderCartList(listProduct)}
       </div>
+      {productList.load && productList.data.length > 0 && (
+        <Spin indicator={antIcon} className="col-span-5 w-full my-4" />
+      )}
       {productList.data.length !== productList.meta.total && (
         <Row
           justify="center"

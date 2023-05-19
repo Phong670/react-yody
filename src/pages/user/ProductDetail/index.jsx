@@ -16,6 +16,8 @@ import ReviewProduct from "./review";
 import * as S from "./styles";
 
 import { Input, Collapse } from "antd";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 function ProductDetail() {
   const { id } = useParams();
@@ -51,7 +53,7 @@ function ProductDetail() {
     dispatch(getProductDetailAction({ id: id }));
 
     dispatch(getSizeListAction());
-  }, []);
+  }, [id]);
   useEffect(() => {
     console.log(
       "1111111111111111111111111111111122222222222222222222222222222222",
@@ -121,11 +123,15 @@ function ProductDetail() {
       <div className="flex my-4 h-auto   xxs:justify-center lg:justify-between xxs:flex-wrap  ">
         <div className="xl:w-[750px]  xxs:w-full mb-3 overflow-auto ">
           <div
-            spinning={productDetail.load}
+            // spinning={productDetail.load}
             className="flex justify-center flex-wrap w-full h-auto border-b-[1px] border-solid border-[#F2F2F2] pb-[24px]"
           >
             <div className="flex justify-center w-full">
-              <img src={productDetail.data.image} alt="" />
+              {!productDetail.load ? (
+                <img src={productDetail.data.image} alt="" />
+              ) : (
+                <Skeleton height={480} width={360} />
+              )}
             </div>
             <div className="xl:hidden xxs:block w-full mt-4 ">
               <AddToCard

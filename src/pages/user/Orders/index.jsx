@@ -195,9 +195,9 @@ function Orders() {
                 </button>
               </div>
             </div>
-            <div className="w-full flex flex-col items-start justify-start">
+            <div className="w-full flex flex-col items-start justify-start ">
               <Link
-                className="w-full flex gap-2 px-4 py-3"
+                className="w-full flex gap-2 px-4 py-3 hover:bg-[#FEEEEA] hover:text-[orange]"
                 to={generatePath(ROUTES.USER.ACCOUNT)}
               >
                 <img
@@ -214,7 +214,7 @@ function Orders() {
                 Đơn hàng của tôi
               </Link>
               <Link
-                className="w-full flex gap-2 px-4 py-3"
+                className="w-full flex gap-2 px-4 py-3 hover:bg-[#FEEEEA] hover:text-[orange]"
                 to={generatePath(ROUTES.USER.CHANGE_PASSWORD)}
               >
                 <img
@@ -223,7 +223,7 @@ function Orders() {
                 />
                 Đổi mật khẩu
               </Link>
-              <Link className="w-full flex gap-2 px-4 py-3">
+              <Link className="w-full flex gap-2 px-4 py-3 hover:bg-[#FEEEEA] hover:text-[orange]">
                 <img
                   src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/acc_user_6.svg"
                   alt=""

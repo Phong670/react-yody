@@ -153,6 +153,9 @@ function ReviewProduct({ idProduct, title, dataAllReview }) {
   const showModalAlert = () => {
     setIsModalOpenAlert(true);
   };
+  const cancelModalAlert = () => {
+    setIsModalOpenAlert(false);
+  };
   const reviewedAlert = () => {
     messageApi.open({
       type: "reviewedAlert",
@@ -403,6 +406,8 @@ function ReviewProduct({ idProduct, title, dataAllReview }) {
         title="Bạn cần phải đăng nhập để đánh giá"
         open={isModalOpenAlert}
         footer={null}
+        closable={true}
+        onCancel={cancelModalAlert}
       >
         <div className="w-full flex justify-center mt-3">
           <Button
@@ -475,9 +480,9 @@ function ReviewProduct({ idProduct, title, dataAllReview }) {
             type="primary"
             htmlType="submit"
             block
-            className="w-[120px] h-[48px] bg-[#ffc107] text-[#fff] hover:bg-[#FEECC7] hover:text-[#fcaf17] rounded-md mt-[10px]"
+            className="w-[120px] h-[48px] bg-[#ffc311] text-[white] hover:!bg-[#ffc107] hover:text-[white] rounded-md mt-[10px]"
           >
-            Submit
+            Gửi đánh giá
           </Button>
         </Form>
       </Modal>

@@ -31,12 +31,13 @@
   "users": [
     {
       "email": "qphong1234@gmail.com",
-      "password": "$2a$10$Su07NndSk7Y1Vot/E519kOk5ngQY1xU65neS8..rm7c7SmM0KlSK6",
+      "password": "$2a$10$.smPDuFcbkmzlFnUkDTGWOSSBGiQYTaiZQ6JACwiy.jzIbk/lfrfO",
       "fullName": "Phong",
       "role": "user",
       "createdAt": 1684318825721,
-      "updatedAt": 1684318825721,
-      "id": 1
+      "updatedAt": 1684472351335,
+      "id": 1,
+      "anhyeuem": ""
     }
   ],
   "products": [

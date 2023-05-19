@@ -235,3 +235,29 @@ html {
 .characteristic > ul {
   list-style-type: disc !important;
 }
+//ant input
+.css-dev-only-do-not-override-1fviqcj > .ant-input-affix-wrapper:focus {
+  border-color: #fcaf17 !important;
+}
+.ant-input:focus {
+  border-color: #fcaf17 !important;
+  box-shadow: 0 0 0 2px rgb(255 189 5 / 10%) !important;
+}
+.ant-input:hover {
+  border-color: #fcaf17 !important;
+}
+:where(.css-dev-only-do-not-override-1fviqcj).ant-input-affix-wrapper:focus,
+:where(.css-dev-only-do-not-override-1fviqcj).ant-input-affix-wrapper-focused {
+  border-color: #fcaf17 !important;
+  box-shadow: 0 0 0 2px rgb(255 189 5 / 10%) !important;
+}
+.ant-input-affix-wrapper.ant-input-password:hover {
+  border-color: #fcaf17 !important;
+  box-shadow: 0 0 0 2px rgb(255 189 5 / 10%) !important;
+}
+//ant submit
+:where(.css-dev-only-do-not-override-1fviqcj).ant-btn-primary:not(
+    :disabled
+  ):hover {
+  background-color: red !important;
+}

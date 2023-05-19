@@ -7,7 +7,8 @@ import { addCartListAction } from "../../../redux/actions/";
 
 import axios from "axios";
 import { Rate, Space } from "antd";
-
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 function AddToCard({ productDetail, dataAllReview }) {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -101,7 +102,14 @@ function AddToCard({ productDetail, dataAllReview }) {
 
   return (
     <div className="xxs:w-full lg:w-[400px]  ">
-      <div className=" text-[20px] font-bold">{productDetail.data.title}</div>
+      <div className=" text-[20px] font-bold">
+        {" "}
+        {!productDetail.load ? (
+          productDetail.data.title
+        ) : (
+          <Skeleton height={60} width={360} />
+        )}
+      </div>
       <Space>
         <Rate value={totalRate / dataAllReview.length} disabled />
         <span>

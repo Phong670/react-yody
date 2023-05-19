@@ -9,10 +9,21 @@ import "swiper/css/pagination";
 import { ROUTES } from "../../../constants/routes";
 import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper";
 import * as S from "./styles";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 function ProductHome({ subCategoryId, nameSwiper }) {
   const [productData, setProductDress] = useState([]);
+  // const [loading, setLoading] = useState(false);
+
+  console.log(
+    "🚀 ~ file: productHome.jsx:19 ~ ProductHome ~ productData:",
+    productData
+  );
   const dispatch = useDispatch();
+  const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
   useEffect(() => {
     axios
@@ -26,8 +37,6 @@ function ProductHome({ subCategoryId, nameSwiper }) {
         console.log("loi roi");
       });
   }, []);
-  let productChildOne = productData.slice(0, 4);
-  let productChildTwo = productData.slice(4);
 
   const renderListCart = (productChild) => {
     return productChild.map((item, index) => {
@@ -46,7 +55,22 @@ function ProductHome({ subCategoryId, nameSwiper }) {
       );
     });
   };
-
+  const arrayLoading = [1, 2, 3, 4, 5, 6, 7, 8];
+  const renderCartListLoading = (array) => {
+    return array?.map((item) => {
+      return (
+        <SwiperSlide key={item} className="productSwiperSlide">
+          <S.CustomLink>
+            <Skeleton height={280} width={214} />
+            <S.Info className="flex items-end">
+              <Skeleton height={40} width={214} />
+              <Skeleton height={20} width={70} />
+            </S.Info>
+          </S.CustomLink>
+        </SwiperSlide>
+      );
+    });
+  };
   return (
     <div className="flex  w-full  relative ">
       <Swiper
@@ -94,7 +118,9 @@ function ProductHome({ subCategoryId, nameSwiper }) {
         }}
         modules={[Keyboard, Navigation, Pagination]}
       >
-        {renderListCart(productData)}
+        {productData.length === 0
+          ? renderCartListLoading(arrayLoading)
+          : renderListCart(productData)}
       </Swiper>
       <div
         className={`swiper-button-prev-unique-${nameSwiper} xxs:hidden lg:block absolute left-[-30px] top-[50%]`}

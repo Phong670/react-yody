@@ -82,7 +82,9 @@ function OrderedDetail() {
           <div className="col-span-2 flex flex-wrap col justify-start align-content-md-start xl:ml-[-35px] lg:ml-[-45px] sm:ml-[-18px]">
             <Link
               className="hover:text-[orange] w-full text-[16px]"
-              to={generatePath(ROUTES.USER.PRODUCT_DETAIL, { id: item.id })}
+              to={generatePath(ROUTES.USER.PRODUCT_DETAIL, {
+                id: item.productId,
+              })}
             >
               {item.name}
             </Link>
@@ -114,7 +116,9 @@ function OrderedDetail() {
           <div className="col-span-2 flex flex-wrap col justify-start align-content-md-start xl:ml-[-35px] lg:ml-[-45px] ">
             <Link
               className="hover:text-[orange] w-full text-[16px]"
-              to={generatePath(ROUTES.USER.PRODUCT_DETAIL, { id: item.id })}
+              to={generatePath(ROUTES.USER.PRODUCT_DETAIL, {
+                id: item.productId,
+              })}
             >
               {item.name}
             </Link>
@@ -416,7 +420,7 @@ function OrderedDetail() {
           <button
             className="bg-[orange] w-[200PX] h-[48px] text-[white] rounded-sm"
             onClick={() => {
-              navigate(ROUTES.USER.ACCOUNT);
+              navigate(ROUTES.USER.ORDERS);
             }}
           >
             QUAY LẠI
