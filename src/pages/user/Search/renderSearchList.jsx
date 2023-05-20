@@ -23,7 +23,9 @@ const RenderSearchList = ({ productList }) => {
           <S.CustomLink
             to={generatePath(ROUTES.USER.PRODUCT_DETAIL, { id: item.id })}
           >
-            <S.Image src={item.image} alt="" />
+            <S.WrapImg className="overflow-hidden">
+              <S.Image src={item.image} alt="" />
+            </S.WrapImg>
             <S.Info>
               <S.Title className="w-full">{item.title}</S.Title>
               <S.Price className="">{item.price.toLocaleString()}đ</S.Price>
@@ -69,8 +71,8 @@ const RenderSearchList = ({ productList }) => {
         //     <b>Yay! You have seen it all</b>
         //   </p>
         // }
-        className="max-w-full flex-wrap justify-center px-[8px] grid  
-    lg:gap-[20px] xxs:gap-[10px] xl:grid-cols-5 lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2"
+        className="max-w-full flex-wrap justify-center px-[20px] grid  
+    xs:gap-[20px] xxs:gap-[10px] xl:grid-cols-5 lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2"
       >
         {renderListCart()}
       </InfiniteScroll>

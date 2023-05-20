@@ -39,7 +39,9 @@ const CartProductList = ({ listProduct, filterParams }) => {
           <S.CustomLink
             to={generatePath(ROUTES.USER.PRODUCT_DETAIL, { id: item.id })}
           >
-            <S.Image src={item.image} alt="" />
+            <S.WrapImg className="overflow-hidden">
+              <S.Image src={item.image} alt="" />
+            </S.WrapImg>
             <S.Info className="flex items-end">
               <S.Title>{item.title}</S.Title>
               <S.Price>{item.price.toLocaleString()}đ</S.Price>
@@ -57,7 +59,7 @@ const CartProductList = ({ listProduct, filterParams }) => {
           <S.CustomLink>
             <Skeleton height={280} width={214} />
             <S.Info className="flex items-end">
-              <Skeleton height={40} width={214} />
+              <Skeleton height={35} width={214} />
               <Skeleton height={20} width={70} />
             </S.Info>
           </S.CustomLink>
@@ -67,7 +69,7 @@ const CartProductList = ({ listProduct, filterParams }) => {
   };
   return (
     <>
-      <div className="grid lg:col-span-4 lg:gap-[20px] xxs:gap-[10px] xl:grid-cols-4 lg:grid-cols-4 xxs:col-span-5 sm:grid-cols-3 xxs:grid-cols-2 xxs:mt-[16px] lg:mt-2">
+      <div className="grid lg:col-span-4 md:gap-[20px] xxs:gap-[10px] xl:grid-cols-4 lg:grid-cols-4 xxs:col-span-5 sm:grid-cols-3 xxs:grid-cols-2 xxs:mt-[16px] lg:mt-2">
         {productList.load && productList.data.length === 0
           ? renderCartListLoading(arrayLoading)
           : renderCartList(listProduct)}

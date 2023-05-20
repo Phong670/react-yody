@@ -32,29 +32,34 @@ function* loginSaga(action) {
 }
 function* changePasswordSaga(action) {
   try {
-    const { data, newPassword, idUser, callback } = action.payload;
-    const result = yield axios.post("http://localhost:4000/login", data);
+    const { oldData, newPassword, idUser, callback } = action.payload;
+    const result = yield axios.post("http://localhost:4000/login", oldData);
     yield localStorage.setItem("accessToken", result.data.accessToken);
     const newData = {
-      email: data.email,
-      password: newPassword,
+      email: oldData.email,
+      password: newPassword.password,
     };
-    yield callback("success");
 
-    yield axios.put(`http://localhost:4000/users/${idUser}`, newPassword);
-    const result2 = yield axios.post("http://localhost:4000/login", newData);
-    yield localStorage.setItem("accessToken", result.data.accessToken);
+    yield axios.patch(`http://localhost:4000/users/${idUser}`, newPassword);
+    // const result2 = yield axios.post("http://localhost:4000/login", newData);
+    // yield localStorage.setItem("accessToken", result.data.accessToken);
+    // yield put({
+    //   type: SUCCESS(AUTH_ACTION.LOGIN),
+    //   payload: {
+    //     data: result.data,
+    //   },
+    // });
     yield put({
-      type: SUCCESS(AUTH_ACTION.LOGIN),
+      type: SUCCESS(AUTH_ACTION.CHANGE_PASSWORD),
       payload: {
-        data: result.data,
+        success: "Đổi mật khẩu thành công",
       },
     });
   } catch (e) {
     yield put({
-      type: FAIL(AUTH_ACTION.LOGIN),
+      type: FAIL(AUTH_ACTION.CHANGE_PASSWORD),
       payload: {
-        error: "Email hoặc password không đúng",
+        error: "Đổi mật khẩu không thành công",
       },
     });
   }

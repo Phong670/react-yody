@@ -1,6 +1,7 @@
 import * as S from "./styles";
 
-import { useEffect, useState, useMemo } from "react";
+import { Transition } from "react-transition-group";
+import { useEffect, useState, useMemo, useRef } from "react";
 import { Link, generatePath, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -13,6 +14,7 @@ import {
   getSizeListAction,
 } from "../../../redux/actions";
 import axios from "axios";
+import { SwitchTransition, CSSTransition } from "react-transition-group";
 
 import { AiOutlineClose, AiOutlineUp, AiOutlineDown } from "react-icons/ai";
 import { Select, Col, Button, Slider, Drawer, Space, Input } from "antd";
@@ -20,27 +22,14 @@ import { FiFilter } from "react-icons/fi";
 let genderClone = null;
 let valuePriceClone = [0, 1200000];
 function ProductList() {
-  console.log("render lai");
-  console.log("render Listpage");
+  const nodeRef = useRef(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { subCategoryId } = useParams();
-  console.log(
-    "🚀 ~ file: index.jsx:27 ~ ProductList ~ subCategoryId:",
-    subCategoryId
-  );
   let subCategoryIdArray = subCategoryId.split(",");
-  console.log(
-    "🚀 ~ file: index.jsx:32 ~ ProductList ~ subCategoryIdArray:",
-    subCategoryIdArray
-  );
   let [gender, setGender] = useState([subCategoryIdArray[0]]);
-  console.log("🚀 ~ file: index.jsx:33 ~ ProductList ~ gender:", gender);
   const [subCategory, setSubCategory] = useState([]);
-  console.log(
-    "🚀 ~ file: index.jsx:40 ~ ProductList ~ subCategory:",
-    subCategory
-  );
+
   const [listYourChoice, setListYourChoice] = useState([]);
   const [placeHolderSort, setPlaceHolderSort] = useState("Mặc định");
   const [showTypeFilter, setShowTypeFilter] = useState(true);
@@ -66,7 +55,6 @@ function ProductList() {
     subCategoryId: gender,
   });
   useEffect(() => {
-    console.log("ahhahahahaha");
     setFilterParams({
       ...filterParams,
       subCategoryId: gender,
@@ -430,9 +418,31 @@ function ProductList() {
           Loại sản phẩm {showTypeFilter && <AiOutlineUp />}
           {!showTypeFilter && <AiOutlineDown />}
         </div>
-        <S.Transition showTypeFilter={showTypeFilter}>
-          {renderListFilterType}
-        </S.Transition>
+        <CSSTransition
+          in={showTypeFilter}
+          nodeRef={nodeRef}
+          timeout={300}
+          classNames="alert"
+          unmountOnExit
+        >
+          <S.Transition>{renderListFilterType}</S.Transition>
+        </CSSTransition>
+        <SwitchTransition mode="out-in">
+          <CSSTransition
+            // Dùng key để phân biệt các trạng thái
+            key={showTypeFilter ? "out" : "in"}
+            // Sử dụng event transitionend để đánh dấu kết thúc transition
+            addEndListener={(node, done) =>
+              node.addEventListener("transitionend", done)
+            }
+            // Tạo hiệu ứng fade transition theo class "fade"
+            classNames="fade"
+          >
+            <button onClick={() => setShowTypeFilter(!showTypeFilter)}>
+              {showTypeFilter ? "Goodbye!" : "Hello!"}
+            </button>
+          </CSSTransition>
+        </SwitchTransition>
         <div
           className="my-4 flex justify-between items-center"
           onClick={() => {
@@ -450,8 +460,8 @@ function ProductList() {
   console.log("render lai button genderClone", subCategoryId, genderClone);
 
   return (
-    <div className="max-w-[1200px] p-[8px] flex flex-nowrap flex-col justify-between lg:mt-[55px] xxs:mt-[30px]">
-      <div className="w-full flex justify-center mb-4">
+    <div className=" max-w-[1200px] p-[8px] flex flex-nowrap flex-col justify-between lg:mt-[55px] xxs:mt-[30px]">
+      <div className="w-full relative flex justify-center mb-4">
         {subCategoryIdArray.length > 1 ? (
           <>
             <p
@@ -553,7 +563,7 @@ function ProductList() {
       ) : (
         <></>
       )}
-      <div className="flex xxs:w-full justify-between min-w-[250px] h-[auto] border-solid border-b-2 border-[#dde1ef]">
+      <div className="flex !sticky  top-0 z-999 xxs:w-full justify-between min-w-[250px] h-[auto] border-solid border-b-2 border-[#dde1ef]">
         <CpnFilterSort></CpnFilterSort>
         <div
           className="xs:block lg:hidden cursor-pointer"

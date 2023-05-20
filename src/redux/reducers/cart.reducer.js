@@ -88,5 +88,14 @@ const cartReducer = createReducer(initialState, {
       },
     };
   },
+  [REQUEST(CART_ACTION.DELETE_All_CART)]: (state, action) => {
+    localStorage.setItem("cartList", JSON.stringify([]));
+    return {
+      ...state,
+      cartList: {
+        data: [],
+      },
+    };
+  },
 });
 export default cartReducer;

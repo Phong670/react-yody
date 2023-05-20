@@ -14,6 +14,8 @@ export const ItemList = styled.div`
   align-items: flex-start;
   flex-wrap: nowrap;
   overflow: hidden;
+  z-index: 1;
+  position: relative;
   /* border-radius: 8px; */
   /* box-shadow: 5px 5px 5px #798896; */
 
@@ -24,25 +26,32 @@ export const ItemList = styled.div`
     /* max-height: 220px; */
   }
 `;
+
 export const Image = styled.img`
+  position: relative;
   width: 100%;
-  height: 80%;
+  /* height: 80%; */
   object-position: center;
   object-fit: fill;
   transition: all 0.7s;
-  overflow: hidden;
   z-index: -99;
   border-radius: 8px;
-  &:hover {
+  overflow: hidden;
+
+  @media (max-width: 500px) {
+    /* height: 83%; */
+  }
+  @media (max-width: 350px) {
+    /* height: 82%; */
+  }
+`;
+export const WrapImg = styled.div`
+  overflow: hidden;
+  border-radius: 8px;
+  :hover ${Image} {
     transform: scale(1.07);
     transition: all 0.7s;
     z-index: -99;
-  }
-  @media (max-width: 500px) {
-    height: 83%;
-  }
-  @media (max-width: 350px) {
-    height: 82%;
   }
 `;
 export const Info = styled.div`
@@ -69,23 +78,26 @@ export const CustomLink = styled(Link)`
   height: 100%;
 `;
 export const Title = styled.h2`
+  display: -webkit-box;
   max-width: 100%;
   font-weight: 500;
-  height: 40px;
+  height: 35px;
   text-overflow: ellipsis;
-  white-space: nowrap;
   overflow: hidden;
+  line-height: 16.8px;
+  white-space: initial;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   &:hover {
     color: #fcaf17;
   }
   @media (max-width: 500px) {
     /* display: flex;
     flex-wrap: wrap; */
-    max-height: 35px;
+    /* max-height: 35px; */
     font-size: 14px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
   }
 `;
 export const Price = styled.h4`
@@ -100,6 +112,6 @@ export const Transition = styled.div`
   transition: all 2s;
   /* transition-property: all; */
   overflow: hidden;
-  height: ${(props) => props.showTypeFilter && "400px"};
+  /* height: ${(props) => props.showTypeFilter && "400px"}; */
   /* transition: ${(props) => (props.showTypeFilter ? "height" : "all")} 2s; */
 `;

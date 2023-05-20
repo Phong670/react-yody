@@ -29,7 +29,50 @@ function* orderProductSaga(action) {
       detail
     );
 
-    yield callback();
+    yield callback(true);
+    yield put({
+      type: SUCCESS(ORDER_ACTION.ORDER_PRODUCT),
+      payload: {
+        data: result.data,
+      },
+    });
+  } catch (e) {
+    yield put({
+      type: FAIL(ORDER_ACTION.ORDER_PRODUCT),
+      payload: {
+        error: "Fail!",
+      },
+    });
+  }
+}
+
+function* guestOrderProductSaga(action) {
+  const { data, products, callback } = action.payload;
+  console.log(
+    "🚀 ~ file: order.saga.js:8 ~ function*orderProductSaga ~ products:",
+    products
+  );
+  try {
+    const result = yield axios.post("http://localhost:4000/guestOrders", data);
+
+    for (let i = 0; i < products.data.length; i++) {
+      yield axios.post("http://localhost:4000/orderDetails", {
+        orderId: result.data.id,
+        productId: products.data[i].id,
+        name: products.data[i].title,
+        price: products.data[i].price,
+        image: products.data[i].image,
+        size: products.data[i].size,
+        quantity: products.data[i].quantity,
+      });
+    }
+    const detail = yield axios.get("http://localhost:4000/guestOrderDetails");
+    console.log(
+      "🚀 ~ file: order.saga.js:28 ~ function*orderProductSaga ~ detail:",
+      detail
+    );
+
+    yield callback(true);
     //DELETE CARD
     yield put({
       type: SUCCESS(ORDER_ACTION.ORDER_PRODUCT),
@@ -78,6 +121,10 @@ function* getOrderProductListSaga(action) {
 
 export default function* locationSaga() {
   yield takeEvery(REQUEST(ORDER_ACTION.ORDER_PRODUCT), orderProductSaga);
+  yield takeEvery(
+    REQUEST(ORDER_ACTION.GUEST_ORDER_PRODUCT),
+    guestOrderProductSaga
+  );
 
   yield takeEvery(
     REQUEST(ORDER_ACTION.GET_ORDER_PRODUCT_LIST),

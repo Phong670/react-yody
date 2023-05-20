@@ -13,3 +13,4 @@ export const deleteCartItemAction = createAction(
 export const deleteAddNewCard = createAction(
   REQUEST(CART_ACTION.DELETE_ADD_NEW_CART)
 );
+export const deleteAllCard = createAction(REQUEST(CART_ACTION.DELETE_All_CART));

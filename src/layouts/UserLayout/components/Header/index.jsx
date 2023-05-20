@@ -443,9 +443,9 @@ function Header() {
         dispatch(logoutAction());
       },
       label: (
-        <Link target="_blank" rel="noopener noreferrer">
+        <a target="_blank" rel="noopener noreferrer">
           Đăng xuất
-        </Link>
+        </a>
       ),
     },
   ];

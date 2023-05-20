@@ -15,6 +15,8 @@ import {
   getDistrictListAction,
   getWardListAction,
   orderProductAction,
+  guestOrderProductAction,
+  deleteAllCard,
 } from "../../../redux/actions";
 import { IoIosArrowBack } from "react-icons/io";
 import { Button, Form, Input, Badge, Radio, Space } from "antd";
@@ -23,12 +25,16 @@ import { clearFields } from "redux-form";
 import { parse } from "querystring";
 import { uid } from "uid";
 // import { values } from "json-server-auth";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
 
 function Checkout() {
   const [checkoutForm] = Form.useForm();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { cartList } = useSelector((state) => state.cart);
+  const { orderList } = useSelector((state) => state.order);
+
   console.log("🚀 ~ file: index.jsx:27 ~ Checkout ~ cartList:", cartList);
   const { cityList, districtList, wardList } = useSelector(
     (state) => state.location
@@ -52,6 +58,7 @@ function Checkout() {
   const { userInfo } = useSelector((state) => state.auth);
   const [total, setTotal] = useState(0);
   let totalClone = 0;
+  const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
   useEffect(() => {
     console.log("aaaaaaaaaaaaaaaaa");
@@ -68,25 +75,9 @@ function Checkout() {
     console.log("00000000000000000000000000000000000000000000");
     console.log(values);
     let idOrder = uid(4);
-    dispatch(
-      orderProductAction({
-        data: {
-          ...values,
-          userId: userInfo.data.id,
-          totalPrice: total,
-          status: "Đang xử lý",
-          costShip: total > 500000 ? 0 : 20000,
-          idOrder: idOrder,
-        },
-        products: cartList,
-        callback: () => {},
-      })
-    );
-    navigate(
-      { pathname: generatePath(ROUTES.USER.THANKYOU) },
-
-      {
-        state: {
+    if (userInfo.data.id) {
+      dispatch(
+        orderProductAction({
           data: {
             ...values,
             userId: userInfo.data.id,
@@ -96,9 +87,66 @@ function Checkout() {
             idOrder: idOrder,
           },
           products: cartList,
-        },
-      }
-    );
+          callback: (orderSuccess) => {
+            if (orderSuccess) {
+              navigate(
+                { pathname: generatePath(ROUTES.USER.THANKYOU) },
+
+                {
+                  state: {
+                    data: {
+                      ...values,
+                      userId: userInfo.data.id,
+                      totalPrice: total,
+                      status: "Đang xử lý",
+                      costShip: total > 500000 ? 0 : 20000,
+                      idOrder: idOrder,
+                    },
+                    products: cartList,
+                  },
+                }
+              );
+              dispatch(deleteAllCard());
+            }
+          },
+        })
+      );
+    } else {
+      dispatch(
+        guestOrderProductAction({
+          data: {
+            ...values,
+            totalPrice: total,
+            status: "Đang xử lý",
+            costShip: total > 500000 ? 0 : 20000,
+            idOrder: idOrder,
+          },
+          products: cartList,
+          callback: (orderSuccess) => {
+            if (orderSuccess) {
+              navigate(
+                { pathname: generatePath(ROUTES.USER.THANKYOU) },
+
+                {
+                  state: {
+                    data: {
+                      ...values,
+                      userId: "GUEST",
+                      totalPrice: total,
+                      status: "Đang xử lý",
+                      costShip: total > 500000 ? 0 : 20000,
+                      idOrder: idOrder,
+                    },
+                    products: cartList,
+                  },
+                }
+              );
+              dispatch(deleteAllCard());
+            }
+          },
+        })
+      );
+    }
   };
   const renderCartList = () => {
     return cartList.data.map((item, index) => {
@@ -130,7 +178,7 @@ function Checkout() {
   };
 
   return (
-    <div className="mt-[0px] xl:min-w-[1200px] xxs:w-full  grid lg:grid-cols-3 xxs:grid-cols-1 gap-4 xxs:px-4 lg:px-0">
+    <div className="mt-[0px] mb-[84px] xl:min-w-[1200px] xxs:w-full  grid lg:grid-cols-3 xxs:grid-cols-1 gap-4 xxs:px-4 lg:px-0">
       <div className="lg:col-span-2 h-auto  flex flex-wrap justify-center content-start my-4">
         <div className="w-full h-[80px]  flex justify-center pb-2 mb-2">
           <img
@@ -408,13 +456,17 @@ function Checkout() {
               <button
                 form="checkoutForm"
                 // key="submit"
-                className="bg-[orange] w-[40%] py-2 text-[white] rounded-[4px]"
+                className="bg-[orange] w-[40%] h-[42px] py-2 text-[white] rounded-[4px]"
                 onClick={() => {
                   checkoutForm.onFinish();
                   console.log(123);
                 }}
               >
-                Đặt hàng
+                {orderList.load ? (
+                  <Spin indicator={antIcon} className="w-full" />
+                ) : (
+                  <p className="w-full">Đặt hàng</p>
+                )}
               </button>
             </div>
           </div>
@@ -459,13 +511,17 @@ function Checkout() {
             <button
               form="checkoutForm"
               // key="submit"
-              className="bg-[orange] w-[40%] py-2 text-[white] rounded-[4px]"
+              className="bg-[orange] h-[42px] w-[40%] py-2 text-[white] rounded-[4px]"
               onClick={() => {
                 checkoutForm.onFinish();
                 console.log(123);
               }}
             >
-              Đặt hàng
+              {orderList.load ? (
+                <Spin indicator={antIcon} className="w-full" />
+              ) : (
+                <p className="w-full">Đặt hàng</p>
+              )}
             </button>
           </div>
         </div>

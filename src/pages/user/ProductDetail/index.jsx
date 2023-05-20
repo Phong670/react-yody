@@ -35,7 +35,11 @@ function ProductDetail() {
 
   const { Panel } = Collapse;
   const { TextArea } = Input;
+  useEffect(() => {
+    dispatch(getProductDetailAction({ id: id }));
 
+    dispatch(getSizeListAction());
+  }, [id]);
   useEffect(() => {
     axios
       .get("http://localhost:4000/reviews/", {
@@ -50,15 +54,6 @@ function ProductDetail() {
   }, [id, listReview]);
 
   useEffect(() => {
-    dispatch(getProductDetailAction({ id: id }));
-
-    dispatch(getSizeListAction());
-  }, [id]);
-  useEffect(() => {
-    console.log(
-      "1111111111111111111111111111111122222222222222222222222222222222",
-      productDetail.data.subCategoryId
-    );
     axios
       .get("http://localhost:4000/products/?_page=1&_limit=12", {
         params: { subCategoryId: productDetail.data.subCategoryId },
@@ -118,14 +113,11 @@ function ProductDetail() {
   }, [productDetail.data]);
 
   return (
-    <div className="flex flex-wrap flex-col justify-center xl:w-[1200px] lg:mt-[50px] xxs:mt-[-16px] relative p-3">
+    <div className="flex flex-wrap flex-col items-center justify-center xl:w-[1200px] lg:mt-[50px] xxs:mt-[-16px] relative p-3">
       <div>{renderTitle}</div>
       <div className="flex my-4 h-auto   xxs:justify-center lg:justify-between xxs:flex-wrap  ">
         <div className="xl:w-[750px]  xxs:w-full mb-3 overflow-auto ">
-          <div
-            // spinning={productDetail.load}
-            className="flex justify-center flex-wrap w-full h-auto border-b-[1px] border-solid border-[#F2F2F2] pb-[24px]"
-          >
+          <div className="flex justify-center flex-wrap w-full h-auto border-b-[1px] border-solid border-[#F2F2F2] pb-[24px]">
             <div className="flex justify-center w-full">
               {!productDetail.load ? (
                 <img src={productDetail.data.image} alt="" />
@@ -199,7 +191,7 @@ function ProductDetail() {
       </div>
 
       <p className="mt-4 w-full">GỢI Ý CHO BẠN</p>
-      <div className=" grid col-span-4 gap-1 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-3 xs:grid-cols-2 xxs:mt-[8px] lg:mt-0">
+      <div className=" grid sm:w-full  justify-items-center xs:gap-[20px] xxs:gap-[10px] xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-4  sm:grid-cols-3 xs:grid-cols-2 xxs:grid-cols-2 xxs:mt-[16px] lg:mt-2">
         {renderCartList}
       </div>
     </div>

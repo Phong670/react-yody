@@ -31,13 +31,12 @@
   "users": [
     {
       "email": "qphong1234@gmail.com",
-      "password": "$2a$10$.smPDuFcbkmzlFnUkDTGWOSSBGiQYTaiZQ6JACwiy.jzIbk/lfrfO",
+      "password": "$2a$10$GXO2QchtGcwtLw4MPNDmDuDfg39dVkVzgzm/CacJGr39Xkn2IDC8i",
       "fullName": "Phong",
       "role": "user",
       "createdAt": 1684318825721,
-      "updatedAt": 1684472351335,
-      "id": 1,
-      "anhyeuem": ""
+      "updatedAt": 1684504054528,
+      "id": 1
     }
   ],
   "products": [
@@ -1445,6 +1444,279 @@
       "createdAt": 1684428811247,
       "updatedAt": 1684428811247,
       "id": 2
+    },
+    {
+      "name": "phong4",
+      "numberPhone": "123",
+      "email": "ewq",
+      "city": {
+        "id": 9737,
+        "value": "79",
+        "parentcode": "0003",
+        "label": "Thành phố Hồ Chí Minh",
+        "status": 1,
+        "region": 3
+      },
+      "district": {
+        "id": 9749,
+        "value": "761",
+        "parentcode": "79",
+        "label": "Quận 12",
+        "status": 1,
+        "region": null
+      },
+      "ward": {
+        "id": 9750,
+        "value": "26764",
+        "parentcode": "761",
+        "label": "Phường Thạnh Xuân",
+        "status": 1,
+        "region": null
+      },
+      "address": "123",
+      "paymentMethod": "cod",
+      "userId": 1,
+      "totalPrice": 399000,
+      "status": "Đang xử lý",
+      "costShip": 20000,
+      "idOrder": "8257",
+      "createdAt": 1684488035832,
+      "updatedAt": 1684488035832,
+      "id": 3
+    },
+    {
+      "name": "ằd",
+      "numberPhone": "ád",
+      "email": "qưe",
+      "city": {
+        "id": 3429,
+        "value": "31",
+        "parentcode": "0003",
+        "label": "Thành phố Hải Phòng",
+        "status": 1,
+        "region": 1
+      },
+      "district": {
+        "id": 3430,
+        "value": "303",
+        "parentcode": "31",
+        "label": "Quận Hồng Bàng",
+        "status": 1,
+        "region": null
+      },
+      "ward": {
+        "id": 3436,
+        "value": "11311",
+        "parentcode": "303",
+        "label": "Phường Minh Khai",
+        "status": 1,
+        "region": null
+      },
+      "address": "qưewq",
+      "paymentMethod": "cod",
+      "userId": 1,
+      "totalPrice": 0,
+      "status": "Đang xử lý",
+      "costShip": 20000,
+      "idOrder": "0763",
+      "createdAt": 1684488461451,
+      "updatedAt": 1684488461451,
+      "id": 4
+    },
+    {
+      "name": "jksdajf",
+      "numberPhone": "ád",
+      "email": "ádf",
+      "city": {
+        "id": 7224,
+        "value": "48",
+        "parentcode": "0003",
+        "label": "Thành phố Đà Nẵng",
+        "status": 1,
+        "region": 2
+      },
+      "district": {
+        "id": 7264,
+        "value": "494",
+        "parentcode": "48",
+        "label": "Quận Ngũ Hành Sơn",
+        "status": 1,
+        "region": null
+      },
+      "ward": {
+        "id": 7266,
+        "value": "20285",
+        "parentcode": "494",
+        "label": "Phường Khuê Mỹ",
+        "status": 1,
+        "region": null
+      },
+      "address": "ád",
+      "paymentMethod": "cod",
+      "userId": 1,
+      "totalPrice": 0,
+      "status": "Đang xử lý",
+      "costShip": 20000,
+      "idOrder": "7631",
+      "createdAt": 1684488504426,
+      "updatedAt": 1684488504426,
+      "id": 5
+    },
+    {
+      "name": "zC",
+      "numberPhone": "asd",
+      "email": "sad",
+      "city": {
+        "id": 9737,
+        "value": "79",
+        "parentcode": "0003",
+        "label": "Thành phố Hồ Chí Minh",
+        "status": 1,
+        "region": 3
+      },
+      "district": {
+        "id": 9897,
+        "value": "771",
+        "parentcode": "79",
+        "label": "Quận 10",
+        "status": 1,
+        "region": null
+      },
+      "ward": {
+        "id": 9912,
+        "value": "27205",
+        "parentcode": "771",
+        "label": "Phường 03",
+        "status": 1,
+        "region": null
+      },
+      "address": "asdas",
+      "paymentMethod": "cod",
+      "userId": 1,
+      "totalPrice": 230000,
+      "status": "Đang xử lý",
+      "costShip": 20000,
+      "idOrder": "55e5",
+      "createdAt": 1684552034381,
+      "updatedAt": 1684552034382,
+      "id": 6
+    },
+    {
+      "name": "1",
+      "numberPhone": "423",
+      "email": "qphong670@gmail.com",
+      "city": {
+        "id": 8113,
+        "value": "92",
+        "parentcode": "0003",
+        "label": "Thành phố Cần Thơ",
+        "status": 1,
+        "region": 2
+      },
+      "district": {
+        "id": 8145,
+        "value": "919",
+        "parentcode": "92",
+        "label": "Quận Cái Răng",
+        "status": 1,
+        "region": null
+      },
+      "ward": {
+        "id": 8148,
+        "value": "31192",
+        "parentcode": "919",
+        "label": "Phường Hưng Thạnh",
+        "status": 1,
+        "region": null
+      },
+      "address": "qserw",
+      "paymentMethod": "cod",
+      "userId": 1,
+      "totalPrice": 230000,
+      "status": "Đang xử lý",
+      "costShip": 20000,
+      "idOrder": "5e59",
+      "createdAt": 1684553346566,
+      "updatedAt": 1684553346566,
+      "id": 7
+    },
+    {
+      "name": "123",
+      "numberPhone": "123",
+      "email": "123",
+      "city": {
+        "id": 8113,
+        "value": "92",
+        "parentcode": "0003",
+        "label": "Thành phố Cần Thơ",
+        "status": 1,
+        "region": 2
+      },
+      "district": {
+        "id": 8114,
+        "value": "916",
+        "parentcode": "92",
+        "label": "Quận Ninh Kiều",
+        "status": 1,
+        "region": null
+      },
+      "ward": {
+        "id": 8116,
+        "value": "31120",
+        "parentcode": "916",
+        "label": "Phường An Hòa",
+        "status": 1,
+        "region": null
+      },
+      "address": "123",
+      "paymentMethod": "cod",
+      "userId": 1,
+      "totalPrice": 0,
+      "status": "Đang xử lý",
+      "costShip": 20000,
+      "idOrder": "e595",
+      "createdAt": 1684553379046,
+      "updatedAt": 1684553379046,
+      "id": 8
+    },
+    {
+      "name": "32qwrdf",
+      "numberPhone": "asfd",
+      "email": "ward",
+      "city": {
+        "id": 9737,
+        "value": "79",
+        "parentcode": "0003",
+        "label": "Thành phố Hồ Chí Minh",
+        "status": 1,
+        "region": 3
+      },
+      "district": {
+        "id": 9897,
+        "value": "771",
+        "parentcode": "79",
+        "label": "Quận 10",
+        "status": 1,
+        "region": null
+      },
+      "ward": {
+        "id": 9907,
+        "value": "27190",
+        "parentcode": "771",
+        "label": "Phường 02",
+        "status": 1,
+        "region": null
+      },
+      "address": "asd",
+      "paymentMethod": "cod",
+      "userId": 1,
+      "totalPrice": 449000,
+      "status": "Đang xử lý",
+      "costShip": 20000,
+      "idOrder": "467b",
+      "createdAt": 1684554163802,
+      "updatedAt": 1684554163803,
+      "id": 9
     }
   ],
   "orderDetails": [
@@ -1483,8 +1755,259 @@
       "createdAt": 1684428811293,
       "updatedAt": 1684428811293,
       "id": 3
+    },
+    {
+      "orderId": 1,
+      "productId": 11,
+      "name": "Áo Polo Nữ Croptop Pique Mắt Chim In Hình",
+      "price": 249000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apn5054-xan-5.jpg?v=1681356076000",
+      "size": "3XL",
+      "quantity": 1,
+      "createdAt": 1684487079615,
+      "updatedAt": 1684487079615,
+      "id": 4
+    },
+    {
+      "orderId": 2,
+      "productId": 11,
+      "name": "Áo Polo Nữ Croptop Pique Mắt Chim In Hình",
+      "price": 249000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apn5054-xan-5.jpg?v=1681356076000",
+      "size": "3XL",
+      "quantity": 3,
+      "createdAt": 1684487338369,
+      "updatedAt": 1684487338369,
+      "id": 5
+    },
+    {
+      "orderId": 3,
+      "productId": 30,
+      "name": "Quần Short Jeans Nữ Bó Cạp Cao",
+      "price": 249000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/sjn4010-den5.jpg?v=1666084711000",
+      "size": "26",
+      "quantity": 1,
+      "createdAt": 1684487790238,
+      "updatedAt": 1684487790238,
+      "id": 6
+    },
+    {
+      "orderId": 3,
+      "productId": 34,
+      "name": "Chân Váy Dáng A Khaki Túi Ốp",
+      "price": 399000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/chan-vay-nu-cvn6068-reu-1.jpg?v=1680923455000",
+      "size": "M",
+      "quantity": 1,
+      "createdAt": 1684488035885,
+      "updatedAt": 1684488035885,
+      "id": 7
+    },
+    {
+      "orderId": 6,
+      "productId": 2,
+      "name": "Áo Polo Nữ Cafe Phối Tay Raglan Ngực In Gấu",
+      "price": 230000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apn5326-nav-31-0edb2973-7c98-4fe1-9279-c33f25f139f4.jpg?v=1677122912000",
+      "size": "S",
+      "quantity": 1,
+      "createdAt": 1684552034439,
+      "updatedAt": 1684552034439,
+      "id": 8
+    },
+    {
+      "orderId": 7,
+      "productId": 2,
+      "name": "Áo Polo Nữ Cafe Phối Tay Raglan Ngực In Gấu",
+      "price": 230000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apn5326-nav-31-0edb2973-7c98-4fe1-9279-c33f25f139f4.jpg?v=1677122912000",
+      "size": "XS",
+      "quantity": 1,
+      "createdAt": 1684553346617,
+      "updatedAt": 1684553346617,
+      "id": 9
+    },
+    {
+      "orderId": 4,
+      "productId": 4,
+      "name": "Áo Polo Thể Thao Nữ Phối Màu",
+      "price": 345300,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/polo-the-thao-nu-phoi-mau-san6046-cdt-12.jpg?v=1676606487000",
+      "size": "M",
+      "quantity": 1,
+      "createdAt": 1684553998117,
+      "updatedAt": 1684553998117,
+      "id": 10
+    },
+    {
+      "orderId": 9,
+      "productId": 27,
+      "name": "Quần Âu Nữ Lưng Cao Ống Đứng Thêu Cạp",
+      "price": 449000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/qan5110-nca-6.jpg?v=1664531724000",
+      "size": "26",
+      "quantity": 1,
+      "createdAt": 1684554163868,
+      "updatedAt": 1684554163868,
+      "id": 11
     }
   ],
+  "guestOrders": [
+    {
+      "name": "guest213",
+      "numberPhone": "wsaed",
+      "email": "asd",
+      "city": {
+        "id": 3429,
+        "value": "31",
+        "parentcode": "0003",
+        "label": "Thành phố Hải Phòng",
+        "status": 1,
+        "region": 1
+      },
+      "district": {
+        "id": 3481,
+        "value": "307",
+        "parentcode": "31",
+        "label": "Quận Kiến An",
+        "status": 1,
+        "region": null
+      },
+      "ward": {
+        "id": 3487,
+        "value": "11440",
+        "parentcode": "307",
+        "label": "Phường Ngọc Sơn",
+        "status": 1,
+        "region": null
+      },
+      "address": "123",
+      "paymentMethod": "cod",
+      "totalPrice": 249000,
+      "status": "Đang xử lý",
+      "costShip": 20000,
+      "idOrder": "7667",
+      "createdAt": 1684487079563,
+      "updatedAt": 1684487079564,
+      "id": 1
+    },
+    {
+      "name": "safcguest",
+      "numberPhone": "123",
+      "email": "3412",
+      "city": {
+        "id": 3429,
+        "value": "31",
+        "parentcode": "0003",
+        "label": "Thành phố Hải Phòng",
+        "status": 1,
+        "region": 1
+      },
+      "district": {
+        "id": 3456,
+        "value": "305",
+        "parentcode": "31",
+        "label": "Quận Lê Chân",
+        "status": 1,
+        "region": null
+      },
+      "ward": {
+        "id": 3464,
+        "value": "11389",
+        "parentcode": "305",
+        "label": "Phường Dư Hàng",
+        "status": 1,
+        "region": null
+      },
+      "address": "12321",
+      "paymentMethod": "cod",
+      "totalPrice": 747000,
+      "status": "Đang xử lý",
+      "costShip": 0,
+      "idOrder": "2de8",
+      "createdAt": 1684487338317,
+      "updatedAt": 1684487338317,
+      "id": 2
+    },
+    {
+      "name": "GUEST2314",
+      "numberPhone": "123",
+      "email": "4324",
+      "city": {
+        "id": 9737,
+        "value": "79",
+        "parentcode": "0003",
+        "label": "Thành phố Hồ Chí Minh",
+        "status": 1,
+        "region": 3
+      },
+      "district": {
+        "id": 9913,
+        "value": "772",
+        "parentcode": "79",
+        "label": "Quận 11",
+        "status": 1,
+        "region": null
+      },
+      "ward": {
+        "id": 9918,
+        "value": "27220",
+        "parentcode": "772",
+        "label": "Phường 03",
+        "status": 1,
+        "region": null
+      },
+      "address": "12",
+      "paymentMethod": "cod",
+      "totalPrice": 249000,
+      "status": "Đang xử lý",
+      "costShip": 20000,
+      "idOrder": "62ca",
+      "createdAt": 1684487790184,
+      "updatedAt": 1684487790184,
+      "id": 3
+    },
+    {
+      "name": "asdas",
+      "numberPhone": "213421",
+      "email": "123qwe",
+      "city": {
+        "id": 8113,
+        "value": "92",
+        "parentcode": "0003",
+        "label": "Thành phố Cần Thơ",
+        "status": 1,
+        "region": 2
+      },
+      "district": {
+        "id": 8114,
+        "value": "916",
+        "parentcode": "92",
+        "label": "Quận Ninh Kiều",
+        "status": 1,
+        "region": null
+      },
+      "ward": {
+        "id": 8119,
+        "value": "31129",
+        "parentcode": "916",
+        "label": "Phường An Cư",
+        "status": 1,
+        "region": null
+      },
+      "address": "12321",
+      "paymentMethod": "cod",
+      "totalPrice": 345300,
+      "status": "Đang xử lý",
+      "costShip": 20000,
+      "idOrder": "fa0e",
+      "createdAt": 1684553998027,
+      "updatedAt": 1684553998028,
+      "id": 4
+    }
+  ],
+  "guestOrderDetails": [],
   "cities": [
     {
       "id": 10993,

@@ -22,7 +22,15 @@ function Orders() {
   const { userInfo } = useSelector((state) => state.auth);
   console.log("🚀 ~ file: index.jsx:20 ~ Orders ~ userInfo:", userInfo);
   const { orderList } = useSelector((state) => state.order);
-  console.log("🚀 ~ file: index.jsx:21 ~ Orders ~ orderList:", orderList.data);
+
+  useEffect(() => {
+    !userInfo.data.id &&
+      navigate({
+        pathname: generatePath(ROUTES.USER.LOGIN),
+        search: `ReturnUrl=account/orders`,
+      });
+  }, []);
+
   useEffect(() => {
     if (userInfo.data.id) {
       console.log("ddang nhap");
@@ -43,10 +51,6 @@ function Orders() {
         item.city.label,
     });
   });
-  console.log(
-    "🚀 ~ file: index.jsx:33 ~ Orders ~ orderListFinalClone:",
-    orderListFinalClone
-  );
 
   const renderOrderList = () => {
     return orderListFinalClone.map((item, index) => {

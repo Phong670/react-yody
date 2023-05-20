@@ -4,7 +4,7 @@ import { generatePath, useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getProductListAction } from "../../../redux/actions/";
 
-import { ROUTES } from "../../../constants/routes";
+import { ROUTES } from "constants/routes";
 import * as S from "./styles";
 import RenderSearchList from "./renderSearchList";
 

@@ -25,13 +25,16 @@ function ChangePassword() {
   const dispatch = useDispatch();
   const { state } = useLocation();
   console.log("🚀 ~ file: index.jsx:24 ~ OrderedDetail ~ state:", state);
-  const { userInfo } = useSelector((state) => state.auth);
+  const { userInfo, changePasswordData } = useSelector((state) => state.auth);
+  console.log(
+    "🚀 ~ file: index.jsx:29 ~ ChangePassword ~ changePasswordData:",
+    changePasswordData
+  );
   console.log("🚀 ~ file: index.jsx:20 ~ Orders ~ userInfo:", userInfo);
   const { orderList } = useSelector((state) => state.order);
   console.log("🚀 ~ file: index.jsx:21 ~ Orders ~ orderList:", orderList.data);
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
   const [changePasswordForm] = Form.useForm();
-  const [successPassword, setSuccessPassword] = useState(false);
   function getCurrentDimension() {
     return {
       width: window.innerWidth,
@@ -48,10 +51,7 @@ function ChangePassword() {
       window.removeEventListener("resize", updateDimension);
     };
   }, [screenSize]);
-  console.log(
-    "🚀 ~ file: index.jsx:46 ~ OrderedDetail ~ screenSize:",
-    screenSize
-  );
+
   useEffect(() => {
     if (userInfo.data.id) {
       console.log("ddang nhap");
@@ -72,14 +72,11 @@ function ChangePassword() {
         item.city.label,
     });
   });
-  console.log(
-    "🚀 ~ file: index.jsx:33 ~ Orders ~ orderListFinalClone:",
-    orderListFinalClone
-  );
+
   const handleChangePassword = (values) => {
     dispatch(
       changePasswordAction({
-        data: {
+        oldData: {
           email: userInfo.data.email,
           password: values.password,
         },
@@ -87,14 +84,6 @@ function ChangePassword() {
           password: values.newPassword,
         },
         idUser: userInfo.data.id,
-        callback: (success) => {
-          console.log("thay doi thanh cong");
-          changePasswordForm.resetFields();
-
-          success === "success"
-            ? setSuccessPassword(true)
-            : setSuccessPassword(false);
-        },
       })
     );
   };
@@ -196,11 +185,10 @@ function ChangePassword() {
               </p>
             </div>
             <div>
-              {successPassword ? (
-                <div>Thay đổi mật khẩu thành công</div>
-              ) : (
-                <></>
-              )}
+              <div>
+                {changePasswordData.error || changePasswordData.success}
+              </div>
+
               <Form
                 form={changePasswordForm}
                 name="changePasswordForm"

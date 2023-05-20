@@ -5,7 +5,7 @@ import * as S from "./styles";
 import { ROUTES } from "../../../constants/routes";
 import { getOrderList } from "../../../redux/actions";
 import { Button, Form, Input, Badge, Radio, Space } from "antd";
-import emailjs from "emailjs-com";
+import axios from "axios";
 
 function ThankyouOrdered() {
   const dispatch = useDispatch();
@@ -43,32 +43,24 @@ function ThankyouOrdered() {
     "🚀 ~ file: index.jsx:33 ~ Orders ~ orderListFinalClone:",
     orderListFinalClone
   );
-
   const templateParams = {
-    name: state.data.name,
-    idOrder: state.data.idOrder,
-    address: state.data.addressFinal,
-    paymentMethod: state.data.paymentMethod,
-    totalPrice: state.data.totalPrice,
-    costShip: state.data.costShip,
+    email: "qphong670@gmail.com",
+    subject: "test",
+    content: "content",
   };
-  useEffect(() => {
-    emailjs
-      .send(
-        "orderSuccessClone",
-        "orderSuccessYody",
-        templateParams,
-        "1T4w4YthxdLw3RavW"
-      )
-      .then(
-        (response) => {
-          console.log("SUCCESS!", response.status, response.text);
-        },
-        (err) => {
-          console.log("FAILED...", err);
-        }
-      );
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .post("http://localhost:4000/email/send", templateParams)
+
+  //     .then((res) => {
+  //       console.log("email ok");
+  //     })
+  //     .catch((err) => {
+  //       console.log("loi roi");
+  //     });
+  // }, []);
+
+  useEffect(() => {}, []);
   const renderCartList = () => {
     return state.products.data?.map((item, index) => {
       return (
@@ -198,7 +190,7 @@ function ThankyouOrdered() {
           </div>
         </div>
       </div>
-      <div className="w-full flex justify-center my-4 gap-4">
+      <div className="w-full flex justify-center my-4 h-[60px] gap-4">
         {userInfo.data.id && (
           <button
             form="checkoutForm"

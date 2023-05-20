@@ -1,8 +1,9 @@
 import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate, Navigate, useLocation } from "react-router-dom";
 import { Button, Form, Input } from "antd";
 import { Link, generatePath } from "react-router-dom";
+import qs from "qs";
 
 import { loginAction } from "../../redux/actions";
 import { ROUTES } from "../../constants/routes";
@@ -12,6 +13,11 @@ import * as S from "./styles";
 function LoginPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { search } = useLocation();
+  console.log("🚀 ~ file: index.jsx:16 ~ LoginPage ~ search:", search);
+  const query = qs.parse(search, { ignoreQueryPrefix: true });
+  console.log("🚀 ~ file: index.jsx:18 ~ LoginPage ~ query:", query);
+
   const { loginData } = useSelector((state) => state.auth);
   const [loginForm] = Form.useForm();
 
@@ -42,10 +48,12 @@ function LoginPage() {
           password: values.password,
         },
         callback: (role) =>
-          navigate(
-            role === "admin" ? ROUTES.ADMIN.DASHBOARD : ROUTES.USER.HOME
-            //tra ve trang truoc do?
-          ),
+          query.ReturnUrl === "account/orders"
+            ? navigate(ROUTES.USER.ORDERS)
+            : navigate(
+                role === "admin" ? ROUTES.ADMIN.DASHBOARD : ROUTES.USER.HOME
+                //tra ve trang truoc do?
+              ),
       })
     );
   };
@@ -102,13 +110,15 @@ function LoginPage() {
               Đăng nhập
             </S.ButtonCustom>
           </Form>
-          <Link
+          <div
             className="w-full flex justify-center flex-wrap gap-2 xxs:text-[16px]"
-            to={generatePath(ROUTES.USER.REGISTER)}
+            onClick={() => {
+              navigate(ROUTES.USER.REGISTER);
+            }}
           >
             Bạn chưa có tài khoản?{" "}
             <p className="text-[orange] hover:cursor-pointer">Đăng ký ngay</p>
-          </Link>
+          </div>
         </div>
       </S.LoginContainer>
     </S.LoginWrapper>
