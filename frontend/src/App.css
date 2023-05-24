@@ -278,3 +278,13 @@ html {
 .ant-modal .ant-modal-content {
   padding: 1px !important;
 }
+//radioCustomCheckout
+.ant-radio-wrapper
+  .ant-radio-wrapper-in-form-item
+  .css-dev-only-do-not-override-1fviqcj
+  > span {
+  display: flex !important;
+}
+.payment :where(.css-dev-only-do-not-override-1fviqcj).ant-form-item {
+  margin-bottom: 0 !important;
+}

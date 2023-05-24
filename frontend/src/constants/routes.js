@@ -1,7 +1,7 @@
 export const ROUTES = {
   USER: {
     HOME: "/",
-    PRODUCT_DETAIL: "/product_detail/:id",
+    PRODUCT_DETAIL: "/product-detail/:id",
     PRODUCT_LIST: "/product/:subCategoryId",
     LOGIN: "/login",
     REGISTER: "/register",
@@ -11,9 +11,10 @@ export const ROUTES = {
     CHANGE_PASSWORD: "/account/changePassword",
     ORDERS: "/account/orders",
     ORDERED_DETAIL: "/account/orders/orderedDetail",
-    THANKYOU: "/checkout/thankyou/",
+    THANKYOU: "/checkout/thankyou/:id",
+    ORDER_SUCCESS: "/checkout/order-success/",
     CHECKOUT: "/checkout",
-    PAYMENT_VNPAY: "/paymentVnpay",
+    FORGOT_PASSWORD: "/login/forgot-password",
   },
   id: {},
 };

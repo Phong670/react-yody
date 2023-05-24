@@ -20,6 +20,10 @@ const initialState = {
     load: false,
     error: "",
   },
+  forgotPasswordData: {
+    load: false,
+    error: "",
+  },
 };
 
 const authReducer = createReducer(initialState, {
@@ -58,6 +62,7 @@ const authReducer = createReducer(initialState, {
       },
     };
   },
+  //changepass
   [REQUEST(AUTH_ACTION.CHANGE_PASSWORD)]: (state, action) => {
     return {
       ...state,
@@ -76,11 +81,42 @@ const authReducer = createReducer(initialState, {
       },
     };
   },
+
   [FAIL(AUTH_ACTION.CHANGE_PASSWORD)]: (state, action) => {
     const { error } = action.payload;
     return {
       ...state,
       changePasswordData: {
+        load: false,
+        error: error,
+      },
+    };
+  },
+  //forgotpass
+  [REQUEST(AUTH_ACTION.FORGOT_PASSWORD)]: (state, action) => {
+    return {
+      ...state,
+      forgotPasswordData: {
+        load: true,
+        error: "",
+      },
+    };
+  },
+  [SUCCESS(AUTH_ACTION.FORGOT_PASSWORD)]: (state, action) => {
+    return {
+      ...state,
+      forgotPasswordData: {
+        load: false,
+        error: "",
+      },
+    };
+  },
+
+  [FAIL(AUTH_ACTION.FORGOT_PASSWORD)]: (state, action) => {
+    const { error } = action.payload;
+    return {
+      ...state,
+      forgotPasswordData: {
         load: false,
         error: error,
       },

@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Navigate } from "react-router-dom";
 import { Button, Form, Input } from "antd";
 import { Link, generatePath } from "react-router-dom";
-
+import moment from "moment";
+import { uid } from "uid";
 import { registerAction } from "../../redux/actions";
 import { ROUTES } from "../../constants/routes";
 
@@ -28,6 +29,19 @@ function RegisterPage() {
   }, [registerData.error]);
 
   const handleRegister = (values) => {
+    const calculateExpirationTime = () => {
+      const expirationDurationHours = 24 * 60 * 60 * 1000; // Set the expiration duration in hours
+      let createDate = moment().valueOf();
+      let expirationTime = createDate + expirationDurationHours;
+      return expirationTime;
+    };
+
+    // let token = {
+    //   token: uid(6),
+    // };
+    // let tokenExpirationTime = {
+    //   tokenExpirationTime: calculateExpirationTime(),
+    // };
     dispatch(
       registerAction({
         data: {
@@ -35,6 +49,8 @@ function RegisterPage() {
           email: values.email,
           password: values.password,
           role: "user",
+          token: uid(6),
+          tokenExpirationTime: calculateExpirationTime(),
         },
         callback: () => navigate(ROUTES.USER.LOGIN),
       })

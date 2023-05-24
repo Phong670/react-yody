@@ -7,7 +7,7 @@ function* orderProductSaga(action) {
   const { data, products, callback } = action.payload;
   console.log(
     "🚀 ~ file: order.saga.js:8 ~ function*orderProductSaga ~ products:",
-    products
+    data
   );
   try {
     const result = yield axios.post("http://localhost:4000/orders", data);
@@ -29,7 +29,7 @@ function* orderProductSaga(action) {
       detail
     );
 
-    yield callback(true);
+    yield callback();
     yield put({
       type: SUCCESS(ORDER_ACTION.ORDER_PRODUCT),
       payload: {

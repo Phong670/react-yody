@@ -19,6 +19,7 @@ import {
   deleteAllCard,
 } from "../../../redux/actions";
 import { IoIosArrowBack } from "react-icons/io";
+import { FaMoneyBillAlt } from "react-icons/fa";
 import { Button, Form, Input, Badge, Radio, Space } from "antd";
 import Select from "react-select";
 import { clearFields } from "redux-form";
@@ -46,6 +47,7 @@ function Checkout() {
   const [isDisabledWard, setIsDisabledWard] = useState(true);
   const [selectedOptionCity, setSelectedOptionCity] = useState(null);
   const [selectedOptionDistrict, setSelectedOptionDistrict] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const [selectedOptionWard, setSelectedOptionWard] = useState(null);
 
@@ -62,7 +64,6 @@ function Checkout() {
   const antIcon = (
     <LoadingOutlined style={{ fontSize: 24, color: "#30c5c5" }} spin />
   );
-
   useEffect(() => {
     console.log("aaaaaaaaaaaaaaaaa");
     dispatch(getCityListAction());
@@ -73,110 +74,139 @@ function Checkout() {
       totalClone = totalClone + item.price * item.quantity;
       setTotal(totalClone);
     });
-  }, [cartList.data]);
+  }, []);
+  console.log("total", total);
   const handleSubmitCheckoutForm = (values) => {
-    console.log("00000000000000000000000000000000000000000000");
-    console.log(values);
-    let data = {
-      amount: 20000,
-      bankCode: values.bankCode,
-      orderDescription: values.orderDescription,
-      orderType: values.orderType,
-      language: values.language,
-    };
+    setLoading(true);
     let idOrder = uid(4);
-    let config = {
-      method: "post",
-      maxBodyLength: Infinity,
-      url: "http://localhost:5000/order/create_payment_url",
-      data: data,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
+    if (userInfo.data.id) {
+      dispatch(
+        orderProductAction({
+          data: {
+            ...values,
+            userId: userInfo.data.id,
+            addressShow:
+              values.address +
+              ", " +
+              values.ward.label +
+              ", " +
+              values.district.label +
+              ", " +
+              values.city.label +
+              ".",
+            totalPrice: total,
+            statusOrder: "Đang xử lý",
+            costShip: total > 500000 ? 0 : 20000,
+            idOrder: idOrder,
+            statusPayment: "Chưa thanh toán",
+            vnp_ResponseCode: "",
+            vnp_TransactionStatus: "",
+          },
+          products: cartList,
+          callback() {
+            if (values.paymentMethod === "COD") {
+              navigate({
+                pathname: generatePath(ROUTES.USER.THANKYOU, {
+                  id: idOrder,
+                }),
+              });
+            } else if (values.paymentMethod === "VN pay") {
+              let data = {
+                amount: total > 500000 ? total : total + 20000,
+                bankCode: "",
+                orderDescription: "Thanh toan hoa don" + idOrder,
+                orderType: 200000,
+                language: "vn",
+                idOrder: idOrder,
+              };
 
-    axios
-      .request(config)
-      .then((res) => {
-        console.log("======================================", res);
-        window.location.replace(res.data.url);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    // if (userInfo.data.id) {
-    //   dispatch(
-    //     orderProductAction({
-    //       data: {
-    //         ...values,
-    //         userId: userInfo.data.id,
-    //         totalPrice: total,
-    //         status: "Đang xử lý",
-    //         costShip: total > 500000 ? 0 : 20000,
-    //         idOrder: idOrder,
-    //       },
-    //       products: cartList,
-    //       callback: (orderSuccess) => {
-    //         if (orderSuccess) {
-    //           navigate(
-    //             { pathname: generatePath(ROUTES.USER.THANKYOU) },
+              let config = {
+                method: "post",
+                maxBodyLength: Infinity,
+                url: "http://localhost:5000/order/create_payment_url",
+                data: data,
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              };
 
-    //             {
-    //               state: {
-    //                 data: {
-    //                   ...values,
-    //                   userId: userInfo.data.id,
-    //                   totalPrice: total,
-    //                   status: "Đang xử lý",
-    //                   costShip: total > 500000 ? 0 : 20000,
-    //                   idOrder: idOrder,
-    //                   createdAt: moment().valueOf(),
-    //                 },
-    //                 products: cartList,
-    //               },
-    //             }
-    //           );
-    //           // dispatch(deleteAllCard());
-    //         }
-    //       },
-    //     })
-    //   );
-    // } else {
-    //   dispatch(
-    //     guestOrderProductAction({
-    //       data: {
-    //         ...values,
-    //         totalPrice: total,
-    //         status: "Đang xử lý",
-    //         costShip: total > 500000 ? 0 : 20000,
-    //         idOrder: idOrder,
-    //       },
-    //       products: cartList,
-    //       callback: (orderSuccess) => {
-    //         if (orderSuccess) {
-    //           navigate(
-    //             { pathname: generatePath(ROUTES.USER.THANKYOU) },
+              axios
+                .request(config)
+                .then((res) => {
+                  console.log("======================================", res);
+                  window.location.replace(res.data.url);
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
+            }
+          },
+        })
+      );
+    } else {
+      dispatch(
+        guestOrderProductAction({
+          data: {
+            ...values,
+            addressShow:
+              values.address +
+              ", " +
+              values.ward.label +
+              ", " +
+              values.district.label +
+              ", " +
+              values.city.label +
+              ".",
+            totalPrice: total,
+            statusOrder: "Đang xử lý",
+            costShip: total > 500000 ? 0 : 20000,
+            idOrder: idOrder,
+            statusPayment: "Chưa thanh toán",
+            vnp_ResponseCode: "",
+            vnp_TransactionStatus: "",
+          },
+          products: cartList,
+          callback() {
+            if (values.paymentMethod === "COD") {
+              navigate({
+                pathname: generatePath(ROUTES.USER.THANKYOU, {
+                  id: idOrder,
+                }),
+              });
+            } else if (values.paymentMethod === "VN pay") {
+              let data = {
+                amount: total > 500000 ? total : total + 20000,
+                bankCode: "",
+                orderDescription: "Thanh toan hoa don" + idOrder,
+                orderType: 200000,
+                language: "vn",
+                idOrder: idOrder,
+              };
 
-    //             {
-    //               state: {
-    //                 data: {
-    //                   ...values,
-    //                   userId: "GUEST",
-    //                   totalPrice: total,
-    //                   status: "Đang xử lý",
-    //                   costShip: total > 500000 ? 0 : 20000,
-    //                   idOrder: idOrder,
-    //                 },
-    //                 products: cartList,
-    //               },
-    //             }
-    //           );
-    //           dispatch(deleteAllCard());
-    //         }
-    //       },
-    //     })
-    //   );
-    // }
+              let config = {
+                method: "post",
+                maxBodyLength: Infinity,
+                url: "http://localhost:5000/order/create_payment_url",
+                data: data,
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              };
+
+              axios
+                .request(config)
+                .then((res) => {
+                  console.log("======================================", res);
+                  window.location.replace(res.data.url);
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
+            }
+          },
+        })
+      );
+    }
   };
   const renderCartList = () => {
     return cartList.data.map((item, index) => {
@@ -225,7 +255,7 @@ function Checkout() {
         <div className="w-full xxs:block lg:hidden bg-[#e7e8fc] p-4 my-4">
           <div className="pb-3 border-b-[1px] border-solid border-[white] ">
             <h4 className="text-[20px] font-bold">
-              Đơn hàng ({cartList.data.length} sản phẩm){" "}
+              Đơn hàng ({cartList.data.length} sản phẩm)
             </h4>
           </div>
           <>{renderCartList()}</>
@@ -430,66 +460,6 @@ function Checkout() {
                     className="py-[10px] rounded-[4px]"
                   />
                 </Form.Item>
-                <Form.Item
-                  label=""
-                  name="bankCode"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Vui lòng nhập bankCode",
-                    },
-                  ]}
-                >
-                  <Input
-                    placeholder="bankCode"
-                    className="py-[10px] rounded-[4px]"
-                  />
-                </Form.Item>
-                <Form.Item
-                  label=""
-                  name="orderDescription"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Vui lòng nhập orderDescription",
-                    },
-                  ]}
-                >
-                  <Input
-                    placeholder="orderDescription"
-                    className="py-[10px] rounded-[4px]"
-                  />
-                </Form.Item>
-                <Form.Item
-                  label=""
-                  name="orderType"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Vui lòng nhập orderType",
-                    },
-                  ]}
-                >
-                  <Input
-                    placeholder="orderType"
-                    className="py-[10px] rounded-[4px]"
-                  />
-                </Form.Item>
-                <Form.Item
-                  label=""
-                  name="language"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Vui lòng nhập language",
-                    },
-                  ]}
-                >
-                  <Input
-                    placeholder="language"
-                    className="py-[10px] rounded-[4px]"
-                  />
-                </Form.Item>
               </Form>
             </div>
           </div>
@@ -507,14 +477,14 @@ function Checkout() {
               <div className="mb-2">
                 <h4 className="text-[20px] font-bold">Thanh toán</h4>
               </div>
-              <div className="mt-3 p-3 border-[1px]  border-[#cecdcd] rounded-[4px]">
+              <div className="mt-3 p-2 border-[1px]  border-[#cecdcd] rounded-[4px] flex items-center">
                 <Form
                   form={checkoutForm}
                   name="checkoutForm"
                   layout="vertical"
                   onFinish={(values) => handleSubmitCheckoutForm(values)}
                   autoComplete="off"
-                  className="w-full p-2 text-[20px]"
+                  className="payment w-full p-2 text-[20px] flex items-center"
                 >
                   <Form.Item
                     label=""
@@ -528,8 +498,28 @@ function Checkout() {
                   >
                     <Radio.Group>
                       <Space direction="vertical">
-                        <Radio value="cod">COD</Radio>
-                        <Radio value="atm">ATM</Radio>
+                        <Radio value="COD">
+                          <p className="flex gap-2 justify-content-between lg:w-[120%] xxs:w-full">
+                            <p>Thanh toán khi nhận hàng (COD)</p>
+                            <FaMoneyBillAlt className="text-[24px] text-[orange]" />
+                          </p>
+                        </Radio>
+                        <Radio
+                          value="VN pay"
+                          className="radioCustomCheckout "
+                          styleBody={{ display: "flex" }}
+                        >
+                          <p className="flex gap-2  justify-content-between lg:w-[100%] xxs:w-full">
+                            <p>
+                              Thanh toán qua thẻ thanh toán, ứng dụng ngân hàng
+                              VNPAY
+                            </p>
+                            <img
+                              src="https://bizweb.dktcdn.net/assets/themes_support/payment_icon_vnpay.png"
+                              alt=""
+                            />
+                          </p>
+                        </Radio>
                       </Space>
                     </Radio.Group>
                   </Form.Item>
@@ -552,7 +542,7 @@ function Checkout() {
                   console.log(123);
                 }}
               >
-                {orderList.load ? (
+                {loading ? (
                   <Spin indicator={antIcon} className="w-full" />
                 ) : (
                   <p className="w-full">Đặt hàng</p>
@@ -565,7 +555,7 @@ function Checkout() {
       <div className=" lg:block xxs:hidden h-[100vh] w-[5] bg-[#e7e8fc] p-4">
         <div className="pb-3 border-b-[1px] border-solid border-[white] ">
           <h4 className="text-[20px] font-bold">
-            Đơn hàng ({cartList.data.length} sản phẩm){" "}
+            Đơn hàng ({cartList.data.length} sản phẩm)
           </h4>
         </div>
         <div className="scroll overflow-auto h-[50%]">{renderCartList()}</div>
@@ -607,7 +597,7 @@ function Checkout() {
                 console.log(123);
               }}
             >
-              {orderList.load ? (
+              {loading ? (
                 <Spin indicator={antIcon} className="w-full" />
               ) : (
                 <p className="w-full">Đặt hàng</p>

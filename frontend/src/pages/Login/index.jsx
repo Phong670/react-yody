@@ -71,7 +71,7 @@ function LoginPage() {
 
   if (accessToken) return <Navigate to={ROUTES.USER.HOME} />;
   return (
-    <S.LoginWrapper className=" lg:mt-[35px] xxs:mt-[40px]">
+    <S.LoginWrapper className="lg:mt-[35px] xxs:mt-[0px]">
       {contextHolder}
       <S.LoginContainer className="max-w-[500px] lg:my-[40px] sm:p-[40px] xxs:px-[8px] py-[40px]">
         <div className="w-full flex justify-center flex-wrap gap-4">
@@ -122,6 +122,14 @@ function LoginPage() {
               Đăng nhập
             </S.ButtonCustom>
           </Form>
+          <div
+            className="w-full flex justify-center flex-wrap gap-2 xxs:text-[16px]"
+            onClick={() => {
+              navigate(ROUTES.USER.FORGOT_PASSWORD);
+            }}
+          >
+            <p className="text-[orange] hover:cursor-pointer">Quên mật khẩu</p>
+          </div>
           <div
             className="w-full flex justify-center flex-wrap gap-2 xxs:text-[16px]"
             onClick={() => {

@@ -124,13 +124,13 @@ function AddToCard({ productDetail, dataAllReview }) {
         {productDetail.data.price?.toLocaleString()}đ
       </div>
       <div
-        className={`ml-[-4px] p-[4px] ${
+        className={`ml-[-4px] p-[4px]   ${
           boxSizeWarning && " border-dashed border-2 border-[red]"
         }`}
       >
         <div className="my-3">Kích thước:</div>
         <div
-          className={`w-full flex flex-wrap gap-3 border-red-600 ${
+          className={`w-full flex flex-wrap gap-3 border-red-600  ${
             boxSizeWarning && "border-red-600"
           }`}
         >

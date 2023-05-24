@@ -41,6 +41,20 @@ function ProductList() {
   const { categoryList } = useSelector((state) => state.category);
   const [sizeList, setSizeList] = useState([]);
   const [valuePriceShow, setValuePriceShow] = useState([0, 1200000]);
+
+  const [popCard, setPopCard] = useState("hidden");
+  const [fade, setFade] = useState(false);
+
+  const handleMenuClick = () => {
+    setPopCard("inline-block");
+    setFade(true);
+  };
+
+  const handleXClick = () => {
+    setPopCard("hidden");
+    setFade(false);
+  };
+  console.log(fade, "fade");
   useEffect(() => {
     console.log("ahihi");
     setGender(subCategoryIdArray[0]);
@@ -443,6 +457,37 @@ function ProductList() {
             </button>
           </CSSTransition>
         </SwitchTransition>
+        <div className="text-center">
+          <header className="sticky z-50 top-0  shadow-md bg-white border-b p-5">
+            <div className="flex justify-between items-center">
+              <h1 className="text-6xl text-red-500 cursor-pointer">Velvet</h1>
+              <button
+                className="text-3xl border rounded-lg px-5"
+                onClick={handleMenuClick}
+              >
+                Menu
+              </button>
+            </div>
+          </header>
+
+          <div className="p-10">
+            <div
+              className={`transition-all duration-200	 ${
+                fade ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              <div className="flex justify-end">
+                <button className="mt-2 mr-2 border p-2" onClick={handleXClick}>
+                  Close
+                </button>
+              </div>
+              <div className="space-y-2 text-3xl text-center mt-5 mb-10 mx-5 text-red-500">
+                <h1>Kontakt</h1>
+                <h1>O Velvetu</h1>
+              </div>
+            </div>
+          </div>
+        </div>
         <div
           onClick={() => {
             setShowSizeFilter(!showSizeFilter);

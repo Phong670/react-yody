@@ -1,221 +1,84 @@
 import { useEffect, useState, useMemo } from "react";
-import { Link, generatePath, useNavigate, useLocation } from "react-router-dom";
+import {
+  Link,
+  generatePath,
+  useNavigate,
+  useParams,
+  useLocation,
+} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as S from "./styles";
 import { ROUTES } from "../../../constants/routes";
-import { getOrderList } from "../../../redux/actions";
+import { getOrderId } from "../../../redux/actions";
 import { Badge } from "antd";
 import axios from "axios";
 import moment from "moment";
-import * as crypto from "crypto-js";
+import qs from "qs";
+import { emailSuccessTemp } from "../../../constants/emailSuccessTemp";
+import { useParamss } from "react-router-dom";
+import { Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 
 function ThankyouOrdered() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { state } = useLocation();
-  // console.log("🚀 ~ file: index.jsx:14 ~ ThankyouOrdered ~ state:", state);
-  const { orderList } = useSelector((state) => state.order);
+  const antIcon = (
+    <LoadingOutlined style={{ fontSize: 44, color: "#eeb50d" }} spin />
+  );
+  const params = useParams();
+
+  console.log("🚀 ~ file: index.jsx:16 ~ ThankyouOrdered ~ params:", params);
   const { userInfo } = useSelector((state) => state.auth);
+
+  const navigate = useNavigate();
+  const [dataShow, setDataShow] = useState([]);
 
   useEffect(() => {
     if (userInfo.data.id) {
-      console.log("ddang nhap");
-      dispatch(getOrderList({ userId: userInfo.data.id }));
+      console.log("dang nap 1");
+      axios
+        .get("http://localhost:4000/orders?", {
+          params: {
+            idOrder: params.id,
+            _embed: "orderDetails",
+          },
+        })
+
+        .then((res) => {
+          console.log("then dang nhap", res.data[0]);
+          setDataShow(res.data[0]);
+        })
+        .catch((err) => {
+          console.log("loi roi");
+        });
+    } else {
+      console.log("dang xuat 1");
+      axios
+        .get("http://localhost:4000/guestOrders?", {
+          params: {
+            idOrder: params.vnp_TxnRef,
+            _embed: "orderDetails",
+          },
+        })
+
+        .then((res) => {
+          setDataShow(res.data[0]);
+        })
+        .catch((err) => {
+          console.log("loi roi");
+        });
     }
   }, [userInfo.data.id]);
-  let orderListFinalClone = [];
-  orderList.data.map((item, index) => {
-    orderListFinalClone.push({
-      ...item,
-      addressFinal:
-        item.address +
-        ", " +
-        item.ward?.label +
-        ", " +
-        item.district?.label +
-        ", " +
-        item.city?.label,
-    });
-  });
+  console.log(
+    "🚀 ~ file: index.jsx:26 ~ ThankyouOrdered ~ dataShow?:",
+    dataShow
+  );
 
   useEffect(() => {
-    const emailBody = `
-    <!DOCTYPE html>
-<html>
-  <head>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-        background-color: #f5f5f5;
-      }
+    let emailSuccessTemp22 = emailSuccessTemp(dataShow);
 
-      .container {
-        max-width: 600px;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 5px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        margin-top: 50px;
-           border: 1px solid rgb(238, 162, 31);
-      }
-     #topTitle{
-      width: 100%;
-      display: flex;
-        margin: auto;
-
-      justify-content: center !important;
-      align-items: center !important;
-  }
-  #logoImg{
-         width: 100%;
-        margin: auto;
-
-      display: flex;
-      justify-content: center !important;
-      align-items: center !important;
-  }
-      .logo {
-          display: flex;
-        justify-content: center;
-        max-width: 200px;
-        margin: auto;
-        margin-bottom: 20px;
-      }
-
-      h1 {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        font-size: 24px;
-        color: #000000;
-        margin-top: 0;
-      }
-
-      p {
-        font-size: 16px;
-        color: #000000;
-      }
-
-      .success-icon {
-        font-size: 48px;
-        color: #4caf50;
-        margin-bottom: 20px;
-      }
-
-      .order-table {
-        width: 100%;
-        margin-top: 20px;
-        border-collapse: collapse;
-      }
-
-      .order-table th,
-      .order-table td {
-        padding: 8px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
-    
-      }
-#quantity{
-   text-align: center;
-}
-      .order-table th {
-        background-color: #f2f2f2;
-         text-align: center;
-      }
-
-      .total-price {
-        font-size: 18px;
-        font-weight: bold;
-        margin-top: 20px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-  <div id="topTitle" style="flex-wrap: wrap; justify-content: center">    
-     <div id="logoImg">
-      <img
-        class="logo"
-        src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/checkout_logo.png?1683881952485"
-        alt="Your Logo"
-      ></div>
-  
-  </div>
-  <p>Chào ${state.data.name}.</p>
-  <div style="display: flex"><p style="color: rgb(238, 162, 31); margin: 0; margin-right: 4px">Yody</p> 
-   <p style="margin: 0">cảm ơn bạn đã đặt hàng.</p>
-</div>
-  <p>Chúng tôi đã nhận được yêu cầu đặt hàng của bạn. Chi tiết ở bên dưới:</p>
-   <div style="display: flex"> 
-        <p style="margin: 0">Mã đơn hàng:</p>
-        <p style="color: rgb(238, 162, 31); margin: 0; margin-left: 4px; margin-right: 4px"> ${
-          state.data.idOrder
-        } </p>
-        <p style="margin: 0">(Ngày đặt: ${moment(state.data.createdAt).format(
-          "DD/MM/YYYY HH:mm"
-        )})</p>
-  </div>
-     <div style="display: flex"> 
-        <p style="">Trạng thái đơn hàng:</p>
-        <p style="color: rgb(238, 162, 31);  margin-left: 4px"> ${
-          state.data.status
-        } </p>
-  </div>
-
-  <p style="margin: 0">Chi tiết đơn hàng:</p>
-  <table class="order-table">
-   <thead>
-      <tr>
-        <th>Tên sản phẩm</th>
-        <th>Số lượng</th>
-        <th>Giá</th>
-        <th>Tổng</th>
-      </tr>
-    </thead>
-    <tbody>
-      ${state.products.data
-        .map(
-          (item) =>
-            `<tr>
-              <td>${item.title}</td>
-              <td id="quantity">${item.quantity}</td>
-              <td>${item.price.toLocaleString()}đ</td>
-              <td>${(item.quantity * item.price).toLocaleString()}đ</td>
-            </tr>`
-        )
-        .join("")}
-    </tbody>
-  </table>
-
-  <p class="order-letter">Phí vận chuyển: ${state.data.costShip.toLocaleString()}đ</p>
-  <p class="order-letter" style:"display: flex">Tổng giá trị đơn hàng: <p style="color:rgb(238, 162, 31); margin-left: 4px; "> ${
-    state.data.totalPrice + state.data.costShip
-  }đ</p></p>
-  <p class="">Phương thức thanh toán: ${
-    state.data.paymentMethod === "cod"
-      ? "Thanh toán khi nhận hàng"
-      : "Thanh toán online"
-  }</p>
-  
-  <i style="font-size: 16px">Cảm ơn quý khách hàng đã tin tưởng và đặt hàng sản phẩm của chúng tôi.</i>
- <p style="margin:0"> <i style="width: 100% ">Xem lịch sử mua hàng tại: http://localhost:3000/account/orders </i></p> 
-<p style="margin:0">  <i style="width: 100%">Mọi thông tin xin liên hệ: </i></p>
-<p style="margin:0">  <i style="width: 100%">- Đường dây miễn phí: 18002086</i></p>
-<p style="margin:0">  <i style="width: 100%">- Trang chủ cửa hàng: http://localhost:3000/</i></p>
-
-
-
-
-</div>
-</body>
-</html>
-`;
     let data = JSON.stringify({
-      // email: state.data.email,
+      email: dataShow?.email,
       subject: "Thông báo đặt hàng thành công ",
-      content: emailBody,
+      content: emailSuccessTemp22,
     });
 
     let config = {
@@ -227,28 +90,19 @@ function ThankyouOrdered() {
       },
       data: data,
     };
-  }, []);
 
-  function sortObject(obj) {
-    let sorted = {};
-    let str = [];
-    let key;
-    for (key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        str.push(encodeURIComponent(key));
-      }
-    }
-    str.sort();
-    for (key = 0; key < str.length; key++) {
-      sorted[str[key]] = encodeURIComponent(obj[str[key]]).replace(/%20/g, "+");
-    }
-    return sorted;
-  }
-  useEffect(() => {}, []);
+    axios
+      .request(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [dataShow]);
 
-  useEffect(() => {}, []);
   const renderCartList = () => {
-    return state.products.data?.map((item, index) => {
+    return dataShow?.orderDetails?.map((item, index) => {
       return (
         <div
           key={index}
@@ -263,7 +117,6 @@ function ThankyouOrdered() {
               />
             </div>
           </Badge>
-
           <div className=" ml-3 flex flex-col justify-between">
             <h3>{item.title}</h3>
             <p>Size: {item.size}</p>
@@ -275,7 +128,11 @@ function ThankyouOrdered() {
       );
     });
   };
-  return (
+  return dataShow === {} || 1 === undefined ? (
+    <div className="w-full h-[100vh] flex justify-content-center align-items-center ">
+      <Spin indicator={antIcon} className="w-full" />
+    </div>
+  ) : (
     <div className="max-w-[1200px] w-full flex justify-center flex-wrap mt-4 p-3 min-h-[95vh]">
       <div className="w-full flex justify-center">
         <img
@@ -303,23 +160,22 @@ function ThankyouOrdered() {
           </div>
           <div className="flex text-[20px]">
             Mã đơn hàng:
-            <p className="ml-[4px] text-[orange]">{state?.data.idOrder}</p>
+            <p className="ml-[4px] text-[orange]">{dataShow?.idOrder}</p>
           </div>
           <div className="w-full flex xxs:flex-wrap my-2">
             <div className="lg:w-[50%] xxs:w-full">
               <h4 className="text-[20px]">Thông tin người mua</h4>
               <p className="text-[14px] font-[500px]  my-2 px-2">
-                Tên người nhận: {state?.data.name}
+                Tên người nhận: {dataShow?.name}
               </p>
               <p className="text-[14px] font-[500px]  my-2 px-2">
-                Số điện thoại: {state?.data.numberPhone}
+                Số điện thoại: {dataShow?.numberPhone}
               </p>
             </div>
             <div className="lg:w-[50%] xxs:w-full">
               <h4 className="text-[20px]">Địa chỉ nhận hàng</h4>
               <p className="text-[14px] font-[500px]  my-2 px-2">
-                Địa chỉ: {state?.data.address}, {state?.data.ward.label},
-                {state?.data.district.label},{state?.data.city.label}
+                Địa chỉ: {dataShow?.addressShow}
               </p>
             </div>
           </div>
@@ -327,13 +183,21 @@ function ThankyouOrdered() {
             <div className="lg:w-[50%] xxs:w-full">
               <h4 className="text-[20px]">Phương thức thanh toán</h4>
               <p className="text-[14px] font-[500px]  my-2 px-2">
-                {state?.data.paymentMethod === "cod" &&
-                  "Thanh toán khi nhận hàng (COD)"}
+                {dataShow?.paymentMethod === "COD"
+                  ? "Tiền mặt"
+                  : "Thanh toán online (VN pay)"}
               </p>
             </div>
             <div className="lg:w-[50%] xxs:w-full">
-              <h4 className="text-[20px]">Phương thức vận chuyển</h4>
-              <p className="text-[14px] font-[500px]  my-2 px-2">--</p>
+              <h4 className="text-[20px]">Tình trạng thanh toán</h4>
+              <p className="text-[14px] font-[500px]  my-2 px-2">
+                {dataShow?.vnp_ResponseCode === "00" &&
+                dataShow?.paymentMethod === "VN pay"
+                  ? "Đã thanh toán"
+                  : dataShow?.paymentMethod === "COD"
+                  ? "Thanh toán khi nhận hàng"
+                  : ""}
+              </p>
             </div>
           </div>
         </div>
@@ -341,7 +205,7 @@ function ThankyouOrdered() {
           <div className=" lg:block h-auto max-h-[500px] w-[5] bg-[#e7e8fc] p-4 ">
             <div className="pb-3 border-b-[1px] border-solid border-[white] ">
               <h4 className="text-[20px] font-bold ">
-                Đơn hàng ({state?.products.data.length} sản phẩm)
+                Đơn hàng ({dataShow?.orderDetails?.length} sản phẩm)
               </h4>
             </div>
             <div className="h-[200px] w-full scroll overflow-y-scroll ">
@@ -350,14 +214,14 @@ function ThankyouOrdered() {
             <div className="w-full py-3 border-b-[1px] border-solid border-[white] flex flex-wrap gap-4">
               <div className="flex justify-between w-full">
                 <div>Tạm tính</div>
-                <div>{state?.data.totalPrice.toLocaleString()}đ</div>
+                <div>{dataShow?.totalPrice?.toLocaleString()}đ</div>
               </div>
               <div className="flex justify-between w-full  ">
                 <div>Phí vận chuyển</div>
                 <div>
-                  {state?.data.costShip === 0
+                  {dataShow?.costShip === 0
                     ? "Miễn phí vận chuyển"
-                    : `${state?.data.costShip.toLocaleString()}đ`}
+                    : `${dataShow?.costShip?.toLocaleString()}đ`}
                 </div>
               </div>
             </div>
@@ -366,9 +230,9 @@ function ThankyouOrdered() {
               <div className="w-full flex justify-between">
                 <div className="text-[20px]">Tổng cộng</div>
                 <div className="text-[20px] text-[orange]">
-                  {state?.data.totalPrice > 500000
-                    ? state?.data.totalPrice.toLocaleString()
-                    : (state?.data.totalPrice + 20000).toLocaleString()}
+                  {dataShow?.totalPrice > 500000
+                    ? dataShow?.totalPrice?.toLocaleString()
+                    : (dataShow?.totalPrice + 20000)?.toLocaleString()}
                   đ
                 </div>
               </div>

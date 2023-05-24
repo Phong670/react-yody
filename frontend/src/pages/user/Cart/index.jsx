@@ -139,11 +139,12 @@ function Cart() {
               <div className="w-full flex mt-3">
                 <div
                   className="bg-[orange] w-[50%] flex justify-center text-[white] p-[4px] rounded-sm cursor-pointer"
-                  onClick={() =>
+                  onClick={() => {
                     dispatch(
                       deleteCartItemAction({ id: item.id, size: item.size })
-                    )
-                  }
+                    );
+                    setOpenModalDeleteCartItem(false);
+                  }}
                 >
                   Đồng ý
                 </div>
@@ -253,11 +254,13 @@ function Cart() {
               <div className="w-full flex mt-3">
                 <div
                   className="bg-[orange] w-[50%] flex justify-center text-[white] p-[4px] rounded-sm cursor-pointer"
-                  onClick={() =>
+                  onClick={() => {
                     dispatch(
                       deleteCartItemAction({ id: item.id, size: item.size })
-                    )
-                  }
+                    );
+
+                    setOpenModalDeleteCartItem(false);
+                  }}
                 >
                   Đồng ý
                 </div>

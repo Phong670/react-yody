@@ -22,7 +22,8 @@ import ChangePasswordPage from "../pages/user/ChangePassword";
 import CheckoutPage from "../pages/user/Checkout";
 import ThankyouOrderedPage from "../pages/user/ThankyouOrdered";
 import OrderedDetailPage from "../pages/user/OrderedDetail";
-// import PaymentPage from "../pages/user/PaymentForm/Payment";
+import OrderSuccessPage from "../pages/user/OrderSuccess";
+import ForgotPasswordPage from "../pages/user/ForgotPassword";
 
 import HomeLayout from "../layouts/UserLayout/HomeLayout";
 import MainLayout from "..//layouts/UserLayout/MainLayout";
@@ -54,11 +55,14 @@ function App() {
 
           <Route path={ROUTES.USER.LOGIN} element={<LoginPage />} />
           <Route path={ROUTES.USER.REGISTER} element={<RegisterPage />} />
+          <Route
+            path={ROUTES.USER.FORGOT_PASSWORD}
+            element={<ForgotPasswordPage />}
+          />
 
           <Route path={ROUTES.USER.CART} element={<CartPage />} />
           <Route path={ROUTES.USER.ACCOUNT} element={<AccountPage />} />
           <Route path={ROUTES.USER.ORDERS} element={<OrdersPage />} />
-          {/* <Route path={ROUTES.USER.PAYMENT_VNPAY} element={<PaymentPage />} /> */}
 
           <Route
             path={ROUTES.USER.ORDERED_DETAIL}
@@ -77,6 +81,10 @@ function App() {
         </Route>
         <Route element={<CheckoutLayout />}>
           <Route path={ROUTES.USER.CHECKOUT} element={<CheckoutPage />} />
+          <Route
+            path={ROUTES.USER.ORDER_SUCCESS}
+            element={<OrderSuccessPage />}
+          />
           <Route
             path={ROUTES.USER.THANKYOU}
             element={<ThankyouOrderedPage />}
