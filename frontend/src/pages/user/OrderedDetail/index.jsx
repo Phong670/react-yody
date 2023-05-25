@@ -1,31 +1,17 @@
 import { useEffect, useState } from "react";
 import { Link, generatePath, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { RiDeleteBinLine } from "react-icons/ri";
-
-import { ROUTES } from "../../../constants/routes";
-import { useRef } from "react";
-import { REQUEST } from "../../../redux/constants";
-
-import { Button, Table, Collapse } from "antd";
-
 import moment from "moment";
-
-import { getOrderList } from "../../../redux/actions";
 import { logoutAction } from "../../../redux/actions";
-import { Fragment } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 
+import { ROUTES } from "../../../constants/routes";
+
 function OrderedDetail() {
-  const { Panel } = Collapse;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { state } = useLocation();
-  console.log("🚀 ~ file: index.jsx:24 ~ OrderedDetail ~ state:", state);
   const { userInfo } = useSelector((state) => state.auth);
-  console.log("🚀 ~ file: index.jsx:20 ~ Orders ~ userInfo:", userInfo);
-  const { orderList } = useSelector((state) => state.order);
-  console.log("🚀 ~ file: index.jsx:21 ~ Orders ~ orderList:", orderList.data);
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
   function getCurrentDimension() {
     return {
@@ -43,34 +29,7 @@ function OrderedDetail() {
       window.removeEventListener("resize", updateDimension);
     };
   }, [screenSize]);
-  console.log(
-    "🚀 ~ file: index.jsx:46 ~ OrderedDetail ~ screenSize:",
-    screenSize
-  );
-  useEffect(() => {
-    if (userInfo.data.id) {
-      console.log("ddang nhap");
-      dispatch(getOrderList({ userId: userInfo.data.id }));
-    }
-  }, [userInfo.data.id]);
-  let orderListFinalClone = [];
-  orderList.data.map((item, index) => {
-    orderListFinalClone.push({
-      ...item,
-      addressFinal:
-        item.address +
-        ", " +
-        item.ward.label +
-        ", " +
-        item.district.label +
-        ", " +
-        item.city.label,
-    });
-  });
-  console.log(
-    "🚀 ~ file: index.jsx:33 ~ Orders ~ orderListFinalClone:",
-    orderListFinalClone
-  );
+
   const renderListProductCartLaptop = () => {
     return state.data.orderDetails?.map((item, index) => {
       return (
@@ -204,7 +163,7 @@ function OrderedDetail() {
                 <p className="flex items-center">
                   Địa chỉ:
                   <p className="text-[14px] ml-2  text-center font-[400]  mb-[2px]">
-                    {state.data.addressFinal}
+                    {state.data.addressShow}
                   </p>
                 </p>
               </div>
@@ -336,7 +295,7 @@ function OrderedDetail() {
             <div className=" w-full mt-3 lg: px-[32px] xxs:px-[24px]">
               <div className="w-full flex">
                 Trạng thái đơn hàng:
-                <p className="text-[orange] ml-2">{state.data.status}</p>
+                <p className="text-[orange] ml-2">{state.data.statusOrder}</p>
               </div>
               <div className="w-full mb-2 mt-3">Thông tin giao hàng</div>
               <div className=" p-3 border-[1px]  border-[#e0e0e0]">
@@ -355,16 +314,28 @@ function OrderedDetail() {
                 <p className="flex items-center">
                   Địa chỉ:
                   <p className="text-[14px] ml-2  text-center font-[400]  mb-[2px]">
-                    {state.data.addressFinal}
+                    {state.data.addressShow}
                   </p>
                 </p>
               </div>
 
               <div className="w-full flex  mb-2 mt-3">
-                Hình thức thanh toán:
+                Phương thức thanh toán:
                 <p className="text-[orange] ml-2">
-                  {state.data.paymentMethod === "cod" &&
-                    "Thanh toán khi nhận hàng"}
+                  {state.data.paymentMethod === "COD"
+                    ? "Tiền mặt"
+                    : "Thanh toán online (VN pay)"}
+                </p>
+              </div>
+              <div className="w-full flex  mb-2 mt-3">
+                Tình trạng thanh toán:
+                <p className="text-[orange] ml-2">
+                  {state.data.vnp_ResponseCode === "00" &&
+                  state.data.paymentMethod === "VN pay"
+                    ? "Đã thanh toán"
+                    : state.data.paymentMethod === "COD"
+                    ? "Thanh toán khi nhận hàng"
+                    : ""}
                 </p>
               </div>
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Link, generatePath, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RiDeleteBinLine } from "react-icons/ri";
@@ -16,20 +16,17 @@ import { logoutAction } from "../../../../src/redux/actions";
 import { Fragment } from "react";
 
 function Orders() {
-  const { Panel } = Collapse;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.auth);
   console.log("🚀 ~ file: index.jsx:20 ~ Orders ~ userInfo:", userInfo);
   const { orderList } = useSelector((state) => state.order);
-
-  useEffect(() => {
-    !userInfo.data.id &&
-      navigate({
-        pathname: generatePath(ROUTES.USER.LOGIN),
-        search: `ReturnUrl=account/orders`,
-      });
+  console.log("🚀 ~ file: index.jsx:24 ~ Orders ~ orderList:", orderList);
+  const accessToken = useMemo(() => {
+    localStorage.getItem("accessToken");
   }, []);
+
+  useEffect(() => {}, []);
 
   useEffect(() => {
     if (userInfo.data.id) {
@@ -37,23 +34,9 @@ function Orders() {
       dispatch(getOrderList({ userId: userInfo.data.id }));
     }
   }, [userInfo.data.id]);
-  let orderListFinalClone = [];
-  orderList.data.map((item, index) => {
-    orderListFinalClone.push({
-      ...item,
-      addressFinal:
-        item.address +
-        ", " +
-        item.ward.label +
-        ", " +
-        item.district.label +
-        ", " +
-        item.city.label,
-    });
-  });
 
-  const renderOrderList = () => {
-    return orderListFinalClone.map((item, index) => {
+  const renderOrderListMobile = () => {
+    return orderList.data?.map((item, index) => {
       return (
         <Fragment key={index}>
           <div className="w-full flex flex-wrap justify-between ">
@@ -71,12 +54,12 @@ function Orders() {
             </div>
             <div className="w-full flex justify-start p-2 px-4">
               <div className="w-[165px]">Địa chỉ</div>
-              <div className="flex flex-1">{item.addressFinal}</div>
+              <div className="flex flex-1">{item.addressShow}</div>
             </div>
             <div className="w-full flex justify-start p-2 px-4">
               <div className="w-[165px]">Giá trị đơn hàng</div>
               <div className="flex flex-1">
-                {item.totalPrice.toLocaleString()}đ
+                {(item.totalPrice + item.costShip).toLocaleString()}đ
               </div>
             </div>
             <div className="w-full flex justify-start p-2 px-4">
@@ -118,14 +101,19 @@ function Orders() {
     },
     {
       title: "Giá trị đơn hàng",
-      dataIndex: "totalPrice",
+      dataIndex: ["totalPrice"],
       key: "totalPrice",
-      render: (text) => `${text.toLocaleString()}đ`,
+      render: (totalPrice) =>
+        `${
+          totalPrice > 500000
+            ? totalPrice.toLocaleString()
+            : (totalPrice + 20000).toLocaleString()
+        }đ`,
     },
     {
       title: "Địa chỉ",
-      dataIndex: "addressFinal",
-      key: "addressFinal",
+      dataIndex: "addressShow",
+      key: "addressShow",
       render: (text) => text,
     },
 
@@ -137,9 +125,9 @@ function Orders() {
     },
     {
       title: "Trạng thái đơn hàng",
-      dataIndex: "status",
-      key: "status",
-      render: (status) => status,
+      dataIndex: "statusOrder",
+      key: "statusOrder",
+      render: (statusOrder) => statusOrder,
     },
   ];
 
@@ -178,7 +166,7 @@ function Orders() {
               <p className="w-[60%]"> ĐƠN HÀNG CỦA TÔI</p>
               <p className="w-[30%] flex ">{orderList.data.length} đơn hàng</p>
             </div>
-            {renderOrderList()}
+            {renderOrderListMobile()}
           </div>
           <div className="lg:col-span-1  w-full bg-[white] justify-start">
             <div className="w-full p-4 ">
@@ -265,7 +253,7 @@ function Orders() {
               }}
               className="w-[100%] cursor-pointer"
               columns={tableColumns}
-              dataSource={orderListFinalClone}
+              dataSource={orderList.data}
               rowKey="id"
               pagination={false}
             />

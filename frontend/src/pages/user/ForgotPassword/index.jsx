@@ -1,32 +1,35 @@
 import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Navigate, generatePath } from "react-router-dom";
-import { Form, Input } from "antd";
-import { notification } from "antd";
+import { Form, Input, notification } from "antd";
 import axios from "axios";
+import { uid } from "uid";
 
 import { forgotPasswordAction } from "../../../redux/actions";
 import { ROUTES } from "../../../constants/routes";
-import { uid } from "uid";
 import moment from "moment";
-import * as S from "./styles";
 import { emailForgotPasswordTemp } from "../../../constants/emailForgotPasswordTemp";
+import * as S from "./styles";
 
 function ForgotPassword() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loginData } = useSelector((state) => state.auth);
+  const { forgotPasswordData } = useSelector((state) => state.auth);
+
   const [sendEmailForgotPasswordForm] = Form.useForm();
   const [changePasswordForm] = Form.useForm();
+
   const [showInputNewPassPage, setShowInputNewPassPage] = useState(false);
   const [showErrorEmailFail, setShowErrorEmailFail] = useState("");
   const [showFailToken, setShowFailToken] = useState("");
   const [id, setId] = useState("");
 
+  // check sign in
   const accessToken = useMemo(() => {
     localStorage.getItem("accessToken");
   }, []);
 
+  // ant notif
   const [api, contextHolder] = notification.useNotification();
   const openNotificationWithSentEmail = (type) => {
     api[type]({
@@ -34,22 +37,21 @@ function ForgotPassword() {
     });
   };
 
+  //show error when server users return error (password short,...)
   useEffect(() => {
-    if (loginData.error) {
-      sendEmailForgotPasswordForm.setFields([
-        {
-          name: "email",
-          errors: [" "],
-        },
+    if (forgotPasswordData.error) {
+      changePasswordForm.setFields([
         {
           name: "password",
-          errors: [loginData.error],
+          errors: [forgotPasswordData.error],
         },
       ]);
     }
-  }, [loginData.error]);
+  }, [forgotPasswordData.error]);
+  if (accessToken) return <Navigate to={ROUTES.USER.HOME} />;
 
   const handleSendToken = (values) => {
+    //creat token and tokenExpirationTime
     const calculateExpirationTime = () => {
       const expirationDurationHours = 24 * 60 * 60 * 1000; // Set the expiration duration in hours
       let createDate = moment().valueOf();
@@ -63,15 +65,16 @@ function ForgotPassword() {
     let tokenExpirationTime = {
       tokenExpirationTime: calculateExpirationTime(),
     };
+    //search id and patch token and tokenExpirationTime
     axios
-      .get(`http://localhost:4000/users?email=${values.email}`)
 
+      .get(`http://localhost:4000/users?email=${values.email}`)
       .then((res) => {
         let dataSendEmail = {
           name: res.data[0].fullName,
           token: token.token,
         };
-        console.log("then dang nhap", res.data[0]);
+
         setId(res.data[0].id);
         axios.patch(`http://localhost:4000/users/${res.data[0].id}`, token);
         axios
@@ -87,9 +90,7 @@ function ForgotPassword() {
               token: "",
               password: "",
             });
-
-            console.log(res);
-
+            // send email
             let data = JSON.stringify({
               email: res.data.email,
               subject: "Mã thay đổi mật khẩu ",
@@ -105,7 +106,6 @@ function ForgotPassword() {
               },
               data: data,
             };
-
             axios
               .request(config)
               .then((response) => {
@@ -122,15 +122,14 @@ function ForgotPassword() {
       });
   };
   const handChangePassword = (values) => {
-    console.log("change");
     let now = moment().valueOf();
+    // get token at API
     axios.get(`http://localhost:4000/users/${id}`).then((res) => {
-      console.log(res);
+      // check token and tokenExpirationTime
       if (
         res.data.token === values.token &&
         now < res.data.tokenExpirationTime
       ) {
-        console.log("vao if");
         dispatch(
           forgotPasswordAction({
             data: {
@@ -148,10 +147,9 @@ function ForgotPassword() {
             },
           })
         );
-      } else setShowFailToken("Mã mã thay đổi mật khẩu không đÚng");
+      } else setShowFailToken("Mã mã thay đổi mật khẩu không đúng");
     });
   };
-  if (accessToken) return <Navigate to={ROUTES.USER.HOME} />;
   return (
     <S.LoginWrapper className=" lg:mt-[35px] xxs:mt-[0px]">
       {contextHolder}
@@ -215,7 +213,7 @@ function ForgotPassword() {
             form={changePasswordForm}
             name="changePasswordForm"
             layout="vertical"
-            // onFocus={() => setShowErrorEmailFail("")}
+            onFocus={() => setShowFailToken("")}
             onFinish={(values) => handChangePassword(values)}
             autoComplete="off"
             className={`w-full p-2 text-[20px] ${

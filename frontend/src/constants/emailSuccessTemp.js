@@ -152,9 +152,9 @@ export let emailSuccessTemp = (dataShow) => {
     </table>
 
     <p class="order-letter">Phí vận chuyển: ${dataShow?.costShip?.toLocaleString()}đ</p>
-    <p class="order-letter" style:"display: flex">Tổng giá trị đơn hàng: <div style="color:rgb(238, 162, 31); margin-left: 4px; "> ${
+    <div class="order-letter" style="display: flex"><p>Tổng giá trị đơn hàng:</p> <p style="color:rgb(238, 162, 31); margin-left: 4px; "> ${(
       dataShow?.totalPrice + dataShow?.costShip
-    }đ</div></p>
+    ).toLocaleString()}đ</p></div>
     <p class="">Phương thức thanh toán: ${
       dataShow?.paymentMethod === "COD"
         ? "Tiền mặt"

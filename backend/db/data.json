@@ -51,13 +51,13 @@
     },
     {
       "email": "qphong670@gmail.com",
-      "password": "$2a$10$XZ9POKB3JvtjxPKOua1NOud5azJHwUBcMV4rg9pnPSgE.U6wH9kp.",
+      "password": "$2a$10$Nje0e4qM8aG9AMtrYQsSUe2iJmlp/R1A.wT.2KoDeTBgDGlYce6rq",
       "fullName": "Phong Ho Quang",
       "role": "user",
-      "token": "fadb14",
-      "tokenExpirationTime": 1685001074640,
+      "token": "b14a94",
+      "tokenExpirationTime": 1685001796964,
       "createdAt": 1684902508702,
-      "updatedAt": 1684914715850,
+      "updatedAt": 1684915506839,
       "id": 2
     }
   ],
@@ -1388,10 +1388,281 @@
       "size": "42"
     }
   ],
-  "orders": [],
-  "orderDetails": [],
-  "guestOrders": [],
-  "guestOrderDetails": [],
+  "orders": [
+    {
+      "name": "1",
+      "numberPhone": "1",
+      "email": "1",
+      "city": {
+        "id": 9737,
+        "value": "79",
+        "parentcode": "0003",
+        "label": "Thành phố Hồ Chí Minh",
+        "status": 1,
+        "region": 3
+      },
+      "district": {
+        "id": 9897,
+        "value": "771",
+        "parentcode": "79",
+        "label": "Quận 10",
+        "status": 1,
+        "region": null
+      },
+      "ward": {
+        "id": 9908,
+        "value": "27193",
+        "parentcode": "771",
+        "label": "Phường 04",
+        "status": 1,
+        "region": null
+      },
+      "address": "1",
+      "paymentMethod": "COD",
+      "userId": 1,
+      "addressShow": "1, Phường 04, Quận 10, Thành phố Hồ Chí Minh.",
+      "totalPrice": 449000,
+      "statusOrder": "Đang xử lý",
+      "costShip": 20000,
+      "idOrder": "cc7d",
+      "statusPayment": "Chưa thanh toán",
+      "vnp_ResponseCode": "",
+      "vnp_TransactionStatus": "",
+      "createdAt": 1684927812772,
+      "updatedAt": 1684927812772,
+      "id": 1
+    },
+    {
+      "name": "2",
+      "numberPhone": "2",
+      "email": "2",
+      "city": {
+        "id": 3429,
+        "value": "31",
+        "parentcode": "0003",
+        "label": "Thành phố Hải Phòng",
+        "status": 1,
+        "region": 1
+      },
+      "district": {
+        "id": 3430,
+        "value": "303",
+        "parentcode": "31",
+        "label": "Quận Hồng Bàng",
+        "status": 1,
+        "region": null
+      },
+      "ward": {
+        "id": 3435,
+        "value": "11308",
+        "parentcode": "303",
+        "label": "Phường Hạ Lý",
+        "status": 1,
+        "region": null
+      },
+      "address": "2",
+      "paymentMethod": "VN pay",
+      "userId": 1,
+      "addressShow": "2, Phường Hạ Lý, Quận Hồng Bàng, Thành phố Hải Phòng.",
+      "totalPrice": 898000,
+      "statusOrder": "Đang xử lý",
+      "costShip": 0,
+      "idOrder": "c7dd",
+      "statusPayment": "Chưa thanh toán",
+      "vnp_ResponseCode": "00",
+      "vnp_TransactionStatus": "00",
+      "createdAt": 1684927829745,
+      "updatedAt": 1684927858716,
+      "id": 2
+    },
+    {
+      "name": "Hồ Quang Phong",
+      "numberPhone": "0971455331",
+      "email": "qphong670@gmail.com",
+      "city": {
+        "id": 7224,
+        "value": "48",
+        "parentcode": "0003",
+        "label": "Thành phố Đà Nẵng",
+        "status": 1,
+        "region": 2
+      },
+      "district": {
+        "id": 7225,
+        "value": "490",
+        "parentcode": "48",
+        "label": "Quận Liên Chiểu",
+        "status": 1,
+        "region": null
+      },
+      "ward": {
+        "id": 7228,
+        "value": "20197",
+        "parentcode": "490",
+        "label": "Phường Hòa Khánh Bắc",
+        "status": 1,
+        "region": null
+      },
+      "address": "45 Ngô Thì Nhậm,",
+      "paymentMethod": "COD",
+      "userId": 1,
+      "addressShow": "45 Ngô Thì Nhậm,, Phường Hòa Khánh Bắc, Quận Liên Chiểu, Thành phố Đà Nẵng.",
+      "totalPrice": 1316300,
+      "statusOrder": "Đang xử lý",
+      "costShip": 0,
+      "idOrder": "42ff",
+      "statusPayment": "Chưa thanh toán",
+      "vnp_ResponseCode": "",
+      "vnp_TransactionStatus": "",
+      "createdAt": 1684949160787,
+      "updatedAt": 1684949160787,
+      "id": 3
+    }
+  ],
+  "orderDetails": [
+    {
+      "orderId": 1,
+      "productId": 27,
+      "name": "Quần Âu Nữ Lưng Cao Ống Đứng Thêu Cạp",
+      "price": 449000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/qan5110-nca-6.jpg?v=1664531724000",
+      "size": "26",
+      "quantity": 1,
+      "createdAt": 1684927812827,
+      "updatedAt": 1684927812827,
+      "id": 1
+    },
+    {
+      "orderId": 2,
+      "productId": 27,
+      "name": "Quần Âu Nữ Lưng Cao Ống Đứng Thêu Cạp",
+      "price": 449000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/qan5110-nca-6.jpg?v=1664531724000",
+      "size": "26",
+      "quantity": 2,
+      "createdAt": 1684927829810,
+      "updatedAt": 1684927829810,
+      "id": 2
+    },
+    {
+      "orderId": 3,
+      "productId": 32,
+      "name": "Áo Polo Thể Thao Nữ Umorfil Trẻ Trung",
+      "price": 209000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/san5004-den-186.jpg?v=1675313261000",
+      "size": "XS",
+      "quantity": 1,
+      "createdAt": 1684949160860,
+      "updatedAt": 1684949160860,
+      "id": 3
+    },
+    {
+      "orderId": 3,
+      "productId": 3,
+      "name": "Áo Polo Nữ Coolmax Phối Bo Siêu Mát",
+      "price": 209300,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apn5320-cba-cjn3030-tra-4.jpg?v=1684202629000",
+      "size": "S",
+      "quantity": 1,
+      "createdAt": 1684949160905,
+      "updatedAt": 1684949160905,
+      "id": 4
+    },
+    {
+      "orderId": 3,
+      "productId": 27,
+      "name": "Quần Âu Nữ Lưng Cao Ống Đứng Thêu Cạp",
+      "price": 449000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/qan5110-nca-6.jpg?v=1664531724000",
+      "size": "26",
+      "quantity": 2,
+      "createdAt": 1684949160937,
+      "updatedAt": 1684949160937,
+      "id": 5
+    }
+  ],
+  "guestOrders": [
+    {
+      "name": "phong",
+      "numberPhone": "21421",
+      "email": "qwe",
+      "city": {
+        "id": 9737,
+        "value": "79",
+        "parentcode": "0003",
+        "label": "Thành phố Hồ Chí Minh",
+        "status": 1,
+        "region": 3
+      },
+      "district": {
+        "id": 9913,
+        "value": "772",
+        "parentcode": "79",
+        "label": "Quận 11",
+        "status": 1,
+        "region": null
+      },
+      "ward": {
+        "id": 9918,
+        "value": "27220",
+        "parentcode": "772",
+        "label": "Phường 03",
+        "status": 1,
+        "region": null
+      },
+      "address": "123",
+      "paymentMethod": "COD",
+      "addressShow": "123, Phường 03, Quận 11, Thành phố Hồ Chí Minh.",
+      "totalPrice": 1316300,
+      "statusOrder": "Đang xử lý",
+      "costShip": 0,
+      "idGuestOrder": "4d12",
+      "statusPayment": "Chưa thanh toán",
+      "vnp_ResponseCode": "",
+      "vnp_TransactionStatus": "",
+      "createdAt": 1684940874420,
+      "updatedAt": 1684940874421,
+      "id": 1
+    }
+  ],
+  "guestOrderDetails": [
+    {
+      "guestOrderId": 1,
+      "productId": 32,
+      "name": "Áo Polo Thể Thao Nữ Umorfil Trẻ Trung",
+      "price": 209000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/san5004-den-186.jpg?v=1675313261000",
+      "size": "XS",
+      "quantity": 1,
+      "createdAt": 1684940874490,
+      "updatedAt": 1684940874490,
+      "id": 1
+    },
+    {
+      "guestOrderId": 1,
+      "productId": 3,
+      "name": "Áo Polo Nữ Coolmax Phối Bo Siêu Mát",
+      "price": 209300,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apn5320-cba-cjn3030-tra-4.jpg?v=1684202629000",
+      "size": "S",
+      "quantity": 1,
+      "createdAt": 1684940874522,
+      "updatedAt": 1684940874522,
+      "id": 2
+    },
+    {
+      "guestOrderId": 1,
+      "productId": 27,
+      "name": "Quần Âu Nữ Lưng Cao Ống Đứng Thêu Cạp",
+      "price": 449000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/qan5110-nca-6.jpg?v=1664531724000",
+      "size": "26",
+      "quantity": 2,
+      "createdAt": 1684940874560,
+      "updatedAt": 1684940874560,
+      "id": 3
+    }
+  ],
   "cities": [
     {
       "id": 10993,

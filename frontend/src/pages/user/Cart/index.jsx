@@ -21,6 +21,7 @@ function Cart() {
   let totalClone = 0;
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
   const [openModalDeleteCartItem, setOpenModalDeleteCartItem] = useState(false);
+  const [contentDeleteItem, setContentDeleteItem] = useState("");
 
   function getCurrentDimension() {
     return {
@@ -66,7 +67,9 @@ function Cart() {
             </Link>
             <div>Size: {item.size}</div>
           </div>
-          <div className="flex justify-center">{item.price}</div>
+          <div className="flex justify-center">
+            {item.price.toLocaleString()}đ
+          </div>
           <div className="flex ">
             <div className="flex w-full h-[38px] justify-center gap-0">
               <div className="flex justify-center gap-0">
@@ -114,48 +117,13 @@ function Cart() {
             </div>
             <div
               className="w-full flex justify-end items-end pb-2"
-              onClick={showModalDeleteCartItem}
+              onClick={() => {
+                setContentDeleteItem(item);
+                showModalDeleteCartItem();
+              }}
             >
               <RiDeleteBinLine className="text-[20px] cursor-pointer" />
             </div>
-            <Modal
-              open={openModalDeleteCartItem}
-              footer={null}
-              closable={null}
-              padding={null}
-              bodyStyle={{
-                display: "flex",
-                justifyContent: "center",
-                flexWrap: "wrap",
-              }}
-              className="!w-[410px] !p-0 modalDeleteCartItem"
-            >
-              <div className="w-full">
-                <p className="text-[red] w-full flex justify-center text-[16px]">
-                  Bạn có chắc chắn muốn xoá sản phẩm này?
-                </p>
-                <p className=" w-full flex justify-center">{item.title}</p>
-              </div>
-              <div className="w-full flex mt-3">
-                <div
-                  className="bg-[orange] w-[50%] flex justify-center text-[white] p-[4px] rounded-sm cursor-pointer"
-                  onClick={() => {
-                    dispatch(
-                      deleteCartItemAction({ id: item.id, size: item.size })
-                    );
-                    setOpenModalDeleteCartItem(false);
-                  }}
-                >
-                  Đồng ý
-                </div>
-                <div
-                  className="w-[50%] flex justify-center p-[4px] rounded-sm cursor-pointer  border-[1px]  !border-[#F2F2F2]"
-                  onClick={() => setOpenModalDeleteCartItem(false)}
-                >
-                  Không
-                </div>
-              </div>
-            </Modal>
           </div>
         </div>
       );
@@ -180,7 +148,7 @@ function Cart() {
             >
               {item.title}
             </Link>
-            <div className="w-full">Size: {item.size}</div>
+            <div className="w-full">Size: {item.size.toLocaleString()}đ</div>
             <div className="flex w-full ">
               <div className="flex w-full  gap-0">
                 <div className="flex justify-center gap-0">
@@ -226,52 +194,16 @@ function Cart() {
           <div className="col-span-1 flex flex-col justify-between items-end ">
             <div
               className="w-full flex justify-end items-end pb-2"
-              onClick={showModalDeleteCartItem}
+              onClick={() => {
+                setContentDeleteItem(item);
+                showModalDeleteCartItem();
+              }}
             >
               <RiDeleteBinLine className="text-[20px] cursor-pointer" />
             </div>
             <div className="flex justify-center">
               {item.price.toLocaleString()}đ
             </div>
-            <Modal
-              open={openModalDeleteCartItem}
-              footer={null}
-              closable={null}
-              padding={null}
-              bodyStyle={{
-                display: "flex",
-                justifyContent: "center",
-                flexWrap: "wrap",
-              }}
-              className="!w-[410px] !p-0 modalDeleteCartItem"
-            >
-              <div className="w-full">
-                <p className="text-[red] w-full flex justify-center text-[16px]">
-                  Bạn có chắc chắn muốn xoá sản phẩm này?
-                </p>
-                <p className=" w-full flex justify-center">{item.title}</p>
-              </div>
-              <div className="w-full flex mt-3">
-                <div
-                  className="bg-[orange] w-[50%] flex justify-center text-[white] p-[4px] rounded-sm cursor-pointer"
-                  onClick={() => {
-                    dispatch(
-                      deleteCartItemAction({ id: item.id, size: item.size })
-                    );
-
-                    setOpenModalDeleteCartItem(false);
-                  }}
-                >
-                  Đồng ý
-                </div>
-                <div
-                  className="w-[50%] flex justify-center p-[4px] rounded-sm cursor-pointer border-[1px] border-[#F2F2F2]"
-                  onClick={() => setOpenModalDeleteCartItem(false)}
-                >
-                  Không
-                </div>
-              </div>
-            </Modal>
           </div>
         </div>
       );
@@ -282,6 +214,49 @@ function Cart() {
   console.log("width: ", windowWidth.current);
   return (
     <div className="w-[100vw] flex justify-center content-center bg-[#f8f8f8]">
+      <Modal
+        open={openModalDeleteCartItem}
+        footer={null}
+        closable={null}
+        padding={null}
+        bodyStyle={{
+          display: "flex",
+          justifyContent: "center",
+          flexWrap: "wrap",
+        }}
+        className="!w-[410px] !p-0 modalDeleteCartItem"
+      >
+        <div className="w-full">
+          <p className="text-[red] w-full flex justify-center text-[16px] text-center">
+            Bạn có chắc chắn muốn xoá sản phẩm này?
+          </p>
+          <p className=" w-full flex justify-center text-center">
+            {contentDeleteItem.title}
+          </p>
+        </div>
+        <div className="w-full flex mt-3">
+          <div
+            className="bg-[orange] w-[50%] flex justify-center text-[white] p-[4px] rounded-sm cursor-pointer"
+            onClick={() => {
+              dispatch(
+                deleteCartItemAction({
+                  id: contentDeleteItem.id,
+                  size: contentDeleteItem.size,
+                })
+              );
+              setOpenModalDeleteCartItem(false);
+            }}
+          >
+            Đồng ý
+          </div>
+          <div
+            className="w-[50%] flex justify-center p-[4px] rounded-sm cursor-pointer  border-[1px]  !border-[#F2F2F2]"
+            onClick={() => setOpenModalDeleteCartItem(false)}
+          >
+            Không
+          </div>
+        </div>
+      </Modal>
       {cartList.data.length > 0 ? (
         <div className="max-w-[1200px] md:w-[680px] lg:w-[900px] xl:w-full lg:mt-[85px] lg:mb-4 xxs:mt-[0px] lg:grid-cols-1 grid xl:grid-cols-3 gap-4 ">
           <div className="xl:col-span-2 bg-[white] p-4">

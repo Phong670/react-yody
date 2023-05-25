@@ -56,8 +56,8 @@ function* guestOrderProductSaga(action) {
     const result = yield axios.post("http://localhost:4000/guestOrders", data);
 
     for (let i = 0; i < products.data.length; i++) {
-      yield axios.post("http://localhost:4000/orderDetails", {
-        orderId: result.data.id,
+      yield axios.post("http://localhost:4000/guestOrderDetails", {
+        guestOrderId: result.data.id,
         productId: products.data[i].id,
         name: products.data[i].title,
         price: products.data[i].price,

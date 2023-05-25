@@ -54,13 +54,19 @@ function ThankyouOrdered() {
       axios
         .get("http://localhost:4000/guestOrders?", {
           params: {
-            idOrder: params.vnp_TxnRef,
-            _embed: "orderDetails",
+            idGuestOrder: params.id,
+            _embed: "guestOrderDetails",
           },
         })
 
         .then((res) => {
-          setDataShow(res.data[0]);
+          // chuyen guestOrder sang order de de dang code chung
+          let dataShowMid = {
+            ...res.data[0],
+            orderDetails: res.data[0].guestOrderDetails,
+            idOrder: res.data[0].idGuestOrder,
+          };
+          setDataShow(dataShowMid);
         })
         .catch((err) => {
           console.log("loi roi");
@@ -240,24 +246,11 @@ function ThankyouOrdered() {
           </div>
         </div>
       </div>
-      <div className="w-full flex justify-center my-4 h-[60px] gap-4">
-        {userInfo.data.id && (
-          <button
-            form="checkoutForm"
-            // key="submit"
-            className="bg-[orange] w-[25%] py-2  text-[white] rounded-[4px]"
-            onClick={() => {
-              navigate(ROUTES.USER.ORDERS);
-            }}
-          >
-            Xem đơn hàng của bạn
-          </button>
-        )}
-
+      <div className="w-full flex justify-center my-4 h-[50px] gap-4">
         <button
           form="checkoutForm"
           // key="submit"
-          className="bg-[orange] w-[25%] py-2  text-[white] rounded-[4px]"
+          className="bg-[orange] px-3 py-1  text-[white] rounded-[4px]"
           onClick={() => {
             navigate(ROUTES.USER.HOME);
           }}

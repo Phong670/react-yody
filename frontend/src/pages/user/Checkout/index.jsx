@@ -1,34 +1,23 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import { Link, generatePath, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { RiDeleteBinLine } from "react-icons/ri";
+import { ROUTES } from "constants/routes";
 import * as S from "./styles";
-import { ROUTES } from "../../../constants/routes";
-import { useRef } from "react";
-import { REQUEST } from "../../../redux/constants";
-import {
-  deleteCartItemAction,
-  updateCartItemAction,
-} from "../../../redux/actions/index";
+
 import {
   getCityListAction,
   getDistrictListAction,
   getWardListAction,
   orderProductAction,
   guestOrderProductAction,
-  deleteAllCard,
 } from "../../../redux/actions";
 import { IoIosArrowBack } from "react-icons/io";
 import { FaMoneyBillAlt } from "react-icons/fa";
-import { Button, Form, Input, Badge, Radio, Space } from "antd";
-import Select from "react-select";
-import { clearFields } from "redux-form";
-import { parse } from "querystring";
+import { Form, Input, Badge, Radio, Space, Select } from "antd";
 import { uid } from "uid";
 // import { values } from "json-server-auth";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
-import moment from "moment";
 import axios from "axios";
 function Checkout() {
   const [checkoutForm] = Form.useForm();
@@ -41,23 +30,12 @@ function Checkout() {
   const { cityList, districtList, wardList } = useSelector(
     (state) => state.location
   );
-  const [isClearable, setIsClearable] = useState(true);
-  const [isSearchable, setIsSearchable] = useState(true);
-  const [isDisabledDistrict, setIsDisabledDistrict] = useState(true);
-  const [isDisabledWard, setIsDisabledWard] = useState(true);
-  const [selectedOptionCity, setSelectedOptionCity] = useState(null);
-  const [selectedOptionDistrict, setSelectedOptionDistrict] = useState(null);
+
   const [loading, setLoading] = useState(false);
+  const [city, setCity] = useState(false);
+  const [district, setDistrict] = useState(false);
+  const [ward, setWard] = useState(false);
 
-  const [selectedOptionWard, setSelectedOptionWard] = useState(null);
-
-  console.log(
-    "🚀 ~ file: index.jsx:36 ~ Checkout ~ selectedOptionCity:",
-    selectedOptionCity
-  );
-
-  const [isLoading, setIsLoading] = useState(false);
-  const [isRtl, setIsRtl] = useState(false);
   const { userInfo } = useSelector((state) => state.auth);
   const [total, setTotal] = useState(0);
   let totalClone = 0;
@@ -77,136 +55,175 @@ function Checkout() {
   }, []);
   console.log("total", total);
   const handleSubmitCheckoutForm = (values) => {
-    setLoading(true);
+    console.log(
+      "🚀 ~ file: index.jsx:69 ~ handleSubmitCheckoutForm ~ values:",
+      values
+    );
     let idOrder = uid(4);
-    if (userInfo.data.id) {
-      dispatch(
-        orderProductAction({
-          data: {
-            ...values,
-            userId: userInfo.data.id,
-            addressShow:
-              values.address +
-              ", " +
-              values.ward.label +
-              ", " +
-              values.district.label +
-              ", " +
-              values.city.label +
-              ".",
-            totalPrice: total,
-            statusOrder: "Đang xử lý",
-            costShip: total > 500000 ? 0 : 20000,
-            idOrder: idOrder,
-            statusPayment: "Chưa thanh toán",
-            vnp_ResponseCode: "",
-            vnp_TransactionStatus: "",
-          },
-          products: cartList,
-          callback() {
-            if (values.paymentMethod === "COD") {
-              navigate({
-                pathname: generatePath(ROUTES.USER.THANKYOU, {
-                  id: idOrder,
-                }),
+    axios
+      .get(`http://localhost:4000/cities?value=${values.city}`)
+
+      .then((res) => {
+        let cityClone = res.data[0];
+        console.log(res.data[0]);
+        axios
+          .get(`http://localhost:4000/districts?value=${values.district}`)
+
+          .then((res) => {
+            let districtClone = res.data[0];
+            console.log(district);
+            axios
+              .get(`http://localhost:4000/wards?value=${values.ward}`)
+
+              .then((res) => {
+                let wardClone = res.data[0];
+
+                if (userInfo.data.id) {
+                  console.log(city);
+                  dispatch(
+                    orderProductAction({
+                      data: {
+                        ...values,
+                        city: cityClone,
+                        district: districtClone,
+                        ward: wardClone,
+                        userId: userInfo.data.id,
+                        addressShow:
+                          values.address +
+                          ", " +
+                          wardClone.label +
+                          ", " +
+                          districtClone.label +
+                          ", " +
+                          cityClone.label +
+                          ".",
+                        totalPrice: total,
+                        statusOrder: "Đang xử lý",
+                        costShip: total > 500000 ? 0 : 20000,
+                        idOrder: idOrder,
+                        statusPayment: "Chưa thanh toán",
+                        vnp_ResponseCode: "",
+                        vnp_TransactionStatus: "",
+                      },
+                      products: cartList,
+                      callback() {
+                        if (values.paymentMethod === "COD") {
+                          navigate({
+                            pathname: generatePath(ROUTES.USER.THANKYOU, {
+                              id: idOrder,
+                            }),
+                          });
+                        } else if (values.paymentMethod === "VN pay") {
+                          let data = {
+                            amount: total > 500000 ? total : total + 20000,
+                            bankCode: "",
+                            orderDescription: "Thanh toan hoa don" + idOrder,
+                            orderType: 200000,
+                            language: "vn",
+                            idOrder: idOrder,
+                          };
+
+                          let config = {
+                            method: "post",
+                            maxBodyLength: Infinity,
+                            url: "http://localhost:5000/order/create_payment_url",
+                            data: data,
+                            headers: {
+                              "Content-Type": "application/json",
+                            },
+                          };
+
+                          axios
+                            .request(config)
+                            .then((res) => {
+                              console.log(
+                                "======================================",
+                                res
+                              );
+                              window.location.replace(res.data.url);
+                            })
+                            .catch((error) => {
+                              console.log(error);
+                            });
+                        }
+                      },
+                    })
+                  );
+                } else {
+                  dispatch(
+                    guestOrderProductAction({
+                      data: {
+                        ...values,
+                        city: cityClone,
+                        district: districtClone,
+                        ward: wardClone,
+                        addressShow:
+                          values.address +
+                          ", " +
+                          wardClone.label +
+                          ", " +
+                          districtClone.label +
+                          ", " +
+                          cityClone.label +
+                          ".",
+                        totalPrice: total,
+                        statusOrder: "Đang xử lý",
+                        costShip: total > 500000 ? 0 : 20000,
+                        idGuestOrder: idOrder,
+                        statusPayment: "Chưa thanh toán",
+                        vnp_ResponseCode: "",
+                        vnp_TransactionStatus: "",
+                      },
+                      products: cartList,
+                      callback() {
+                        if (values.paymentMethod === "COD") {
+                          navigate({
+                            pathname: generatePath(ROUTES.USER.THANKYOU, {
+                              id: idOrder,
+                            }),
+                          });
+                        } else if (values.paymentMethod === "VN pay") {
+                          let data = {
+                            amount: total > 500000 ? total : total + 20000,
+                            bankCode: "",
+                            orderDescription: "Thanh toan hoa don" + idOrder,
+                            orderType: 200000,
+                            language: "vn",
+                            idOrder: idOrder,
+                          };
+
+                          let config = {
+                            method: "post",
+                            maxBodyLength: Infinity,
+                            url: "http://localhost:5000/order/create_payment_url",
+                            data: data,
+                            headers: {
+                              "Content-Type": "application/json",
+                            },
+                          };
+
+                          axios
+                            .request(config)
+                            .then((res) => {
+                              console.log(
+                                "======================================",
+                                res
+                              );
+                              window.location.replace(res.data.url);
+                            })
+                            .catch((error) => {
+                              console.log(error);
+                            });
+                        }
+                      },
+                    })
+                  );
+                }
               });
-            } else if (values.paymentMethod === "VN pay") {
-              let data = {
-                amount: total > 500000 ? total : total + 20000,
-                bankCode: "",
-                orderDescription: "Thanh toan hoa don" + idOrder,
-                orderType: 200000,
-                language: "vn",
-                idOrder: idOrder,
-              };
+          });
+      });
 
-              let config = {
-                method: "post",
-                maxBodyLength: Infinity,
-                url: "http://localhost:5000/order/create_payment_url",
-                data: data,
-                headers: {
-                  "Content-Type": "application/json",
-                },
-              };
-
-              axios
-                .request(config)
-                .then((res) => {
-                  console.log("======================================", res);
-                  window.location.replace(res.data.url);
-                })
-                .catch((error) => {
-                  console.log(error);
-                });
-            }
-          },
-        })
-      );
-    } else {
-      dispatch(
-        guestOrderProductAction({
-          data: {
-            ...values,
-            addressShow:
-              values.address +
-              ", " +
-              values.ward.label +
-              ", " +
-              values.district.label +
-              ", " +
-              values.city.label +
-              ".",
-            totalPrice: total,
-            statusOrder: "Đang xử lý",
-            costShip: total > 500000 ? 0 : 20000,
-            idOrder: idOrder,
-            statusPayment: "Chưa thanh toán",
-            vnp_ResponseCode: "",
-            vnp_TransactionStatus: "",
-          },
-          products: cartList,
-          callback() {
-            if (values.paymentMethod === "COD") {
-              navigate({
-                pathname: generatePath(ROUTES.USER.THANKYOU, {
-                  id: idOrder,
-                }),
-              });
-            } else if (values.paymentMethod === "VN pay") {
-              let data = {
-                amount: total > 500000 ? total : total + 20000,
-                bankCode: "",
-                orderDescription: "Thanh toan hoa don" + idOrder,
-                orderType: 200000,
-                language: "vn",
-                idOrder: idOrder,
-              };
-
-              let config = {
-                method: "post",
-                maxBodyLength: Infinity,
-                url: "http://localhost:5000/order/create_payment_url",
-                data: data,
-                headers: {
-                  "Content-Type": "application/json",
-                },
-              };
-
-              axios
-                .request(config)
-                .then((res) => {
-                  console.log("======================================", res);
-                  window.location.replace(res.data.url);
-                })
-                .catch((error) => {
-                  console.log(error);
-                });
-            }
-          },
-        })
-      );
-    }
+    setLoading(true);
   };
   const renderCartList = () => {
     return cartList.data.map((item, index) => {
@@ -344,107 +361,61 @@ function Checkout() {
                 </Form.Item>
 
                 <Form.Item
-                  label=""
                   name="city"
                   rules={[
-                    {
-                      required: true,
-                      message: "Bạn chưa chọn tỉnh thành",
-                    },
+                    { required: true, message: "Bạn chưa chọn tỉnh thành" },
                   ]}
                 >
                   <Select
                     className="selectCustomCheckout"
-                    classNamePrefix="select"
-                    defaultValue={""}
-                    // isDisabled={isDisabled}
                     placeholder="Tỉnh thành"
-                    isSearchable={isSearchable}
                     name="city"
                     options={cityList.data}
-                    value={checkoutForm.getFieldValue("city")}
                     onChange={(value) => {
-                      setSelectedOptionDistrict(null);
-                      setSelectedOptionWard(null);
-                      dispatch(
-                        getDistrictListAction({ cityCode: value.value })
-                      );
-                      console.log(
-                        "ahiiiiiiiiiiiiiiiiiiii",
-                        selectedOptionDistrict
-                      );
-                      setIsDisabledWard(true);
-                      setSelectedOptionCity(value);
-                      setIsDisabledDistrict(false);
-
+                      dispatch(getDistrictListAction({ cityCode: value }));
                       checkoutForm.setFieldsValue({
-                        city: value,
                         district: undefined,
                         ward: undefined,
                       });
                     }}
-                  />
+                  ></Select>
                 </Form.Item>
+
                 <Form.Item
-                  label=""
                   name="district"
                   rules={[
-                    {
-                      required: true,
-                      message: "Bạn chưa chọn quận huyện",
-                    },
+                    { required: true, message: "Bạn chưa chọn quận huyện" },
                   ]}
                 >
                   <Select
-                    styles={{ padding: "11px" }}
                     className="selectCustomCheckout"
-                    classNamePrefix="select"
                     name="district"
                     placeholder="Quận huyện"
-                    defaultValue={selectedOptionDistrict}
-                    // value={checkoutForm.getFieldValue('district')}
-                    isDisabled={isDisabledDistrict}
-                    isSearchable={isSearchable}
                     options={districtList.data}
                     onChange={(value) => {
-                      dispatch(
-                        getWardListAction({ districtCode: value.value })
-                      );
-                      setIsDisabledWard(false);
-                      setSelectedOptionWard(null);
-                      setSelectedOptionDistrict(value);
+                      dispatch(getWardListAction({ districtCode: value }));
+                      checkoutForm.setFieldsValue({
+                        ward: undefined,
+                      });
                     }}
-                  />
+                    disabled={!checkoutForm.getFieldValue("city")}
+                  ></Select>
                 </Form.Item>
 
                 <Form.Item
-                  label=""
                   name="ward"
                   rules={[
-                    {
-                      required: true,
-                      message: "Bạn chưa chọn phường xã",
-                    },
+                    { required: true, message: "Bạn chưa chọn phường xã" },
                   ]}
                 >
                   <Select
                     className="selectCustomCheckout"
-                    classNamePrefix="select"
                     placeholder="Phường xã"
-                    defaultValue={selectedOptionWard}
-                    // value={selectedOptionWard}
-                    isDisabled={isDisabledWard}
-                    isSearchable={isSearchable}
                     name="ward"
                     options={wardList.data}
-                    value={checkoutForm.getFieldValue("ward")}
-                    onChange={(value) => {
-                      checkoutForm.setFieldValue("ward", value);
-                      // setSelectedOptionWard(value);
-                    }}
-                  />
+                    disabled={!checkoutForm.getFieldValue("district")}
+                  ></Select>
                 </Form.Item>
-
                 <Form.Item
                   label=""
                   name="address"
@@ -499,22 +470,19 @@ function Checkout() {
                     <Radio.Group>
                       <Space direction="vertical">
                         <Radio value="COD">
-                          <p className="flex gap-2 justify-content-between lg:w-[120%] xxs:w-full">
+                          <p className="flex gap-2 justify-content-between lg:w-[120%] xxs:w-[110%]">
                             <p>Thanh toán khi nhận hàng (COD)</p>
                             <FaMoneyBillAlt className="text-[24px] text-[orange]" />
                           </p>
                         </Radio>
-                        <Radio
-                          value="VN pay"
-                          className="radioCustomCheckout "
-                          styleBody={{ display: "flex" }}
-                        >
+                        <Radio value="VN pay" className="radioCustomCheckout ">
                           <p className="flex gap-2  justify-content-between lg:w-[100%] xxs:w-full">
                             <p>
                               Thanh toán qua thẻ thanh toán, ứng dụng ngân hàng
                               VNPAY
                             </p>
                             <img
+                              className="w-[50px] h-[40px]"
                               src="https://bizweb.dktcdn.net/assets/themes_support/payment_icon_vnpay.png"
                               alt=""
                             />

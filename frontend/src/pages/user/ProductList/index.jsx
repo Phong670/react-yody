@@ -32,8 +32,6 @@ function ProductList() {
 
   const [listYourChoice, setListYourChoice] = useState([]);
   const [placeHolderSort, setPlaceHolderSort] = useState("Mặc định");
-  const [showTypeFilter, setShowTypeFilter] = useState(true);
-  const [showSizeFilter, setShowSizeFilter] = useState(true);
   const [sortBox, setSortBox] = useState(false);
   const [defaultValuePrice, setDefaultValuePrice] = useState([0, 1200000]);
   const [activeButton, setActiveButton] = useState(1);
@@ -166,31 +164,31 @@ function ProductList() {
     }
   };
   const checkAddYourChoiceSize = (name, name2, valuesId) => {
-    // let sizeId = sizeIdTemp.find((size) => size === valuesId);
-    // const addYourChoice = (name) => {
-    //   clone.push({ name: name, value: valuesId });
-    //   setListYourChoice(clone);
-    // };
-    // const handleFilterSize = (values) => {
-    //   sizeIdTemp = [...filterParams.sizeId, values];
-    //   setFilterParams({
-    //     ...filterParams,
-    //     sizeId: sizeIdTemp,
-    //     page: 1,
-    //     limit: PRODUCT_LIMIT,
-    //   });
-    // };
-    // if (!sizeId) {
-    //   addYourChoice(name);
-    //   handleFilterSize(valuesId);
-    // } else {
-    //   removeYourChoice(sizeIdTemp, sizeId, name);
-    //   setFilterParams({
-    //     ...filterParams,
-    //     sizeId: sizeIdTemp,
-    //   });
-    //   setListYourChoice(clone);
-    // }
+    let sizeId = sizeIdTemp.find((size) => size === valuesId);
+    const addYourChoice = (name) => {
+      clone.push({ name: name, value: valuesId });
+      setListYourChoice(clone);
+    };
+    const handleFilterSize = (values) => {
+      sizeIdTemp = [...filterParams.sizeId, values];
+      setFilterParams({
+        ...filterParams,
+        sizeId: sizeIdTemp,
+        page: 1,
+        limit: PRODUCT_LIMIT,
+      });
+    };
+    if (!sizeId) {
+      addYourChoice(name);
+      handleFilterSize(valuesId);
+    } else {
+      removeYourChoice(sizeIdTemp, sizeId, name);
+      setFilterParams({
+        ...filterParams,
+        sizeId: sizeIdTemp,
+      });
+      setListYourChoice(clone);
+    }
   };
 
   const removeYourChoiceTop = (objectname) => {
@@ -270,7 +268,7 @@ function ProductList() {
         })}
       </div>
     );
-  }, [categoryList.data, showTypeFilter, categoryIdTemp]);
+  }, [categoryList.data, categoryIdTemp]);
 
   const renderListFilterSize = (list) => {
     return (
@@ -408,8 +406,11 @@ function ProductList() {
   };
 
   const CpnFilter = ({ listYourChoice, typeProduct, sizeProduct }) => {
+    const [showSizeFilter, setShowSizeFilter] = useState(true);
+    const [showTypeFilter, setShowTypeFilter] = useState(true);
+
     return (
-      <div className="lg:col-span-1 xxs:col-span-0 lg:block p-2 xxs:hidden">
+      <div className="lg:col-span-1 xxs:col-span-0 p-2">
         <div className="flex justify-between">
           Bạn chọn:
           <div
@@ -424,83 +425,38 @@ function ProductList() {
         {renderListFilterPrice}
 
         <div
-          className="my-4 flex justify-between items-center"
+          className="w-full flex justify-between my-2"
           onClick={() => {
             setShowTypeFilter(!showTypeFilter);
           }}
         >
-          Loại sản phẩm {showTypeFilter && <AiOutlineUp />}
+          Loại sản phẩm
+          {showTypeFilter && <AiOutlineUp />}
           {!showTypeFilter && <AiOutlineDown />}
         </div>
-        <CSSTransition
-          in={showTypeFilter}
-          nodeRef={nodeRef}
-          timeout={300}
-          classNames="alert"
-          unmountOnExit
-        >
-          <S.Transition>{renderListFilterType}</S.Transition>
-        </CSSTransition>
-        <SwitchTransition mode="out-in">
-          <CSSTransition
-            // Dùng key để phân biệt các trạng thái
-            key={showTypeFilter ? "out" : "in"}
-            // Sử dụng event transitionend để đánh dấu kết thúc transition
-            addEndListener={(node, done) =>
-              node.addEventListener("transitionend", done)
-            }
-            // Tạo hiệu ứng fade transition theo class "fade"
-            classNames="fade"
+        <div className="overflow-hidden">
+          <div
+            className={`overflow-hidden transition-all duration-300 delay-150 
+            ${showTypeFilter ? "mt-0" : "mt-[-140%]"}`}
           >
-            <button onClick={() => setShowTypeFilter(!showTypeFilter)}>
-              {showTypeFilter ? "Goodbye!" : "Hello!"}
-            </button>
-          </CSSTransition>
-        </SwitchTransition>
-        <div className="text-center">
-          <header className="sticky z-50 top-0  shadow-md bg-white border-b p-5">
-            <div className="flex justify-between items-center">
-              <h1 className="text-6xl text-red-500 cursor-pointer">Velvet</h1>
-              <button
-                className="text-3xl border rounded-lg px-5"
-                onClick={handleMenuClick}
-              >
-                Menu
-              </button>
-            </div>
-          </header>
-
-          <div className="p-10">
-            <div
-              className={`transition-all duration-200	 ${
-                fade ? "opacity-100" : "opacity-0"
-              }`}
-            >
-              <div className="flex justify-end">
-                <button className="mt-2 mr-2 border p-2" onClick={handleXClick}>
-                  Close
-                </button>
-              </div>
-              <div className="space-y-2 text-3xl text-center mt-5 mb-10 mx-5 text-red-500">
-                <h1>Kontakt</h1>
-                <h1>O Velvetu</h1>
-              </div>
-            </div>
+            <div className="w-full">{renderListFilterType}</div>
           </div>
         </div>
         <div
+          className="w-full flex justify-between my-2"
           onClick={() => {
             setShowSizeFilter(!showSizeFilter);
           }}
         >
+          Size
+          {showSizeFilter && <AiOutlineUp />}
+          {!showSizeFilter && <AiOutlineDown />}
+        </div>
+        <div className="overflow-hidden">
           <div
             className={`overflow-hidden transition-all duration-300 delay-150 
-          
-          ${showSizeFilter ? "h-[200px]" : "h-[20px]"}`}
+             ${showSizeFilter ? "mt-0" : "mt-[-140%]"}`}
           >
-            Size
-            {/* {showSizeFilter && <AiOutlineUp />} */}
-            {/* {!showSizeFilter && <AiOutlineDown />} */}
             <div className="w-full">{renderListFilterSize(sizeList)}</div>
           </div>
         </div>
@@ -629,11 +585,14 @@ function ProductList() {
       </div>
 
       <div className="xl:w-[1150px] w-full grid lg:grid-cols-5 md:grid-cols-5 lg:gap-[20px] xxs:gap-[10px]">
-        <CpnFilter
-          listYourChoice={listYourChoice}
-          typeProduct={categoryList.data}
-          sizeProduct={sizeList}
-        />
+        <div className="xxs:hidden lg:block">
+          {" "}
+          <CpnFilter
+            listYourChoice={listYourChoice}
+            typeProduct={categoryList.data}
+            sizeProduct={sizeList}
+          />
+        </div>
         <Drawer
           width={"300px"}
           title="Bộ lọc"
@@ -652,7 +611,12 @@ function ProductList() {
             </Space>
           }
         >
-          <div className="col-span-1 lg:block pl-7 w-[220px]  bg-[white] z-50 h-full">
+          <CpnFilter
+            listYourChoice={listYourChoice}
+            typeProduct={categoryList.data}
+            sizeProduct={sizeList}
+          />
+          {/* <div className="col-span-1 lg:block pl-7 w-[220px]  bg-[white] z-50 h-full">
             <div className="flex justify-between">
               Bạn chọn:
               <div
@@ -691,7 +655,7 @@ function ProductList() {
                 ? showSizeFilter && renderListFilterSize(sizeList)
                 : renderListFilterSize(sizeList)}
             </div>
-          </div>
+          </div> */}
         </Drawer>
         <CartProductList
           listProduct={productList.data}

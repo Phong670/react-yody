@@ -49,19 +49,16 @@ function OrderSuccess() {
 
         .then((res) => {
           setDataIdOrders(res.data[0]);
+          axios
+            .patch(`http://localhost:4000/orders/${id}`, ResultPayment)
+
+            .then((res) => {
+              window.location.replace(
+                `http://localhost:3000/checkout/thankyou/${query.vnp_TxnRef}`
+              );
+            });
         })
         .catch((err) => {
-          console.log("loi roi");
-        });
-      axios
-        .patch(`http://localhost:4000/orders/${id}`, ResultPayment)
-
-        .then((res1) => {
-          window.location.replace(
-            `http://localhost:3000/checkout/thankyou/${query.vnp_TxnRef}`
-          );
-        })
-        .catch((err1) => {
           console.log("loi roi");
         });
     } else {
@@ -75,20 +72,17 @@ function OrderSuccess() {
 
         .then((res) => {
           setDataIdOrders(res.data[0]);
+          axios
+            .patch(`http://localhost:4000/guestOrders/${id}`, ResultPayment)
+            .then((res) => {
+              navigate({
+                pathname: generatePath(ROUTES.USER.THANKYOU, {
+                  id: query.vnp_TxnRef,
+                }),
+              });
+            });
         })
         .catch((err) => {
-          console.log("loi roi");
-        });
-      axios
-        .patch(`http://localhost:4000/guestOrders/${id}`, ResultPayment)
-        .then((res1) => {
-          navigate({
-            pathname: generatePath(ROUTES.USER.THANKYOU, {
-              id: query.vnp_TxnRef,
-            }),
-          });
-        })
-        .catch((err1) => {
           console.log("loi roi");
         });
     }

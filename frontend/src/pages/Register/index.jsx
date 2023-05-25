@@ -148,7 +148,7 @@ function RegisterPage() {
               block
               className="bg-[#fcaf17]  hover:text-white "
             >
-              Đăng nhập
+              Đăng ký
             </S.ButtonCustom>
           </Form>
           <Link

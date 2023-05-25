@@ -425,9 +425,14 @@ function Header() {
     {
       key: "2",
       onClick: () => {
-        navigate({
-          pathname: generatePath(ROUTES.USER.ORDERS),
-        });
+        !userInfo.data.id
+          ? navigate({
+              pathname: generatePath(ROUTES.USER.LOGIN),
+              search: `ReturnUrl=account/orders`,
+            })
+          : navigate({
+              pathname: generatePath(ROUTES.USER.ORDERS),
+            });
       },
       label: (
         <div className="">
@@ -986,14 +991,23 @@ function Header() {
                   </Link>
                 )}
               </div>
-              <Link
+              <div
                 className="flex w-full justify-start items-center ml-[28px] gap-2"
-                to={generatePath(ROUTES.USER.ORDERS)}
-                onClick={() => onClose()}
+                onClick={() => {
+                  !userInfo.data.id
+                    ? navigate({
+                        pathname: generatePath(ROUTES.USER.LOGIN),
+                        search: `ReturnUrl=account/orders`,
+                      })
+                    : navigate({
+                        pathname: generatePath(ROUTES.USER.ORDERS),
+                      });
+                  onClose();
+                }}
               >
                 <BsTruck />
                 Đơn hàng của tôi
-              </Link>
+              </div>
               <div className="flex w-full justify-start items-center ml-[28px] gap-2">
                 <BiMap />
                 Hệ thống cửa hàng
