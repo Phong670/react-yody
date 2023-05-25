@@ -1,0 +1,7 @@
+{
+  "vnp_TmnCode": "OWE2JN7Y",
+  "vnp_HashSecret": "WMUKBIPTXOHSHVGXPXXUCGXXJAHQYCWJ",
+  "vnp_Url": "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html",
+  "vnp_Api": "https://sandbox.vnpayment.vn/merchant_webapi/api/transaction",
+  "vnp_ReturnUrl": "http://localhost:3000/checkout/order-success/"
+}

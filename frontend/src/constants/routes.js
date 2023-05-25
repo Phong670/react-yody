@@ -1,0 +1,20 @@
+export const ROUTES = {
+  USER: {
+    HOME: "/",
+    PRODUCT_DETAIL: "/product-detail/:id",
+    PRODUCT_LIST: "/product/:subCategoryId",
+    LOGIN: "/login",
+    REGISTER: "/register",
+    CART: "/cart",
+    SEARCH: "/search/:searchKey",
+    ACCOUNT: "/account/",
+    CHANGE_PASSWORD: "/account/changePassword",
+    ORDERS: "/account/orders",
+    ORDERED_DETAIL: "/account/orders/orderedDetail",
+    THANKYOU: "/checkout/thankyou/:id",
+    ORDER_SUCCESS: "/checkout/order-success/",
+    CHECKOUT: "/checkout",
+    FORGOT_PASSWORD: "/login/forgot-password",
+  },
+  id: {},
+};
