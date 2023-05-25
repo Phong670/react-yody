@@ -260,16 +260,27 @@ html {
 .payment :where(.css-dev-only-do-not-override-1fviqcj).ant-form-item {
   margin-bottom: 0 !important;
 }
-// ANT SELECT CHECKOUT
 
-.selectCustomCheckout > .ant-select-selector {
-  height: auto !important;
-  padding: 8px 10px !important;
-  background-color: red !important;
+.selectCustomCheckout .ant-select-selector {
+  height: 43px !important;
+  padding: 0px 10px !important;
+  box-shadow: none !important;
 }
 :where(.css-dev-only-do-not-override-1fviqcj).ant-select:not(
     .ant-select-disabled
   ):not(.ant-select-customize-input):not(.ant-pagination-size-changer):hover
   .ant-select-selector {
   border-color: #fcaf17 !important;
+}
+.ant-select-focused:where(.css-dev-only-do-not-override-1fviqcj).ant-select:not(
+    .ant-select-disabled
+  ):not(.ant-select-customize-input):not(.ant-pagination-size-changer)
+  .ant-select-selector {
+  box-shadow: none !important;
+  border-color: #fcaf17 !important;
+}
+
+.selectCustomCheckout .ant-select-selector .ant-select-selection-item,
+.selectCustomCheckout .ant-select-selector .ant-select-selection-placeholder {
+  line-height: 43px !important;
 }
