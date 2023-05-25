@@ -1,11 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link, generatePath, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RiDeleteBinLine } from "react-icons/ri";
-import * as S from "./styles";
 import { ROUTES } from "../../../constants/routes";
-import { useRef } from "react";
-import { REQUEST } from "../../../redux/constants";
 import {
   deleteCartItemAction,
   updateCartItemAction,
@@ -14,14 +11,13 @@ import { Modal } from "antd";
 
 function Cart() {
   const navigate = useNavigate();
-  const { cartList } = useSelector((state) => state.cart);
-  console.log("🚀 ~ file: index.jsx:14 ~ Cart ~ cartList:", cartList);
-  const [total, setTotal] = useState(0);
   const dispatch = useDispatch();
-  let totalClone = 0;
+  const { cartList } = useSelector((state) => state.cart);
+  const [total, setTotal] = useState(0);
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
   const [openModalDeleteCartItem, setOpenModalDeleteCartItem] = useState(false);
   const [contentDeleteItem, setContentDeleteItem] = useState("");
+  let totalClone = 0;
 
   function getCurrentDimension() {
     return {
@@ -43,7 +39,6 @@ function Cart() {
       window.removeEventListener("resize", updateDimension);
     };
   }, [screenSize]);
-  console.log("width", screenSize.width);
   useEffect(() => {
     cartList.data?.map((item) => {
       totalClone = totalClone + item.price * item.quantity;

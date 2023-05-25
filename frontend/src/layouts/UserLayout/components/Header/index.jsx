@@ -116,8 +116,6 @@ function Header() {
         searchKey: value,
       })
     );
-
-    // setGoSearchPage(false);
   };
   //ant modal showDelete
   const showModalDeleteCartItem = () => {
@@ -482,7 +480,7 @@ function Header() {
   };
 
   //search in mobile
-  const { Search } = Input;
+
   const onSearch = (value, e) => {
     e.preventDefault();
     if (value.trim()) {
@@ -755,7 +753,6 @@ function Header() {
             <div className="w-full flex flex-col z-50  bg-[#ffffff] absolute top-[40px] left-0 ">
               <SearchBox
                 searchKey={searchKey}
-                setSearchKey={setSearchKey}
                 openSearchBox={openSearchBox}
                 setOpenSearchBox={setOpenSearchBox}
                 empty={empty}
@@ -1099,7 +1096,6 @@ function Header() {
               <div className="flex justify-center w-full">
                 <SearchBox
                   searchKey={searchKey}
-                  setSearchKey={setSearchKey}
                   openSearchBox={openSearchBox}
                   setOpenSearchBox={setOpenSearchBox}
                   empty={empty}

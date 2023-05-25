@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { getProductListAction } from "../../../redux/actions/";
 
 import { ROUTES } from "constants/routes";
-import * as S from "./styles";
 import RenderSearchList from "./renderSearchList";
 
 import { TbPointFilled } from "react-icons/tb";
@@ -14,12 +13,10 @@ import { Spin } from "antd";
 import { PRODUCT_LIMIT } from "../../../constants/paging";
 
 function Search() {
-  console.log("render lai search 1111111111111111111111");
   const { searchKey } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { productList } = useSelector((state) => state.product);
-  console.log("🚀 ~ file: index.jsx:22 ~ Search ~ productList:", productList);
 
   const antIcon = (
     <LoadingOutlined style={{ fontSize: 44, color: "#ffc107" }} spin />

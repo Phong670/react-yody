@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, Navigate } from "react-router-dom";
-import { Button, Form, Input } from "antd";
-import { Link, generatePath } from "react-router-dom";
+import { useNavigate, Navigate, Link, generatePath } from "react-router-dom";
 import moment from "moment";
 import { uid } from "uid";
+
+import { Form, Input } from "antd";
+
 import { registerAction } from "../../redux/actions";
 import { ROUTES } from "../../constants/routes";
 
@@ -36,12 +37,6 @@ function RegisterPage() {
       return expirationTime;
     };
 
-    // let token = {
-    //   token: uid(6),
-    // };
-    // let tokenExpirationTime = {
-    //   tokenExpirationTime: calculateExpirationTime(),
-    // };
     dispatch(
       registerAction({
         data: {

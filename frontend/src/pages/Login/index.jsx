@@ -1,10 +1,9 @@
 import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Navigate, useLocation } from "react-router-dom";
-import { Button, Form, Input } from "antd";
-import { Link, generatePath } from "react-router-dom";
 import qs from "qs";
-import { notification } from "antd";
+
+import { Form, Input, notification } from "antd";
 
 import { loginAction } from "../../redux/actions";
 import { ROUTES } from "../../constants/routes";
@@ -15,9 +14,7 @@ function LoginPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { search } = useLocation();
-  console.log("🚀 ~ file: index.jsx:16 ~ LoginPage ~ search:", search);
   const query = qs.parse(search, { ignoreQueryPrefix: true });
-  console.log("🚀 ~ file: index.jsx:18 ~ LoginPage ~ query:", query);
 
   const { loginData } = useSelector((state) => state.auth);
   const [loginForm] = Form.useForm();

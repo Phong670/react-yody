@@ -15,10 +15,6 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { Rate, Form, Input, Modal, Select, Button, message, Spin } from "antd";
 
 function ReviewProduct({ idProduct, title, dataAllReview }) {
-  console.log(
-    "🚀 ~ file: review.jsx:18 ~ ReviewProduct ~ dataAllReview:",
-    dataAllReview
-  );
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

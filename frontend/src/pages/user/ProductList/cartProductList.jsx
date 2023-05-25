@@ -1,14 +1,7 @@
-import { Checkbox, Select, Col, Row, Button, Slider, Form } from "antd";
-import {
-  Link,
-  useParams,
-  generatePath,
-  Navigate,
-  useNavigate,
-} from "react-router-dom";
+import { Row, Button } from "antd";
+import { generatePath } from "react-router-dom";
 import { ROUTES } from "../../../constants/routes";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState, useMemo } from "react";
 import { PRODUCT_LIMIT } from "../../../constants/paging";
 import { getProductListAction } from "../../../redux/actions";
 import * as S from "./styles";
@@ -17,13 +10,13 @@ import { LoadingOutlined } from "@ant-design/icons";
 
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+
 const CartProductList = ({ listProduct, filterParams }) => {
+  const dispatch = useDispatch();
+  const { productList } = useSelector((state) => state.product);
   const antIcon = (
     <LoadingOutlined style={{ fontSize: 44, color: "#ffc107" }} spin />
   );
-  const dispatch = useDispatch();
-  const { productList } = useSelector((state) => state.product);
-
   const handleShowMore = () => {
     dispatch(
       getProductListAction({

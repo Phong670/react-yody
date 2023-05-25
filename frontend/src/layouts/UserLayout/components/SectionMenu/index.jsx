@@ -1,15 +1,12 @@
 import * as S from "./styles";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper";
-import { Link, generatePath, useNavigate } from "react-router-dom";
+import { generatePath, useNavigate } from "react-router-dom";
 import { ROUTES } from "../../../../constants/routes";
 
 import "swiper/css";
 import "swiper/css/navigation";
-import { Pagination } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 function CarouselMenuSection() {
   const navigate = useNavigate();
 

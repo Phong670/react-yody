@@ -5,10 +5,7 @@ import { ORDER_ACTION, REQUEST, SUCCESS, FAIL } from "../constants";
 
 function* orderProductSaga(action) {
   const { data, products, callback } = action.payload;
-  console.log(
-    "🚀 ~ file: order.saga.js:8 ~ function*orderProductSaga ~ products:",
-    data
-  );
+
   try {
     const result = yield axios.post("http://localhost:4000/orders", data);
 
@@ -24,10 +21,6 @@ function* orderProductSaga(action) {
       });
     }
     const detail = yield axios.get("http://localhost:4000/orderDetails");
-    console.log(
-      "🚀 ~ file: order.saga.js:28 ~ function*orderProductSaga ~ detail:",
-      detail
-    );
 
     yield callback();
     yield put({
@@ -48,10 +41,7 @@ function* orderProductSaga(action) {
 
 function* guestOrderProductSaga(action) {
   const { data, products, callback } = action.payload;
-  console.log(
-    "🚀 ~ file: order.saga.js:8 ~ function*orderProductSaga ~ products:",
-    products
-  );
+
   try {
     const result = yield axios.post("http://localhost:4000/guestOrders", data);
 

@@ -1,9 +1,8 @@
-import { Link, generatePath, useLocation, useNavigate } from "react-router-dom";
+import { Link, generatePath, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { changePasswordAction, logoutAction } from "../../../redux/actions";
 
 import { ROUTES } from "../../../constants/routes";
-
-import { changePasswordAction, logoutAction } from "../../../redux/actions";
 
 import { LoadingOutlined } from "@ant-design/icons";
 import { Form, Input, Spin } from "antd";
@@ -12,13 +11,8 @@ import * as S from "./styles";
 function ChangePassword() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { state } = useLocation();
-  console.log("🚀 ~ file: index.jsx:24 ~ OrderedDetail ~ state:", state);
   const { userInfo, changePasswordData } = useSelector((state) => state.auth);
-  console.log(
-    "🚀 ~ file: index.jsx:29 ~ ChangePassword ~ changePasswordData:",
-    changePasswordData
-  );
+
   const antIcon = (
     <LoadingOutlined style={{ fontSize: 24, color: "#06c4f4" }} spin />
   );
@@ -123,13 +117,6 @@ function ChangePassword() {
                   alt=""
                 />
                 Đổi mật khẩu
-              </Link>
-              <Link className="w-full flex gap-2 px-4 py-3 hover:bg-[#FEEEEA] hover:text-[orange]">
-                <img
-                  src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/acc_user_6.svg"
-                  alt=""
-                />
-                Sản phẩm yêu thích
               </Link>
             </div>
           </div>

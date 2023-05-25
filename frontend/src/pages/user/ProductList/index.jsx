@@ -1,8 +1,7 @@
 import * as S from "./styles";
 
-import { Transition } from "react-transition-group";
 import { useEffect, useState, useMemo, useRef } from "react";
-import { Link, generatePath, useNavigate } from "react-router-dom";
+import { generatePath, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { PRODUCT_LIMIT } from "../../../constants/paging";
@@ -14,50 +13,31 @@ import {
   getSizeListAction,
 } from "../../../redux/actions";
 import axios from "axios";
-import { SwitchTransition, CSSTransition } from "react-transition-group";
 
 import { AiOutlineClose, AiOutlineUp, AiOutlineDown } from "react-icons/ai";
 import { Select, Col, Button, Slider, Drawer, Space, Input } from "antd";
 import { FiFilter } from "react-icons/fi";
+
 let genderClone = null;
 let valuePriceClone = [0, 1200000];
+
 function ProductList() {
-  const nodeRef = useRef(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const { subCategoryId } = useParams();
   let subCategoryIdArray = subCategoryId.split(",");
+
   let [gender, setGender] = useState([subCategoryIdArray[0]]);
   const [subCategory, setSubCategory] = useState([]);
-
   const [listYourChoice, setListYourChoice] = useState([]);
   const [placeHolderSort, setPlaceHolderSort] = useState("Mặc định");
-  const [sortBox, setSortBox] = useState(false);
   const [defaultValuePrice, setDefaultValuePrice] = useState([0, 1200000]);
   const [activeButton, setActiveButton] = useState(1);
   const { productList } = useSelector((state) => state.product);
   const { categoryList } = useSelector((state) => state.category);
   const [sizeList, setSizeList] = useState([]);
-  const [valuePriceShow, setValuePriceShow] = useState([0, 1200000]);
-
-  const [popCard, setPopCard] = useState("hidden");
-  const [fade, setFade] = useState(false);
-
-  const handleMenuClick = () => {
-    setPopCard("inline-block");
-    setFade(true);
-  };
-
-  const handleXClick = () => {
-    setPopCard("hidden");
-    setFade(false);
-  };
-  console.log(fade, "fade");
-  useEffect(() => {
-    console.log("ahihi");
-    setGender(subCategoryIdArray[0]);
-  }, [subCategoryId]);
-
+  const [stickySort, setStickySort] = useState(false);
   const [open, setOpen] = useState(false);
   const [filterParams, setFilterParams] = useState({
     categoryId: [],
@@ -66,13 +46,18 @@ function ProductList() {
     limit: PRODUCT_LIMIT,
     subCategoryId: gender,
   });
+
+  useEffect(() => {
+    setGender(subCategoryIdArray[0]);
+  }, [subCategoryId]);
+
   useEffect(() => {
     setFilterParams({
       ...filterParams,
       subCategoryId: gender,
     });
   }, [gender]);
-  //useEffect
+
   useEffect(() => {
     axios
       .get("http://localhost:4000/sizes")
@@ -92,9 +77,7 @@ function ProductList() {
     dispatch(getSizeListAction());
   }, [gender]);
   useEffect(() => {
-    console.log("lay lai lis product");
     dispatch(getProductListAction(filterParams));
-    console.log("productList aaaaaaaaaaaaaaaaaaaaaa", productList);
   }, [filterParams, subCategoryId, gender]);
   useEffect(() => {
     setListYourChoice(clone);
@@ -122,11 +105,9 @@ function ProductList() {
   //ant function
   const showDrawer = () => {
     setOpen(true);
-    setSortBox(true);
   };
   const onClose = () => {
     setOpen(false);
-    setSortBox(false);
   };
   //function
   const removeYourChoice = (array, values, name) => {
@@ -192,7 +173,7 @@ function ProductList() {
   };
 
   const removeYourChoiceTop = (objectname) => {
-    let valueType = categoryIdTemp.map((item) => {
+    categoryIdTemp.map((item) => {
       if (item === objectname.value) {
         removeYourChoice(categoryIdTemp, item, objectname.name);
         setListYourChoice(clone);
@@ -204,7 +185,7 @@ function ProductList() {
         });
       }
     });
-    let valueSize = sizeIdTemp.map((item) => {
+    sizeIdTemp.map((item) => {
       if (item === objectname.value) {
         removeYourChoice(sizeIdTemp, item, objectname.name);
         setListYourChoice(clone);
@@ -219,7 +200,6 @@ function ProductList() {
   };
 
   const removeAll = (subCategoryIdRemove) => {
-    console.log("subCategoryIdRemove", subCategoryIdRemove);
     clone = [];
     genderClone = subCategoryIdRemove;
     setListYourChoice(clone);
@@ -238,15 +218,9 @@ function ProductList() {
       price_lte: valuePriceClone[1],
     });
   };
-  console.log("render lai");
   const renderListFilterType = useMemo(() => {
-    console.log("renderListFilterType");
     return (
-      <div
-        className={`w-full
-  
-          flex flex-wrap gap-2  overflow-hidden `}
-      >
+      <div className={`w-full flex flex-wrap gap-2  overflow-hidden `}>
         {categoryList.data?.map((item, index) => {
           return (
             <div
@@ -273,7 +247,7 @@ function ProductList() {
   const renderListFilterSize = (list) => {
     return (
       <div className="w-full flex flex-wrap gap-2 ">
-        {list?.map((item, index) => {
+        {list?.map((item) => {
           return (
             <div
               key={item.id}
@@ -309,14 +283,16 @@ function ProductList() {
     (list) => {
       return (
         <div className="w-[90%] ">
-          <div className="w-100% flex justify-between">
+          <div className="w-100% flex justify-between gap-2">
             <Input
-              className="w-[40%]"
+              className={`${valuePriceClone[0] !== 0 ? "!bg-[orange]" : ""}`}
               value={valuePriceClone[0].toLocaleString()}
               disabled
             ></Input>
             <Input
-              className="w-[40%]"
+              className={`${
+                valuePriceClone[1] !== 1200000 ? "!bg-[orange]" : ""
+              }`}
               value={valuePriceClone[1].toLocaleString()}
               disabled
             ></Input>
@@ -326,7 +302,7 @@ function ProductList() {
             step={10000}
             onAfterChange={(value) => {
               setDefaultValuePrice(value);
-              setValuePriceShow(value);
+
               valuePriceClone = value;
 
               setFilterParams({
@@ -381,7 +357,7 @@ function ProductList() {
   };
   const CpnFilterSort = () => {
     return (
-      <div className="mb-2 lg:w-full flex justify-end gap-2">
+      <div className={` lg:w-full flex justify-end gap-2 `}>
         <div className="flex items-center">Sắp xếp:</div>
         <div className="min-w-[120px]">
           <Col>
@@ -463,9 +439,19 @@ function ProductList() {
       </div>
     );
   };
-  console.log("render lai button actione", activeButton, activeButtonClone);
-  console.log("render lai button genderClone", subCategoryId, genderClone);
+  window.onscroll = function () {
+    myFunction();
+  };
+  // scroll fixed "sortBar"
+  var sticky = 139;
 
+  function myFunction() {
+    if (window.pageYOffset > sticky) {
+      setStickySort(true);
+    } else {
+      setStickySort(false);
+    }
+  }
   return (
     <div className=" max-w-[1200px] p-[8px] flex flex-nowrap flex-col justify-between lg:mt-[55px] xxs:mt-[30px]">
       <div className="w-full relative flex justify-center mb-4">
@@ -481,7 +467,7 @@ function ProductList() {
             >
               Trang chủ /
             </p>
-            <p className="text-[20px]">{activeButton ? "Nữ" : "Nam"}</p>
+            <p className="text-[20px] ml-2">{activeButton ? "Nữ" : "Nam"}</p>
           </>
         ) : (
           <>
@@ -495,7 +481,7 @@ function ProductList() {
             >
               Trang chủ /
             </p>
-            <p className="text-[20px]">{subCategory.name}</p>
+            <p className="text-[20px]  ml-2">{subCategory.name}</p>
           </>
         )}
       </div>
@@ -522,14 +508,6 @@ function ProductList() {
                 removeAll(genderClone);
                 activeButtonClone = 1;
                 setActiveButton(activeButtonClone);
-                console.log(
-                  "🚀 ~ file: index.jsx:446 ~ ProductList ~ activeButtonClone:",
-                  activeButtonClone
-                );
-                console.log(
-                  "🚀 ~ file: index.jsx:439 ~ ProductList ~ genderClone:",
-                  genderClone
-                );
               }}
               className={`p-2 w-[80px] rounded-md hover:bg-[#fcaf17] ${
                 activeButton ? "bg-[#fcaf17]" : "bg-[#ffff]"
@@ -549,15 +527,7 @@ function ProductList() {
 
                 removeAll(genderClone);
                 activeButtonClone = 0;
-                console.log(
-                  "🚀 ~ file: index.jsx:470 ~ ProductList ~ activeButtonClone:",
-                  activeButtonClone
-                );
                 setActiveButton(activeButtonClone);
-                console.log(
-                  "🚀 ~ file: index.jsx:458 ~ ProductList ~ genderClone:",
-                  genderClone
-                );
               }}
               className={`p-2 w-[80px] rounded-md hover:bg-[#fcaf17] ${
                 activeButton ? "bg-[#ffff]" : "bg-[#fcaf17]"
@@ -570,21 +540,30 @@ function ProductList() {
       ) : (
         <></>
       )}
-      <div className="flex !sticky  top-0 z-999 xxs:w-full justify-between min-w-[250px] h-[auto] border-solid border-b-2 border-[#dde1ef]">
+      <div
+        className={`flex lg:relative lg:z-0 h-[42px] overflow-hidden xxs:w-full items-center justify-between min-w-[250px] 
+       border-solid border-b-2 border-[#dde1ef]
+      ${
+        stickySort
+          ? "xxs:fixed top-[53px] right-0 xxs:bg-[white] xxs:z-[999] xxs:px-[8px]"
+          : ""
+      }
+      `}
+      >
         <CpnFilterSort></CpnFilterSort>
         <div
-          className="xs:block lg:hidden cursor-pointer"
+          className="xs:block lg:hidden cursor-pointer "
           onClick={() => {
             showDrawer();
           }}
         >
-          <p className="flex items-centers sm:gap-2 xs:gap-0">
+          <p className="flex  sm:gap-2 xs:gap-0 text-center h-[32px] !items-center">
             Bộ lọc <FiFilter className="text-[20px]" />
           </p>
         </div>
       </div>
 
-      <div className="xl:w-[1150px] w-full grid lg:grid-cols-5 md:grid-cols-5 lg:gap-[20px] xxs:gap-[10px]">
+      <div className="xl:w-[1150px]  w-full grid lg:grid-cols-5 md:grid-cols-5 lg:gap-[20px] xxs:gap-[10px]">
         <div className="xxs:hidden lg:block">
           {" "}
           <CpnFilter
@@ -616,46 +595,6 @@ function ProductList() {
             typeProduct={categoryList.data}
             sizeProduct={sizeList}
           />
-          {/* <div className="col-span-1 lg:block pl-7 w-[220px]  bg-[white] z-50 h-full">
-            <div className="flex justify-between">
-              Bạn chọn:
-              <div
-                className="hover:text-[orange] cursor-pointer"
-                onClick={() => removeAll(genderClone)}
-              >
-                Bỏ hết
-              </div>
-            </div>
-            {RenderYourChoice}
-            <div className="my-4">Giá</div>
-            {renderListFilterPrice}
-            <div
-              className="my-4 flex justify-between items-center"
-              onClick={() => {
-                setShowTypeFilter(!showTypeFilter);
-              }}
-            >
-              Loại sản phẩm {sortBox && showTypeFilter && <AiOutlineUp />}
-              {sortBox && !showTypeFilter && <AiOutlineDown />}
-            </div>
-            <div className="transition-[height]">
-              {sortBox && renderListFilterType}
-            </div>
-            <div
-              className="my-4 flex justify-between items-center"
-              onClick={() => {
-                setShowSizeFilter(!showSizeFilter);
-              }}
-            >
-              Size {sortBox && showSizeFilter && <AiOutlineUp />}
-              {sortBox && !showSizeFilter && <AiOutlineDown />}
-            </div>
-            <div>
-              {sortBox
-                ? showSizeFilter && renderListFilterSize(sizeList)
-                : renderListFilterSize(sizeList)}
-            </div>
-          </div> */}
         </Drawer>
         <CartProductList
           listProduct={productList.data}

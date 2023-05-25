@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { Link, generatePath, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
-import { logoutAction } from "../../../redux/actions";
-import { AiOutlineArrowLeft } from "react-icons/ai";
 
+import { logoutAction } from "../../../redux/actions";
 import { ROUTES } from "../../../constants/routes";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 
 function OrderedDetail() {
   const navigate = useNavigate();
@@ -262,13 +262,6 @@ function OrderedDetail() {
                   alt=""
                 />
                 Đổi mật khẩu
-              </Link>
-              <Link className="w-full flex gap-2 px-4 py-3">
-                <img
-                  src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/acc_user_6.svg"
-                  alt=""
-                />
-                Sản phẩm yêu thích
               </Link>
             </div>
           </div>

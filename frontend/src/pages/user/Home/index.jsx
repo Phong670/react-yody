@@ -1,21 +1,16 @@
 import { generatePath, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import * as S from "./styles";
 import { ROUTES } from "../../../constants/routes";
 
 import "swiper/css";
 import "swiper/css/navigation";
-
-import "swiper/css";
 import "swiper/css/pagination";
 
 import { AiOutlineRight } from "react-icons/ai";
 import ProductHome from "./productHome";
+import * as S from "./styles";
 
 function HomeUser(props) {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-
   return (
     <div className="w-full  ">
       <div className="p-2 w-full lg:border-none xxs:border-b-[6px] xxs:border-[#F2F3F7]">
@@ -50,7 +45,7 @@ function HomeUser(props) {
         </div>
         <div className="w-full lg:hidden xxs:flex mb-2">
           <img
-            src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/home_preivew_sanpham_2_image_mobile.jpg?1683278564918"
+            src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/home_preivew_sanpham_2_image_mobile.jpg?1684998116749"
             alt=""
             onClick={() => {
               navigate({
@@ -65,7 +60,7 @@ function HomeUser(props) {
           <div className="w-[180px] h-[360px] xxs:hidden lg:block ">
             <img
               className="w-full, h-full "
-              src="https://bizweb.dktcdn.net/thumb/large/100/438/408/products/cvn5270-den-6.jpg?v=1663386076000"
+              src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/home_preivew_sanpham_2_image_desktop.jpg?1684998116749"
               alt=""
               onClick={() => {
                 navigate({

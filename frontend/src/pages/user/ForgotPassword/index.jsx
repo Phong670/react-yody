@@ -1,13 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Navigate, generatePath } from "react-router-dom";
-import { Form, Input, notification } from "antd";
 import axios from "axios";
 import { uid } from "uid";
+import moment from "moment";
 
+import { Form, Input, notification } from "antd";
 import { forgotPasswordAction } from "../../../redux/actions";
 import { ROUTES } from "../../../constants/routes";
-import moment from "moment";
 import { emailForgotPasswordTemp } from "../../../constants/emailForgotPasswordTemp";
 import * as S from "./styles";
 

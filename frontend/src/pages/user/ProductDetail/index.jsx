@@ -5,12 +5,10 @@ import axios from "axios";
 
 import {
   getProductDetailAction,
-  getProductListAction,
   getSizeListAction,
 } from "../../../redux/actions";
 
 import { ROUTES } from "../../../constants/routes";
-import { PRODUCT_LIMIT } from "../../../constants/paging";
 import AddToCard from "./addToCard";
 import ReviewProduct from "./review";
 import * as S from "./styles";
@@ -28,13 +26,9 @@ function ProductDetail() {
   const { listReview } = useSelector((state) => state.review);
   const [dataAllReview, setDataAllReview] = useState([]);
   const [productListRecommend, setProductListRecommend] = useState([]);
-  console.log(
-    "🚀 ~ file: index.jsx:33 ~ ProductDetail ~ productListRecommend:",
-    productListRecommend
-  );
 
   const { Panel } = Collapse;
-  const { TextArea } = Input;
+
   useEffect(() => {
     dispatch(getProductDetailAction({ id: id }));
 

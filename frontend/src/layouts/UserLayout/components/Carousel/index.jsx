@@ -3,7 +3,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 import { Pagination, Navigation, Autoplay } from "swiper";
-// import { delay } from "@reduxjs/toolkit/dist/utils";
+
 function Carousel() {
   return (
     <div className="max-w-[1200px] w-[100%] lg:mt-[94px] xxs:mt-[54px] order-1 ">
@@ -21,12 +21,12 @@ function Carousel() {
       >
         <SwiperSlide className="carouselItem">
           <img
-            className="lg:block xxs:hidden min-h-[210px]"
+            className="sm:block xxs:hidden min-h-[210px]"
             src="https://bizweb.dktcdn.net/100/438/408/files/slidebanerpc-01-1831bb73-075e-4e64-8161-2fc657834abc.jpg?v=1683641778387"
             alt="First slide"
           />
           <img
-            className="lg:hidden xxs:block min-h-[210px]"
+            className="sm:hidden xxs:block min-h-[210px]"
             src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/slider_1_mb.jpg?1684571768752"
             alt="First slide"
           />

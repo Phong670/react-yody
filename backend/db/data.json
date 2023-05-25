@@ -35,6 +35,15 @@
       "createdAt": 1684771402708,
       "updatedAt": 1684771402708,
       "id": 4
+    },
+    {
+      "rate": 2,
+      "comment": "12",
+      "userId": 2,
+      "productId": 1,
+      "createdAt": 1685012173794,
+      "updatedAt": 1685012173794,
+      "id": 5
     }
   ],
   "users": [
@@ -51,13 +60,13 @@
     },
     {
       "email": "qphong670@gmail.com",
-      "password": "$2a$10$Nje0e4qM8aG9AMtrYQsSUe2iJmlp/R1A.wT.2KoDeTBgDGlYce6rq",
+      "password": "$2a$10$UhcbAZao3UfkK5AVK64jg.KpLu4qtOZjAA3g8YBMl0Y5tCv9bRtta",
       "fullName": "Phong Ho Quang",
       "role": "user",
-      "token": "b14a94",
-      "tokenExpirationTime": 1685001796964,
+      "token": "9fc2ad",
+      "tokenExpirationTime": 1685095477404,
       "createdAt": 1684902508702,
-      "updatedAt": 1684915506839,
+      "updatedAt": 1685009236639,
       "id": 2
     }
   ],
@@ -1623,6 +1632,48 @@
       "createdAt": 1684940874420,
       "updatedAt": 1684940874421,
       "id": 1
+    },
+    {
+      "name": "ZAdx",
+      "numberPhone": "aD",
+      "email": "ASD",
+      "city": {
+        "id": 9737,
+        "value": "79",
+        "parentcode": "0003",
+        "label": "Thành phố Hồ Chí Minh",
+        "status": 1,
+        "region": 3
+      },
+      "district": {
+        "id": 9738,
+        "value": "760",
+        "parentcode": "79",
+        "label": "Quận 1",
+        "status": 1,
+        "region": null
+      },
+      "ward": {
+        "id": 9742,
+        "value": "26743",
+        "parentcode": "760",
+        "label": "Phường Bến Thành",
+        "status": 1,
+        "region": null
+      },
+      "address": "ASD",
+      "paymentMethod": "COD",
+      "addressShow": "ASD, Phường Bến Thành, Quận 1, Thành phố Hồ Chí Minh.",
+      "totalPrice": 449000,
+      "statusOrder": "Đang xử lý",
+      "costShip": 20000,
+      "idGuestOrder": "3988",
+      "statusPayment": "Chưa thanh toán",
+      "vnp_ResponseCode": "",
+      "vnp_TransactionStatus": "",
+      "createdAt": 1685019863285,
+      "updatedAt": 1685019863285,
+      "id": 2
     }
   ],
   "guestOrderDetails": [
@@ -1661,6 +1712,18 @@
       "createdAt": 1684940874560,
       "updatedAt": 1684940874560,
       "id": 3
+    },
+    {
+      "guestOrderId": 2,
+      "productId": 27,
+      "name": "Quần Âu Nữ Lưng Cao Ống Đứng Thêu Cạp",
+      "price": 449000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/qan5110-nca-6.jpg?v=1664531724000",
+      "size": "26",
+      "quantity": 1,
+      "createdAt": 1685019863360,
+      "updatedAt": 1685019863360,
+      "id": 4
     }
   ],
   "cities": [

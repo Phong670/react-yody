@@ -1,30 +1,16 @@
-import { useEffect, useState } from "react";
-import { Link, generatePath, useLocation, useNavigate } from "react-router-dom";
+import { Link, generatePath, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { RiDeleteBinLine } from "react-icons/ri";
 
 import { ROUTES } from "../../../constants/routes";
-import { useRef } from "react";
-import { REQUEST } from "../../../redux/constants";
 
-import { Button, Table, Collapse } from "antd";
+import { Collapse } from "antd";
 
-import moment from "moment";
-import { changePasswordAction } from "../../../redux/actions";
-
-import { getOrderList } from "../../../redux/actions";
 import { logoutAction } from "../../../redux/actions";
-import { Fragment } from "react";
-import { AiOutlineArrowLeft } from "react-icons/ai";
-import { Form, Input } from "antd";
-import * as S from "./styles";
 
 function Account() {
-  const { Panel } = Collapse;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.auth);
-  console.log("🚀 ~ file: index.jsx:20 ~ Orders ~ userInfo:", userInfo);
 
   return (
     <div className="w-full bg-[#f8f8f8] flex justify-center  lg:mt-4 xxs:mt-2 text-[14px]">
@@ -97,19 +83,15 @@ function Account() {
                 />
                 Đơn hàng của tôi
               </Link>
-              <Link className="w-full flex gap-2 px-4 py-3  hover:bg-[#FEEEEA] hover:text-[orange]">
+              <Link
+                className="w-full flex gap-2 px-4 py-3  hover:bg-[#FEEEEA] hover:text-[orange]"
+                to={generatePath(ROUTES.USER.CHANGE_PASSWORD)}
+              >
                 <img
                   src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/acc_user_3_hover.svg"
                   alt=""
                 />
                 Đổi mật khẩu
-              </Link>
-              <Link className="w-full flex gap-2 px-4 py-3 hover:bg-[#FEEEEA] hover:text-[orange]">
-                <img
-                  src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/acc_user_6.svg"
-                  alt=""
-                />
-                Sản phẩm yêu thích
               </Link>
             </div>
           </div>

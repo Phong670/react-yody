@@ -1,22 +1,10 @@
-import { useEffect, useState, useMemo } from "react";
-import {
-  Link,
-  generatePath,
-  useNavigate,
-  useParams,
-  useLocation,
-} from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import * as S from "./styles";
+import { useEffect, useState } from "react";
+import { generatePath, useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { ROUTES } from "../../../constants/routes";
-import { getOrderId } from "../../../redux/actions";
-import { Badge } from "antd";
+import { Badge, Spin } from "antd";
 import axios from "axios";
-import moment from "moment";
-import qs from "qs";
 import { emailSuccessTemp } from "../../../constants/emailSuccessTemp";
-import { useParamss } from "react-router-dom";
-import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 
 function ThankyouOrdered() {
@@ -25,7 +13,6 @@ function ThankyouOrdered() {
   );
   const params = useParams();
 
-  console.log("🚀 ~ file: index.jsx:16 ~ ThankyouOrdered ~ params:", params);
   const { userInfo } = useSelector((state) => state.auth);
 
   const navigate = useNavigate();
@@ -73,10 +60,6 @@ function ThankyouOrdered() {
         });
     }
   }, [userInfo.data.id]);
-  console.log(
-    "🚀 ~ file: index.jsx:26 ~ ThankyouOrdered ~ dataShow?:",
-    dataShow
-  );
 
   useEffect(() => {
     let emailSuccessTemp22 = emailSuccessTemp(dataShow);

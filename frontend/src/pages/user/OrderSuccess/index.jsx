@@ -1,41 +1,29 @@
-import { useEffect, useState, useMemo } from "react";
-import { Link, generatePath, useNavigate, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import * as S from "./styles";
+import { useEffect, useState } from "react";
+import { generatePath, useNavigate, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { ROUTES } from "../../../constants/routes";
 import axios from "axios";
 import qs from "qs";
-import { emailSuccessTemp } from "../../../constants/emailSuccessTemp";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 
 function OrderSuccess() {
-  const antIcon = (
-    <LoadingOutlined style={{ fontSize: 44, color: "#eeb50d" }} spin />
-  );
-  const { search } = useLocation();
-  const { idOrderProductList } = useSelector((state) => state.order);
-  const query = qs.parse(search, { ignoreQueryPrefix: true });
-  console.log("🚀 ~ file: index.jsx:16 ~ ThankyouOrdered ~ query:", query);
-  const { userInfo } = useSelector((state) => state.auth);
-  console.log(
-    "🚀 ~ file: index.jsx:18 ~ ThankyouOrdered ~ userInfo:",
-    userInfo
-  );
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [dataShow, setDataShow] = useState([]);
+  const { search } = useLocation();
+
+  const { userInfo } = useSelector((state) => state.auth);
   const [dataIdOrders, setDataIdOrders] = useState([]);
-  console.log(
-    "🚀 ~ file: index.jsx:28 ~ ThankyouOrdered ~ dataIdOrders:",
-    dataIdOrders
-  );
+
+  const query = qs.parse(search, { ignoreQueryPrefix: true });
+
   let id = dataIdOrders?.id;
-  console.log("🚀 ~ file: index.jsx:33 ~ ThankyouOrdered ~ id:", id);
   let ResultPayment = {
     vnp_ResponseCode: query.vnp_ResponseCode,
     vnp_TransactionStatus: query.vnp_TransactionStatus,
   };
+  const antIcon = (
+    <LoadingOutlined style={{ fontSize: 44, color: "#eeb50d" }} spin />
+  );
   useEffect(() => {
     if (userInfo.data.id) {
       console.log("dang nap 1");

@@ -1,19 +1,14 @@
 import { put, takeEvery } from "redux-saga/effects";
 import { notification } from "antd";
 import axios from "axios";
-import { loginAction } from "../../redux/actions";
 
 import { AUTH_ACTION, REQUEST, SUCCESS, FAIL } from "../constants";
-import Password from "antd/es/input/Password";
 
 function* loginSaga(action) {
   try {
     const { data, callback } = action.payload;
     const result = yield axios.post("http://localhost:4000/login", data);
-    console.log(
-      "🚀 ~ file: auth.saga.js:12 ~ function*loginSaga ~ result:",
-      result
-    );
+
     yield localStorage.setItem("accessToken", result.data.accessToken);
     yield callback(result.data.user.role);
     yield put({
@@ -54,10 +49,7 @@ function* changePasswordSaga(action) {
 function* forgotPasswordSaga(action) {
   try {
     const { data, callback } = action.payload;
-    console.log(
-      "🚀 ~ file: auth.saga.js:57 ~ function*forgotPasswordSaga ~ callback:",
-      callback
-    );
+
     let password = {
       password: data.password,
     };

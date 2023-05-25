@@ -4,10 +4,7 @@ import { PRODUCT_SEARCH_ACTION, REQUEST, SUCCESS, FAIL } from "../constants/";
 function* getProductListSearchSaga(action) {
   try {
     const { page, limit, searchKey } = action.payload;
-    console.log(
-      "🚀 ~ file: productSearch.saga.js:7 ~ function*getProductListSearchSaga ~ searchKey:",
-      searchKey
-    );
+
     //call API
     // xu ly BDB
 
@@ -18,10 +15,6 @@ function* getProductListSearchSaga(action) {
         q: searchKey,
       },
     });
-    console.log(
-      "🚀 ~ file: productSearch.saga.js:17 ~ function*getProductListSearchSaga ~ result:",
-      result
-    );
 
     yield put({
       type: SUCCESS(PRODUCT_SEARCH_ACTION.GET_PRODUCT_LIST_SEARCH),

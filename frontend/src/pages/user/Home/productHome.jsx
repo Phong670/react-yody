@@ -1,29 +1,20 @@
 import { useEffect, useState } from "react";
-import { Link, generatePath } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { generatePath } from "react-router-dom";
 import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { ROUTES } from "../../../constants/routes";
-import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper";
+import { Navigation, Pagination, Keyboard } from "swiper";
 import * as S from "./styles";
 import { LoadingOutlined } from "@ant-design/icons";
-import { Spin } from "antd";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 function ProductHome({ subCategoryId, nameSwiper }) {
   const [productData, setProductDress] = useState([]);
   // const [loading, setLoading] = useState(false);
-
-  console.log(
-    "🚀 ~ file: productHome.jsx:19 ~ ProductHome ~ productData:",
-    productData
-  );
-  const dispatch = useDispatch();
-  const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
   useEffect(() => {
     axios

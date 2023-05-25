@@ -1,7 +1,6 @@
 import { Fragment, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { getProductListSearchAction } from "../../../../redux/actions";
 import { useMemo } from "react";
 import { Link, generatePath, useNavigate } from "react-router-dom";
 import { ROUTES } from "../../../../constants/routes";
@@ -11,22 +10,13 @@ import { Spin } from "antd";
 
 const SearchBox = ({
   searchKey,
-  setSearchKey,
   openSearchBox,
   setOpenSearchBox,
   empty,
   setEmpty,
 }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const [goSearchPage, setGoSearchPage] = useState(false);
   const { productSearchList } = useSelector((state) => state.productSearch);
-  console.log("🚀 ~ file: searchBox.jsx:20 ~ empty:", empty);
-  console.log("🚀 ~ file: searchBox.jsx:19 ~ openSearchBox:", openSearchBox);
-  console.log(
-    "🚀 ~ file: searchBox.jsx:13 ~ SearchBox ~ productSearchList:",
-    productSearchList
-  );
   const antIcon = (
     <LoadingOutlined
       style={{
@@ -54,7 +44,6 @@ const SearchBox = ({
       window.removeEventListener("resize", updateDimension);
     };
   }, [screenSize]);
-  console.log("width", screenSize.width);
 
   const renderListProductSearch = useMemo(() => {
     return productSearchList.data?.map((item, index) => {
@@ -64,7 +53,6 @@ const SearchBox = ({
           className=" h-[80px] w-full flex justify-start cursor-pointer mb-2  gap-1 z-10 p-1 "
           to={generatePath(ROUTES.USER.PRODUCT_DETAIL, { id: item.id })}
           onClick={() => {
-            setGoSearchPage(true);
             setEmpty(true);
             setOpenSearchBox(false);
           }}
@@ -93,7 +81,6 @@ const SearchBox = ({
       // Bind the event listener
       document.addEventListener("keypress", function (e) {
         if (e.keyCode !== 13) {
-          console.log("enter");
           document.addEventListener("mousedown", handleClickOutside);
         } else {
         }
@@ -114,18 +101,12 @@ const SearchBox = ({
             <div
               className=" w-full h-10 cursor-pointer flex items-center justify-center bg-[orange]"
               onClick={() => {
-                console.log("dmdmdmdm", openSearchBox);
                 navigate({
                   pathname: generatePath(ROUTES.USER.SEARCH, {
                     searchKey: searchKey,
                   }),
                 });
-                console.log("hello", searchKey);
                 setOpenSearchBox(false);
-
-                // setSearchKey(false);
-                setGoSearchPage(true);
-
                 setEmpty(true);
               }}
             >

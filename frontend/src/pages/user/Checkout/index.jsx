@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Link, generatePath, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { ROUTES } from "constants/routes";
-import * as S from "./styles";
 
 import {
   getCityListAction,
@@ -11,67 +10,49 @@ import {
   orderProductAction,
   guestOrderProductAction,
 } from "../../../redux/actions";
+import { uid } from "uid";
+import axios from "axios";
 import { IoIosArrowBack } from "react-icons/io";
 import { FaMoneyBillAlt } from "react-icons/fa";
-import { Form, Input, Badge, Radio, Space, Select } from "antd";
-import { uid } from "uid";
-// import { values } from "json-server-auth";
+import { Form, Input, Badge, Radio, Space, Select, Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
-import { Spin } from "antd";
-import axios from "axios";
 function Checkout() {
   const [checkoutForm] = Form.useForm();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { cartList } = useSelector((state) => state.cart);
-  const { orderList } = useSelector((state) => state.order);
-
-  console.log("🚀 ~ file: index.jsx:27 ~ Checkout ~ cartList:", cartList);
+  const { userInfo } = useSelector((state) => state.auth);
   const { cityList, districtList, wardList } = useSelector(
     (state) => state.location
   );
-
   const [loading, setLoading] = useState(false);
-  const [city, setCity] = useState(false);
-  const [district, setDistrict] = useState(false);
-  const [ward, setWard] = useState(false);
-
-  const { userInfo } = useSelector((state) => state.auth);
   const [total, setTotal] = useState(0);
   let totalClone = 0;
   const antIcon = (
     <LoadingOutlined style={{ fontSize: 24, color: "#30c5c5" }} spin />
   );
+
   useEffect(() => {
-    console.log("aaaaaaaaaaaaaaaaa");
     dispatch(getCityListAction());
-    console.log("🚀 ~ file: index.jsx:28 ~ Checkout ~ cityList:", cityList);
-  }, []);
-  useEffect(() => {
     cartList.data?.map((item) => {
       totalClone = totalClone + item.price * item.quantity;
       setTotal(totalClone);
     });
   }, []);
-  console.log("total", total);
   const handleSubmitCheckoutForm = (values) => {
-    console.log(
-      "🚀 ~ file: index.jsx:69 ~ handleSubmitCheckoutForm ~ values:",
-      values
-    );
     let idOrder = uid(4);
     axios
       .get(`http://localhost:4000/cities?value=${values.city}`)
 
       .then((res) => {
         let cityClone = res.data[0];
-        console.log(res.data[0]);
+
         axios
           .get(`http://localhost:4000/districts?value=${values.district}`)
 
           .then((res) => {
             let districtClone = res.data[0];
-            console.log(district);
+
             axios
               .get(`http://localhost:4000/wards?value=${values.ward}`)
 
@@ -79,7 +60,6 @@ function Checkout() {
                 let wardClone = res.data[0];
 
                 if (userInfo.data.id) {
-                  console.log(city);
                   dispatch(
                     orderProductAction({
                       data: {

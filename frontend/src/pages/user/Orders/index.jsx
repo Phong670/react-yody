@@ -1,15 +1,10 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect } from "react";
 import { Link, generatePath, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { RiDeleteBinLine } from "react-icons/ri";
+import moment from "moment";
 
 import { ROUTES } from "../../../constants/routes";
-import { useRef } from "react";
-import { REQUEST } from "../../../redux/constants";
-
-import { Button, Table, Collapse } from "antd";
-
-import moment from "moment";
+import { Table } from "antd";
 
 import { getOrderList } from "../../../redux/actions";
 import { logoutAction } from "../../../../src/redux/actions";
@@ -19,18 +14,12 @@ function Orders() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.auth);
-  console.log("🚀 ~ file: index.jsx:20 ~ Orders ~ userInfo:", userInfo);
   const { orderList } = useSelector((state) => state.order);
-  console.log("🚀 ~ file: index.jsx:24 ~ Orders ~ orderList:", orderList);
-  const accessToken = useMemo(() => {
-    localStorage.getItem("accessToken");
-  }, []);
 
   useEffect(() => {}, []);
 
   useEffect(() => {
     if (userInfo.data.id) {
-      console.log("ddang nhap");
       dispatch(getOrderList({ userId: userInfo.data.id }));
     }
   }, [userInfo.data.id]);
@@ -214,13 +203,6 @@ function Orders() {
                   alt=""
                 />
                 Đổi mật khẩu
-              </Link>
-              <Link className="w-full flex gap-2 px-4 py-3 hover:bg-[#FEEEEA] hover:text-[orange]">
-                <img
-                  src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/acc_user_6.svg"
-                  alt=""
-                />
-                Sản phẩm yêu thích
               </Link>
             </div>
           </div>

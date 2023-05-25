@@ -57,6 +57,7 @@ export let emailForgotPasswordTemp = (dataSendEmail) => {
 
         p {
           font-size: 16px;
+          
           color: #000000;
         }
 
@@ -82,9 +83,9 @@ export let emailForgotPasswordTemp = (dataSendEmail) => {
 
     </div>
     <p>Chào ${dataSendEmail?.name}.</p>
-    <p>${dataSendEmail?.token}</p>
-    <i style="font-size: 16px">Cảm ơn quý khách hàng đã tin tưởng và đặt hàng sản phẩm của chúng tôi.</i>
-   <p style="margin:0"> <i style="width: 100% ">Xem lịch sử mua hàng tại: http://localhost:3000/account/orders </i></p>
+    <p>Đây là mã thay đổi mật khẩu của bạn, mã này có hiệu lực trong vòng 24h. Bạn không nên chia sẻ mã này ra bên ngoài</p>
+    <p>Mã của bạn là: ${dataSendEmail?.token}</p>
+    <i style="font-size: 16px">Cảm ơn quý khách hàng đã tin tưởng sản phẩm của chúng tôi.</i>
   <p style="margin:0">  <i style="width: 100%">Mọi thông tin xin liên hệ: </i></p>
   <p style="margin:0">  <i style="width: 100%">- Đường dây miễn phí: 18002086</i></p>
   <p style="margin:0">  <i style="width: 100%">- Trang chủ cửa hàng: http://localhost:3000/</i></p>

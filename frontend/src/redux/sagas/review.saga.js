@@ -6,10 +6,6 @@ import { REVIEW_LIMIT } from "../../constants/paging";
 function* getReviewListSaga(action) {
   try {
     const { productId, page, sendReview, more, rate } = action.payload;
-    console.log(
-      "🚀 ~ file: review.saga.js:9 ~ function*getReviewListSaga ~ unMount:",
-      more
-    );
 
     const result = yield axios.get("http://localhost:4000/reviews/", {
       params: {
@@ -25,10 +21,6 @@ function* getReviewListSaga(action) {
         rate: rate,
       },
     });
-    console.log(
-      "🚀 ~ file: review.saga.js:27 ~ function*getReviewListSaga ~ result:",
-      result.data
-    );
 
     yield put({
       type: SUCCESS(REVIEW_ACTION.GET_REVIEW_LIST),
@@ -53,16 +45,9 @@ function* getReviewListSaga(action) {
 function* sendReviewSaga(action) {
   try {
     const { data, callback, callback2 } = action.payload;
-    console.log(
-      "🚀 ~ file: review.saga.js:40 ~ function*sendProductReviewSaga ~ data:",
-      data
-    );
 
     const result = yield axios.post("http://localhost:4000/reviews/", data);
-    console.log(
-      "🚀 ~ file: review.saga.js:52 ~ function*sendReviewSaga ~ result:",
-      result
-    );
+
     yield callback();
     yield callback2();
 

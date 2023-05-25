@@ -1,14 +1,14 @@
-import { useMemo, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useMemo, useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
 import { addCartListAction } from "../../../redux/actions/";
 
 import axios from "axios";
 import { Rate, Space } from "antd";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+
 function AddToCard({ productDetail, dataAllReview }) {
   const { id } = useParams();
   const dispatch = useDispatch();
