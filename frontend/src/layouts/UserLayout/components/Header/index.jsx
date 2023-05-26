@@ -256,7 +256,7 @@ function Header() {
       onClick: () => {
         navigate({
           pathname: generatePath(ROUTES.USER.PRODUCT_LIST, {
-            subCategoryId: [7],
+            subCategoryId: [8],
           }),
         });
       },
@@ -277,7 +277,7 @@ function Header() {
       onClick: () => {
         navigate({
           pathname: generatePath(ROUTES.USER.PRODUCT_LIST, {
-            subCategoryId: [8],
+            subCategoryId: [7],
           }),
         });
       },

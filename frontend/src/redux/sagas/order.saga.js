@@ -1,7 +1,13 @@
 import { takeEvery, put } from "redux-saga/effects";
 import axios from "axios";
 
-import { ORDER_ACTION, REQUEST, SUCCESS, FAIL } from "../constants";
+import {
+  ORDER_ACTION,
+  REQUEST,
+  SUCCESS,
+  FAIL,
+  CART_ACTION,
+} from "../constants";
 
 function* orderProductSaga(action) {
   const { data, products, callback } = action.payload;
@@ -23,6 +29,9 @@ function* orderProductSaga(action) {
     const detail = yield axios.get("http://localhost:4000/orderDetails");
 
     yield callback();
+    yield put({
+      type: REQUEST(CART_ACTION.DELETE_All_CART),
+    });
     yield put({
       type: SUCCESS(ORDER_ACTION.ORDER_PRODUCT),
       payload: {
@@ -57,13 +66,12 @@ function* guestOrderProductSaga(action) {
       });
     }
     const detail = yield axios.get("http://localhost:4000/guestOrderDetails");
-    console.log(
-      "🚀 ~ file: order.saga.js:28 ~ function*orderProductSaga ~ detail:",
-      detail
-    );
 
     yield callback(true);
-    //DELETE CARD
+    //DELETE CART
+    yield put({
+      type: REQUEST(CART_ACTION.DELETE_All_CART),
+    });
     yield put({
       type: SUCCESS(ORDER_ACTION.ORDER_PRODUCT),
       payload: {
@@ -89,10 +97,7 @@ function* getOrderProductListSaga(action) {
         _embed: "orderDetails",
       },
     });
-    console.log(
-      "🚀 ~ file: order.saga.js:50 ~ function*getOrderProductListSaga ~ result:",
-      result
-    );
+
     yield put({
       type: SUCCESS(ORDER_ACTION.GET_ORDER_PRODUCT_LIST),
       payload: {

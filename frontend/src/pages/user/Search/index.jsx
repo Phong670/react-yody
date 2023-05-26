@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { generatePath, useNavigate, useParams } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -17,6 +17,7 @@ function Search() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { productList } = useSelector((state) => state.product);
+  const [nextPage, setNextPage] = useState(false);
 
   const antIcon = (
     <LoadingOutlined style={{ fontSize: 44, color: "#ffc107" }} spin />
@@ -26,7 +27,7 @@ function Search() {
     dispatch(
       getProductListAction({
         page: 1,
-        limit: PRODUCT_LIMIT,
+        limit: 15,
         searchKey: searchKey,
         more: false,
       })
