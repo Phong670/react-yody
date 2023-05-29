@@ -62,18 +62,11 @@ const cartReducer = createReducer(initialState, {
 
   [REQUEST(CART_ACTION.UPDATE_CART_ITEM)]: (state, action) => {
     const { id, size, quantity } = action.payload;
-    console.log(
-      "🚀 ~ file: cart.reducer.js:51 ~ [REQUEST ~ quantity:",
-      quantity
-    );
-    console.log("🚀 ~ file: cart.reducer.js:51 ~ [REQUEST ~ id:", id);
+
     const indexUpdate = state.cartList.data?.findIndex(
       (item) => item.id === id && item.size === size
     );
-    console.log(
-      "🚀 ~ file: cart.reducer.js:54 ~ [REQUEST ~ indexUpdate:",
-      indexUpdate
-    );
+
     const newCartList = [...state.cartList.data];
     newCartList.splice(indexUpdate, 1, {
       ...newCartList[indexUpdate],

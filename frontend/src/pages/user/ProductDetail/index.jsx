@@ -49,7 +49,7 @@ function ProductDetail() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/products/?_page=1&_limit=12", {
+      .get("http://localhost:4000/products/?_page=1&_limit=10", {
         params: { subCategoryId: productDetail.data.subCategoryId },
       })
       .then((res) => {
@@ -112,7 +112,7 @@ function ProductDetail() {
     <div className="flex flex-wrap flex-col items-center justify-center xl:w-[1200px] lg:mt-[50px] xxs:mt-[-16px] relative p-3">
       <div className="w-full">{renderTitle}</div>
       <div className="flex my-4 h-auto   xxs:justify-center lg:justify-between xxs:flex-wrap  ">
-        <div className="xl:w-[750px]  xxs:w-full mb-3 overflow-auto ">
+        <div className="xl:w-[750px]  xxs:w-full mb-3">
           <div className="flex justify-center flex-wrap w-full h-auto border-b-[1px] border-solid border-[#F2F2F2] pb-[24px]">
             <div className="flex justify-center w-full">
               {!productDetail.load ? (

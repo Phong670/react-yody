@@ -117,7 +117,7 @@ function ReviewProduct({ idProduct, title, dataAllReview }) {
           <div className="ml-3">
             <div className="flex gap-2 items-center">
               <h5 className="text-[16px] text-[#030d78]">
-                {item.user.fullName}
+                {item.user?.fullName}
               </h5>
               <p className="text-[rgba(0,0,0,.54)] mb-[-2px] text-[12px]">
                 {`${
@@ -135,7 +135,7 @@ function ReviewProduct({ idProduct, title, dataAllReview }) {
             </div>
 
             <Rate value={item.rate} disabled style={{ fontSize: 12 }} />
-            <p className="text-[12px]">{item.comment}</p>
+            <p className="text-[14px]">{item.comment}</p>
           </div>
         </div>
       );
@@ -161,7 +161,7 @@ function ReviewProduct({ idProduct, title, dataAllReview }) {
     });
   };
   return (
-    <div className="flex flex-wrap flex-col justify-between w-full border-[#c4cdd5] border-b-[0.8px]">
+    <div className="flex flex-wrap flex-col justify-between w-full border-[#c4cdd5] border-b-[0.8px] pb-[8px]">
       {contextHolder}
       <h6 className="my-4"> ĐÁNH GIÁ</h6>
       {dataAllReview.length === 0 ? (

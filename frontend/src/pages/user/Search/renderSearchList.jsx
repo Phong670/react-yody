@@ -8,14 +8,17 @@ import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 
 import * as S from "./styles";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 let hasMoreClone = true;
 const RenderSearchList = ({ productList }) => {
+  useEffect(() => {
+    console.log("dismount");
+    hasMoreClone = true;
+  }, []);
   const antIcon = (
     <LoadingOutlined style={{ fontSize: 44, color: "#ffc107" }} spin />
   );
-
   const dispatch = useDispatch();
   const renderListCart = () => {
     return productList.data?.map((item, index) => {
@@ -36,24 +39,29 @@ const RenderSearchList = ({ productList }) => {
       );
     });
   };
+  console.log(hasMoreClone);
+
   const fetchMoreData = () => {
+    console.log(hasMoreClone);
     if (productList.data.length >= productList.meta.total) {
-      hasMoreClone = false;
+      // hasMoreClone = false;
 
       return;
     }
+    // setNextPage(true);
     // a fake async api call like which sends
     // 20 more records in .5 secs
-    setTimeout(() => {
-      dispatch(
-        getProductListAction({
-          page: productList.meta.page + 1,
-          limit: PRODUCT_LIMIT,
-          more: true,
-          searchKey: productList.meta.searchKey,
-        })
-      );
-    }, 0);
+    else
+      setTimeout(() => {
+        dispatch(
+          getProductListAction({
+            page: productList.meta.page + 1,
+            limit: 15,
+            more: true,
+            searchKey: productList.meta.searchKey,
+          })
+        );
+      }, 0);
   };
   return (
     <>
@@ -69,8 +77,10 @@ const RenderSearchList = ({ productList }) => {
       </InfiniteScroll>
       {productList.data.length > 0 && productList.load ? (
         <Spin indicator={antIcon} className="my-[100px]" />
-      ) : (
+      ) : productList.data.length >= productList.meta.total ? (
         <div className="my-2">Bạn đã xem hết kết quả tìm kiếm</div>
+      ) : (
+        <></>
       )}
     </>
   );

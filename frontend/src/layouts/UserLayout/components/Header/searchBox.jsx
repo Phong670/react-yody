@@ -11,6 +11,7 @@ import { Spin } from "antd";
 const SearchBox = ({
   searchKey,
   openSearchBox,
+  setSearchKey,
   setOpenSearchBox,
   empty,
   setEmpty,
@@ -108,6 +109,7 @@ const SearchBox = ({
                 });
                 setOpenSearchBox(false);
                 setEmpty(true);
+                setSearchKey("");
               }}
             >
               Xem thêm kết quả

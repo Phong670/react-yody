@@ -25,10 +25,10 @@ app.use("/order", order);
 const APP_PORT = 5000;
 const APP_HOST = "localhost";
 const GOOGLE_MAILER_CLIENT_ID =
-  "1022225479410-a1donk6nchh8cov91si3ag2bm0vhjle5.apps.googleusercontent.com";
-const GOOGLE_MAILER_CLIENT_SECRET = "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";
+  "1022225479410-brk13mmus3t67u6bva1i33kosjbbgrba.apps.googleusercontent.com";
+const GOOGLE_MAILER_CLIENT_SECRET = "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";
 const GOOGLE_MAILER_REFRESH_TOKEN =
-  "1//04qv3HfUqrQXPCgYIARAAGAQSNwF-L9Irl8mR6bs4GJprxpvndRL42fh26Do8WiyWcO1Ih_jlWiTtYkFw1VhTQjirNFQfU3_sgpY";
+  "1//04tHV88Q2R_ENCgYIARAAGAQSNwF-L9IrjgmigPmflSrCK8afQOlp4UHMLoRv6GSmH7djmAFh8lXaKw-0VpHNWHMfFBEyaA-kPL0";
 const ADMIN_EMAIL_ADDRESS = "phongtestmail2805@gmail.com";
 
 const myOAuth2Client = new ggAuth.OAuth2Client(

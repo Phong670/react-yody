@@ -101,11 +101,12 @@ export const BtnRegister = styled.button`
   }
 `;
 
-export const Social = styled.div`
+export const Social = styled.ul`
   width: 100%;
   display: flex;
   justify-content: space-between;
   margin-top: 30px;
+  list-style: none;
   /* margin-left: 10px; */
   @media (max-width: 900px) {
     width: 80%;
@@ -168,6 +169,7 @@ export const ListYodyFollow = styled.ul`
   padding: 0;
   margin: 0;
   margin-top: 10px;
+  list-style: none;
   @media (max-width: 900px) {
     ${(props) => (props.isShow ? "display: flex" : "display: none")}
   }

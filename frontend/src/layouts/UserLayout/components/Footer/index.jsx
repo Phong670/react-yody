@@ -133,7 +133,7 @@ function Footer() {
     <S.Footer>
       <S.FooterWrapper>
         <S.LeftFooter>
-          <S.Vision>
+          <S.Vision className="text-center">
             “Đặt sự hài lòng của khách hàng là ưu tiên số 1 trong mọi suy nghĩ
             hành động của mình” là sứ mệnh, là triết lý, chiến lược.. luôn cùng
             YODY tiến bước"
