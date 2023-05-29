@@ -31,13 +31,13 @@
   "users": [
     {
       "email": "qphong670@gmail.com",
-      "password": "$2a$10$yM1CSu5jIY0Kdlq7FBP8fOxZv5cJvmjaM/WCBOpKHCZdWHZh.Ygue",
+      "password": "$2a$10$k1ILiQgNRWZeRqhiYQPlN.5EmZvXEmPRSS1uOezuf4pptIbv3E8oC",
       "fullName": "Phong",
       "role": "user",
-      "token": "d90ee2",
-      "tokenExpirationTime": 1685206632415,
+      "token": "2637e7",
+      "tokenExpirationTime": 1685244217590,
       "createdAt": 1685120232436,
-      "updatedAt": 1685120232436,
+      "updatedAt": 1685157817629,
       "id": 1
     },
     {
@@ -61,6 +61,17 @@
       "createdAt": 1685120710432,
       "updatedAt": 1685120847763,
       "id": 3
+    },
+    {
+      "email": "qphong12345@gmail.com",
+      "password": "$2a$10$5etowad6jDZ9XbDnZiy9OOfAcU4GZ9xzlfjjq8erOgZQk1ve3L1nq",
+      "fullName": "phong2",
+      "role": "user",
+      "token": "c12637",
+      "tokenExpirationTime": 1685244118835,
+      "createdAt": 1685157718843,
+      "updatedAt": 1685157718843,
+      "id": 4
     }
   ],
   "products": [
@@ -1390,8 +1401,285 @@
       "size": "42"
     }
   ],
-  "orders": [],
-  "orderDetails": [],
+  "orders": [
+    {
+      "name": "Ho Quang Phong",
+      "numberPhone": "0339948275",
+      "email": "qphong670@gmail.com",
+      "city": {
+        "id": 9737,
+        "value": "79",
+        "parentcode": "0003",
+        "label": "Thành phố Hồ Chí Minh",
+        "status": 1,
+        "region": 3
+      },
+      "district": {
+        "id": 9913,
+        "value": "772",
+        "parentcode": "79",
+        "label": "Quận 11",
+        "status": 1,
+        "region": null
+      },
+      "ward": {
+        "id": 9918,
+        "value": "27220",
+        "parentcode": "772",
+        "label": "Phường 03",
+        "status": 1,
+        "region": null
+      },
+      "address": "123a",
+      "paymentMethod": "VN pay",
+      "userId": 1,
+      "addressShow": "123a, Phường 03, Quận 11, Thành phố Hồ Chí Minh.",
+      "totalPrice": 399000,
+      "statusOrder": "Đang xử lý",
+      "costShip": 20000,
+      "idOrder": "9209",
+      "statusPayment": "Chưa thanh toán",
+      "vnp_ResponseCode": "00",
+      "vnp_TransactionStatus": "00",
+      "createdAt": 1685150232235,
+      "updatedAt": 1685150353537,
+      "id": 1
+    },
+    {
+      "name": "Ho Quang Phong",
+      "numberPhone": "0971455330",
+      "email": "qphong670@gmail.com",
+      "city": {
+        "id": 10993,
+        "value": "01",
+        "parentcode": "0003",
+        "label": "Thành phố Hà Nội",
+        "status": 1,
+        "region": 1
+      },
+      "district": {
+        "id": 11630,
+        "value": "019",
+        "parentcode": "01",
+        "label": "Quận Bắc Từ Liêm",
+        "status": 1,
+        "region": null
+      },
+      "ward": {
+        "id": 11601,
+        "value": "00598",
+        "parentcode": "019",
+        "label": "Phường Liên Mạc",
+        "status": 1,
+        "region": null
+      },
+      "address": "123b",
+      "paymentMethod": "COD",
+      "userId": 1,
+      "addressShow": "123b, Phường Liên Mạc, Quận Bắc Từ Liêm, Thành phố Hà Nội.",
+      "totalPrice": 209000,
+      "statusOrder": "Đang xử lý",
+      "costShip": 20000,
+      "idOrder": "9f1a",
+      "statusPayment": "Chưa thanh toán",
+      "vnp_ResponseCode": "",
+      "vnp_TransactionStatus": "",
+      "createdAt": 1685150459659,
+      "updatedAt": 1685150459659,
+      "id": 2
+    },
+    {
+      "name": "sad1",
+      "numberPhone": "123",
+      "email": "qphong670@gmail.com",
+      "city": {
+        "id": 8113,
+        "value": "92",
+        "parentcode": "0003",
+        "label": "Thành phố Cần Thơ",
+        "status": 1,
+        "region": 2
+      },
+      "district": {
+        "id": 8153,
+        "value": "923",
+        "parentcode": "92",
+        "label": "Quận Thốt Nốt",
+        "status": 1,
+        "region": null
+      },
+      "ward": {
+        "id": 8156,
+        "value": "31212",
+        "parentcode": "923",
+        "label": "Phường Thuận An",
+        "status": 1,
+        "region": null
+      },
+      "address": "123",
+      "paymentMethod": "COD",
+      "userId": 1,
+      "addressShow": "123, Phường Thuận An, Quận Thốt Nốt, Thành phố Cần Thơ.",
+      "totalPrice": 149000,
+      "statusOrder": "Đang xử lý",
+      "costShip": 20000,
+      "idOrder": "340f",
+      "statusPayment": "Chưa thanh toán",
+      "vnp_ResponseCode": "",
+      "vnp_TransactionStatus": "",
+      "createdAt": 1685150645412,
+      "updatedAt": 1685150645413,
+      "id": 3
+    },
+    {
+      "name": "Phong",
+      "numberPhone": "21",
+      "email": "qphong670@gmail.com",
+      "city": {
+        "id": 9737,
+        "value": "79",
+        "parentcode": "0003",
+        "label": "Thành phố Hồ Chí Minh",
+        "status": 1,
+        "region": 3
+      },
+      "district": {
+        "id": 9913,
+        "value": "772",
+        "parentcode": "79",
+        "label": "Quận 11",
+        "status": 1,
+        "region": null
+      },
+      "ward": {
+        "id": 9918,
+        "value": "27220",
+        "parentcode": "772",
+        "label": "Phường 03",
+        "status": 1,
+        "region": null
+      },
+      "address": "123a",
+      "paymentMethod": "VN pay",
+      "userId": 1,
+      "addressShow": "123a, Phường 03, Quận 11, Thành phố Hồ Chí Minh.",
+      "totalPrice": 230000,
+      "statusOrder": "Đang xử lý",
+      "costShip": 20000,
+      "idOrder": "cb1b",
+      "statusPayment": "Chưa thanh toán",
+      "vnp_ResponseCode": "00",
+      "vnp_TransactionStatus": "00",
+      "createdAt": 1685152797956,
+      "updatedAt": 1685152858714,
+      "id": 4
+    },
+    {
+      "name": "Phong",
+      "numberPhone": "123",
+      "email": "qphong670@gmail.com",
+      "city": {
+        "id": 9737,
+        "value": "79",
+        "parentcode": "0003",
+        "label": "Thành phố Hồ Chí Minh",
+        "status": 1,
+        "region": 3
+      },
+      "district": {
+        "id": 9913,
+        "value": "772",
+        "parentcode": "79",
+        "label": "Quận 11",
+        "status": 1,
+        "region": null
+      },
+      "ward": {
+        "id": 9928,
+        "value": "27250",
+        "parentcode": "772",
+        "label": "Phường 02",
+        "status": 1,
+        "region": null
+      },
+      "address": "11a",
+      "paymentMethod": "VN pay",
+      "userId": 1,
+      "addressShow": "11a, Phường 02, Quận 11, Thành phố Hồ Chí Minh.",
+      "totalPrice": 499000,
+      "statusOrder": "Đang xử lý",
+      "costShip": 20000,
+      "idOrder": "3755",
+      "statusPayment": "Chưa thanh toán",
+      "vnp_ResponseCode": "00",
+      "vnp_TransactionStatus": "00",
+      "createdAt": 1685157571315,
+      "updatedAt": 1685157607072,
+      "id": 5
+    }
+  ],
+  "orderDetails": [
+    {
+      "orderId": 1,
+      "productId": 34,
+      "name": "Chân Váy Dáng A Khaki Túi Ốp",
+      "price": 399000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/chan-vay-nu-cvn6068-reu-1.jpg?v=1680923455000",
+      "size": "XS",
+      "quantity": 1,
+      "createdAt": 1685150232283,
+      "updatedAt": 1685150232283,
+      "id": 1
+    },
+    {
+      "orderId": 2,
+      "productId": 1,
+      "name": "Áo Polo Nữ Pique Mắt Chim Phối Tay Cổ Kẻ",
+      "price": 209000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apn5036-tra3-yody-vn.jpg?v=1677118569000",
+      "size": "XS",
+      "quantity": 1,
+      "createdAt": 1685150459698,
+      "updatedAt": 1685150459698,
+      "id": 2
+    },
+    {
+      "orderId": 3,
+      "productId": 31,
+      "name": "Áo T-Shirt Nữ In Ngực Thể Thao Mềm Mịn Thông Thoáng",
+      "price": 149000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/stn5008-ddo-13.jpg?v=1682478535000",
+      "size": "M",
+      "quantity": 1,
+      "createdAt": 1685150645467,
+      "updatedAt": 1685150645467,
+      "id": 3
+    },
+    {
+      "orderId": 4,
+      "productId": 2,
+      "name": "Áo Polo Nữ Cafe Phối Tay Raglan Ngực In Gấu",
+      "price": 230000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apn5326-nav-31-0edb2973-7c98-4fe1-9279-c33f25f139f4.jpg?v=1677122912000",
+      "size": "XS",
+      "quantity": 1,
+      "createdAt": 1685152797999,
+      "updatedAt": 1685152797999,
+      "id": 4
+    },
+    {
+      "orderId": 5,
+      "productId": 25,
+      "name": "Quần Jeans Nữ Skinny Túi Vuông Co Giãn 4 Chiều",
+      "price": 499000,
+      "image": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/quan-jean-nu-qjn5094-xdm-6-yodyvn.jpg?v=1681440208000",
+      "size": "25",
+      "quantity": 1,
+      "createdAt": 1685157571433,
+      "updatedAt": 1685157571433,
+      "id": 5
+    }
+  ],
   "guestOrders": [],
   "guestOrderDetails": [],
   "cities": [

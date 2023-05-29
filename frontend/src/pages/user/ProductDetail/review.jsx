@@ -135,7 +135,7 @@ function ReviewProduct({ idProduct, title, dataAllReview }) {
             </div>
 
             <Rate value={item.rate} disabled style={{ fontSize: 12 }} />
-            <p className="text-[12px]">{item.comment}</p>
+            <p className="text-[14px]">{item.comment}</p>
           </div>
         </div>
       );

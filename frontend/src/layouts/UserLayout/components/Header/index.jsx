@@ -754,6 +754,7 @@ function Header() {
               <SearchBox
                 searchKey={searchKey}
                 openSearchBox={openSearchBox}
+                setSearchKey={setSearchKey}
                 setOpenSearchBox={setOpenSearchBox}
                 empty={empty}
                 setEmpty={setEmpty}
