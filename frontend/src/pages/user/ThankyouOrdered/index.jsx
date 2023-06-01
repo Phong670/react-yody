@@ -107,7 +107,7 @@ function ThankyouOrdered() {
             </div>
           </Badge>
           <div className=" ml-3 flex flex-col justify-between">
-            <h3>{item.title}</h3>
+            <h3>{item.name}</h3>
             <p>Size: {item.size}</p>
           </div>
           <div className="flex flex-1 justify-end">
